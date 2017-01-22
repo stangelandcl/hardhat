@@ -1,0 +1,39 @@
+* Code analysis tools
+1. CppCheck
+2. Splint
+3. Oink/Cqual
+4. CCCC
+5. Flawfinder
+6. BLAST https://en.wikipedia.org/wiki/List_of_tools_for_static_code_analysis#C.2C_C.2B.2B
+7. Clang static analyzer
+8. valgrind
+9. cpplint
+10. lint
+11. frama C
+
+* Code
+1. Default version checking url for github to releases
+2. Add GithubUrl() class so we can convert from Url to release url. Use this instead of string
+   for self.url so we can pick apart the objects.
+
+* Packages
+1. xgboost
+2. vlc
+3. lua
+4. ardb
+5. snappy
+6. leveldb
+7. rocksdb
+8. fonts
+9. freerdp
+10. x11vnc
+11. openbox
+12. lxde
+13. shutter - screenshot utility
+14. make pidgin work on work network
+
+* Bugs
+1. gimp install hangs.
+2. Add better error on circular dependencies.
+
+    
