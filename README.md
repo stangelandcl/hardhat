@@ -3,6 +3,12 @@ Builds from source including gcc, glibc and binutils
 Useful for building new glibc and compiler on older linuxes.
 I use it on Fedora 24 and CentOS 6. MIT license.
 
+It builds binutils, glibc and gcc from source and uses the newly
+built glibc. In the future I would like to add the option of using
+preinstalled compilers instead and a preinstalled glibc and make
+it work for mingw64 on windows.
+
+
 ## To bootstrap
 
 ### Python 2.6 bootstrap
