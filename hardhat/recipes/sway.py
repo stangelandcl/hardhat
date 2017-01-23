@@ -24,12 +24,20 @@ class SwayRecipe(GnuRecipe):
             '-DCMAKE_BUILD_TYPE=Release',
             '-DCMAKE_INSTALL_PREFIX=%s' % self.prefix_dir,
             ]
+# to set keyboard layout. run these commands before starting sway
+#    export XKB_DEFAULT_LAYOUT=us
+#    export XKB_DEFAULT_VARIANT=dvorak
+
+# to run sway with logging 'sway -d 2> sway.log'
 
     def install(self):
         super(SwayRecipe, self).install()
 
-        self.log_dir('install', self.directory, 'setuid')
-        exe = '%s/bin/sway' % self.prefix_dir
-        args = ['sudo', 'chown', 'root', exe]
-        args = ['sudo', 'chmod', '+s', exe]
 
+        exe = '%s/bin/sway' % self.prefix_dir
+        self.log_dir('install', self.directory, 'chown root sway')
+        args = ['sudo', 'chown', 'root', exe]
+        self.run_exe(args, self.directory, self.environment)
+        self.log_dir('install', self.directory, 'setuid sway')
+        args = ['sudo', 'chmod', '+s', exe]
+        self.run_exe(args, self.directory, self.environment)

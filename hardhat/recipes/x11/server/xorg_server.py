@@ -27,14 +27,21 @@ class XOrgServerRecipe(GnuRecipe):
     def install(self):
         super(XOrgServerRecipe, self).install()
 
-        self.log_dir('install', self.directory, 'setuid')
         exe = '%s/bin/Xorg' % self.prefix_dir
+        self.log_dir('install', self.directory, 'chown root Xorg')
         args = ['sudo', 'chown', 'root', exe]
+        self.run_exe(args, self.directory, self.environment)
+        self.log_dir('install', self.directory, 'setuid Xorg')
         args = ['sudo', 'chmod', '+s', exe]
+        self.run_exe(args, self.directory, self.environment)
 
         exe = '%s/libexec/Xorg.wrap' % self.prefix_dir
+        self.log_dir('install', self.directory, 'chown root Xorg.wrap')
         args = ['sudo', 'chown', 'root', exe]
+        self.run_exe(args, self.directory, self.environment)
+        self.log_dir('install', self.directory, 'setuid Xorg.wrap')
         args = ['sudo', 'chmod', '+s', exe]
+        self.run_exe(args, self.directory, self.environment)
 
     def patch(self):
         patch = r'''
