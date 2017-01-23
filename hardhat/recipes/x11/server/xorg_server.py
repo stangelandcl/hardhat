@@ -24,6 +24,18 @@ class XOrgServerRecipe(GnuRecipe):
         self.configure_strip_cross_compile()
         self.environment['CFLAGS'] += ' -Wno-error=array-bounds'
 
+    def install(self):
+        super(XOrgServerRecipe, self).install()
+
+        self.log_dir('install', self.directory, 'setuid')
+        exe = '%s/bin/Xorg' % self.prefix_dir
+        args = ['sudo', 'chown', 'root', exe]
+        args = ['sudo', 'chmod', '+s', exe]
+
+        exe = '%s/libexec/Xorg.wrap' % self.prefix_dir
+        args = ['sudo', 'chown', 'root', exe]
+        args = ['sudo', 'chmod', '+s', exe]
+
     def patch(self):
         patch = r'''
 Submitted By:            Armin K. <krejzi at email dot com>

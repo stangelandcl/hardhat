@@ -24,3 +24,12 @@ class SwayRecipe(GnuRecipe):
             '-DCMAKE_BUILD_TYPE=Release',
             '-DCMAKE_INSTALL_PREFIX=%s' % self.prefix_dir,
             ]
+
+    def install(self):
+        super(SwayRecipe, self).install()
+
+        self.log_dir('install', self.directory, 'setuid')
+        exe = '%s/bin/sway' % self.prefix_dir
+        args = ['sudo', 'chown', 'root', exe]
+        args = ['sudo', 'chmod', '+s', exe]
+
