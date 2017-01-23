@@ -9,14 +9,17 @@ class XOrgServerRecipe(GnuRecipe):
         self.name = 'xorg-server'
         self.version = '1.19.1'
         self.depends = ['libepoxy', 'libunwind', 'nettle', 'openssl', 'pixman',
-                        'xkeyboard-config', 'wayland', 'wayland-protocols']
+                        'wayland', 'wayland-protocols',
+                        'xkeyboard-config', 'xorg-apps']
         self.url = 'http://ftp.x.org/pub/individual/xserver/' \
                    'xorg-server-$version.tar.bz2'
 
-        self.configure_args += ['--enable-glamor',
-#                                '--enable-install-setuid',
-                                '--enable-suid-wrapper',
-#                                '--with-xkb-output=/var/lib/xkb'
+        self.configure_args += [
+            '--sysconfdir=%s/etc' % self.prefix_dir,
+            '--enable-glamor',
+            #'--enable-install-setuid',
+            '--enable-suid-wrapper',
+            #'--with-xkb-output=/var/lib/xkb'
                                 ]
         self.configure_strip_cross_compile()
         self.environment['CFLAGS'] += ' -Wno-error=array-bounds'
