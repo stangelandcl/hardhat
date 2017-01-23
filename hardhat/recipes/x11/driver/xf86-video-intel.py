@@ -14,6 +14,9 @@ class Xf86VideoIntelRecipe(X11DriverBaseRecipe):
         self.url = 'http://anduin.linuxfromscratch.org/BLFS/' \
                    'xf86-video-intel/xf86-video-intel-$version.tar.bz2'
 
+        self.environment['CFLAGS'] = '-O3 -mtune=native -march=native'
+        self.environment['CXXFLAGS'] = self.environment['CFLAGS']
+
         # Optional from BLFS
 #cat >> /etc/X11/xorg.conf.d/20-intel.conf << "EOF"
 #Section "Device"
