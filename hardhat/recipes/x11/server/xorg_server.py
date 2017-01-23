@@ -43,6 +43,14 @@ class XOrgServerRecipe(GnuRecipe):
         args = ['sudo', 'chmod', '+s', exe]
         self.run_exe(args, self.directory, self.environment)
 
+        exe = '%s/libexec/Xorg' % self.prefix_dir
+        self.log_dir('install', self.directory, 'chown root libexec/Xorg')
+        args = ['sudo', 'chown', 'root', exe]
+        self.run_exe(args, self.directory, self.environment)
+        self.log_dir('install', self.directory, 'setuid libexec/Xorg')
+        args = ['sudo', 'chmod', '+s', exe]
+        self.run_exe(args, self.directory, self.environment)
+
     def patch(self):
         patch = r'''
 Submitted By:            Armin K. <krejzi at email dot com>
