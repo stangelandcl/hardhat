@@ -1,1 +1,4 @@
+include setuptools-20.10.1.tar.gz
+include argparse-1.4.0.tar.gz
+include importlib-1.0.3.tar.gz
 include bootstrap.sh
