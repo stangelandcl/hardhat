@@ -6,12 +6,12 @@ from .base import SetupPyRecipe
 class HardhatRecipe(SetupPyRecipe):
     def __init__(self, *args, **kwargs):
         super(HardhatRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '97c1f18496814c495f77c379e5d3a30c' \
-                      'fd3b6fcb316232de150e7a6e17cbcb9d'
-
+        self.sha256 = '8c7e40921866f042293b8f4669873031' \
+                      'b1cfa87f1f13303df536a560f43fce26'
+                
         self.description = 'Install hardhat (ourself) the current version'
         self.name = 'hardhat'
-        self.version = 'afe6fb7c76c2ce812b2029858a89741524d2ddec'
+        self.version = '747d6caf98516ffce4347c3a8688f1356fed90bb'
         self.url = 'https://github.com/stangelandcl/hardhat/archive/' \
                    '$version.tar.gz'
         self.dest_dir = os.path.join(self.prefix_dir, 'hardhat')
