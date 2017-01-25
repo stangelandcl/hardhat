@@ -1,6 +1,6 @@
 import os
 import shutil
-from hardhat.util import check_directory, run_or_error
+from hardhat.util import check_directory, run_or_error, patch
 from .base import CrossGnuRecipe
 
 
@@ -64,6 +64,17 @@ class CrossGLibCRecipe(CrossGnuRecipe):
         with open(os.path.join(self.directory, 'configparms'), 'wt') as f:
             f.write("slibdir=%s/%s/lib64\n" % (self.cross_prefix_dir,
                                                self.target_triplet))
+
+        # _CS_PATH is used by execlp when PATH is null
+        # PATH is null when execlp is called from a binary
+        # that is setuid
+        self.log_dir('patch', self.directory, 'patch _CS_PATH')
+        filename = os.path.join(self.directory, 'sysdeps/unix/confstr.h')
+        src = '"/bin:/usr/bin"'
+        dst = '"%s/bin:%s/texlive/bin:%s/java/bin:/bin:/usr/bin"' % (self.prefix_dir, self.prefix_dir, self.prefix_dir)
+        patch(filename, src, dst)
+
+
 
     def post_install(self):
         # test that we can compile an exe and that it

@@ -2,7 +2,7 @@ import os
 import platform
 import shutil
 from hardhat.recipes.base import GnuRecipe
-from hardhat.util import check_directory
+from hardhat.util import check_directory, patch
 from hardhat.environment import target_path_env
 from hardhat.recipes.cross.base import CrossGnuRecipe
 
@@ -29,6 +29,17 @@ class GLibCRecipe(CrossGnuRecipe):
             shutil.rmtree(self.extract_dir)
         if os.path.exists(self.directory):
             shutil.rmtree(self.directory)
+
+    def patch(self):
+        # _CS_PATH is used by execlp when PATH is null
+        # PATH is null when execlp is called from a binary
+        # that is setuid
+        self.log_dir('patch', self.directory, 'patch _CS_PATH')
+        filename = os.path.join(self.directory, 'sysdeps/unix/confstr.h')
+        src = '"/bin:/usr/bin"'
+        dst = '"%s/bin:%s/texlive/bin:%s/java/bin:/bin:/usr/bin"' % (self.prefix_dir, self.prefix_dir, self.prefix_dir)
+        patch(filename, src, dst)
+
 
     def need_configure(self):
         return True
