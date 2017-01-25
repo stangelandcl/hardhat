@@ -14,7 +14,7 @@ install: sdist
 	cd ~/Downloads && tar xvf hardhat-0.1.tar.gz
 	rm -rf ~/hardhat/${VERSION}
 #	rm -rf ~/hardhat/${OLD_VERSION}
-	cd ~/Downloads/hardhat-0.1 && ./bootstrap.sh --prefix=~/hardhat/${VERSION} --cpus=.99
+	cd ~/Downloads/hardhat-0.1 && ./bootstrap.sh --prefix=~/hardhat/${VERSION} --cpus=.99 --pkgfile=~/vcs/hardhat/config/dev.config
 #           --cpus=.99 --pkgfile=~/vcs/vcs/hardhat/config/dev.config
 
 stat:

@@ -21,7 +21,7 @@ for i in "$@"; do
 	    ;;
 	--pkgfile=*)
 	    PKG_FILE="${i#*=}"
-	    PKG_FILE=$(realpath $PKG_FILE)
+	    PKG_FILE="${PKG_FILE/#\~/$HOME}"
 	    ;;
 	*)
 	    # skip unknown
@@ -135,16 +135,10 @@ if [ ! -e $DIR/bootstrap/bin/hardhat ]; then
     "$PYTHON" setup.py install --home=$DIR/bootstrap
 fi
 
-# for HARDHAT_TARGET
-. $PREFIX/init.sh
-
 OLDPATH=$PATH
 export PATH=$DIR/bootstrap/bin:$PATH
 if [ ! -e $PREFIX/bin/python3 ]; then
     hardhat --cpus=$CPUS --prefix=$PREFIX --downloads=$DOWNLOAD_DIR install python3-beautifulsoup
-    if [ "$PKG_FILE" != "" ]; then
-        hardhat --cpus=$CPUS --prefix=$PREFIX --downloads=$DOWNLOAD_DIR install --file=$PKG_FILE
-    fi
 fi
 export PATH=$PREFIX/bin:$OLDPATH
 export PYTHONPATH=""
@@ -158,6 +152,10 @@ if [ ! -e $PREFIX/bin/hardhat ]; then
     # To set HARDHAT_TARGET environment variable correctly
     . $PREFIX/init.sh
     cd $PREFIX/hardhat && $PREFIX/bin/python3 setup.py develop
+fi
+
+if [ "$PKG_FILE" != "" ]; then       
+    hardhat --cpus=$CPUS --prefix=$PREFIX --downloads=$DOWNLOAD_DIR install --file=$PKG_FILE
 fi
 
 echo "Run '. $PREFIX/init.sh' or 'source $PREFIX/init.sh' (without quotes) to step into your new sysroot environment at $PREFIX."
