@@ -35,8 +35,8 @@ class Python2Recipe(GnuRecipe):
             "PYTHON_FOR_BUILD='env LD_LIBRARY_PATH=. ./$(BUILDPYTHON) -E'"
             ]
 
-        # profile-opt got really slow with python 2.7.13
-#        self.compile_args += ['profile-opt']
+
+        self.compile_args += ['profile-opt']
 #                              '_PYTHON_HOST_PLATFORM=%s' % (self.HOST),
 #                              'HOST_GNU_TYPE=%s' % (self.HOST)
 #                              ]
