@@ -135,6 +135,9 @@ if [ ! -e $DIR/bootstrap/bin/hardhat ]; then
     "$PYTHON" setup.py install --home=$DIR/bootstrap
 fi
 
+# for HARDHAT_TARGET
+. $PREFIX/init.sh
+
 OLDPATH=$PATH
 export PATH=$DIR/bootstrap/bin:$PATH
 if [ ! -e $PREFIX/bin/python3 ]; then

@@ -215,8 +215,8 @@ fi'''
 
     def post_install(self):
 #        self.patch_limits()
-
-        config = '%s/%s/include/c++/%s/bits/c++config.h' % \
+        
+       config = '%s/%s/include/c++/%s/bits/c++config.h' % \
             (self.prefix_dir, self.target_triplet, self.version)
         if os.path.exists(config):
             os.remove(config)
