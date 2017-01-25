@@ -9,6 +9,7 @@ class Python2Recipe(GnuRecipe):
 
         self.name = 'python2'
         self.version = '2.7.13'
+        self.rebuilds = ['graphviz']
         self.depends = ['bdb', 'bzip2', 'cacert', 'expat', 'gdbm', 'ncurses',
                         'openssl', 'readline', 'sqlite3', 'zlib']
         self.url = \

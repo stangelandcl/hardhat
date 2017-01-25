@@ -11,5 +11,6 @@ class GuileRecipe(GnuRecipe):
         self.name = 'guile'
         self.version = '2.0.11'
         self.url = Urls.gnu_template(self.name, self.version)
+        self.rebuilds = ['graphviz']
         self.depends = ['bash', 'coreutils', 'gc', 'gmp', 'libffi',
                         'libtool', 'libunistring', 'ncurses', 'readline']

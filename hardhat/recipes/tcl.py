@@ -12,7 +12,6 @@ class TclRecipe(GnuRecipe):
         self.version = '8.6.5'
         self.url = 'http://downloads.sourceforge.net/tcl/' \
                    '$name$version-src.tar.gz'
-
         self.configure_args += ['--enable-64bit',
                                 '--enable-threads',
                                 '--enable-shared']

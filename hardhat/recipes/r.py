@@ -17,6 +17,7 @@ class RRecipe(GnuRecipe):
         self.version_prefix = 'R'
 
         self.url = 'http://cran.mtu.edu/src/base/R-3/R-$version.tar.gz'
+        self.rebuilds = ['graphviz']
         # libssh2 required by some R libraries
         # the MASS package installed in the R build requires libtinfo.so.5
         # (ncurses 5)
@@ -93,7 +94,6 @@ class RRecipe(GnuRecipe):
             text = '\n'.join(f.readlines()[:2])
         with open(filename, 'wt') as f:
             f.write(text)
-
 
 #    def install(self):
 #        filename = os.path.join(self.directory, 'etc', 'Makeconf')

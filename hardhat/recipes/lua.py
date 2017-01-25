@@ -12,6 +12,7 @@ class LuaRecipe(GnuRecipe):
         self.name = 'lua'
         self.version = '5.3.3'
         self.url = 'http://www.lua.org/ftp/lua-$version.tar.gz'
+        self.rebuilds = ['graphviz']
         self.compile_args = ['make',
                              'MYCFLAGS="-DLUA_COMPAT_5_2 -DLUA_COMPAT_5_1"',
                              'linux']

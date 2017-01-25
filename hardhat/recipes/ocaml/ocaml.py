@@ -9,6 +9,7 @@ class OcamlRecipe(GnuRecipe):
 
         self.name = 'ocaml'
         self.version = '4.04.0'
+        self.rebuilds = ['graphviz']
         self.depends = ['x11']
         self.url = 'http://caml.inria.fr/pub/distrib/ocaml-%s/' \
                    'ocaml-$version.tar.xz' % self.short_version
