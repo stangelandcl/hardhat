@@ -15,6 +15,11 @@
 1. Default version checking url for github to releases
 2. Add GithubUrl() class so we can convert from Url to release url. Use this instead of string
    for self.url so we can pick apart the objects.
+3. Pass in '-march=native' to bootstrap and save, also pass on command line.
+4. Proper config file instead of environment variables?
+5. Add my emacs plugin for find other file (.h/.c)
+6. Add an emacs plugin to decide if .h are C-mode or C++-mode files
+7. split graphviz language dependencies to separate project
 
 * Packages
 1. xgboost
@@ -36,4 +41,3 @@
 1. gimp install hangs.
 2. Add better error on circular dependencies.
 
-    

@@ -13,3 +13,5 @@ class GuileRecipe(GnuRecipe):
         self.url = Urls.gnu_template(self.name, self.version)
         self.depends = ['bash', 'coreutils', 'gc', 'gmp', 'libffi',
                         'libtool', 'libunistring', 'ncurses', 'readline']
+        # to avoid requiring a bootstrap guile
+        self.configure_strip_cross_compile()
