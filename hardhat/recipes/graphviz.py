@@ -11,7 +11,7 @@ class GraphVizRecipe(GnuRecipe):
         self.version = '2.38.0'
         self.depends = ['freeglut', 'fontconfig', 'freetype',
                         'gdk-pixbuf', 'libjpeg-turbo', 'libpng', 'librsvg',
-                        'lua', 'pango', 'python2', 'r', 'swig', 'xorg-libs']
+                        'pango', 'swig', 'xorg-libs']
         self.url = 'http://pkgs.fedoraproject.org/repo/pkgs/graphviz/' \
                    'graphviz-$version.tar.gz/' \
                    '5b6a829b2ac94efcd5fa3c223ed6d3ae/graphviz-$version.tar.gz'
