@@ -68,8 +68,8 @@ class CrossGLibCRecipe(CrossGnuRecipe):
         # _CS_PATH is used by execlp when PATH is null
         # PATH is null when execlp is called from a binary
         # that is setuid
-        self.log_dir('patch', self.directory, 'patch _CS_PATH')
-        filename = os.path.join(self.directory, 'sysdeps/unix/confstr.h')
+        self.log_dir('patch', self.extract_dir, 'patch _CS_PATH')
+        filename = os.path.join(self.extract_dir, 'sysdeps/unix/confstr.h')
         src = '"/bin:/usr/bin"'
         dst = '"%s/bin:%s/texlive/bin:%s/java/bin:/bin:/usr/bin"' % (self.prefix_dir, self.prefix_dir, self.prefix_dir)
         patch(filename, src, dst)
