@@ -325,11 +325,6 @@ class Recipe(RecipeSettings, Logger, ExeRunner, ShortVersionMixin):
         self.log_dir('post-install', dir, 'ldconfig')
         self.run_exe(args, dir, self.environment)
 
-    def rebuild(self):
-        if hasattr(self, 'rebuilds'):
-            for rebuild in self.rebuilds:
-                self.installer.reinstall(rebuild)
-
     def run(self):
         self.init()
         self.version_check()
@@ -340,7 +335,7 @@ class Recipe(RecipeSettings, Logger, ExeRunner, ShortVersionMixin):
         self.compile()
         self.install()
         self.post_install()
-        self.rebuild()
+
 
 
 def clear_list(x):

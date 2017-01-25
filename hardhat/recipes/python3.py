@@ -9,7 +9,6 @@ class Python3Recipe(GnuRecipe):
                       '9f4b2fe77c3cb21f69275e0cce30cb2b'
 
         self.name = 'python3'
-        self.rebuilds = ['graphviz']
         self.depends = ['bdb', 'bzip2', 'cacert', 'expat', 'gdbm', 'ncurses',
                         'openssl', 'readline', 'sqlite3', 'xz', 'zlib']
 

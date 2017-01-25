@@ -9,7 +9,6 @@ class Python2Recipe(GnuRecipe):
 
         self.name = 'python2'
         self.version = '2.7.13'
-        self.rebuilds = ['graphviz']
         self.depends = ['bdb', 'bzip2', 'cacert', 'expat', 'gdbm', 'ncurses',
                         'openssl', 'readline', 'sqlite3', 'zlib']
         self.url = \
@@ -36,7 +35,8 @@ class Python2Recipe(GnuRecipe):
             "PYTHON_FOR_BUILD='env LD_LIBRARY_PATH=. ./$(BUILDPYTHON) -E'"
             ]
 
-        self.compile_args += ['profile-opt']
+        # profile-opt got really slow with python 2.7.13
+#        self.compile_args += ['profile-opt']
 #                              '_PYTHON_HOST_PLATFORM=%s' % (self.HOST),
 #                              'HOST_GNU_TYPE=%s' % (self.HOST)
 #                              ]

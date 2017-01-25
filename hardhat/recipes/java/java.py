@@ -10,7 +10,6 @@ class OracleJreRecipe(GnuRecipe):
                       'fef4df732f3af80b0f34567d594588bf'
         self.name = 'java'
         self.version = '8u66'
-        self.rebuilds = ['graphviz']
         self.depends = ['rsync']
         self.url = 'hg:pkgsrc/2015Q4/distfiles/jre-$version-linux-x64.tar.gz'
 

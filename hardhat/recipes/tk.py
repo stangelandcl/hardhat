@@ -10,7 +10,6 @@ class TkRecipe(GnuRecipe):
                       '543a54c3597586727f0ab128220d7946'
 
         self.name = 'tk'
-        self.rebuilds = ['graphviz']
         self.depends = ['tcl', 'xorg-libs']
         self.version = '8.6.5'
         self.version_regex = self.name + r'(?P<version>\d+d.\d+\.\d+)-src' \
