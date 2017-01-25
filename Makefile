@@ -1,6 +1,6 @@
 .PHONY: install sdist bootstrap stats nix
 #OLD_VERSION=20161227
-VERSION=20170113
+VERSION=20170125
 
 sdist:
 	python3 setup.py sdist --formats=gztar
@@ -14,7 +14,7 @@ install: sdist
 	cd ~/Downloads && tar xvf hardhat-0.1.tar.gz
 	rm -rf ~/hardhat/${VERSION}
 #	rm -rf ~/hardhat/${OLD_VERSION}
-	cd ~/Downloads/hardhat-0.1 && ./bootstrap.sh --prefix=~/hardhat/${VERSION} 
+	cd ~/Downloads/hardhat-0.1 && ./bootstrap.sh --prefix=~/hardhat/${VERSION} --cpus=.99 --pkgfile=/home/stangecl/vcs/hardhat/config/dev.config
 #           --cpus=.99 --pkgfile=~/vcs/vcs/hardhat/config/dev.config
 
 stat:
