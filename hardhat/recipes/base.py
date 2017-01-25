@@ -327,7 +327,7 @@ class Recipe(RecipeSettings, Logger, ExeRunner, ShortVersionMixin):
 
     def rebuild(self):
         if hasattr(self, 'rebuilds'):
-            for rebuild in rebuilds:
+            for rebuild in self.rebuilds:
                 self.installer.reinstall(rebuild)
 
     def run(self):
