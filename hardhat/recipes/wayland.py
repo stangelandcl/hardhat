@@ -19,7 +19,8 @@ class WaylandRecipe(GnuRecipe):
         # documentation depends on graphviz which depends on mesa
         # which depends on wayland. Circular dependency.
         # use the minimal graphviz project 'dot' instead
-        # self.configure_args += ['--disable-documentation']
+        # dot is missing fonts
+        self.configure_args += ['--disable-documentation']
 
         def rm(x):
             self.environment[x] = self.environment[x].replace('-DNDEBUG', '')
