@@ -9,5 +9,5 @@ class Sdl2Recipe(GnuRecipe):
 
         self.name = 'sdl2'
         self.version = '2.0.5'
-        self.depends = ['pcre', 'pkgconfig', 'xz', 'zlib']
+        self.depends = ['pcre', 'pkgconfig', 'xorg-libs', 'xz', 'zlib']
         self.url = 'http://www.libsdl.org/release/SDL2-$version.tar.gz'
