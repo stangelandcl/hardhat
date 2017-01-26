@@ -124,7 +124,8 @@ def main():
     settings_dict = {'Prefix Directory': settings.prefix_dir,
                      'Target': settings.target_triplet,
                      'CPU Count': '%s of %s' % (settings.cpu_count,
-                                                multiprocessing.cpu_count())
+                                                multiprocessing.cpu_count()),
+                     'March':settings.march
                     }
     print('')
     print_settings('Settings', list(settings_dict.items()))

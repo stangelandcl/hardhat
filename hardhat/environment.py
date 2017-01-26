@@ -12,6 +12,7 @@ export HARDHAT_PREFIX=$HARDHAT_PREFIX
 export HARDHAT_PATH="$HARDHAT_PATH"
 export HARDHAT_DOWNLOAD_DIR="$HARDHAT_DOWNLOAD_DIR"
 export HARDHAT_TARGET=$HARDHAT_TARGET
+export HARDHAT_MARCH=$HARDHAT_MARCH
 export PREFIX=$PREFIX
 export XORG_PREFIX=$XORG_PREFIX
 export XML_CATALOG_FILES=$XML_CATALOG_FILES
@@ -115,9 +116,10 @@ def runtime_env(prefix, target, download_dir):
     ld_opt = '-O3 -flto -fuse-linker-plugin'
     ld_opt_flags = ldflags + ' ' + ld_opt
 
-    opt = '-O3 -mtune=native -march=core2' \
+    arch = os.environ['HARDHAT_MARCH']
+    opt = '-O3 -mtune=native -march=%s' \
           ' -flto -ffat-lto-objects -fomit-frame-pointer' \
-          ' -momit-leaf-frame-pointer '
+          ' -momit-leaf-frame-pointer ' % arch
     # -ffast-math breaks sqlite so needs disabled for sqlite3 and bdb at least
 # -falign-functions=1 -falign-jumps=1 -falign-loops=1
 
@@ -137,6 +139,7 @@ def runtime_env(prefix, target, download_dir):
     env = dotdict({
         'HARDHAT_PREFIX': prefix,
         'HARDHAT_DOWNLOAD_DIR': download_dir,
+        'HARDHAT_MARCH': os.environ['HARDHAT_MARCH'],
         'PREFIX': prefix,
         'XORG_PREFIX': prefix,
         'HOME': os.environ.get('HOME', os.path.expanduser('~')),
@@ -267,9 +270,10 @@ def target_path_env(*prefixes):
         path += ':'
     path += ROOT_PATH
 
-    cflags = '-O3 -mtune=native -march=core2' \
+    arch = os.environ['HARDHAT_MARCH']
+    cflags = '-O3 -mtune=native -march=%s' \
              ' -fomit-frame-pointer' \
-             ' -momit-leaf-frame-pointer -DNDEBUG'
+             ' -momit-leaf-frame-pointer -DNDEBUG' % arch
 
     return dotdict({
         'PATH': path,

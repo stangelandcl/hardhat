@@ -21,6 +21,9 @@ def parse_args():
                              ' half of the available cpus.',
                         type=float,
                         default=_default_cpu_count())
+    parser.add_argument('--march',
+                        help='architecture=core2|native',
+                        type=str)                    
     parser.add_argument('--prefix',
                         default=default_prefix_dir,
                         help='the root-like directory packages ' +
@@ -145,6 +148,9 @@ def parse_args():
     settings.silent = args.silent
     settings.quiet = not args.verbose
     settings.cpu_count = _cpu_count(args.cpus)
+    if args.march:
+        settings.march = args.march
+        os.environ['HARDHAT_MARCH'] = args.march
 
     # TODO: only run this if creating tmp_dir
     tmp = os.path.join(args.prefix, 'tmp')

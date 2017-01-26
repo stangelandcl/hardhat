@@ -11,7 +11,7 @@ class SwayRecipe(GnuRecipe):
         self.depends = ['gdk-pixbuf', 'cairo',
                         'json-c', 'libcap', 'pango',
                         'pcre', 'pkgconfig',
-                        'wayland', 'wlc']
+                        'wayland', 'wlc', 'xorg-server']
         self.version = '0.11'
         self.version_regex = r'(?P<version>\d+\.\d+(-rc\d+)?)' \
             + extension_regex

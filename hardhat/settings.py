@@ -19,6 +19,12 @@ def get_target_triplet(arch, os_name):
     os.environ['HARDHAT_TARGET'] = target
     return target
 
+def get_march():
+    target = os.environ.get('HARDHAT_MARCH')
+    target = target if target else 'core2'
+    os.environ['HARDHAT_MARCH'] = target
+    return target
+
 
 class RecipeSettings(Object):
     quiet = False
@@ -36,6 +42,7 @@ class RecipeSettings(Object):
         self.target_triplet = self.host_triplet
         self.build_triplet = '%s-unknown-%s-gnu' % (arch, os_name)
         self.tarball_dir = os.path.expanduser('~/Downloads/hardhat')
+        self.march = get_march()
 
         self.prefix_dir = os.path.expanduser('~/hardhat')
         self.quiet = RecipeSettings.quiet
@@ -59,6 +66,7 @@ class RecipeSettings(Object):
         if hasattr(src, 'install_file'):
             self.install_file = src.install_file
         self.installer = src.installer
+        self.march = src.march
 #        self.settings_filename = src.settings_filename
 
     ## @property
