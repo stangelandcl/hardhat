@@ -9,7 +9,7 @@ class LibInputRecipe(GnuRecipe):
 
         self.name = 'libinput'
         self.version = '1.5.3'
-        self.depends = ['check', 'doxygen', 'graphviz', 'gtk3',
+        self.depends = ['check', 'doxygen', 'dot', 'gtk3',
                         'libevdev', 'mtdev']
         # libwacom - not working yet
         self.url = 'http://www.freedesktop.org/software/libinput/' \

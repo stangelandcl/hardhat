@@ -9,6 +9,6 @@ class LibVdPauRecipe(GnuRecipe):
 
         self.name = 'libvdpau'
         self.version = '1.1.1'
-        self.depends = ['doxygen', 'graphviz', 'texlive', 'xorg-libs']
+        self.depends = ['doxygen', 'dot', 'texlive', 'xorg-libs']
         self.url = 'http://people.freedesktop.org/~aplattner/vdpau/' \
                    'libvdpau-$version.tar.bz2'

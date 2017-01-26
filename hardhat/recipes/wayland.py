@@ -7,18 +7,19 @@ class WaylandRecipe(GnuRecipe):
         self.sha256 = 'd6b4135cba0188abcb7275513c72dede' \
                       '751d6194f6edc5b82183a3ba8b821ab1'
 
-        self.name = 'wayland'	
+        self.name = 'wayland'
         self.version = '1.12.0'
         self.depends = [
-            'docbook-xml', 'docbook-xsl'
+            'docbook-xml', 'docbook-xsl', 'dot',
             'doxygen', 'libffi', 'libxslt',
             'xmlto']
         self.url = 'http://wayland.freedesktop.org/releases/' \
                    'wayland-$version.tar.xz'
 
-	# documentation depends on graphviz which depends on mesa
-        # which depends on wayland. Circular dependency
-        self.configure_args += ['--disable-documentation']
+        # documentation depends on graphviz which depends on mesa
+        # which depends on wayland. Circular dependency.
+        # use the minimal graphviz project 'dot' instead
+        # self.configure_args += ['--disable-documentation']
 
         def rm(x):
             self.environment[x] = self.environment[x].replace('-DNDEBUG', '')

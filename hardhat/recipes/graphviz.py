@@ -9,7 +9,7 @@ class GraphVizRecipe(GnuRecipe):
 
         self.name = 'graphviz'
         self.version = '2.38.0'
-        self.depends = ['freeglut', 'fontconfig', 'freetype',                        
+        self.depends = ['freeglut', 'fontconfig', 'freetype',
                         'gdk-pixbuf', 'guile',
                         'java', 'libjpeg-turbo', 'libpng', 'librsvg',
                         'lua',
