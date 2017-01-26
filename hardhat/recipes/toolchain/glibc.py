@@ -22,6 +22,14 @@ class GLibCRecipe(CrossGnuRecipe):
 
         self.environment = target_path_env(self.prefix_dir,
                                            self.cross_prefix_dir)
+        # enable debugging symbols so libpthread gets built with them
+        # so gdb can debug threads.
+        # According to http://lists.busybox.net/pipermail/buildroot/
+        # 2012-September/058759.html
+        # gdb searches for the debug symbol td_ta_new in libpthread and if not
+        # found it won't go ahead and look for libthread_db
+        self.environment['CFLAGS'] += ' -g'
+        self.environment['CXXFLAGS'] += ' -g'
 
 
     def clean(self):
