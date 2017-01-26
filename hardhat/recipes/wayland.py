@@ -16,6 +16,10 @@ class WaylandRecipe(GnuRecipe):
         self.url = 'http://wayland.freedesktop.org/releases/' \
                    'wayland-$version.tar.xz'
 
+	# documentation depends on graphviz which depends on mesa
+        # which depends on wayland. Circular dependency
+        self.configure_args += ['--disable-documentation']
+
         def rm(x):
             self.environment[x] = self.environment[x].replace('-DNDEBUG', '')
         rm('CPPFLAGS')
