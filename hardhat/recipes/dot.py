@@ -10,7 +10,9 @@ class DotRecipe(GnuRecipe):
         self.sha256 = graphviz.sha256
         self.version = graphviz.version
         self.url = graphviz.url
-        self.depends = ['libgd']
+        self.depends = ['fontconfig', # for fonts
+                        'libgd'  # for png
+                       ]
         self.documentation = 'graphviz without all the dependencies for' \
                              ' building documentation'
         self.configure_args += ['--without-x',
