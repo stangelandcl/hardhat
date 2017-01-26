@@ -7,11 +7,11 @@ class WaylandRecipe(GnuRecipe):
         self.sha256 = 'd6b4135cba0188abcb7275513c72dede' \
                       '751d6194f6edc5b82183a3ba8b821ab1'
 
-        self.name = 'wayland'
+        self.name = 'wayland'	
         self.version = '1.12.0'
         self.depends = [
             'docbook-xml', 'docbook-xsl'
-            'doxygen', 'graphviz', 'libffi', 'libxslt',
+            'doxygen', 'libffi', 'libxslt',
             'xmlto']
         self.url = 'http://wayland.freedesktop.org/releases/' \
                    'wayland-$version.tar.xz'
