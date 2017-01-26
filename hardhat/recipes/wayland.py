@@ -11,7 +11,7 @@ class WaylandRecipe(GnuRecipe):
         self.version = '1.12.0'
         self.depends = [
             'docbook-xml', 'docbook-xsl', 'dot',
-            'doxygen', 'libffi', 'libxslt',
+            'doxygen', 'libffi', 'libpng', 'libxslt',
             'xmlto']
         self.url = 'http://wayland.freedesktop.org/releases/' \
                    'wayland-$version.tar.xz'
