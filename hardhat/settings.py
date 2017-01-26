@@ -56,7 +56,8 @@ class RecipeSettings(Object):
         self.silent = src.silent
         self.tmp_dir = src.tmp_dir
         self.cpu_count = src.cpu_count
-        self.install_file = src.install_file
+        if hasattr(src, 'install_file'):
+            self.install_file = src.install_file
         self.installer = src.installer
 #        self.settings_filename = src.settings_filename
 
