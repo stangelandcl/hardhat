@@ -12,7 +12,7 @@ class MesaRecipe(GnuRecipe):
         self.version_regex = '(?P<version>\d+\.\d+\.\d+)/'
         self.version_url = 'https://mesa.freedesktop.org/archive/'
         self.depends = ['elfutils', 'eudev', 'libdrm', 'llvm', 'nettle',
-                        'xorg-libs']
+                        'wayland-protocols', 'xorg-libs']
         self.url = 'ftp://ftp.freedesktop.org/pub/mesa/$version/' \
                    'mesa-$version.tar.xz'
         self.configure_args += [
