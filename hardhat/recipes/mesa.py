@@ -23,7 +23,8 @@ class MesaRecipe(GnuRecipe):
             '--enable-shared-glapi',
             '--enable-gbm',
             '--enable-dri3',
-            '--enable-texture-float'
+            '--enable-texture-float',
             '--enable-glx-tls',
-            '--with-gallium-drivers=i915,r600,nouveau,radeonsi,svga,swrast'
+            '--with-gallium-drivers=i915,r600,nouveau,radeonsi,svga,swrast,swr',
+            '--enable-gallium-llvm'
             ]
