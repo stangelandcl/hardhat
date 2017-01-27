@@ -21,6 +21,7 @@ class TclRecipe(GnuRecipe):
         # directory of TCL
         self.extract_dir = os.path.join(self.prefix_dir, 'src',
                                         'tcl-%s' % self.short_version)
+        self._directory = self.extract_dir
         self.configure_strip_cross_compile()
         self.environment['LIBS'] += ' -lm'
 

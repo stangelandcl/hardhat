@@ -24,8 +24,11 @@ class PackCCRecipe(GnuRecipe):
 all:
 \t${CC} ${CFLAGS} src/packcc.c -o bin/packcc
 \tchmod +x bin/packcc
+\tmkdir -p ${HARDHAT_PREFIX}/bin
 \tcp bin/packcc ${HARDHAT_PREFIX}/bin
+\tmkdir -p ${HARDHAT_PREFIX}/src
 \tcp src/packcc.c ${HARDHAT_PREFIX}/src
+\tmkdir -p ${HARDHAT_PREFIX}/doc
 \tcp packcc.html ${HARDHAT_PREFIX}/doc
 \tchmod +x bin/packcc-doc
 \tcp bin/packcc-doc ${HARDHAT_PREFIX}/bin

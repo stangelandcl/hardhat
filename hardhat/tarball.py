@@ -60,6 +60,8 @@ class Tarball(Object):
             self.tarball.members = []  # To decrease memory use
 
     def extract(self, directory):
+        if not os.path.exists(directory):
+            os.makedirs(directory)
 #        os.system('tar -czf %s %s/' % (self.filename, directory))
         for member in self.contents():
             self.tarball.extract(member, directory)
