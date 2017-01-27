@@ -19,6 +19,7 @@ class GitRecipe(GnuRecipe):
                         'expat',
                         'openssl',
                         'pcre',
+                        'perl',
                         'python2',
                         'tk']
         gitconfig = os.path.join(self.prefix_dir, 'etc', 'gitconfig')
@@ -28,6 +29,7 @@ class GitRecipe(GnuRecipe):
             '--with-curl',
             '--with-expat',
             '--with-openssl',
+            '--with-perl=%s/bin/perl' % self.prefix_dir,
             'ac_cv_fread_reads_directories=yes',
             'ac_cv_snprintf_returns_bogus=no']
         self.environment['XMLTO'] = 'xmlto --skip-validation'
