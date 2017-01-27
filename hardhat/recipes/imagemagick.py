@@ -6,14 +6,17 @@ from ..version import extension_regex
 class ImageMagickRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(ImageMagickRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = 'bc09ea103a82d1c2c093889eda7e36dd' \
-                      '0aa7aa98a06c55de4b73932838459fc4'
 
         self.name = 'imagemagick'
-        self.version = '7.0.4-3'
         self.version_regex = r'ImageMagick\-(?P<version>\d+\.\d+\.\d+\-\d+)' \
             + extension_regex
         self.version_url = 'https://www.imagemagick.org/download/'
+        # imagemagick only maintains one copy of their releases and
+        # they change frequently. so just use whatever is there
+        # TODO: set a mininmum version just in case
+        self.version = self.get_version()[0]
+        if self.version_compare('7.0.4-5') > 0:
+            raise Exception("imagemagick version is lower than its old version")
         self.url = 'ftp://ftp.imagemagick.org/pub/ImageMagick/releases/' \
                    'ImageMagick-$version.tar.xz'
 

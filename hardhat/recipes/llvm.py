@@ -4,6 +4,7 @@ from string import Template
 from .base import Downloader, GnuRecipe
 from hardhat.tarball import Tarball
 from hardhat.version import extension_regex
+from hardhat.util import patch
 
 
 class LlvmRecipe(GnuRecipe):
@@ -134,6 +135,16 @@ class LlvmRecipe(GnuRecipe):
         d.url = self.openmp_url
         d.filename = self.openmp_file
         d.download()
+
+    def patch(self):
+        # don't overwrite gcc's libgomp. It doesn't work with
+        # clang's version
+        src = r'set(LIBOMP_ALIASES "libgomp;libiomp5")'
+        dst = r'set(LIBOMP_ALIASES "")'
+        filename = os.path.join(self.openmp_dir, 'runtime', 'src',
+                                'CMakeLists.txt')
+        patch(filename, src, dst)
+
 
     def extract(self):
         super(LlvmRecipe, self).extract()

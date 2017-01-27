@@ -6,7 +6,8 @@ class PillowRecipe(PipBaseRecipe):
         super(PillowRecipe, self).__init__(*args, **kwargs)
 
         self.name = 'pillow'
-        self.version = '3.2.0'
+        self.version = '4.0.0'
         self.depends = ['libjpeg-turbo', 'libpng']
-        self.sha256 = '64b0a057210c480aea99406c9391180cd' \
-                      '866fc0fd8f0b53367e3af21b195784a'
+        self.pydepends = ['olefile']
+        self.sha256 = 'ee26d2d7e7e300f76ba7b796014c0401' \
+                      '1394d0c4a5ed9a288264a3e443abca50'
