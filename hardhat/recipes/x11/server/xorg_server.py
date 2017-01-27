@@ -1,3 +1,4 @@
+import os
 from hardhat.recipes.base import GnuRecipe
 
 
@@ -24,7 +25,17 @@ class XOrgServerRecipe(GnuRecipe):
         self.configure_strip_cross_compile()
         self.environment['CFLAGS'] += ' -Wno-error=array-bounds'
 
-    def install(self):
+    def install(self):    
+        self.log_dir('install', self.directory, 'removing old libexec/Xorg')
+        file = os.path.join(self.prefix_dir, 'libexec', 'Xorg')
+        if os.path.exists(file):
+            os.remove(file)
+
+        self.log_dir('install', self.directory, 'removing old libexec/Xorg')
+        file = os.path.join(self.prefix_dir, 'libexec', 'Xorg.wrap')
+        if os.path.exists(file):
+            os.remove(file)
+
         super(XOrgServerRecipe, self).install()
 
         exe = '%s/bin/Xorg' % self.prefix_dir

@@ -180,10 +180,13 @@ def _default_cpu_count():
     return c // 2
 
 
-def _cpu_count(cpus):
+def _cpu_count(in_cpus):
+    cpus = in_cpus
     if cpus < 0:
         cpus = max(multiprocessing.cpu_count() + cpus, 1)
     elif (cpus - int(cpus)) != 0:
         cpus *= multiprocessing.cpu_count()
         cpus = max(min(multiprocessing.cpu_count(), cpus), 1)
-    return int(cpus)
+    cpus = int(cpus)
+#    print('in_cpus=%s out=%s' % (in_cpus, cpus))
+    return cpus

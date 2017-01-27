@@ -12,7 +12,12 @@ class SwayRecipe(GnuRecipe):
                         'gdk-pixbuf',                        
                         'json-c', 'libcap', 'pango',
                         'pcre', 'pkgconfig',
-                        'wayland', 'wlc', 'xorg-server']
+                        'wayland', 'wlc', 'xf86-video-fbdev',
+                        'xorg-server']
+        # Plus install a specific driver for better performanc
+        # see recipes/x11/drivers for a list
+        # Also install the synaptics driver in that directory
+        # for laptop touchpad support
         self.version = '0.11'
         self.version_regex = r'(?P<version>\d+\.\d+(-rc\d+)?)' \
             + extension_regex

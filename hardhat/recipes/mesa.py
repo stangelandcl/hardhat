@@ -20,5 +20,9 @@ class MesaRecipe(GnuRecipe):
             '--with-egl-platforms=x11,drm,wayland,surfaceless',
             '--enable-gles1',
             '--enable-gles2',
-            '--enable-shared-glapi'
+            '--enable-shared-glapi',
+            '--enable-gbm',
+            '--enable-dri3',
+            '--enable-texture-float'
+            '--enable-glx-tls',
             ]
