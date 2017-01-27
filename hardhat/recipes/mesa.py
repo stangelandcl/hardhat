@@ -25,4 +25,5 @@ class MesaRecipe(GnuRecipe):
             '--enable-dri3',
             '--enable-texture-float'
             '--enable-glx-tls',
+            '--with-gallium-drivers=i915,r600,nouveau,radeonsi,svga,swrast'
             ]
