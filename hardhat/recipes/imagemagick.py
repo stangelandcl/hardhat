@@ -15,7 +15,7 @@ class ImageMagickRecipe(GnuRecipe):
         # they change frequently. so just use whatever is there
         # TODO: set a mininmum version just in case
         self.version = self.get_version()[0]
-        if self.version_compare('7.0.4-5') > 0:
+        if self.version and self.version_compare('7.0.4-5') > 0:
             raise Exception("imagemagick version is lower than its old version")
         self.url = 'ftp://ftp.imagemagick.org/pub/ImageMagick/releases/' \
                    'ImageMagick-$version.tar.xz'

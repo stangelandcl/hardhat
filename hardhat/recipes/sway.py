@@ -8,7 +8,8 @@ class SwayRecipe(GnuRecipe):
         self.sha256 = '3d4d18afc849db8704d8da9cb69eb121' \
                       'ea92b27d7fa556acdcc6708f05c84964'
         self.name = 'sway'
-        self.depends = ['gdk-pixbuf', 'cairo',
+        self.depends = ['cairo', 'dmenu', 'fonts',
+                        'gdk-pixbuf',                        
                         'json-c', 'libcap', 'pango',
                         'pcre', 'pkgconfig',
                         'wayland', 'wlc', 'xorg-server']

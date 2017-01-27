@@ -194,15 +194,16 @@ class GetVersionMixin(Object):
         self._version_url = value
 
     def get_version(self):
-        v = str(self.version_url)
-        if 'sourceforge.net' in v:
-            return Versions.scrape_page(self.version_url, self.version_regex)
-        elif ('github.com' not in v or hasattr(self, '_version_url')):
-            return Versions.get_from_directory(
-                self.version_url, self.version_regex)
-        elif isinstance(self.version_url, GithubUrl):
-            return Versions.scrape_page(self.version_url.project.releases_url,
-                                        self.version_regex)
+        if False:
+            v = str(self.version_url)
+            if 'sourceforge.net' in v:
+                return Versions.scrape_page(self.version_url, self.version_regex)
+            elif ('github.com' not in v or hasattr(self, '_version_url')):
+                return Versions.get_from_directory(
+                    self.version_url, self.version_regex)
+            elif isinstance(self.version_url, GithubUrl):
+                return Versions.scrape_page(self.version_url.project.releases_url,
+                                            self.version_regex)
         return (None, None)
 
     def version_check(self):
