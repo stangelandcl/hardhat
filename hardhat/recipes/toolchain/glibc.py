@@ -45,7 +45,8 @@ class GLibCRecipe(CrossGnuRecipe):
         self.log_dir('patch', self.extract_dir, 'patch _CS_PATH')
         filename = os.path.join(self.extract_dir, 'sysdeps/unix/confstr.h')
         src = '"/bin:/usr/bin"'
-        dst = '"%s/bin:%s/texlive/bin:%s/java/bin:/bin:/usr/bin"' % (self.prefix_dir, self.prefix_dir, self.prefix_dir)
+        dst = '"%s/bin:%s/texlive/bin:%s/java/bin:/bin:/usr/bin"' % (
+            self.prefix_dir, self.prefix_dir, self.prefix_dir)
         patch(filename, src, dst)
 
 

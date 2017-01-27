@@ -20,22 +20,25 @@
 5. Add my emacs plugin for find other file (.h/.c)
 6. Add an emacs plugin to decide if .h are C-mode or C++-mode files
 7. split graphviz language dependencies to separate project
+8. use readelf and look for any shared libraries linked from the root lib directories instead of our lib directories
 
 * Packages
 1. xgboost
 2. vlc
-3. lua
 4. ardb
 5. snappy
 6. leveldb
 7. rocksdb
-8. fonts
-9. freerdp
 10. x11vnc
 11. openbox
 12. lxde
 13. shutter - screenshot utility
 14. make pidgin work on work network
+15. Add PAM for swaylock
+16. OpenCL
+17. test CILK for gcc?
+18. fix gimp
+19. add --with-auto-load-safe-path to gdb configure
 
 * Bugs
 1. gimp install hangs.

@@ -4,10 +4,10 @@ from .base import PythonGnuRecipe
 class PyGtkRecipe(PythonGnuRecipe):
     def __init__(self, *args, **kwargs):
         super(PyGtkRecipe, self).__init__(*args, **kwargs)
-
+        self.pythons = ['python2']
         self.name = 'pygtk'
         self.depends = ['gtk3']
-        self.pydepends = ['pygobject']
+        self.pydepends = ['pygobject2']
         self.version = '2.24.0'
         short_version = '.'.join(self.version.split('.')[:2])
         self.sha256 = 'cd1c1ea265bd63ff669e92a2d3c2a88e' \
