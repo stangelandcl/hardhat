@@ -16,6 +16,11 @@ class TclRecipe(GnuRecipe):
                                 '--enable-threads',
                                 '--enable-shared']
 
+        # Leave a copy of TCL in src instead of build because it shouldn't
+        # be deleted. expect uses private headers (tclInt.h) from the src/build
+        # directory of TCL
+        self.extract_dir = os.path.join(self.prefix_dir, 'src',
+                                        'tcl-%s' % self.short_version)
         self.configure_strip_cross_compile()
         self.environment['LIBS'] += ' -lm'
 
@@ -29,3 +34,8 @@ class TclRecipe(GnuRecipe):
             super(TclRecipe, self).compile()
         except Exception as e:
             print('ignoring compile error: %s' % e)
+
+    def post_install(self):
+        super(TclRecipe, self).post_install()
+        self.log_dir('post_install', self.directory, 'cleaning build files')
+        self.run_exe(['make', 'clean'], self.directory, self.environment)
