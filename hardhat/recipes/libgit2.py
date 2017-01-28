@@ -1,7 +1,7 @@
 import os
 import shutil
 from .base import GnuRecipe
-
+from ..util import save_url
 
 class LibGit2Recipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
@@ -33,3 +33,6 @@ class LibGit2Recipe(GnuRecipe):
             shutil.rmtree(dst)
 
         shutil.copytree(src, dst)
+
+        dst = os.path.join(self.prefix_dir, 'doc', 'libgit2', '101-samples.html')
+        save_url('https://libgit2.github.com/docs/guides/101-samples/', dst)
