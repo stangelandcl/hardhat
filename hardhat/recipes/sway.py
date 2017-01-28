@@ -9,8 +9,8 @@ class SwayRecipe(GnuRecipe):
                       'ea92b27d7fa556acdcc6708f05c84964'
         self.name = 'sway'
         self.depends = ['cairo', 'dmenu', 'fonts',
-                        'gdk-pixbuf',                        
-                        'json-c', 'libcap', 'pango',
+                        'gdk-pixbuf',
+                        'json-c', 'libcap', 'login', 'pango',
                         'pcre', 'pkgconfig',
                         'wayland', 'wlc', 'xf86-video-fbdev',
                         'xorg-server']
