@@ -10,8 +10,8 @@ class SwayRecipe(GnuRecipe):
         self.name = 'sway'
         self.depends = ['cairo', 'dmenu', 'fonts',
                         'gdk-pixbuf',
-                        'json-c', 'libcap', 'login', 'pango',
-                        'pcre', 'pkgconfig',
+                        'json-c', 'libcap', 'linux-pam', 'pango',
+                        'pcre', 'pkgconfig', 'util-linux',
                         'wayland', 'wlc', 'xf86-video-fbdev',
                         'xorg-server']
         # Plus install a specific driver for better performanc
