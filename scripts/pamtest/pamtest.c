@@ -1,3 +1,5 @@
+/* Code from http://stackoverflow.com/questions/10910193/how-to-authenticate-username-password-using-pam-w-o-root-privileges */
+
 #include <stdio.h>
 #include <security/pam_appl.h>
 #include <unistd.h>
