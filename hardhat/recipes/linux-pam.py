@@ -23,9 +23,10 @@ class LinuxPamRecipe(GnuRecipe):
         super(LinuxPamRecipe, self).install()
         # These files are from BLFS
         self.log_dir('install', self.directory, 'adding etc/pam.d files')
-
+        dir = os.path.join(self.prefix_dir, 'etc', 'pam.d')
+        if not os.path.exists(dir):
+            os.makedirs(dir)
         def write(filename, text):
-            dir = os.path.join(self.prefix_dir, 'etc', 'pam.d')
             with open(os.path.join(dir, filename), 'wt') as f:
                 f.write(text)
         other = r'''
@@ -77,7 +78,7 @@ session     [success=1 default=ignore] pam_succeed_if.so service !~ gdm* service
 session     [default=1]   pam_lastlog.so nowtmp showfailed
 session     optional      pam_lastlog.so silent noupdate showfailed
 '''
-        write('postlogin', password_auth)
+        write('postlogin', postlogin)
         
         password_auth = r'''#%PAM-1.0
 # This file is auto-generated.
