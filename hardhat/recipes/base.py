@@ -50,6 +50,31 @@ class ExeRunner(Object):
         if rc:
             raise Exception('%s in %s failed: %s' % (arg_str, directory, rc))
 
+    def run_sudo(self, args, directory=None, environment=None):
+        if not directory: directory = self.directory
+        if not environment: environment = self.environment
+
+        args = ['sudo', '-S'] + args
+        arg_str = args
+        if isinstance(args, list):
+            arg_str = ' '.join(args)
+        p = subprocess.Popen(arg_str,
+                             shell=True,
+                             bufsize=1,
+                             cwd=directory,
+                             env=environment,
+                             stdin=subprocess.PIPE,
+                             stdout=subprocess.PIPE,
+                             stderr=subprocess.PIPE)
+        pwd = self.password + '\n'
+        out, err = p.communicate(input=pwd.encode('utf-8'))
+        self.log_verbose(out.decode('utf-8'))
+        self.log_verbose(err.decode('utf-8'))
+        rc = p.wait()
+        if rc:
+            raise Exception('%s in %s failed: %s' % (arg_str, directory, rc))
+
+
 
 class Logger(Object):
     def __init__(self, *args, **kwargs):
@@ -247,6 +272,8 @@ class Recipe(RecipeSettings, Logger, ExeRunner, ShortVersionMixin):
                                        self.target_triplet,
                                        self.tarball_dir)
         self.directory_template = '$prefix/build/$name-$version'
+        self.sudo = False
+
 
     @property
     def directory(self):

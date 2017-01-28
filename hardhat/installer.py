@@ -166,12 +166,10 @@ class Installer(object):
                 return recipe
         raise Exception('required recipe not found: %s' % (name))
 
-    def _install(self, name):
-        recipe = self._recipe(name)
-        recipe.running_name = name
+    def _install(self, recipe):
         recipe.clean()
         recipe.run()
-        self.install_file.installed.add(name)
+        self.install_file.installed.add(recipe.running_name)
         self.install_file.save()
 
     def depends(self, name):
@@ -188,8 +186,7 @@ class Installer(object):
         installed, missing = depends.gather_graph(names)
         self._log_required(installed, True)
         self._log_required(missing, False)
-#        sys.exit(1)
-        for recipe in missing:
+        for recipe in self._get_recipes(missing):
             self._install(recipe)
 
     def _download(self, name):
@@ -205,7 +202,6 @@ class Installer(object):
         installed, missing = depends.gather_graph(names)
         self._log_required(installed, True)
         self._log_required(missing, False)
-#        sys.exit(1)
         for recipe in missing + installed:
             self._download(recipe)
 
@@ -234,6 +230,27 @@ class Installer(object):
         for name in names:
             self._check_version(name)
 
+    def _check_sudo(self, recipes):
+        password = None
+        for recipe in recipes:
+            if recipe.sudo:
+                if not password:
+                    import getpass
+                    password = getpass.getpass(
+                        '%s requires sudo password:' % recipe.name)
+                recipe.password = password
+
+    def _get_recipes(self, names):
+        recipes = []
+        for recipe_name in names:
+            recipe = self._recipe(recipe_name)
+            recipe.running_name = recipe_name
+            recipes.append(recipe)
+
+        self._check_sudo(recipes)
+        return recipes
+
+
     def reinstall(self, names):
         if isinstance(names, str):
             names = [names]
@@ -252,8 +269,5 @@ class Installer(object):
         self._log_required(installed, True)
         self._log_required(missing, False)
 
-#        sys.exit(1)
-        for recipe_name in missing:
-            recipe = self._recipe(recipe_name)
-            recipe.running_name = recipe_name
-            self._install(recipe_name)
+        for recipe in self._get_recipes(missing):
+            self._install(recipe)
