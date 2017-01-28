@@ -96,3 +96,5 @@ gmon.out
 .tramp_history
 *.orig
 \#*#
+a.out
+scripts/pamtest/pamtest

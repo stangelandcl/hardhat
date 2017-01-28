@@ -1,5 +1,6 @@
 import os
 from .base import GnuRecipe
+from ..util import patch
 
 
 class LinuxPamRecipe(GnuRecipe):
@@ -11,13 +12,23 @@ class LinuxPamRecipe(GnuRecipe):
         self.version = '1.3.0'
         self.depends = ['bdb', 'cracklib', 'libtirpc']
         self.url = 'http://linux-pam.org/library/Linux-PAM-$version.tar.bz2'
-
+        self.sudo = True
         self.configure_args += [
             '--sysconfdir=%s/etc' % self.prefix_dir,
             '--disable-regenerate-docu',
             '--enable-securedir=%s/lib/security' % self.prefix_dir,
             '--includedir=%s/include/security' % self.prefix_dir
             ]
+        
+    def patch(self):
+        self.log_dir('patch', self.directory, 'patching config directories')
+        src = '"/etc/pam.d'
+        dst = '"%s/etc/pam.d' % self.prefix_dir
+        filename = os.path.join(self.directory, 'libpam', 'pam_private.h')
+        patch(filename, src, dst)
+        src = '"/usr/lib/'
+        dst = '"%s/lib/' % self.prefix_dir
+        patch(filename, src, dst)        
 
     def install(self):
         super(LinuxPamRecipe, self).install()
@@ -100,3 +111,8 @@ session     [success=1 default=ignore] pam_succeed_if.so service in crond quiet 
 session     required      pam_unix.so
 '''
         write('password-auth', password_auth)
+
+        self.log_dir('install', self.directory, 'setuid unix_chkpwd')
+        exe = os.path.join(self.prefix_dir, 'sbin', 'unix_chkpwd')
+        self.run_sudo(['chown', 'root', exe])
+        self.run_sudo(['chmod', '+s', exe])

@@ -1,0 +1,6 @@
+auth include login
+#auth      required    pam_unix.so
+#auth        required        pam_deny.so
+#auth		substack	system-auth
+#auth		include		postlogin
+
