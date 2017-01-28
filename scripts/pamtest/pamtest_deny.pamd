@@ -1,0 +1,4 @@
+auth        required        pam_deny.so
+
+
+

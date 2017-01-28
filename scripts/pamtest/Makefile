@@ -5,3 +5,6 @@ all:
 	cp pamtest.pamd $(HARDHAT_PREFIX)/etc/pam.d/pamtest
 	./pamtest $(USER) || /bin/true
 	rm $(HARDHAT_PREFIX)/etc/pam.d/pamtest
+	cp pamtest_deny.pamd $(HARDHAT_PREFIX)/etc/pam.d/pamtest
+	./pamtest $(USER) || /bin/true
+	rm $(HARDHAT_PREFIX)/etc/pam.d/pamtest
