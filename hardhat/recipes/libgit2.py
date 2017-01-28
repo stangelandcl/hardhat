@@ -1,3 +1,5 @@
+import os
+import shutil
 from .base import GnuRecipe
 
 
@@ -20,3 +22,14 @@ class LibGit2Recipe(GnuRecipe):
             '-DCMAKE_INSTALL_PREFIX=%s' % self.prefix_dir,
             ]
 
+    def install(self):
+        super(LibGit2Recipe, self).install()
+
+        self.log_dir('install', self.directory, 'installing examples')
+        src = os.path.join(self.directory, 'examples')
+        dst = os.path.join(self.prefix_dir, 'doc', 'libgit2', 'examples')
+
+        if os.path.exists(dst):
+            shutil.rmtree(dst)
+
+        shutil.copytree(src, dst)
