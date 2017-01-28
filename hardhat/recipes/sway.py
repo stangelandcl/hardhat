@@ -39,11 +39,13 @@ class SwayRecipe(GnuRecipe):
     def install(self):
         super(SwayRecipe, self).install()
 
-
         exe = '%s/bin/sway' % self.prefix_dir
         self.log_dir('install', self.directory, 'chown root sway')
         args = ['sudo', 'chown', 'root', exe]
         self.run_exe(args, self.directory, self.environment)
         self.log_dir('install', self.directory, 'setuid sway')
         args = ['sudo', 'chmod', '+s', exe]
+        self.run_exe(args, self.directory, self.environment)
+        self.log_dir('install', self.directory, 'setcap cap_sys_ptrace=eip')
+        args = ['sudo', 'setcap', 'cap_sys_ptrace=eip', exe]
         self.run_exe(args, self.directory, self.environment)

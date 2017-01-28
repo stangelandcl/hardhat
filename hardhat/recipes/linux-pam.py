@@ -21,7 +21,7 @@ class LinuxPamRecipe(GnuRecipe):
 
     def install(self):
         super(LinuxPamRecipe, self).install()
-        # These files are from the fedora package util-linux
+        # These files are from BLFS
         self.log_dir('install', self.directory, 'adding etc/pam.d files')
 
         def write(filename, text):
@@ -67,3 +67,35 @@ session     required        pam_warn.so
 session     required        pam_deny.so
 '''
         write('other', other)
+
+        # from fedora
+        postlogin = r'''#%PAM-1.0
+# This file is auto-generated.
+# User changes will be destroyed the next time authconfig is run.
+
+session     [success=1 default=ignore] pam_succeed_if.so service !~ gdm* service !~ su* quiet
+session     [default=1]   pam_lastlog.so nowtmp showfailed
+session     optional      pam_lastlog.so silent noupdate showfailed
+'''
+        write('postlogin', password_auth)
+        
+        password_auth = r'''#%PAM-1.0
+# This file is auto-generated.
+# User changes will be destroyed the next time authconfig is run.
+auth        required      pam_env.so
+auth        sufficient    pam_unix.so try_first_pass nullok
+auth        required      pam_deny.so
+
+account     required      pam_unix.so
+
+password    requisite     pam_pwquality.so try_first_pass local_users_only retry=3 authtok_type=
+password    sufficient    pam_unix.so try_first_pass use_authtok nullok sha512 shadow
+password    required      pam_deny.so
+
+session     optional      pam_keyinit.so revoke
+session     required      pam_limits.so
+-session     optional      pam_systemd.so
+session     [success=1 default=ignore] pam_succeed_if.so service in crond quiet use_uid
+session     required      pam_unix.so
+'''
+        write('password-auth', password_auth)
