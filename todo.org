@@ -21,7 +21,18 @@
 6. Add an emacs plugin to decide if .h are C-mode or C++-mode files
 7. split graphviz language dependencies to separate project
 8. use readelf and look for any shared libraries linked from the root lib directories instead of our lib directories
-
+9. Add bash auto-completion
+10. Mirrors for URLs
+11. Add automated test servers CentOS 6,7, Debian 6,7,8, Fedora, Ubuntu
+12. Log files read and written with strace for uninstalling. Or with FUSE filesystem like tup.
+13. provide configurations to build python3 for example with and without X11 (and Tcl/Tk). and emacs with and without X
+7. Allow building packages using the native toolchain and installing to a directory
+9. Allow setting linux kernel headers version - for building against old headers for deploying to debian 8 or centos 7 but with 2.x kernel
+13. Add option to download only tarballs. And to download everything ahead of time and then run, completely offline install.
+    Remove all downloads during operations - wget usage, texlive, etc
+1. Add 'provides */libreadline.so' argument
+2. add options to see dependencies of package.
+3. add descriptions
 
 * Packages
 1. xgboost
@@ -39,8 +50,63 @@
 13. test CILK for gcc?
 14. fix gimp
 15. add --with-auto-load-safe-path to gdb configure
-
+16. statically linked python library
+17. Fix alsamixer to work
+18. libwebp - firefox dependency
+19. freeglut - libwebp dependency
+20. libproxy - firefox dependency
+21. hunspell - firefox dependency
+22. thunderbird
+23. chromium
+24. fix locate command and updatedb in cron
+25. libmicrohttpd
+26. samba
+27. circus - python supervisord alternative
+28. fix virtualbox
+29. fix openwatcom
+30. Add Citus DB https://github.com/citusdata/citus
+31. scheme48
+32. racket
+33. vlc
+34. distcc
+35. oracle JDK
+36. kdiff3
+37. pip upgrading
+38. thttpd
+39. kdbg
+40. add my own dbm in python
+41. chicken scheme?
+42. ctags
+43. theano
+44. statically linked python library
+45. circus-web - python circus wrapper
+46. lighttpd
+47. zile?
+48. mingw64
+49. non-root, user-level systemd and cron alternative
+50. caching web proxy
+51. unix2dos
+52. celery - python
+53. MsgPack - python, C, C++
+54. Python faster json parser
 * Bugs
 1. gimp install hangs.
 2. Add better error on circular dependencies.
+** GTK Themes/Firefox
+    Broken scrollbars with gtk+-3 in BLFS-7.10
+
+On some machines, the gtk3 scrollbars (thin, slider with curved ends)
+were replaced by gtk2-style bars with arrows at their end which could
+be clicked, but without any button on the slider - it could still be
+dragged, but there was no visual indication of where you were in the
+page.
+
+This was eventually identified as a theme problem - e.g. xfce-winter
+is now inadequate. A workaround is to install gnome-themes-standard
+and to edit ~/.config/gtk-3.0/settings.ini to contain
+
+[Settings]
+gtk-theme-name=Adwaita
+
+http://wiki.linuxfromscratch.org/blfs/wiki/firefox
 

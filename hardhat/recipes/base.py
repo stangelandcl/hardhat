@@ -353,6 +353,9 @@ class Recipe(RecipeSettings, Logger, ExeRunner, ShortVersionMixin):
         self.log_dir('post-install', dir, 'ldconfig')
         self.run_exe(args, dir, self.environment)
 
+    def cleanup(self):
+        pass
+
     def run(self):
         self.init()
         self.version_check()
@@ -363,7 +366,7 @@ class Recipe(RecipeSettings, Logger, ExeRunner, ShortVersionMixin):
         self.compile()
         self.install()
         self.post_install()
-
+        self.cleanup()
 
 
 def clear_list(x):
@@ -521,6 +524,12 @@ class Extractor(Object):
         self.log_dir('extract', directory,
                      'extract %s' % filename)
         self.run_exe(args, directory, self.environment)
+
+    def cleanup(self):
+        if (os.path.exists(self.extract_dir) and
+            self.extract_dir.startswith(self.base_extract_dir)):
+            shutil.rmtree(self.extract_dir)
+
 
 
 class Configure(Object):

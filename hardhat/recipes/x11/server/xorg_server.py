@@ -21,11 +21,12 @@ class XOrgServerRecipe(GnuRecipe):
             #'--enable-install-setuid',
             '--enable-suid-wrapper',
             #'--with-xkb-output=/var/lib/xkb'
-                                ]
+            ]
+        self.sudo = True
         self.configure_strip_cross_compile()
         self.environment['CFLAGS'] += ' -Wno-error=array-bounds'
 
-    def install(self):    
+    def install(self):
         self.log_dir('install', self.directory, 'removing old libexec/Xorg')
         file = os.path.join(self.prefix_dir, 'libexec', 'Xorg')
         if os.path.exists(file):
@@ -40,27 +41,24 @@ class XOrgServerRecipe(GnuRecipe):
 
         exe = '%s/bin/Xorg' % self.prefix_dir
         self.log_dir('install', self.directory, 'chown root Xorg')
-        args = ['sudo', 'chown', 'root', exe]
-        self.run_exe(args, self.directory, self.environment)
+        self.run_sudo(['chown', 'root', exe])
         self.log_dir('install', self.directory, 'setuid Xorg')
-        args = ['sudo', 'chmod', '+s', exe]
+        self.run_sudo(['chmod', '+s', exe])
         self.run_exe(args, self.directory, self.environment)
 
         exe = '%s/libexec/Xorg.wrap' % self.prefix_dir
         self.log_dir('install', self.directory, 'chown root Xorg.wrap')
-        args = ['sudo', 'chown', 'root', exe]
+        self.run_sudo(['chown', 'root', exe])
         self.run_exe(args, self.directory, self.environment)
         self.log_dir('install', self.directory, 'setuid Xorg.wrap')
-        args = ['sudo', 'chmod', '+s', exe]
+        self.run_sudo(['chmod', '+s', exe])
         self.run_exe(args, self.directory, self.environment)
 
         exe = '%s/libexec/Xorg' % self.prefix_dir
         self.log_dir('install', self.directory, 'chown root libexec/Xorg')
-        args = ['sudo', 'chown', 'root', exe]
-        self.run_exe(args, self.directory, self.environment)
+        self.run_sudo(['chown', 'root', exe])
         self.log_dir('install', self.directory, 'setuid libexec/Xorg')
-        args = ['sudo', 'chmod', '+s', exe]
-        self.run_exe(args, self.directory, self.environment)
+        self.run_sudo(['chmod', '+s', exe])
 
     def patch(self):
         patch = r'''

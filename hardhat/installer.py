@@ -82,11 +82,12 @@ class DependencyFinder(Object):
                 raise Exception('Circular dependencies')
         return edges
 
-    def _split_installed(self, edges):
+    def _split_installed(self, edges, force_uninstalled):
         installed = []
         uninstalled = []
+        force_uninstalled = set(force_uninstalled)
         for edge in edges:
-            if edge in self.installed:
+            if edge in self.installed and edge not in force_uninstalled:
                 installed.append(edge)
             else:
                 uninstalled.append(edge)
@@ -105,12 +106,14 @@ class DependencyFinder(Object):
             if d not in graph:
                 self._gather_graph1(d, graph)
 
-    def gather_graph(self, names):
+    def gather_graph(self, names, reinstall=False):
         graph = dict()
         for name in names:
             self._gather_graph1(name, graph)
         edges = self._gather_edges(graph)
-        return self._split_installed(edges)
+        if not reinstall:
+            names = []
+        return self._split_installed(edges, names)
 
 
 class InstallFile(object):
@@ -231,13 +234,26 @@ class Installer(object):
             self._check_version(name)
 
     def _check_sudo(self, recipes):
-        password = None
-        for recipe in recipes:
-            if recipe.sudo:
-                if not password:
-                    import getpass
-                    password = getpass.getpass(
-                        '%s requires sudo password:' % recipe.name)
+        recipes = list(filter(lambda x: x.sudo, recipes))
+        if recipes:
+            names = [x.name for x in recipes]
+            names.sort()
+            names = ', '.join(names)
+            import getpass
+            password = getpass.getpass(
+                '%s requires sudo password: ' % names)
+            try:
+                # install python3-python-pam to use this code
+                import pam
+                p = pam.pam()
+                user = os.environ['USER']
+                if p.authenticate(user, password):
+                    print('Authenticated')
+                else:
+                    print('Authentication FAILED')
+                    sys.exit(1)  # Could continue until get to sudo
+            except: pass
+            for recipe in recipes:
                 recipe.password = password
 
     def _get_recipes(self, names):
@@ -261,11 +277,7 @@ class Installer(object):
                                    self.recipes,
                                    self.dependencies)
 
-        installed, missing = depends.gather_graph(names)
-        names = set(names)
-        installed = list(filter(lambda x: x not in names, installed))
-        missing = list(filter(lambda x: x not in names, missing))
-        missing += names
+        installed, missing = depends.gather_graph(names, reinstall=True)
         self._log_required(installed, True)
         self._log_required(missing, False)
 
