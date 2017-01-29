@@ -16,29 +16,29 @@
 2. Add GithubUrl() class so we can convert from Url to release url. Use this instead of string
    for self.url so we can pick apart the objects.
 3. Pass in '-march=native' to bootstrap and save, also pass on command line.
-4. Proper config file instead of environment variables?
+4. Proper config file instead of environment variables.
 5. Add my emacs plugin for find other file (.h/.c)
 6. Add an emacs plugin to decide if .h are C-mode or C++-mode files
 7. split graphviz language dependencies to separate project
 8. use readelf and look for any shared libraries linked from the root lib directories instead of our lib directories
 
+
 * Packages
 1. xgboost
 2. vlc
-4. ardb
-5. snappy
-6. leveldb
-7. rocksdb
-10. x11vnc
-11. openbox
-12. lxde
-13. shutter - screenshot utility
-14. make pidgin work on work network
-15. Add PAM for swaylock
-16. OpenCL
-17. test CILK for gcc?
-18. fix gimp
-19. add --with-auto-load-safe-path to gdb configure
+3. ardb
+4. snappy
+5. leveldb
+6. rocksdb
+7. x11vnc
+8. lxde
+9. shutter - screenshot utility
+10. make pidgin work on work network
+11. Python linux-pam and verify user sudo password when we prompt for it
+12. OpenCL
+13. test CILK for gcc?
+14. fix gimp
+15. add --with-auto-load-safe-path to gdb configure
 
 * Bugs
 1. gimp install hangs.
