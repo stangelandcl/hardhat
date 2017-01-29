@@ -44,15 +44,12 @@ class XOrgServerRecipe(GnuRecipe):
         self.run_sudo(['chown', 'root', exe])
         self.log_dir('install', self.directory, 'setuid Xorg')
         self.run_sudo(['chmod', '+s', exe])
-        self.run_exe(args, self.directory, self.environment)
 
         exe = '%s/libexec/Xorg.wrap' % self.prefix_dir
         self.log_dir('install', self.directory, 'chown root Xorg.wrap')
         self.run_sudo(['chown', 'root', exe])
-        self.run_exe(args, self.directory, self.environment)
         self.log_dir('install', self.directory, 'setuid Xorg.wrap')
         self.run_sudo(['chmod', '+s', exe])
-        self.run_exe(args, self.directory, self.environment)
 
         exe = '%s/libexec/Xorg' % self.prefix_dir
         self.log_dir('install', self.directory, 'chown root libexec/Xorg')
