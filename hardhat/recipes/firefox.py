@@ -1,3 +1,4 @@
+import os
 from string import Template
 from .base import GnuRecipe
 
@@ -5,6 +6,9 @@ from .base import GnuRecipe
 class FirefoxRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(FirefoxRecipe, self).__init__(*args, **kwargs)
+        self.sha256 = '30ba00ba716ea1eeda526e2ccc8642f8' \
+                      'd18a836793fde50e87a4fcb9d9fccca9'
+
         self.name = 'firefox'
         self.version = '51.0.1'
         self.version_regex = r'(?P<version>\d+\.\d+(\.\d+)*)'
@@ -12,6 +16,7 @@ class FirefoxRecipe(GnuRecipe):
                            'releases/'
         self.depends = ['alsa-lib',
                         'autoconf',
+                        'autoconf2.13',
                         'curl',
                         'dbus-glib',
                         'gconf',
@@ -46,6 +51,13 @@ class FirefoxRecipe(GnuRecipe):
              '%s/lib/firefox-%s/browser' % (self.prefix_dir, self.version)]
             ]
 
+    def configure(self):
+        pass
+
+    def extract(self):
+        super(FirefoxRecipe, self).extract()
+        self.directory = os.path.join(self.directory,
+                                      '%s-%s' % (self.name, self.version))
 
     def patch(self):
         mozconfig = Template(r'''
@@ -53,6 +65,8 @@ class FirefoxRecipe(GnuRecipe):
 # If desired, you can reduce the number of cores used, e.g. to 1, by
 # uncommenting the next line and setting a valid number of CPU cores.
 mk_add_options MOZ_MAKE_FLAGS="-j${cpus}"
+ac_add_options --target=${target}
+ac_add_options --disable-gold
 
 # If you have installed dbus-glib, comment out this line:
 #ac_add_options --disable-dbus
@@ -124,7 +138,8 @@ ac_add_options --with-system-zlib
 
 mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/firefox-build-dir
 ''').substitute(cpus=self.cpu_count,
-                prefix=self.prefix_dir)
+                prefix=self.prefix_dir,
+                target=self.target_triplet)
         file = os.path.join(self.directory, 'mozconfig')
         with open(file, 'wt') as f:
             f.write(mozconfig)

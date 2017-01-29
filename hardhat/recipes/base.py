@@ -528,6 +528,8 @@ class Extractor(Object):
     def cleanup(self):
         if (os.path.exists(self.extract_dir) and
             self.extract_dir.startswith(self.base_extract_dir)):
+            self.log_dir('cleanup', self.directory,
+                         'removing %s' % self.extract_dir)
             shutil.rmtree(self.extract_dir)
 
 
