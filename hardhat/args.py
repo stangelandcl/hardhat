@@ -23,7 +23,7 @@ def parse_args():
                         default=_default_cpu_count())
     parser.add_argument('--march',
                         help='architecture=core2|native',
-                        type=str)                    
+                        type=str)
     parser.add_argument('--prefix',
                         default=default_prefix_dir,
                         help='the root-like directory packages ' +
@@ -89,6 +89,9 @@ def parse_args():
     install_parser.add_argument('--file',
                                 help='install packages in config file',
                                 type=str)
+    install_parser.add_argument('--no-clean',
+                                help="leave build directory after install",
+                                action='store_true')
 
 
     list_parser = sub_parsers.add_parser('list',
@@ -116,6 +119,9 @@ def parse_args():
     reinstall_parser.add_argument('package',
                                   help='package to (re)install',
                                   nargs='+')
+    reinstall_parser.add_argument('--no-clean',
+                                  help="leave build directory after install",
+                                  action='store_true')
 
     version_parser = sub_parsers.add_parser(
         'version',
@@ -148,6 +154,7 @@ def parse_args():
     settings.silent = args.silent
     settings.quiet = not args.verbose
     settings.cpu_count = _cpu_count(args.cpus)
+    settings.post_clean = not args.no_clean
     if args.march:
         settings.march = args.march
         os.environ['HARDHAT_MARCH'] = args.march
@@ -159,7 +166,7 @@ def parse_args():
 
     if not os.path.exists(settings.tarball_dir):
         os.makedirs(settings.tarball_dir)
-    
+
     docdir = os.path.join(args.prefix, 'doc')
     if not os.path.exists(docdir):
         os.makedirs(docdir)

@@ -526,18 +526,17 @@ class Extractor(Object):
         self.run_exe(args, directory, self.environment)
 
     def cleanup(self):
-        if (os.path.exists(self.extract_dir) and
-            self.extract_dir.startswith(self.base_extract_dir)):
+        if (self.post_clean and
+                os.path.exists(self.extract_dir) and
+                self.extract_dir.startswith(self.base_extract_dir)):
             self.log_dir('cleanup', self.directory,
                          'removing %s' % self.extract_dir)
             shutil.rmtree(self.extract_dir)
 
 
-
 class Configure(Object):
     def __init__(self, *args, **kwargs):
         super(Configure, self).__init__(*args, **kwargs)
-
 
     @property
     def configure_args(self):
@@ -547,8 +546,8 @@ class Configure(Object):
                  '--prefix=%s' % (self.prefix_dir),
                  '--build=%s' % (self.build_triplet),
                  '--host=%s' % (self.host_triplet),
-#                 '--with-sysroot=%s' % self.prefix_dir
-                ]
+                 # '--with-sysroot=%s' % self.prefix_dir
+                 ]
         return self._configure_args
 
     @configure_args.setter
@@ -573,15 +572,14 @@ class Configure(Object):
 
     def configure_strip_cross_compile(self):
         self.configure_args = list(filter(lambda x:
-                                          not x.startswith('--build=')
-                                          and not x.startswith('--host='),
+                                          not x.startswith('--build=') and
+                                          not x.startswith('--host='),
                                           self.configure_args))
 
     def configure_strip_sysroot(self):
         self.configure_args = list(filter(lambda x:
                                           not x.startswith('--with-sysroot='),
                                           self.configure_args))
-
 
     def configure(self):
         directory = self.configure_directory()

@@ -114,8 +114,8 @@ ac_add_options --with-system-harfbuzz
 
 # Stripping is now enabled by default.
 # Uncomment these lines if you need to run a debugger:
-#ac_add_options --disable-strip
-#ac_add_options --disable-install-strip
+ac_add_options --disable-strip
+ac_add_options --disable-install-strip
 
 # The BLFS editors recommend not changing anything below this line:
 ac_add_options --prefix=${prefix}
@@ -456,3 +456,38 @@ diff --git a/toolkit/library/moz.build b/toolkit/library/moz.build
 
 '''
         self.apply_patch(self.directory, system)
+
+        # Temporary debugging code
+        src = r'''static bool
+equal(const char* s1, const char* s2)
+{
+    return !strcmp(s1, s2);
+}'''
+
+        dst = r'''static bool
+equal(const char* s1, const char* s2)
+{
+    if(!s1)
+    {
+        if(!s2)
+        {
+            printf("equal: comparing null to null\n");
+            return false;
+        }
+        printf("equal: comparing null to %s\n", s2);
+        return false;
+    }
+    else if(!s2)
+    {
+        printf("equal: comparing %s to null\n", s1);
+        return false;
+    }
+    return !strcmp(s1, s2);
+}'''
+        file = os.path.join(self.directory, 'js/src/builtin/Intl.cpp')
+        patch(file, src, dst)
+
+        src = r'''UEnumeration* values = ucol_getKeywordValuesForLocale("co", locale.ptr(), false, &status);
+'''
+        dst = r'''printf("Using locale=%s\n", locale.ptr()); UEnumeration* values = ucol_getKeywordValuesForLocale("co", locale.ptr(), false, &status);'''
+        patch(file, src, dst)

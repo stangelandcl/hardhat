@@ -43,6 +43,7 @@ class RecipeSettings(Object):
         self.build_triplet = '%s-unknown-%s-gnu' % (arch, os_name)
         self.tarball_dir = os.path.expanduser('~/Downloads/hardhat')
         self.march = get_march()
+        self.post_clean = True
 
         self.prefix_dir = os.path.expanduser('~/hardhat')
         self.quiet = RecipeSettings.quiet
@@ -67,6 +68,7 @@ class RecipeSettings(Object):
             self.install_file = src.install_file
         self.installer = src.installer
         self.march = src.march
+        self.post_clean = src.post_clean
 #        self.settings_filename = src.settings_filename
 
     ## @property
