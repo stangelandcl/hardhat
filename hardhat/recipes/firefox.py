@@ -1,6 +1,7 @@
 import os
 from string import Template
 from .base import GnuRecipe
+from ..util import patch
 
 
 class FirefoxRecipe(GnuRecipe):
@@ -50,6 +51,8 @@ class FirefoxRecipe(GnuRecipe):
              '../../mozilla/plugins',
              '%s/lib/firefox-%s/browser' % (self.prefix_dir, self.version)]
             ]
+        # for cert.h
+        self.environment['CPPFLAGS'] += ' -I%s/include/nss' % self.prefix_dir
 
     def configure(self):
         pass
@@ -143,3 +146,11 @@ mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/firefox-build-dir
         file = os.path.join(self.directory, 'mozconfig')
         with open(file, 'wt') as f:
             f.write(mozconfig)
+
+        src = r"cpp = list(buildconfig.substs['CPP'])"
+        dst = r"cpp = buildconfig.substs['CPP'].split()"
+        file = os.path.join(self.directory, 'dom/bindings/GenerateCSS2PropertiesWebIDL.py')
+        patch(file, src, dst)
+
+        file = os.path.join(self.directory, 'layout/style/GenerateCSSPropsGenerated.py')
+        patch(file, src, dst)
