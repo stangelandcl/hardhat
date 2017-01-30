@@ -141,7 +141,7 @@ ac_add_options --enable-url-classifier
 ac_add_options --enable-system-ffi
 ac_add_options --enable-system-pixman
 
-ac_add_options --with-pthreads
+#ac_add_options --with-pthreads
 
 ac_add_options --with-system-bz2
 ac_add_options --with-system-jpeg
