@@ -53,6 +53,7 @@ class FirefoxRecipe(GnuRecipe):
             ]
         # for cert.h
         self.environment['CPPFLAGS'] += ' -I%s/include/nss' % self.prefix_dir
+        self.environment_strip_lto()
 
     def configure(self):
         pass
