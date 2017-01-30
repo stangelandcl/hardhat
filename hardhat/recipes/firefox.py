@@ -164,6 +164,12 @@ mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/firefox-build-dir
         file = os.path.join(self.directory, 'layout/style/GenerateCSSPropsGenerated.py')
         patch(file, src, dst)
 
+        # Fix install failure when --enable-debug is specified
+        src = r'''#ifdef MOZ_DEBUG'''
+        dst = r'''#ifndef MOZ_DEBUG'''
+        file = os.path.join(self.directory, 'browser/installer/package-manifest.in')
+        patch(file, src, dst)
+
         system = r'''
 Submitted By: Ken Moffat <ken at linuxfromscratch dot org>
 Date: 2017-01-24
