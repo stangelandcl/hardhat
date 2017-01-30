@@ -1,6 +1,5 @@
 from .base import GnuRecipe
 import os
-import shutil
 
 
 class Graphite2Recipe(GnuRecipe):
