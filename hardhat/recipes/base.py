@@ -424,7 +424,8 @@ class Downloader(Object):
             return self._url
         return Template(self._url).substitute(
             name=self.name,
-            version=self.version)
+            version=self.version,
+            short_version=self.short_version)
 
     @url.setter
     def url(self, value):
