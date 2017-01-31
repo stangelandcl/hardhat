@@ -141,7 +141,8 @@ def parse_args():
 
 
     args = parser.parse_args()
-
+    if not hasattr(args, 'no_clean'):
+        args.no_clean = False
     args.prefix = os.path.expanduser(args.prefix)
     args.prefix = os.path.expandvars(args.prefix)
     args.downloads = os.path.expanduser(args.downloads)

@@ -57,8 +57,6 @@ class FirefoxRecipe(GnuRecipe):
         # for cert.h
         self.environment['CPPFLAGS'] += ' -I%s/include/nss' % self.prefix_dir
         self.environment_strip_lto()
-        self.environment['CFLAGS'] = ' -O0 -g -ggdb3'
-        self.environment['CXXFLAGS'] = ' -O0 -g -ggdb3'
 
     def configure(self):
         pass
@@ -114,8 +112,8 @@ ac_add_options --with-system-harfbuzz
 
 # Stripping is now enabled by default.
 # Uncomment these lines if you need to run a debugger:
-ac_add_options --disable-strip
-ac_add_options --disable-install-strip
+#ac_add_options --disable-strip
+#ac_add_options --disable-install-strip
 
 # The BLFS editors recommend not changing anything below this line:
 ac_add_options --prefix=${prefix}
@@ -126,8 +124,8 @@ ac_add_options --disable-updater
 ac_add_options --disable-tests
 
 # disable for debugging
-ac_add_options --disable-optimize
-ac_add_options --enable-debug
+#ac_add_options --disable-optimize
+#ac_add_options --enable-debug
 
 
 ac_add_options --enable-gio
@@ -141,7 +139,7 @@ ac_add_options --enable-url-classifier
 ac_add_options --enable-system-ffi
 ac_add_options --enable-system-pixman
 
-#ac_add_options --with-pthreads
+ac_add_options --with-pthreads
 
 ac_add_options --with-system-bz2
 ac_add_options --with-system-jpeg
@@ -165,10 +163,11 @@ mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/firefox-build-dir
         patch(file, src, dst)
 
         # Fix install failure when --enable-debug is specified
-        src = r'''#ifdef MOZ_DEBUG'''
-        dst = r'''#ifndef MOZ_DEBUG'''
-        file = os.path.join(self.directory, 'browser/installer/package-manifest.in')
-        patch(file, src, dst)
+        # Only enable this if --enable debug is specified
+#        src = r'''#ifdef MOZ_DEBUG'''
+#        dst = r'''#ifndef MOZ_DEBUG'''
+#        file = os.path.join(self.directory, 'browser/installer/package-manifest.in')
+#        patch(file, src, dst)
 
         system = r'''
 Submitted By: Ken Moffat <ken at linuxfromscratch dot org>
@@ -456,38 +455,3 @@ diff --git a/toolkit/library/moz.build b/toolkit/library/moz.build
 
 '''
         self.apply_patch(self.directory, system)
-
-        # Temporary debugging code
-        src = r'''static bool
-equal(const char* s1, const char* s2)
-{
-    return !strcmp(s1, s2);
-}'''
-
-        dst = r'''static bool
-equal(const char* s1, const char* s2)
-{
-    if(!s1)
-    {
-        if(!s2)
-        {
-            printf("equal: comparing null to null\n");
-            return false;
-        }
-        printf("equal: comparing null to %s\n", s2);
-        return false;
-    }
-    else if(!s2)
-    {
-        printf("equal: comparing %s to null\n", s1);
-        return false;
-    }
-    return !strcmp(s1, s2);
-}'''
-        file = os.path.join(self.directory, 'js/src/builtin/Intl.cpp')
-        patch(file, src, dst)
-
-        src = r'''UEnumeration* values = ucol_getKeywordValuesForLocale("co", locale.ptr(), false, &status);
-'''
-        dst = r'''printf("Using locale=%s\n", locale.ptr()); UEnumeration* values = ucol_getKeywordValuesForLocale("co", locale.ptr(), false, &status);'''
-        patch(file, src, dst)
