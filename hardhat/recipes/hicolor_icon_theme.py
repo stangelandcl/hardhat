@@ -9,7 +9,14 @@ class HiColorIconThemeRecipe(GnuRecipe):
 
         self.name = 'hicolor-icon-theme'
         self.version = '0.15'
+        self.depends = ['gtk3']
         self.url = 'http://pkgs.fedoraproject.org/repo/pkgs/' \
                    'hicolor-icon-theme/hicolor-icon-theme-$version.tar.xz/' \
                    'md5/6aa2b3993a883d85017c7cc0cfc0fb73/' \
                    'hicolor-icon-theme-$version.tar.xz'
+
+    def post_install(self):
+        self.run_exe(['gtk-icon-theme-cache',
+                      '%s/share/icons/hicolor' % self.prefix_dir],
+                     self.directory,
+                     self.environment)
