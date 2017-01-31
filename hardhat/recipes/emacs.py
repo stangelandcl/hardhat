@@ -19,32 +19,35 @@ class EmacsRecipe(GnuRecipe):
 
         self.depends = ['dejavu-fonts',
                         'fontconfig',
-                        'giflib', 'gnome-icon-theme',
-                        'gnutls', 'gtk3', 'imagemagick',
+                        'giflib',
+#                        'gnome-icon-theme',
+                        'gnutls',
+#                        'gtk3',
+                        'imagemagick',
                         'libjpeg-turbo', 'libpng',
                         'libtiff', 'libxml2', 'ncurses', 'zlib']
 
         env = self.environment
-#        env['OPT'] = \
-#            '-O2 -falign-functions=1 -falign-jumps=1 -falign-loops=1'
-#        env['CFLAGS'] = env['CFLAGS_NO_OPT'] + ' ' + env['OPT']
-#        env['CXXFLAGS'] = env['CFLAGS']
-#        env['CPPFLAGS'] = env['CFLAGS']
-        env['CFLAGS'] = ' -O0 -g -ggdb3'
-        env['CXXFLAGS'] = ' -O0 -g -ggdb3'
-        env['CPPFLAGS'] = ' -DDEBUG'
+        env['OPT'] = \
+            '-O2 -falign-functions=1 -falign-jumps=1 -falign-loops=1'
+        env['CFLAGS'] = env['CFLAGS_NO_OPT'] + ' ' + env['OPT']
+        env['CXXFLAGS'] = env['CFLAGS']
+        env['CPPFLAGS'] = env['CFLAGS']
+#        env['CFLAGS'] = ' -O0 -g -ggdb3'
+#        env['CXXFLAGS'] = ' -O0 -g -ggdb3'
+#        env['CPPFLAGS'] = ' -DDEBUG'
 
         env['LD_OPT'] = ''
         env['LDFLAGS'] = env['LDFLAGS_NO_OPT']
 
         self.configure_args += ['--without-makeinfo',
                                 '--with-modules',
-                                '--with-x-toolkit=gtk3',
+                                '--with-x-toolkit=lucid',
 #                                '--with-xwidgets'
 #                                '--without-x',
 #                                '--enable-link-time-optimization'
-                                '--enable-checking',
-                                '--enable-asserts'
+#                                '--enable-checking',
+#                                '--enable-asserts'
                                 ]
 
     def install(self):
