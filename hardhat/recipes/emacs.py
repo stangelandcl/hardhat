@@ -10,12 +10,13 @@ from ..urls import Urls
 class EmacsRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(EmacsRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '763344b90db4d40e9fe90c5d14748a9d' \
-                      'bd201ce544e2cf0835ab48a0aa4a1c67'
-
+        self.sha256 = 'cc2f7d5b91d47798e1898d581a2440af' \
+                      '3bfc43f90de2795d1354be5cc9529e1b'
+                
         self.name = 'emacs'
-        self.version = '25.1'
-        self.url = Urls.gnu_template(self.name, self.version)
+        self.version = '7e02a477bbcabb4e65aeecade79b67357c0b9dae'
+        self.url = 'http://git.savannah.gnu.org/cgit/emacs.git/snapshot/' \
+                   'emacs-$version.tar.gz'
 
         self.depends = ['dejavu-fonts',
                         'fontconfig',
@@ -49,6 +50,8 @@ class EmacsRecipe(GnuRecipe):
 #                                '--enable-checking',
 #                                '--enable-asserts'
                                 ]
+        self.configure_args = [['autoreconf', '-iv'],
+                               self.configure_args]
 
     def install(self):
         src = os.path.join(self.directory, 'src', 'emacs-module.h')
