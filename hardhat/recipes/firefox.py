@@ -37,6 +37,7 @@ class FirefoxRecipe(GnuRecipe):
                         'openssl',
                         'python2',
                         'sqlite3',
+                        'ssl-certificates',
                         'startup-notification',
                         'unzip',
                         'yasm',

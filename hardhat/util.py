@@ -6,6 +6,7 @@ import inspect
 import os
 import shutil
 import ssl
+import stat
 import sys
 import subprocess
 import traceback
@@ -284,3 +285,7 @@ def exception_str(e):
         return str(e) + '\n' + ''.join(e_traceback)
     else:
         return str(e)
+
+
+def make_executable(filename):
+    os.chmod(filename, stat.S_IRWXU | stat.S_IRWXG | stat.S_IROTH)
