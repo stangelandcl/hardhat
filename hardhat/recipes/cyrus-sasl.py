@@ -19,4 +19,6 @@ class CyrusSaslRecipe(GnuRecipe):
             '--prefix=%s' % self.prefix_dir,
             '--with-sysroot=%s' % self.prefix_dir,
             '--with-plugindir=%s/lib/sasl2' % self.prefix_dir,
-            '--with-configdir=%s/lib/sasl2' % self.prefix_dir]
+            '--with-configdir=%s/lib/sasl2' % self.prefix_dir,
+            '--enable-static',
+            '--enable-shared']
