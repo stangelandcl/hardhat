@@ -1,3 +1,4 @@
+import os
 from .base import GnuRecipe
 
 
@@ -15,3 +16,12 @@ class GnupgRecipe(GnuRecipe):
         self.environment['CFLAGS'] += ' -Wno-return-type'
         self.environment['CPPFLAGS'] = \
             self.environment['CPPFLAGS'].replace('-DNDEBUG', '')
+
+    def install(self):
+        super(GnupgRecipe, self).install()
+        bin = os.path.join(self.prefix_dir, 'bin')
+        src = os.path.join(bin, 'gpg2')
+        dst = os.path.join(bin, 'gpg')
+        if os.path.exists(dst):
+            os.remove(dst)
+        os.symlink(src, dst)
