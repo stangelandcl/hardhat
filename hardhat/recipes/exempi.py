@@ -12,3 +12,6 @@ class ExempiRecipe(GnuRecipe):
         self.version = '2.2.2'
         self.url = 'http://libopenraw.freedesktop.org/download/' \
                    'exempi-$version.tar.bz2'
+        self.configure_args += ['--with-boost=%s' % self.prefix_dir]
+        
+        
