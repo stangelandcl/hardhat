@@ -33,3 +33,28 @@ class Gtk3Recipe(GnuRecipe):
 
         filename = os.path.join(self.directory, 'gtk', 'gtkmodules.c')
         patch(filename, src, dst)
+
+        text = r'''
+@@ -, +, @@
+ gtk/gtkiconhelper.c | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
+--- a/gtk/gtkiconhelper.c
++++ a/gtk/gtkiconhelper.c
+@@ -896,7 +896,14 @@ _gtk_icon_helper_draw (GtkIconHelper *self,
+
+   if (self->priv->rendered_surface != NULL)
+     {
+-      gtk_css_style_render_icon_surface (gtk_css_node_get_style (gtk_css_gadget_get_node (GTK_CSS_GADGET (self))),
++      GtkCssNode *node;
++
++      /* Avoid calling gtk_css_node_get_style() because it can
++       * invalidate the style which we don't want while trying
++       * to render the current style.
++       */
++      node = gtk_css_gadget_get_node (GTK_CSS_GADGET (self));
++      gtk_css_style_render_icon_surface (node->style,
+                                          cr,
+                                          self->priv->rendered_surface,
+                                          x, y);
+'''
+        self.apply_patch(self.directory, text)
