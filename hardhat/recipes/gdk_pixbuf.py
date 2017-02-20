@@ -8,6 +8,10 @@ class GdkPixBufRecipe(GnuRecipe):
                       'a7db5379729a6e3e0a0e0eba9a8d8879'
 
         self.name = 'gdk-pixbuf'
+        self.depends = ['shared-mime-info']  # to read image files
+        # alternatively configure with --disable-gio-sniffing
+        # See https://trac.macports.org/ticket/45354 for how gdk detects
+        # image file formats
         self.version = '2.34.0'
         short_version = '.'.join(self.version.split('.')[:2])
         self.url = 'http://ftp.gnome.org/pub/gnome/sources/gdk-pixbuf/' \

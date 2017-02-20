@@ -14,6 +14,7 @@ class Gtk3Recipe(GnuRecipe):
         short_version = '.'.join(self.version.split('.')[:2])
         self.depends = ['atk', 'atk-bridge', 'gdk-pixbuf', 'glib',
                         'libepoxy', 'libxkbcommon', 'pango',
+                        'shared-mime-info',
                         'wayland', 'wayland-protocols',
                         'xorg-libs']
         self.url = 'http://ftp.gnome.org/pub/gnome/sources/gtk+/' \

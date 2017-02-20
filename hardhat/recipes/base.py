@@ -353,6 +353,13 @@ class Recipe(RecipeSettings, Logger, ExeRunner, ShortVersionMixin):
         self.log_dir('post-install', dir, 'ldconfig')
         self.run_exe(args, dir, self.environment)
 
+        args = ['%s/bin/update-mime-database' % self.prefix_dir,
+                '%s/share/mime/' % self.prefix_dir]
+        if os.path.exists(args[0]):
+            self.log_dir('post-install', dir, 'update-mime-database')
+            self.run_exe(args, self.directory, self.environment)
+                 
+
     def cleanup(self):
         pass
 

@@ -13,6 +13,7 @@ class Gtk2Recipe(GnuRecipe):
         self.depends = ['atk', 'gdk-pixbuf',
                         'gobject-introspection',
                         'gtk-doc',
-                        'hicolor-icon-theme', 'pango']
+                        'hicolor-icon-theme', 'pango',
+                        'shared-mime-info']
         self.url = 'http://ftp.gnome.org/pub/gnome/sources/gtk+/' \
                    '%s/gtk+-$version.tar.xz' % (short_version)
