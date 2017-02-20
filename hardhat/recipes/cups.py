@@ -20,3 +20,5 @@ printers.'''
                         'libusb']
         self.url = 'https://github.com/apple/cups/releases/download/' \
                    'v$version/cups-$version-source.tar.gz'
+        self.configure_args += ['--with-rcdir=no',
+                                '--with-xinetd=no']
