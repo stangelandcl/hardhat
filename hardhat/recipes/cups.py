@@ -1,3 +1,4 @@
+import os
 from .base import GnuRecipe
 
 
@@ -21,4 +22,18 @@ printers.'''
         self.url = 'https://github.com/apple/cups/releases/download/' \
                    'v$version/cups-$version-source.tar.gz'
         self.configure_args += ['--with-rcdir=no',
-                                '--with-xinetd=no']
+                                '--with-xinetd=no',
+                                '--disable-pam',
+                                '--disable-dbus',
+                                '--disable-systemd',
+                                '--with-menudir=no',
+                                '--with-icondir=%s/share/icons'
+                                % self.prefix_dir,
+                                '--with-cups-group=%s' % os.environ['USER']]
+        self.install_args += ['CHGRPPROG=/bin/true',
+                              'CHOWNPROG=/bin/true',
+
+                              # otherwise mv hangs waiting for user input
+                              # asking about changing file mode
+                              'MV="mv -f"'
+                              ]
