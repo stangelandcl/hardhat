@@ -18,6 +18,7 @@ class EvinceRecipe(GnuRecipe):
                         'libsecret',
                         'libspectre',
                         'libxml2',
+                        'nautilus',
                         'poppler']
         self.url = 'http://ftp.gnome.org/pub/gnome/sources/evince/' \
                    '%s/evince-$version.tar.xz' % self.short_version
