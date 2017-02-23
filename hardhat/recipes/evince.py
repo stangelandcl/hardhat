@@ -16,6 +16,7 @@ class EvinceRecipe(GnuRecipe):
                         'gtk3',
                         'itstool',
                         'libsecret',
+                        'libspectre',
                         'libxml2',
                         'poppler']
         self.url = 'http://ftp.gnome.org/pub/gnome/sources/evince/' \
