@@ -27,8 +27,9 @@ install -vDm644 misc/ninja-mode.el \
 install -vDm644 misc/ninja-mode.elc \
                 $prefix/share/emacs/site-lisp/ninja-mode.elc &&
 ninja manual &&
-install -vDm644 doc/manual.html $prefix/share/doc/ninja-1.7.2/manual.html &&
-ninja doxygen &&
-install -vDdm644 doc/doxygen/html/* $prefix/share/doc/ninja-1.7.2/
-''').substitute(prefix=self.prefix_dir)
+mkdir -p $prefix/share/doc/ninja-$version &&
+install -vm644 doc/manual.html \
+               $prefix/share/doc/ninja-$version/manual.html
+''').substitute(prefix=self.prefix_dir,
+                version=self.version)
         self.install_args = [script]
