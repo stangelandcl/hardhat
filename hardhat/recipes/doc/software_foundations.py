@@ -24,7 +24,7 @@ class SoftwareFoundationsRecipe(TarballRecipe):
         shutil.copytree(self.directory, dir)
         SCRIPT=r'''#!/bin/bash
 
-google-chrome %s/index.html
+firefox %s/index.html
 
 ''' % dir
 
