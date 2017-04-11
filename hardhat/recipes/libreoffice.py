@@ -4,6 +4,9 @@ from .base import GnuRecipe
 class LibreOfficeRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(LibreOfficeRecipe, self).__init__(*args, **kwargs)
+        self.sha256 = '04b9215e1c4b8c7ce2d79b8e322bff8d' \
+                      '097426a2d103476cf237cfd42262556e'
+
         self.name = 'libreoffice'
         self.version = '5.3.0.3'
         self.version_regex = r'(?P<version>\d+\.\d+\.\d+)'
@@ -19,6 +22,7 @@ class LibreOfficeRecipe(GnuRecipe):
             'gtk3',
             'harfbuzz',
             'icu',
+            'java',
             'lcms',
             'librsvg',
             'libxml2',
@@ -50,19 +54,15 @@ class LibreOfficeRecipe(GnuRecipe):
             'sed', '-e', '"/distro-install-file-lists/d"', '-i', 'Makefile.in']
         super(LibreOfficeRecipe, self).configure()
 
-        self.configure_args = [
-            'sed', '-e', '"/distro-install-file-lists/d"', '-i', 'Makefile.in']
-        super(LibreOfficeRecipe, self).configure()
-
         self.configure_args = ['./autogen.sh',
                                '--prefix=%s' % self.prefix_dir,
                                '--sysconfdir=%s/etc' % self.prefix_dir,
                                '--with-vendor=hardhat',
                                "--with-lang='fr en-GB'",
-                               '--with-help'
+                               '--with-help',
                                '--with-myspell-dicts',
                                '--with-alloc=system',
-                               '--without-junit'
+                               '--without-junit',
                                '--without-system-dicts',
                                '--disable-dconf',
                                '--disable-odk',
@@ -88,3 +88,4 @@ class LibreOfficeRecipe(GnuRecipe):
                                '--with-system-poppler',
                                '--with-system-postgresql',
                                '--with-system-zlib']
+        super(LibreOfficeRecipe, self).configure()

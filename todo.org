@@ -117,3 +117,6 @@ http://wiki.linuxfromscratch.org/blfs/wiki/firefox
 1. rename exuberant ctags and make it work
 2. enable cppreference
 3. don't hardcode browser in scripts
+
+* In Progress
+1. LibreOffice requires JDK
