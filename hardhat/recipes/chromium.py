@@ -111,10 +111,10 @@ Description:             Allows building with system provided ffmpeg.
         self.apply_patch(self.directory, text)
 
         self.log_dir('patch', self.directory, 'fix gcc 6 build')
-        args = self.shell_args + [
+        args = [
                 'sed',
-                's/^config("compiler") {/&\ncflags_cc = '
-                '[ "-fno-delete-null-pointer-checks" ]/',
+                r"""'s/^config("compiler") {/&\ncflags_cc = """
+                r"""[ "-fno-delete-null-pointer-checks" ]/'""",
                 '-i',
                 'build/config/linux/BUILD.gn']
         self.run_exe(args, self.directory, self.environment)
@@ -129,6 +129,7 @@ Description:             Allows building with system provided ffmpeg.
         self.run_exe(args, self.directory, self.environment)
 
     def configure(self):
+        self.log_dir('configure', self.directory, 'generating build files')
         text = r'''
 GN_CONFIG=('google_api_key="AIzaSyDxKL42zsPjbke5O8_rPVpVrLrJ8aeE9rQ"'
 'google_default_client_id="595013732528-llk8trb03f0ldpqq6nprjp1s79596646.apps.googleusercontent.com"'
