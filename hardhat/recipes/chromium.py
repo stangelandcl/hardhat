@@ -130,44 +130,21 @@ Description:             Allows building with system provided ffmpeg.
 
     def configure(self):
         self.log_dir('configure', self.directory, 'generating build files')
-        text = r'''
-GN_CONFIG=('google_api_key="AIzaSyDxKL42zsPjbke5O8_rPVpVrLrJ8aeE9rQ"'
-'google_default_client_id="595013732528-llk8trb03f0ldpqq6nprjp1s79596646.apps.googleusercontent.com"'
-'google_default_client_secret="5ntt6GbbkjnTVXx-MSxbmx5e"'
-'clang_use_chrome_plugins=false'
-'enable_hangout_services_extension=true'
-'enable_nacl=false'
-'enable_nacl_nonsfi=false'
-'enable_widevine=true'
-'fatal_linker_warnings=false'
-'ffmpeg_branding="Chrome"'
-'fieldtrial_testing_like_official_build=true'
-'is_debug=false'
-'is_clang=false'
-'link_pulseaudio=true'
-'linux_use_bundled_binutils=false'
-'proprietary_codecs=true'
-'remove_webcore_debug_symbols=true'
-'symbol_level=0'
-'treat_warnings_as_errors=false'
-'use_allocator="none"'
-'use_cups=true'
-'use_gconf=false'
-'use_gnome_keyring=false'
-'use_gold=false'
-'use_gtk3=false'
-'use_kerberos=true'
-'use_pulseaudio=true'
-'use_sysroot=false') \
-\
-python tools/gn/bootstrap/bootstrap.py --gn-gen-Args "${GN_CONFIG[*]}" && \
-out/Release/gn gen out/Release --args="${GN_CONFIG[*]}"
+        script = r'''#!/bin/bash
+python tools/gn/bootstrap/bootstrap.py --gn-gen-args 'google_api_key="AIzaSyDxKL42zsPjbke5O8_rPVpVrLrJ8aeE9rQ" google_default_client_id="595013732528-llk8trb03f0ldpqq6nprjp1s79596646.apps.googleusercontent.com" google_default_client_secret="5ntt6GbbkjnTVXx-MSxbmx5e" use_sysroot=false use_gnome_keyring=false ffmpeg_branding="Chrome" is_clang=false treat_warnings_as_errors=false use_gold=false enable_hangout_services_extension=true enable_nacl=false enable_nacl_nonsfi=false use_cups=false use_gconf=false use_gtk3=false use_kerberos=true fatal_linker_warnings=false is_debug=false linux_use_bundled_binutils=false proprietary_codecs=true enable_widevine=true fieldtrial_testing_like_official_build=true remove_webcore_debug_symbols=true'
+out/Release/gn gen out/Release --args='google_api_key="AIzaSyDxKL42zsPjbke5O8_rPVpVrLrJ8aeE9rQ" google_default_client_id="595013732528-llk8trb03f0ldpqq6nprjp1s79596646.apps.googleusercontent.com" google_default_client_secret="5ntt6GbbkjnTVXx-MSxbmx5e" use_sysroot=false use_gnome_keyring=false ffmpeg_branding="Chrome" is_clang=false treat_warnings_as_errors=false use_gold=false enable_hangout_services_extension=true enable_nacl=false enable_nacl_nonsfi=false use_cups=false use_gconf=false use_gtk3=false use_kerberos=true fatal_linker_warnings=false is_debug=false linux_use_bundled_binutils=false proprietary_codecs=true enable_widevine=true fieldtrial_testing_like_official_build=true remove_webcore_debug_symbols=true'
 '''
 
-        args = self.shell_args + [text]
+        exe = '/tmp/chromium_install.sh'
+        with open(exe, 'wt') as f:
+            f.write(script)
+
+        args = ['/bin/bash', exe]
+        self.log_dir('configure', self.directory, 'running configure')
         self.run_exe(args, self.directory, self.environment)
 
     def install(self):
+        self.log_dir('install', self.directory, 'running install')
         text = r'''
 install -vDm755  out/Release/chrome \
                  $prefix/lib/chromium/chromium                   &&
