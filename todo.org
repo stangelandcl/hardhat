@@ -92,6 +92,9 @@
 52. celery - python
 53. MsgPack - python, C, C++
 54. Python faster json parser
+55. xfe - file manager
+56. emelFM2 - file manager
+57. pcmanfm - file manager
 * Bugs
 1. gimp install hangs.
 2. Add better error on circular dependencies.
