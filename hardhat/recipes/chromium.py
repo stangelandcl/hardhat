@@ -46,7 +46,7 @@ class ChromiumRecipe(GnuRecipe):
                    'chromium-browser-official/chromium-$version.tar.xz'
 
         self.compile_args = [
-            'ninja', '-C', '-out/Release',
+            'ninja', '-C', 'out/Release',
             'chrome', 'chrome_sandbox', 'chromedriver', 'widevinecdmadapter'
             ]
 
