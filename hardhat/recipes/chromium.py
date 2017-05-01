@@ -148,6 +148,7 @@ out/Release/gn gen out/Release --args='google_api_key="AIzaSyDxKL42zsPjbke5O8_rP
     def install(self):
         self.log_dir('install', self.directory, 'running install')
         text = r'''
+prefix=%s
 install -vDm755  out/Release/chrome \
                  $prefix/lib/chromium/chromium                   &&
 install -vDm4755 out/Release/chrome_sandbox \
@@ -166,8 +167,11 @@ cp -av out/Release/locales $prefix/lib/chromium/ &&
 
 install -vDm644 out/Release/chrome.1 \
                 $prefix/share/man/man1/chromium.1
-'''
-        text = text.replace('$prefix', self.prefix_dir)
-        self.run_exe(self.shell_args + [text],
+''' % self.prefix_dir
+
+        filename = os.path.join(self.directory, 'install.sh')
+        with open(filename, 'wt') as f:
+            f.write(filename)
+        self.run_exe(['bash', 'install.sh'],
                      self.directory,
                      self.environment)
