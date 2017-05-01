@@ -1,4 +1,6 @@
+import os
 from .base import GnuRecipe
+from ..util import patch
 
 
 class ChromiumRecipe(GnuRecipe):
@@ -6,7 +8,6 @@ class ChromiumRecipe(GnuRecipe):
         super(ChromiumRecipe, self).__init__(*args, **kwargs)
         self.sha256 = '70011770a7e522c92826a3af48d3fd28' \
                       'a46bf8042897d072d20c748cbf828cf7'
-
 
         self.name = 'chromium'
         self.version = '57.0.2987.133'
@@ -36,6 +37,7 @@ class ChromiumRecipe(GnuRecipe):
             'nss',
             'pciutils',
             'perl5-file-basedir',
+            'p11-kit',
             'python2',
             'snappy',
             'usbutils',
@@ -49,6 +51,9 @@ class ChromiumRecipe(GnuRecipe):
             'ninja', '-C', 'out/Release',
             'chrome', 'chrome_sandbox', 'chromedriver', 'widevinecdmadapter'
             ]
+        self.environment['CPPFLAGS'] += ' -I%s/include/nss' % self.prefix_dir
+        self.environment['CXXFLAGS'] += ' -I%s/include/nss' % self.prefix_dir
+        self.environment['CFLAGS'] += ' -I%s/include/nss' % self.prefix_dir
 
     def patch(self):
         text = r'''
@@ -120,19 +125,16 @@ Description:             Allows building with system provided ffmpeg.
         self.run_exe(args, self.directory, self.environment)
 
         self.log_dir('patch', self.directory, 'enable widevine')
-        args = [
-            'sed',
-            's/WIDEVINE_CDM_AVAILABLE/&\n\n#define '
-            'WIDEVINE_CDM_VERSION_STRING "Pinkie Pie"/',
-            '-i', 'third_party/widevine/cdm/stub/widevine_cdm_version.h'
-            ]
-        self.run_exe(args, self.directory, self.environment)
+        src = '#define WIDEVINE_CDM_AVAILABLE'
+        dst = '#define WIDEVINE_CDM_AVAILABLE\n#define WIDEVINE_CDM_VERSION_STRING "Pinkie Pie"\n'
+        filename = os.path.join(self.directory, 'third_party/widevine/cdm/stub/widevine_cdm_version.h')
+        patch(filename, src, dst)
 
     def configure(self):
         self.log_dir('configure', self.directory, 'generating build files')
         script = r'''#!/bin/bash
-python tools/gn/bootstrap/bootstrap.py --gn-gen-args 'google_api_key="AIzaSyDxKL42zsPjbke5O8_rPVpVrLrJ8aeE9rQ" google_default_client_id="595013732528-llk8trb03f0ldpqq6nprjp1s79596646.apps.googleusercontent.com" google_default_client_secret="5ntt6GbbkjnTVXx-MSxbmx5e" use_sysroot=false use_gnome_keyring=false ffmpeg_branding="Chrome" is_clang=false treat_warnings_as_errors=false use_gold=false enable_hangout_services_extension=true enable_nacl=false enable_nacl_nonsfi=false use_cups=false use_gconf=false use_gtk3=false use_kerberos=true fatal_linker_warnings=false is_debug=false linux_use_bundled_binutils=false proprietary_codecs=true enable_widevine=true fieldtrial_testing_like_official_build=true remove_webcore_debug_symbols=true'
-out/Release/gn gen out/Release --args='google_api_key="AIzaSyDxKL42zsPjbke5O8_rPVpVrLrJ8aeE9rQ" google_default_client_id="595013732528-llk8trb03f0ldpqq6nprjp1s79596646.apps.googleusercontent.com" google_default_client_secret="5ntt6GbbkjnTVXx-MSxbmx5e" use_sysroot=false use_gnome_keyring=false ffmpeg_branding="Chrome" is_clang=false treat_warnings_as_errors=false use_gold=false enable_hangout_services_extension=true enable_nacl=false enable_nacl_nonsfi=false use_cups=false use_gconf=false use_gtk3=false use_kerberos=true fatal_linker_warnings=false is_debug=false linux_use_bundled_binutils=false proprietary_codecs=true enable_widevine=true fieldtrial_testing_like_official_build=true remove_webcore_debug_symbols=true'
+python tools/gn/bootstrap/bootstrap.py --gn-gen-args 'google_api_key="AIzaSyDxKL42zsPjbke5O8_rPVpVrLrJ8aeE9rQ" google_default_client_id="595013732528-llk8trb03f0ldpqq6nprjp1s79596646.apps.googleusercontent.com" google_default_client_secret="5ntt6GbbkjnTVXx-MSxbmx5e" use_sysroot=false use_gnome_keyring=false ffmpeg_branding="Chrome" is_clang=false treat_warnings_as_errors=false use_gold=false enable_hangout_services_extension=true enable_nacl=false enable_nacl_nonsfi=false use_cups=false use_gconf=false use_gtk3=false use_kerberos=true fatal_linker_warnings=false is_debug=false linux_use_bundled_binutils=false proprietary_codecs=true enable_widevine=true fieldtrial_testing_like_official_build=true remove_webcore_debug_symbols=true use_pulseaudio=false'
+out/Release/gn gen out/Release --args='google_api_key="AIzaSyDxKL42zsPjbke5O8_rPVpVrLrJ8aeE9rQ" google_default_client_id="595013732528-llk8trb03f0ldpqq6nprjp1s79596646.apps.googleusercontent.com" google_default_client_secret="5ntt6GbbkjnTVXx-MSxbmx5e" use_sysroot=false use_gnome_keyring=false ffmpeg_branding="Chrome" is_clang=false treat_warnings_as_errors=false use_gold=false enable_hangout_services_extension=true enable_nacl=false enable_nacl_nonsfi=false use_cups=false use_gconf=false use_gtk3=false use_kerberos=true fatal_linker_warnings=false is_debug=false linux_use_bundled_binutils=false proprietary_codecs=true enable_widevine=true fieldtrial_testing_like_official_build=true remove_webcore_debug_symbols=true use_pulseaudio=false'
 '''
 
         exe = '/tmp/chromium_install.sh'
@@ -152,8 +154,8 @@ install -vDm4755 out/Release/chrome_sandbox \
                  $prefix/lib/chromium/chrome-sandbox             &&
 install -vDm755  out/Release/chromedriver \
                  $prefix/lib/chromium/chromedriver               &&
-ln -svf $prefix/lib/chromium/chromium /usr/bin                   &&
-ln -svf $prefix/lib/chromium/chromedriver /usr/bin/              &&
+ln -svf $prefix/lib/chromium/chromium $prefix/bin                &&
+ln -svf $prefix/lib/chromium/chromedriver $prefix/bin/           &&
 
 install -vDm644 out/Release/gen/content/content_resources.pak \
                 $prefix/lib/chromium/                            &&
