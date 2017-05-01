@@ -20,7 +20,10 @@ class LibCapRecipe(GnuRecipe):
 
         # disable gperf. It generates invalid code
         # it uses size_t without include stdlib.h
-        self.compile_args += ['BUILD_GPERF=no']
+        self.compile_args += ['BUILD_GPERF=no',
+                              'RAISE_SETFCAP=no',
+                              'lib=lib',
+                              'prefix=%s' % self.prefix_dir]
         self.install_args = ['make',
                              'RAISE_SETFCAP=no',
                              'BUILD_GPERF=no',

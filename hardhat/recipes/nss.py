@@ -22,7 +22,8 @@ class NssRecipe(GnuRecipe):
             'USE_SYSTEM_ZLIB=1',
             'ZLIB_LIBS=-lz',
             'USE_64=1',
-            'NSS_USE_SYSTEM_SQLITE=1']
+            'NSS_USE_SYSTEM_SQLITE=1',
+            'PREFIX=%s' % self.prefix_dir]
 
         self.install_args = [
             ('install -v -m755 Linux*/lib/*.so %s/lib'
