@@ -95,6 +95,8 @@
 55. xfe - file manager
 56. emelFM2 - file manager
 57. pcmanfm - file manager
+58. spacefm - file manager
+59. ProofPower - Z theorem prover based on HOL
 * Bugs
 1. gimp install hangs.
 2. Add better error on circular dependencies.
