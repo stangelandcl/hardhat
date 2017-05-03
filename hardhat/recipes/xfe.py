@@ -14,3 +14,7 @@ class XfeRecipe(GnuRecipe):
         self.url = 'http://downloads.sourceforge.net/xfe/' \
                    'xfe-$version.tar.gz'
         self.configure_args += ['--with-x']
+        # Fix rpl_malloc undefined when cross-compiling.
+        # See http://rickfoosusa.blogspot.com/2011/11/
+        # howto-fix-undefined-reference-to.html
+        self.configure_strip_cross_compile()

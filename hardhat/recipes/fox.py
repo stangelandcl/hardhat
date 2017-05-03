@@ -14,6 +14,7 @@ class FoxRecipe(GnuRecipe):
         self.depends = [
             'bzip2',
             'freetype',
+            'glu',
             'libjpeg-turbo',
             'libpng',
             'libtiff',
