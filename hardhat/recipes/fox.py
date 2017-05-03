@@ -22,7 +22,7 @@ class FoxRecipe(GnuRecipe):
             'xorg-libs',
             'zlib'
             ]
-        self.url = 'ftp://ftp.fox-toolkit.org/pub/fox-$version.tar.gz'
+        self.url = 'http://ftp.fox-toolkit.org/pub/fox-$version.tar.gz'
         self.environment['CPPFLAGS'] += \
             ' -I%s/include/freetype2' % self.prefix_dir
 #        self.environment['CXXFLAGS'] += ' -I%s/include/freetype2'

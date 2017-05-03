@@ -9,11 +9,11 @@ from .base import GnuRecipe
 class RRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(RRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = 'd294ad21e9f574fb4828ebb3a94b8cb3' \
-                      '4f4f304a41687a994be00dd41a4e514c'
-
+        self.sha256 = '288e9ed42457c47720780433b3d5c3c2' \
+                      '0983048b789291cc6a7baa11f9428b91'
+                
         self.name = 'r'
-        self.version = '3.3.2'
+        self.version = '3.4.0'
         self.version_prefix = 'R'
 
         self.url = 'http://cran.mtu.edu/src/base/R-3/R-$version.tar.gz'
@@ -30,17 +30,21 @@ class RRecipe(GnuRecipe):
                                                    '$prefix/lib64/R/lib') \
             .substitute(prefix=self.prefix_dir, target=self.target_triplet)
         self.configure_strip_cross_compile()
+        self.with_x = 'no'
 #        self.environment_strip_lto()
+
+    def configure(self):
         self.configure_args += ['--enable-R-shlib',
                                 '--enable-R-static-lib',
                                 '--enable-BLAS-shlib',
                                 '--enable-lto',
                                 '--with-blas',
                                 '--with-lapack',
-                                '--with-x=no',
+                                '--with-x=%s' % self.with_x,
                                 '--with-system-pcre',
                                 '--without-recommended-packages',
                                 ]
+        super(RRecipe, self).configure()
 
     def compile(self):
         try:
@@ -83,9 +87,9 @@ class RRecipe(GnuRecipe):
         dst = 'shlibpath_var=LD_RUN_PATH'
         patch(filename, src, dst)
 
-        src = r'  exit(strncmp(ZLIB_VERSION, "1.2.5", 5) < 0);'
-        dst = r'  exit(0); /* Always >= 1.2.5 */'
-        patch(filename, src, dst)
+#        src = r'  exit(strncmp(ZLIB_VERSION, "1.2.5", 5) < 0);'
+#        dst = r'  exit(0); /* Always >= 1.2.5 */'
+#        patch(filename, src, dst)
 
         # Strip all the LD_LIBRARY_PATH garbage
         filename = os.path.join(self.directory, 'etc', 'ldpaths.in')
@@ -101,3 +105,10 @@ class RRecipe(GnuRecipe):
 #        patch(filename, src, dst)
 
 #        super(RRecipe, self).install()
+
+class RXRecipe(RRecipe):
+    def __init__(self, *args, **kwargs):
+        super(RXRecipe, self).__init__(*args, **kwargs)
+        self.with_x = 'yes'
+        self.name = 'r-x'
+        self.depends += ['xorg-libs']
