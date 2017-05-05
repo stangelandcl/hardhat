@@ -274,6 +274,22 @@ class Recipe(RecipeSettings, Logger, ExeRunner, ShortVersionMixin):
         self.directory_template = '$prefix/build/$name-$version'
         self.sudo = False
 
+    @property
+    def CFLAGS(self):
+        return self.environment.get('CFLAGS')
+
+    @CFLAGS.setter
+    def CFLAGS(self, value):
+        self.environment['CFLAGS'] = value
+
+    @property
+    def CXXFLAGS(self):
+        return self.environment.get('CXXFLAGS')
+
+    @CFLAGS.setter
+    def CXXFLAGS(self, value):
+        self.environment['CXXFLAGS'] = value
+
 
     @property
     def directory(self):

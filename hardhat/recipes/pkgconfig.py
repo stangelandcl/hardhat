@@ -12,12 +12,14 @@ class PkgConfigRecipe(GnuRecipe):
                    'pkg-config-$version.tar.gz'
         self.build_triplet = self.target_triplet
         self.configure_args = self.shell_args + [
-                               './configure',
-                               '--prefix=%s' % (self.prefix_dir),
-                               '--build=%s' % (self.build_triplet),
-                               '--target=%s' % (self.target_triplet),
-                               '--with-internal-glib',
-                               '--disable-host-tool',
-                               '--disable-maintainer-mode'
-    #                                '--with-libiconv=gnu'
-                                ]
+            './configure',
+            '--prefix=%s' % (self.prefix_dir),
+            '--build=%s' % (self.build_triplet),
+            '--target=%s' % (self.target_triplet),
+            '--with-internal-glib',
+            '--disable-host-tool',
+            '--disable-maintainer-mode',
+#                                '--with-libiconv=gnu'
+            '--with-pc-path=%s/lib/pkgconfig:%s/lib64/pkgconfig' % (
+                self.prefix_dir, self.prefix_dir)
+            ]

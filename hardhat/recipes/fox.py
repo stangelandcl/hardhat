@@ -26,3 +26,4 @@ class FoxRecipe(GnuRecipe):
         self.environment['CPPFLAGS'] += \
             ' -I%s/include/freetype2' % self.prefix_dir
 #        self.environment['CXXFLAGS'] += ' -I%s/include/freetype2'
+#        self.CFLAGS = self.CXXFLAGS = ' -O0 -ggdb3'

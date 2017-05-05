@@ -18,3 +18,4 @@ class XfeRecipe(GnuRecipe):
         # See http://rickfoosusa.blogspot.com/2011/11/
         # howto-fix-undefined-reference-to.html
         self.configure_strip_cross_compile()
+#        self.CFLAGS = self.CXXFLAGS = ' -O0 -ggdb3'
