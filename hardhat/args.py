@@ -156,6 +156,7 @@ def parse_args():
     settings.quiet = not args.verbose
     settings.cpu_count = _cpu_count(args.cpus)
     settings.post_clean = not args.no_clean
+    settings.enable_version_check = args.cmd == 'version'
     if args.march:
         settings.march = args.march
         os.environ['HARDHAT_MARCH'] = args.march

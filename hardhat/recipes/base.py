@@ -218,17 +218,25 @@ class GetVersionMixin(Object):
     def version_url(self, value):
         self._version_url = value
 
+    def get_version_always(self):
+        v = str(self.version_url)
+        if 'sourceforge.net' in v:
+            return Versions.scrape_page(self.version_url,
+                                        self.version_regex)
+        elif ('github.com' not in v or hasattr(self, '_version_url')):
+            return Versions.get_from_directory(
+                self.version_url, self.version_regex)
+        elif isinstance(self.version_url, GithubUrl):
+            return Versions.scrape_page(
+                self.version_url.project.releases_url,
+                self.version_regex)
+        else:
+            return Versions.scrape_page(self.version_url,
+                                        self.version_regex)
+
     def get_version(self):
-        if False:
-            v = str(self.version_url)
-            if 'sourceforge.net' in v:
-                return Versions.scrape_page(self.version_url, self.version_regex)
-            elif ('github.com' not in v or hasattr(self, '_version_url')):
-                return Versions.get_from_directory(
-                    self.version_url, self.version_regex)
-            elif isinstance(self.version_url, GithubUrl):
-                return Versions.scrape_page(self.version_url.project.releases_url,
-                                            self.version_regex)
+        if self.enable_version_check:
+            return self.get_version_always()
         return (None, None)
 
     def version_check(self):
@@ -373,7 +381,7 @@ class Recipe(RecipeSettings, Logger, ExeRunner, ShortVersionMixin):
                 '%s/share/mime/' % self.prefix_dir]
         if os.path.exists(args[0]):
             self.log_dir('post-install', dir, 'update-mime-database')
-            self.run_exe(args, self.directory, self.environment)
+            self.run_exe(args, self.prefix_dir, self.environment)
 
 
     def cleanup(self):
@@ -492,6 +500,8 @@ class Downloader(Object):
         for extra in self.extra_downloads:
             downloader = LogDownloader(settings=self)
             downloader.name = extra.name
+            if hasattr(extra, 'filename'):
+                downloader.filename = extra.filename
             downloader.version = extra.version
             downloader.environment = self.environment
             downloader.url = extra.url

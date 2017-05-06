@@ -1,19 +1,19 @@
 from .base import GnuRecipe
+from ..version import Versions
 
 
 class OpenSSLRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(OpenSSLRecipe, self).__init__(*args, **kwargs)
-#        self.sha256 = 'fc436441a2e05752d31b4e46115eb897' \
-#                      '09a28aef96d4fe786abe92409b2fd6f5'
-#       self.version = '1.1.0c'
-        self.sha256 = 'e7aff292be21c259c6af26469c7a9b3b' \
-                      'a26e9abaaffd325e3dccc9785256c431'
+        self.sha256 = '6b3977c61f2aedf0f96367dcfb5c6e57' \
+                      '8cf37e7b8d913b4ecb6643c3cb88d8c0'
 
-        self.version = '1.0.2j'
+        self.version = '1.0.2k'
         self.name = 'openssl'
 
         self.depends = ['zlib']
+        self.version_regex = r'openssl-(?P<version>1\.0\.\d+\w+)'
+        self.version_url = 'https://www.openssl.org/source/'
         self.url = 'https://www.openssl.org/source/openssl-$version.tar.gz'
         self.cpu_count = 1  # multi-core not supported by openssl
         self.configure_args = self.shell_args + [
@@ -27,3 +27,6 @@ class OpenSSLRecipe(GnuRecipe):
                               % (self.prefix_dir)]
 
         self.compile_args = ['make']
+
+    def get_version_always(self):
+        return Versions.scrape_page(self.version_url, self.version_regex)

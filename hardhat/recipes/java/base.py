@@ -1,11 +1,26 @@
 import os
 import shutil
+import stat
 from ..base import GnuRecipe
 
 
-class JavaBase(GnuRecipe):
+class JarBase(GnuRecipe):
     def __init__(self, *args, **kwargs):
-        super(JavaBase, self).__init__(*args, **kwargs)
+        super(JarBase, self).__init__(*args, **kwargs)
+        self.depends = ['java']
+
+    def extract(self):
+        pass
+
+    def clean(self):
+        if os.path.exists(self.installed_file):
+            os.remove(self.installed_file)
+
+    def configure(self):
+        pass
+
+    def compile(self):
+        pass
 
     @property
     def java_dir(self):
@@ -17,30 +32,17 @@ class JavaBase(GnuRecipe):
     def java_dir(self, value):
         self._java_dir = value
 
-    @property
-    def install_dir(self):
-        if hasattr(self, '_install_dir'):
-            return self._install_dir
-        return os.path.join(self.java_dir, self.name)
-
-    @install_dir.setter
-    def install_dir(self, value):
-        self._install_dir = value
-
-    def clean(self):
-        if os.path.exists(self.install_dir):
-            shutil.rmtree(self.install_dir)
-
-    def configure(self):
-        pass
-
-    def compile(self):
-        pass
-
     def install(self):
-        shutil.copytree(self.directory, self.install_dir)
-        src = os.path.join(self.install_dir, self.name)
+        self.log_dir('install', self.directory, 'installing')
+        shutil.copy2(self.filename, self.installed_file)
+
+        java = os.path.join(self.java_dir, 'bin', 'java')
+        script = r'''#!/bin/sh
+%s -jar %s "$@"
+''' % (java, self.installed_file)
+
         dst = os.path.join(self.java_dir, 'bin', self.name)
-        if os.path.exists(dst):
-            os.remove(dst)
-        os.symlink(src, dst)
+        with open(dst, 'wt') as f:
+            f.write(script)
+
+        os.chmod(dst, stat.S_IRWXU | stat.S_IRWXG | stat.S_IROTH)

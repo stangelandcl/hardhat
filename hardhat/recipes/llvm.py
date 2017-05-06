@@ -7,14 +7,19 @@ from hardhat.version import extension_regex
 from hardhat.util import patch
 
 
+class Extra:
+    def __init__(self, name):
+        self.sha256 = None
+        self.name = name
+
+
 class LlvmRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(LlvmRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '1fd90354b9cf19232e8f168faf2220e7' \
-                      '9be555df3aa743242700879e8fd329ee'
-
+        self.sha256 = '8d10511df96e73b8ff9e7abbfb4d4d43' \
+                      '2edbdbe965f1f4f07afaf370b8a533be'
         self.name = 'llvm'
-        self.version = '3.9.1'
+        self.version = '4.0.0'
         self.version_regex = self.name + '\-(?P<version>\d+\.\d+\.\d+).*' \
             + extension_regex
         self.version_url = 'http://releases.llvm.org/download.html'
@@ -26,7 +31,7 @@ class LlvmRecipe(GnuRecipe):
                                   'cfe-$version.src.tar.xz').substitute(
                                       version=self.version)
         self.clang_file = os.path.join(self.tarball_dir,
-                                       'clang-%s.tar.xz' % self.version)
+                                       'llvm-clang-%s.tar.xz' % self.version)
         self.clang_dir = os.path.join(self.base_extract_dir,
                                       'clang-%s' % self.version)
         self.compiler_rt_url = Template('http://llvm.org/releases/$version/'
@@ -34,7 +39,7 @@ class LlvmRecipe(GnuRecipe):
                                         .substitute(version=self.version)
         self.compiler_rt_file = os.path.join(
             self.tarball_dir,
-            'compiler-rt-%s.tar.xz' % self.version)
+            'llvm-compiler-rt-%s.tar.xz' % self.version)
         self.compiler_rt_dir = os.path.join(self.base_extract_dir,
                                             'compiler-rt-%s' % self.version)
 
@@ -42,7 +47,7 @@ class LlvmRecipe(GnuRecipe):
                                    'openmp-$version.src.tar.xz') \
                                    .substitute(version=self.version)
         self.openmp_file = os.path.join(self.tarball_dir,
-                                        'openmp-%s.tar.xz' % self.version)
+                                        'llvm-openmp-%s.tar.xz' % self.version)
         self.openmp_dir = os.path.join(self.base_extract_dir,
                                        'openmp-%s' % self.version)
 
@@ -61,9 +66,10 @@ class LlvmRecipe(GnuRecipe):
                              '-G',
                              '"Unix Makefiles"',
                              '-DCMAKE_INSTALL_PREFIX=%s' % self.prefix_dir,
-                             '-DLLVM_ENABLE_FFI=on',
+                             '-DLLVM_ENABLE_FFI=ON',
                              '-DCMAKE_BUILD_TYPE=Release',
-                             '-DBUILD_SHARED_LIBS=ON',
+#                             '-DBUILD_SHARED_LIBS=ON',
+                             '-DLLVM_BUILD_LLVM_DYLIB=ON',
                              '-DLLVM_TARGETS_TO_BUILD="host;AMDGPU"',
                              '-DGCC_INSTALL_PREFIX=%s' % self.prefix_dir,
                              '-DLLVM_DEFAULT_TARGET_TRIPLE=%s'
@@ -73,6 +79,34 @@ class LlvmRecipe(GnuRecipe):
 #                             '-DCMAKE_CXX_LINK_FLAGS="%s"' % self.prefix_dir,
                              '-Wno-dev',
                              '..']
+
+        self.clang = Extra('llvm-clang')
+        self.clang.url = self.clang_url
+        self.clang.filename = self.clang_file
+        self.clang.version = self.version
+        self.clang.sha256 = 'cea5f88ebddb30e296ca89130c83b9d4' \
+                            '6c2d833685e2912303c828054c4dc98a'
+
+        self.compiler_rt = Extra('llvm-compiler_rt')
+        self.compiler_rt.url = self.compiler_rt_url
+        self.compiler_rt.filename = self.compiler_rt_file
+        self.compiler_rt.version = self.version
+        self.compiler_rt.sha256 = 'd3f25b23bef24c305137e6b44f7e81c5' \
+                                  '1bbec764c119e01512a9bd2330be3115'
+
+        self.openmp = Extra('llvm-openmp')
+        self.openmp.url = self.openmp_url
+        self.openmp.filename = self.openmp_file
+        self.openmp.version = self.version
+        self.openmp.sha256 = 'db55d85a7bb289804dc42fc5c8e35ca2' \
+                             '4dfc3885782261b675a194fd7e206e26'
+
+
+        self.extra_downloads = [
+            self.clang,
+            self.compiler_rt,
+            self.openmp
+            ]
 
     def need_configure(self):
         return False
@@ -91,50 +125,6 @@ class LlvmRecipe(GnuRecipe):
         if os.path.exists(self.openmp_dir):
             self.log_dir('clean', self.openmp_dir, 'removing')
             shutil.rmtree(self.openmp_dir)
-
-    def download(self):
-        super(LlvmRecipe, self).download()
-
-        d = Downloader()
-        d.name = ''
-        d.version = ''
-        d.quiet = self.quiet
-        d.silent = self.silent
-        d.log = self.log
-        d.log_dir = self.log_dir
-        d.sha256 = 'e6c4cebb96dee827fa0470af313dff26' \
-                   '5af391cb6da8d429842ef208c8f25e63'
-        d.url = self.clang_url
-        d.filename = self.clang_file
-        d.download()
-
-#        save_url(self.clang_url, self.clang_file)
-        d = Downloader()
-        d.name = ''
-        d.version = ''
-        d.quiet = self.quiet
-        d.silent = self.silent
-        d.log = self.log
-        d.log_dir = self.log_dir
-        d.sha256 = 'd30967b1a5fa51a2503474aacc913e69' \
-                   'fd05ae862d37bf310088955bdb13ec99'
-        d.url = self.compiler_rt_url
-        d.filename = self.compiler_rt_file
-        d.download()
- #       save_url(self.compiler_rt_url, self.compiler_rt_file)
-
-        d = Downloader()
-        d.name = ''
-        d.version = ''
-        d.quiet = self.quiet
-        d.silent = self.silent
-        d.log = self.log
-        d.log_dir = self.log_dir
-        d.sha256 = 'd23b324e422c0d5f3d64bae5f550ff11' \
-                   '32c37a070e43c7ca93991676c86c7766'
-        d.url = self.openmp_url
-        d.filename = self.openmp_file
-        d.download()
 
     def patch(self):
         # don't overwrite gcc's libgomp. It doesn't work with
@@ -173,6 +163,7 @@ class LlvmRecipe(GnuRecipe):
                        os.path.join(self.directory, 'projects', 'openmp'))
 
     def compile(self):
+        self.old_dir = self.directory
         self.directory = os.path.join(self.directory, 'build')
         os.makedirs(self.directory)
         super(LlvmRecipe, self).compile()
@@ -201,13 +192,22 @@ class LlvmRecipe(GnuRecipe):
 
     def install(self):
         super(LlvmRecipe, self).install()
-        """ TODO: from LFS
-install -v -m644 docs/man/* /usr/share/man/man1             &&
-install -v -d -m755 /usr/share/doc/llvm-3.8.0/llvm-html     &&
-cp -Rv docs/html/* /usr/share/doc/llvm-3.8.0/llvm-html
+        text = """#!/bin/bash
+install -v -m644 docs/man/* $prefix/share/man/man1             &&
+install -v -d -m755 $prefix/share/doc/llvm-$version/llvm-html     &&
+cp -Rv docs/html/* $prefix/share/doc/llvm-$version/llvm-html
 The cmake documentation can be installed in the same way (again as the root user):
 
-install -v -m644 tools/clang/docs/man/* /usr/share/man/man1 &&
-install -v -d -m755 /usr/share/doc/llvm-3.8.0/clang-html    &&
-cp -Rv tools/clang/docs/html/* /usr/share/doc/llvm-3.8.0/clang-html
-"""
+install -v -m644 tools/clang/docs/man/* $prefix/share/man/man1 &&
+install -v -d -m755 $prefix/share/doc/llvm-$version/clang-html    &&
+cp -Rv tools/clang/docs/html/* $prefix/share/doc/llvm-$version/clang-html
+""".replace('$prefix', self.prefix_dir).replace('$version', self.version)
+
+        self.directory = self.old_dir
+        self.log_dir('install', self.directory, 'install docs')
+        script = os.path.join(self.directory, 'install_docs.sh')
+        with open(script, 'wt') as f:
+            f.write(text)
+
+        args = self.shell_args + [script]
+        self.run_exe(args, self.directory, self.environment)

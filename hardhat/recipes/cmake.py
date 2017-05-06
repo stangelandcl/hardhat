@@ -1,17 +1,17 @@
-import os
 from .base import GnuRecipe
 
 
 class CmakeRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(CmakeRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '92d8410d3d981bb881dfff2aed466da5' \
-                      '5a58d34c7390d50449aa59b32bb5e62a'
+        self.sha256 = 'ce5d9161396e06501b00e52933783150' \
+                      'a87c33080d4bdcef461b5b7fd24ac228'
 
         self.name = 'cmake'
-        self.version = '3.5.2'
+        self.version = '3.8.1'
         self.depends = ['bzip2', 'curl', 'expat', 'jsoncpp',
-                        'libarchive', 'xz', 'zlib']
+                        'libarchive', 'librhash', 'libuv',
+                        'xz', 'zlib']
         short_version = '.'.join(self.version.split('.')[:2])
         self.url = 'http://www.cmake.org/files/v%s/' \
                    'cmake-$version.tar.gz' % short_version
@@ -19,6 +19,7 @@ class CmakeRecipe(GnuRecipe):
 #        self.environment_strip_lto()
 #        self.environment['CFLAGS'] = ''
 #        self.environment['CXXFLAGS'] = self.environment['CFLAGS']
+        self.environment['CXXFLAGS'] += ' -Wno-odr'
         self.configure_args = self.shell_args + [
             'bootstrap',
             '--prefix=%s' % self.prefix_dir,

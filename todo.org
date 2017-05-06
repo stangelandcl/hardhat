@@ -125,3 +125,10 @@ http://wiki.linuxfromscratch.org/blfs/wiki/firefox
 
 * In Progress
 1. LibreOffice requires JDK
+
+
+* Stack
+- chromium
+- nodejs
+- cmake
+- jenkins

@@ -49,6 +49,7 @@ class RecipeSettings(Object):
         self.quiet = RecipeSettings.quiet
         self.silent = RecipeSettings.silent
         self.installer = None
+        self.enable_version_check = False
 
         self.tmp_dir = os.path.join(self.prefix_dir, 'tmp')
 
@@ -69,6 +70,7 @@ class RecipeSettings(Object):
         self.installer = src.installer
         self.march = src.march
         self.post_clean = src.post_clean
+        self.enable_version_check = src.enable_version_check
 #        self.settings_filename = src.settings_filename
 
     ## @property

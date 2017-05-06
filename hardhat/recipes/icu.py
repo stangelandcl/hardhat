@@ -6,11 +6,8 @@ from ..util import patch
 class ICURecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(ICURecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '2b0a4410153a9b20de0e20c7d8b66049' \
-                      'a72aef244b53683d0d7521371683da0c'
-
         self.name = 'icu'
-        self.version = '58.2'
+        self.version = '59.1'
         self.version_regex = '(?P<version>\d+\.\d+)/'
         self.version_url = 'http://download.icu-project.org/files/icu4c/'
         underscore_version = self.version.replace('.', '_')
@@ -41,6 +38,8 @@ class ICURecipe(GnuRecipe):
             self.run_exe(args, dir, self.environment)
 
     def patch(self):
+        return # since 59.1
+
         filename = os.path.join(self.directory, 'source', 'common', 'ulist.c')
         patch(filename, 'int32_t currentIndex;', '')
         patch(filename, 'newList->currentIndex = -1;', '')
