@@ -132,3 +132,4 @@ http://wiki.linuxfromscratch.org/blfs/wiki/firefox
 - nodejs
 - cmake
 - jenkins
+- icu
