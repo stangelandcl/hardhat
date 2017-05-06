@@ -98,3 +98,7 @@ class Urls(object):
             p.scheme, p.netloc, path, p.params, p.query, p.fragment)
         url = p.geturl()
         return url
+
+def url_basename(url):
+    p = urlparse(url)
+    return os.path.basename(p.path)

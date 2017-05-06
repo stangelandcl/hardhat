@@ -52,10 +52,22 @@ class FuzzRecipe(GnuRecipe):
         filename = os.path.join(self.directory, 'src', 'zscan.l')
         patch(filename, text, '')
 
+        self.log_dir('patch', self.directory, 'fix fuzzlib path')
+        src = "/usr/local/lib/fuzzlib"
+        dst = "%s/lib/fuzzlib" % self.prefix_dir
+        filename = os.path.join(self.directory, 'src', 'param.c')
+        patch(filename, src, dst)
+
     def install(self):
         super(FuzzRecipe, self).install()
 
-        dst = os.path.join(self.prefix_dir, 'doc')
+        dst = os.path.join(self.prefix_dir, 'share', 'doc', 'fuzz')
+        if not os.path.exists(dst):
+            os.makedirs(dst)
         shutil.copy2(self.manual.filename, os.path.join(dst, 'fuzzman.pdf'))
         shutil.copy2(self.reference.filename,
                      os.path.join(dst, 'Z-refcard.pdf'))
+        shutil.copy2(os.path.join(self.directory, 'tex', 'tut.tex'),
+                     os.path.join(dst, 'tut.tex'))
+        shutil.copy2(os.path.join(self.directory, 'tex', 'example.tex'),
+                     os.path.join(dst, 'example.tex'))
