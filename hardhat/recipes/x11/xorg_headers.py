@@ -35,6 +35,8 @@ class XOrgHeadersRecipe(Recipe):
                                     'e1461068d0b9269d818839703b95c1d1'),
             ('kbproto', '1.0.6', '037cac0aeb80c4fccf44bf736d791fcc'
                                  'b2ff7fd34c558ef8f03ac60b61085479'),
+            ('printproto', '1.0.5', '1298316cf43b987365ab7764d61b022a'
+                                    '3d7f180b67b423eed3456862d155911a'),
             ('presentproto', '1.0', '812c7d48721f909a0f7a2cb1e91f6eea'
                                     'd76159a36c4712f4579ca587552839ce'),
             ('randrproto', '1.5.0', '4c675533e79cd730997d232c8894b669'
