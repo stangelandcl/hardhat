@@ -1,3 +1,5 @@
+import os
+import shutil
 from .base import GnuRecipe
 
 
@@ -22,7 +24,11 @@ class SwiPrologRecipe(GnuRecipe):
         self.doc = Extra('swi-prolog-manual')
         self.doc.url = 'http://www.swi-prolog.org/download/stable/doc/' \
                        'SWI-Prolog-$version.pdf'
+        self.doc.sha256 =  '7aca52426ad254a986ed410eeda9590b' \
+                           'cd0f683bc41190f08853a82212d59d7c'
+        self.doc.version = self.version
 
+        self.extra_downloads = [self.doc]
         self.configure_strip_cross_compile()
 
     def install(self):
