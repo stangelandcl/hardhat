@@ -193,17 +193,15 @@ class LlvmRecipe(GnuRecipe):
     def install(self):
         super(LlvmRecipe, self).install()
         text = """#!/bin/bash
-install -v -m644 docs/man/* $prefix/share/man/man1             &&
-install -v -d -m755 $prefix/share/doc/llvm-$version/llvm-html     &&
+install -v -m644 docs/man/* $prefix/share/man/man1
+install -v -d -m755 $prefix/share/doc/llvm-$version/llvm-html
 cp -Rv docs/html/* $prefix/share/doc/llvm-$version/llvm-html
-The cmake documentation can be installed in the same way (again as the root user):
 
 install -v -m644 tools/clang/docs/man/* $prefix/share/man/man1 &&
 install -v -d -m755 $prefix/share/doc/llvm-$version/clang-html    &&
 cp -Rv tools/clang/docs/html/* $prefix/share/doc/llvm-$version/clang-html
 """.replace('$prefix', self.prefix_dir).replace('$version', self.version)
 
-        self.directory = self.old_dir
         self.log_dir('install', self.directory, 'install docs')
         script = os.path.join(self.directory, 'install_docs.sh')
         with open(script, 'wt') as f:

@@ -54,7 +54,9 @@ VERSIONS = [
     ('4.7.10',
      'c314cdfac8e3526201b2911a36fd18bd' \
      '80f15aead5ca4dcce08d07eb463b04d3',
-     'http://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.7.10.tar.gz')
+     'http://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.7.10.tar.gz'),
+    ('4.10.14', None,
+     'http://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.10.14.tar.gz')
 ]
 
 
