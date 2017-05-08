@@ -97,6 +97,7 @@
 57. pcmanfm - file manager
 58. spacefm - file manager
 59. ProofPower - Z theorem prover based on HOL
+60. Install latex file for CSP - ftp://ftp.comlab.ox.ac.uk/pub/CSP/LaTeX/csp.sty
 * Bugs
 1. gimp install hangs.
 2. Add better error on circular dependencies.
