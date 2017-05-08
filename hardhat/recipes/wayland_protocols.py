@@ -12,3 +12,5 @@ class WaylandProtocolsRecipe(GnuRecipe):
         self.depends = ['wayland']
         self.url = 'https://wayland.freedesktop.org/releases/' \
                    'wayland-protocols-$version.tar.xz'
+#        self.configure_args += [
+#            '--with-noarch-pkgconfigdir=%s/lib/pkgconfig' % self.prefix_dir]

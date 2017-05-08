@@ -20,6 +20,7 @@ class PkgConfigRecipe(GnuRecipe):
             '--disable-host-tool',
             '--disable-maintainer-mode',
 #                                '--with-libiconv=gnu'
-            '--with-pc-path=%s/lib/pkgconfig:%s/lib64/pkgconfig' % (
-                self.prefix_dir, self.prefix_dir)
+            '--with-pc-path=%s/lib/pkgconfig:%s/lib64/pkgconfig:'
+            '%s/share/pkgconfig' % (
+                self.prefix_dir, self.prefix_dir, self.prefix_dir)
             ]

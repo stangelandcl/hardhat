@@ -10,10 +10,9 @@ from hardhat.recipes.cross.base import CrossGnuRecipe
 class GLibCRecipe(CrossGnuRecipe):
     def __init__(self, *args, **kwargs):
         super(GLibCRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '7e01959a42d37739e40d8ce58f9c1475' \
-                      '0cc68bc8a8669889ed586f9f03b91fbe'
+        self.sha256 = self.glibc_sha256
         self.name = 'glibc'
-        self.version = '2.24'
+        self.version = self.glibc_version
         self.url = 'http://ftp.wayne.edu/gnu/libc/glibc-%s.tar.gz' \
             % (self.version)
 

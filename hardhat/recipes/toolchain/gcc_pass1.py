@@ -19,11 +19,10 @@ HEADERS = set(['linux64.h', 'linux.h', 'sysv4.h'])
 class GccRecipe(CrossGnuRecipe):
     def __init__(self, *args, **kwargs):
         super(GccRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '02f9302a559fa2251595ca0bc1e93721' \
-                      '9eff2995a3802d7b31676fec2402beb4'
-
+        self.sha256 = self.gcc_sha256
         self.name = 'gcc'
-        self.version = '6.3.0'
+        self.version = self.gcc_version
+        self.post_clean = False
         self.url = Urls.gnu('gcc', 'gcc-%s/gcc-%s.tar.gz'
                             % (self.version, self.version))
         self.environment = target_path_env(self.prefix_dir,
@@ -215,7 +214,7 @@ fi'''
 
     def post_install(self):
 #        self.patch_limits()
-        
+
         config = '%s/%s/include/c++/%s/bits/c++config.h' % \
             (self.prefix_dir, self.target_triplet, self.version)
         if os.path.exists(config):

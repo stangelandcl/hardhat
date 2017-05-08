@@ -16,11 +16,9 @@ HEADERS = set(['linux64.h', 'linux.h', 'sysv4.h'])
 class CrossGcc1Recipe(CrossGnuRecipe):
     def __init__(self, *args, **kwargs):
         super(CrossGcc1Recipe, self).__init__(*args, **kwargs)
-        self.sha256 = '02f9302a559fa2251595ca0bc1e93721' \
-                      '9eff2995a3802d7b31676fec2402beb4'
-
+        self.sha256 = self.gcc_sha256
         self.name = 'cross-gcc1'
-        self.version = '6.3.0'
+        self.version = self.gcc_version
         self.url = Urls.gnu('gcc', 'gcc-%s/gcc-%s.tar.gz'
                             % (self.version, self.version))
         self.extract_dir = os.path.join(self.base_extract_dir,
@@ -39,6 +37,7 @@ class CrossGcc1Recipe(CrossGnuRecipe):
             p.gcc_directory = self.extract_dir
 
         self.environment['SED'] = 'sed'
+        self.post_clean = False
 
     def version_check(self):
         pass
@@ -171,15 +170,16 @@ class CrossGcc1Recipe(CrossGnuRecipe):
         for header in headers:
             self._patch_header(header)
 
-        src = r'''if (eval "$ac_cpp conftest.$ac_ext") 2>&5 |
+        if self.version < '7.1.0':
+            src = r'''if (eval "$ac_cpp conftest.$ac_ext") 2>&5 |
   $EGREP " \",\" " >/dev/null 2>&1; then :
   glibcxx_cv_sys_sdt_h=yes
 else
   glibcxx_cv_sys_sdt_h=no
 fi'''
-        dst = 'glibcxx_cv_sys_sdt_h=no'
-        filename = os.path.join(self.extract_dir, 'libstdc++-v3', 'configure')
-        patch(filename, src, dst)
+            dst = 'glibcxx_cv_sys_sdt_h=no'
+            filename = os.path.join(self.extract_dir, 'libstdc++-v3', 'configure')
+            patch(filename, src, dst)
 
         filename = os.path.join(self.extract_dir, 'gcc', 'glimits.h')
         src = '#define MB_LEN_MAX 1'

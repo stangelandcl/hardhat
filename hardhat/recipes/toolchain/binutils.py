@@ -8,10 +8,9 @@ from hardhat.recipes.cross.base import CrossGnuRecipe
 class BinutilsRecipe(CrossGnuRecipe):
     def __init__(self, *args, **kwargs):
         super(BinutilsRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '26253bf0f360ceeba1d9ab6965c57c6a' \
-                      '48a01a8343382130d1ed47c468a3094f'
+        self.sha256 = self.binutils_sha256
         self.name = 'binutils'
-        self.version = '2.27'
+        self.version = self.binutils_version
         self.url = Urls.gnu_template(self.name, self.version)
         lib_paths = toolchain_lib_path(self.prefix_dir,
                                        self.target_triplet)

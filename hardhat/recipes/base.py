@@ -159,6 +159,7 @@ class EmptyRecipe(Object):
     def __init__(self, *args, **kwargs):
         super(EmptyRecipe, self).__init__(*args, **kwargs)
         self.depends = []
+        self.sudo = False
 
     @property
     def provides(self):

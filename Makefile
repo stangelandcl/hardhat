@@ -1,6 +1,6 @@
 .PHONY: install sdist bootstrap stats nix
-#OLD_VERSION=20161227
-VERSION=20170126
+OLD_VERSION=
+VERSION=20170507
 
 sdist:
 	python3 setup.py sdist --formats=gztar
@@ -13,9 +13,9 @@ install: sdist
 	rm -rf ~/Downloads/hardhat-0.1
 	cd ~/Downloads && tar xvf hardhat-0.1.tar.gz
 	rm -rf ~/hardhat/${VERSION}
-#	rm -rf ~/hardhat/${OLD_VERSION}
+	if [ -z "$OLD_VERSION" ]; then rm -rf ~/hardhat/${OLD_VERSION} ; fi
 	cd ~/Downloads/hardhat-0.1 && ./bootstrap.sh --march=native --prefix=~/hardhat/${VERSION} --cpus=.99 --pkgfile=~/vcs/hardhat/config/dev.config
-#           --cpus=.99 --pkgfile=~/vcs/vcs/hardhat/config/dev.config
+
 
 stat:
 	@echo "Estimated package counts as of $$(date +%Y-%m-%d)"

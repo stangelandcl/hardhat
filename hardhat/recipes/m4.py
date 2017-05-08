@@ -11,3 +11,4 @@ class M4Recipe(GnuRecipe):
         self.name = 'm4'
         self.version = '1.4.18'
         self.url = Urls.gnu_template(self.name, self.version, 'tar.gz')
+        self.environment_strip_lto()

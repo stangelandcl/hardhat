@@ -30,8 +30,9 @@ class CrossLibStdCppRecipe(CrossGnuRecipe):
             '--with-gxx-include-dir=%s/%s/include/c++/%s' % (
                 self.cross_prefix_dir,
                 self.target_triplet,
-                gcc.version
-            )]
+                gcc.version),
+            'glibcxx_cv_sys_sdt_h=no'
+            ]
 
 #        self.environment['CC'] = self.target_triplet + '-gcc'
 #        self.environment['CXX'] = self.target_triplet + '-g++'

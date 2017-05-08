@@ -19,7 +19,7 @@ class CrossGcc2Recipe(CrossGnuRecipe):
         self.url = gcc.url
         self.version = gcc.version
         self.sha256 = gcc.sha256
-
+        self.post_clean = False
         self.extract_dir = os.path.join(self.base_extract_dir,
                                         'cross-gcc2-%s' % (self.version))
         self.directory = os.path.join(self.base_extract_dir,
