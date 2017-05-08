@@ -71,3 +71,7 @@ class FuzzRecipe(GnuRecipe):
                      os.path.join(dst, 'tut.tex'))
         shutil.copy2(os.path.join(self.directory, 'tex', 'example.tex'),
                      os.path.join(dst, 'example.tex'))
+
+    def post_install(self):
+        self.ldconfig()
+        self.texhash()

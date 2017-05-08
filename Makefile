@@ -14,7 +14,7 @@ install: sdist
 	cd ~/Downloads && tar xvf hardhat-0.1.tar.gz
 	rm -rf ~/hardhat/${VERSION}
 	if [ -z "$OLD_VERSION" ]; then rm -rf ~/hardhat/${OLD_VERSION} ; fi
-	cd ~/Downloads/hardhat-0.1 && ./bootstrap.sh --march=native --prefix=~/hardhat/${VERSION} --cpus=.99 --pkgfile=~/vcs/hardhat/config/dev.config
+	cd ~/Downloads/hardhat-0.1 && ./bootstrap.sh --march=native --prefix=~/hardhat/${VERSION} --cpus=.5 --pkgfile=~/vcs/hardhat/config/dev.config
 
 
 stat:

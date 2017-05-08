@@ -373,19 +373,32 @@ class Recipe(RecipeSettings, Logger, ExeRunner, ShortVersionMixin):
     def install(self):
         pass
 
-    def post_install(self):
+    def ldconfig(self):
         # run ldconfig to rebuild ld cache
         args = ['ldconfig']
         dir = os.path.join(self.prefix_dir, self.target_triplet, 'etc')
         self.log_dir('post-install', dir, 'ldconfig')
         self.run_exe(args, dir, self.environment)
 
+    def update_mime_database(self):
         args = ['%s/bin/update-mime-database' % self.prefix_dir,
                 '%s/share/mime/' % self.prefix_dir]
         if os.path.exists(args[0]):
             self.log_dir('post-install', dir, 'update-mime-database')
             self.run_exe(args, self.prefix_dir, self.environment)
 
+    def texhash(self):
+        # run texhash to rebuild styles cache
+        exe = os.path.join(self.prefix_dir, 'bin', 'texhash')
+        if os.path.exists(exe):
+            args = [exe]
+            self.log_dir('post-install', dir, 'ldconfig')
+            self.run_exe(args, self.prefix_dir, self.environment)
+
+    def post_install(self):
+        self.ldconfig()
+        self.update_mime_database()
+#        self.texhash()
 
     def cleanup(self):
         pass
