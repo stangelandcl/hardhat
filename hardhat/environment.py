@@ -123,7 +123,7 @@ def runtime_env(prefix, target, download_dir):
     # -ffast-math breaks sqlite so needs disabled for sqlite3 and bdb at least
 # -falign-functions=1 -falign-jumps=1 -falign-loops=1
 
-    cflags = '-Wno-error=format-nonliteral'
+    cflags = '-Wno-error=format-nonliteral -Wno-error=implicit-fallthrough='
 
     c_opt_flags = cflags
     if c_opt_flags:
