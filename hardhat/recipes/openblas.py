@@ -8,13 +8,13 @@ from ..urls import Urls
 class OpenBlasRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(OpenBlasRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '9c40b5e4970f27c5f6911cb0a28aa26b' \
-                      '6c83f17418b69f8e5a116bb983ca8557'
+        self.sha256 = 'c4f71a60e3f23a7a25693390af3be230' \
+                      '8d374749ae3cb0bcfd8aab33a3c9ac09'
 
         self.name = 'openblas'
-        self.version = '0.2.19'
+        self.version = 'fd4e68128e56beb3b97f37178edf07bef7ade5f1'
         self.url = Urls.github_commit('xianyi', 'OpenBLAS',
-                                      'v' + self.version)
+                                      self.version)
 #        self.filename = os.path.join(self.tarball_dir,
 #                                     'openblas-%s.tar.gz' % self.version)
         self.libname = 'libopenblas.a'
@@ -45,7 +45,7 @@ class OpenBlasRecipe(GnuRecipe):
 
     def is_atom(self):
         lines = []
-        if platform == "linux" or platform == "linux2":        
+        if platform == "linux" or platform == "linux2":
             with open('/proc/cpuinfo', 'rt') as f:
                 lines = f.readlines()
 
