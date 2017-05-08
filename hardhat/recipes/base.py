@@ -280,6 +280,7 @@ class Recipe(RecipeSettings, Logger, ExeRunner, ShortVersionMixin):
         self.environment = runtime_env(self.prefix_dir,
                                        self.target_triplet,
                                        self.tarball_dir)
+        self.environment_strip_lto()
         self.directory_template = '$prefix/build/$name-$version'
         self.sudo = False
 
