@@ -11,3 +11,4 @@ class BisonRecipe(GnuRecipe):
         self.name = 'bison'
         self.version = '3.0.4'
         self.url = Urls.gnu_template(self.name, self.version, 'tar.xz')
+        self.environment_strip_lto()
