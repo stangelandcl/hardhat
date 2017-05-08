@@ -175,6 +175,7 @@ class ShortVersionMixin(Object):
 
     @property
     def short_version(self):
+#        print('short_version of %s' % self.name)
         version = self.version
         if len(version) == 40:  # git commit hash
             version = version[:8]

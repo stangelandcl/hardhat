@@ -100,7 +100,12 @@ def read_process(stdout, output):
         line = stdout.readline()
         if not line:
             break
-        output.append(line.decode('utf-8').strip())
+        try:
+            # just ignore non-utf-8 output
+            text = line.decode('utf-8').strip()
+        except:
+            text = ''
+        output.append(text)
 
 
 def read_process_async(stdout, output):
