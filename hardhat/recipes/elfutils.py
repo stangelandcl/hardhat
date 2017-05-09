@@ -14,7 +14,7 @@ class ElfUtilsRecipe(GnuRecipe):
 
         self.environment['CFLAGS'] += ' -Wno-error=maybe-uninitialized' \
             ' -Wno-error=unused-but-set-variable -Wno-error=unused-variable' \
-            ' -Wno-error=null-dereference'
+            ' -Wno-error=null-dereference -Wno-error=format-truncation='
         self.environment_strip_lto()
 
         # From linux from scratch. Avoids conflicts with binutils patches
