@@ -4,7 +4,8 @@ from .base import GnuRecipe
 class ElfUtilsRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(ElfUtilsRecipe, self).__init__(*args, **kwargs)
-
+        self.sha256 = '9412fac7b30872b738bc1ed1ebcaed54' \
+                      '493c26ef9a67887913498c17b10f3bc2'
         self.name = 'elfutils'
         self.version = '0.169'
         self.depends = ['valgrind']
