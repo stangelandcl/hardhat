@@ -9,6 +9,7 @@ class ZVimesRecipe(GnuRecipe):
 
         self.description = 'z notation type checker'
         self.name = 'z-vimes'
+        self.depends = ['popt']
         self.version = '0.2.9'
         self.url = 'https://download.sourceforge.net/z-vimes/' \
                    'vimes-$version.tar.gz'
