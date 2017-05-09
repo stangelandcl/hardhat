@@ -1,16 +1,17 @@
 import os
 from .base import GnuRecipe
+from ..util import patch
 
 
 class NssRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(NssRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '58cc0c05c0ed9523e6d820bea74f5135' \
-                      '38f48c87aac931876e3d3775de1a82ad'
+        self.sha256 = '0d4a77ff26bcee79fa8afe0125e0df6a' \
+                      'e9e798b6b36782fa29e28febf7cfce24'
 
         self.name = 'nss'
         self.depends = ['nspr', 'p11-kit', 'sqlite3']
-        self.version = '3.28.1'
+        self.version = '3.30.2'
         self.version_regex = r'(?P<version>\d+\.\d+(\.\d+)*)'
         s = self.version.replace('.', '_')
         self.url = 'https://ftp.mozilla.org/pub/mozilla.org/security/nss/' \
@@ -24,6 +25,9 @@ class NssRecipe(GnuRecipe):
             'USE_64=1',
             'NSS_USE_SYSTEM_SQLITE=1',
             'PREFIX=%s' % self.prefix_dir]
+
+        self.environment['CFLAGS'] += ' -Wno-error=int-in-bool-context'
+        self.environment['CXXFLAGS'] += ' -Wno-error=int-in-bool-context'
 
         self.install_args = [
             ('install -v -m755 Linux*/lib/*.so %s/lib'
@@ -52,9 +56,6 @@ class NssRecipe(GnuRecipe):
 ln -sfv ${HARDHAT_PREFIX}/lib/libp11-kit.so ${HARDHAT_PREFIX}/lib/libnssckbi.so
 '''
         self.run_exe(cmd, self.directory, self.environment)
-
-
-
 
     def patch(self):
         text = r'''
@@ -308,3 +309,14 @@ diff -Naurp nss-3.28-orig/nss/manifest.mn nss-3.28/nss/manifest.mn
 
         self.apply_patch(self.directory, text)
         self.directory = os.path.join(self.directory, 'nss')
+
+        filename = os.path.join(
+            self.directory,
+            'lib/libpkix/pkix_pl_nss/pki/pkix_pl_ocsprequest.c')
+        src = r'''*pHashcode = (((((extensionHash << 8) || certHash) << 8) ||'''
+        dst = r'''*pHashcode = (((((extensionHash << 8) != 0 || certHash) << 8) != 0 ||'''
+        patch(filename, src, dst)
+
+        src = r'''dateHash) << 8) || signerHash;'''
+        dst = r'''dateHash) << 8) != 0 || signerHash;'''
+        patch(filename, src, dst)

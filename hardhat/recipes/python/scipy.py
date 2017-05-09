@@ -4,11 +4,8 @@ from .base import PipBaseRecipe
 class ScipyRecipe(PipBaseRecipe):
     def __init__(self, *args, **kwargs):
         super(ScipyRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '8ab6e9c808bf2fb3e8576cd8cf07226d' \
-                      '9cdc18b012c06d9708429a821ac6634e'
-
         self.name = 'scipy'
-        self.version = '0.18.1'
+        self.version = '0.19.0'
         self.pydepends = ['numpy', 'sphinx']
 
         self.environment['LDFLAGS'] += ' -shared'

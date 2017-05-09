@@ -164,6 +164,8 @@ class PipBaseRecipe(PythonBaseRecipe, Downloader, GetVersionMixin, Recipe):
              self.pypi_name,
              self.version)
             ]
+        if hasattr(self, 'extra_install_args'):
+            args += self.extra_install_args
 
         self.log_dir('install', self.prefix_dir, ' '.join(args))
         self.run_exe(args, self.prefix_dir, self.environment)
@@ -188,7 +190,6 @@ class PipBaseRecipe(PythonBaseRecipe, Downloader, GetVersionMixin, Recipe):
                 versions = list(filter(lambda x: x, versions))
                 versions = [x.group('version') for x in versions]
             return (Versions.max(versions), len(set(versions)) > 1)
-
 
 
 # Unused - trial code

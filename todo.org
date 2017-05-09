@@ -127,6 +127,15 @@ http://wiki.linuxfromscratch.org/blfs/wiki/firefox
 * In Progress
 1. LibreOffice requires JDK
 
+* Future
+- add mingw64
+- add 32 bit?
+- add mingw64 32 bit?
+- use native gcc
+- use native glibc
+- use native kernel headers
+- run on bsd
+- test on multiple linuxes old and new. Add bootstrapping gcc for getting up to current version
 
 * Stack
 - chromium
@@ -134,3 +143,11 @@ http://wiki.linuxfromscratch.org/blfs/wiki/firefox
 - cmake
 - jenkins
 - icu
+
+- jinja2
+- cffi
+- babel
+- hg-git
+- sphinx
+- scipy
+- pandas

@@ -8,6 +8,8 @@ built glibc. In the future I would like to add the option of using
 preinstalled compilers instead and a preinstalled glibc and make
 it work for mingw64 on windows.
 
+The goal is to be something like homebrew/linuxbrew but in python
+instead of ruby.
 
 ## To bootstrap
 
@@ -38,13 +40,14 @@ to see what is available
 Thanks to Linux from Scratch and Beyond Linux from Scratch for most
 of the information and for the patches applied using patch.
 
-Package count estimates: 2017-01-22
-- recipes = 372
-- doc     = 1
-- java    = 3
-- ocaml   = 3
-- perl    = 1
-- python  = 142
-- toolchain = 3
-- x11     = 52
-- total   = 601
+Estimated package counts as of 2017-05-09
+doc       = 3
+java      = 5
+ocaml     = 3
+other     = 427
+perl      = 4
+python    = 144
+toolchain = 3
+x11       = 54
+----------------
+total     = 667

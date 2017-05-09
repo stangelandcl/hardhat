@@ -14,6 +14,8 @@ class LibMemcachedRecipe(GnuRecipe):
                    '+download/libmemcached-$version.tar.gz' \
                    % self.short_version
         self.configure_args += ['LIBUUID_LIB=-luuid']
+        self.environment['CFLAGS'] += ' -fpermissive'
+        self.environment['CXXFLAGS'] += ' -fpermissive'
 
     def install(self):
         super(LibMemcachedRecipe, self).install()

@@ -5,6 +5,9 @@ from .base import GnuRecipe
 class PostgresRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(PostgresRecipe, self).__init__(*args, **kwargs)
+        self.sha256 = '0187b5184be1c09034e74e44761505e5' \
+                      '2357248451b0c854dddec6c231fe50c9'
+
         self.name = 'postgres'
         self.version = '9.6.2'
         self.url = 'https://ftp.postgresql.org/pub/source/' \
