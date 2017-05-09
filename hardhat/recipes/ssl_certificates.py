@@ -11,11 +11,11 @@ class Extra:
 class SSLCertificatesRecipe(TarballRecipe, Recipe):
     def __init__(self, *args, **kwargs):
         super(SSLCertificatesRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '8e35348f5f96108116a92f5c5755991c' \
-                      '7da66e30bddcb4112dc3ddda851c6b2a'
+        self.sha256 = '99e16c076801d5539f2b11cb972398f2' \
+                      '923652bd91e33832134b7faeb707eb02'
 
         self.name = 'ssl-certificates'
-        self.version = '20170119'
+        self.version = '20170425'
         self.depends = ['openssl']
         self.url = 'http://anduin.linuxfromscratch.org/BLFS/other/' \
                    'make-ca.sh-$version'
@@ -25,9 +25,9 @@ class SSLCertificatesRecipe(TarballRecipe, Recipe):
         self.certdata.url = 'http://anduin.linuxfromscratch.org/BLFS/other/' \
                             'certdata.txt'
         self.certdata.name = 'certdata'
-        self.certdata.version = '20161024'
-        self.certdata.sha256 = '8c0fd6fb9c71cee859dfe7cca660a5c9' \
-                               'dc6a573e2be345ecfa9191605d9d6ad2'
+        self.certdata.version = '20170508'
+        self.certdata.sha256 = None
+                               
 
         self.extra_downloads = [self.certdata]
         self.verify_ssl_certificate = False
