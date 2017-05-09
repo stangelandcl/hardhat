@@ -5,8 +5,6 @@ from ..version import extension_regex
 class SwayRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(SwayRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '5adeecdbbddfb43f4e9f897187af1742' \
-                      '03554fa0b2ee66b73218a061470f305e'
         self.name = 'sway'
         self.depends = ['cairo', 'dmenu', 'fonts',
                         'gdk-pixbuf',
@@ -18,7 +16,7 @@ class SwayRecipe(GnuRecipe):
         # see recipes/x11/drivers for a list
         # Also install the synaptics driver in that directory
         # for laptop touchpad support
-        self.version = '76614efb16527420017291cd47de176b11440d38'
+        self.version = 'ee81b1aecb44611f82dc34836ced495ee1514c51'
         self.version_regex = r'(?P<version>\d+\.\d+(-rc\d+)?)' \
             + extension_regex
         self.version_url = 'https://github.com/SirCmpwn/sway/releases'
