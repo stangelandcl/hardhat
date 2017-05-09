@@ -4,9 +4,8 @@ from .base import GnuRecipe
 class DMenuRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(DMenuRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '9155ee8158c777b3ac12f02fca76a50a' \
-                      'fc244053d842115000e06a8fb287eec1'
-                
+        self.sha256 = '06d95d544dbadbab0afb6e382a9b8e09' \
+                      '306959ae48ba44fd1f1cb94fa1d5a3bf'
         self.name = 'dmenu'
         self.version = 'f428f3e01a4ced5b1df07ddf913bb022692f8035'
         self.depends = ['freetype', 'xorg-libs']
