@@ -33,6 +33,9 @@ class OpenBlasRecipe(GnuRecipe):
 # If needed. See TargetList.txt in OpenBLAS directory for list of targets
         if self.is_atom():
             self.compile_args += ['TARGET=ATOM']
+        else:
+            # hardcoded because it failed to compile when detecting for itself
+            self.compile_args += ['TARGET=CORE2']
 
 #        self.compile_args = ['make',
 #                             'all',
