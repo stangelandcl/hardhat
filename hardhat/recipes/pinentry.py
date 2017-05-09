@@ -13,3 +13,4 @@ class PinentryRecipe(GnuRecipe):
         self.url = 'https://www.gnupg.org/ftp/gcrypt/$name/' \
                    '$name-$version.tar.bz2'
         self.environment['LIBS'] += ' -ltinfow'
+        self.depends = ['qt5']
