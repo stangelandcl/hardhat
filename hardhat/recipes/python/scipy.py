@@ -4,6 +4,9 @@ from .base import PipBaseRecipe
 class ScipyRecipe(PipBaseRecipe):
     def __init__(self, *args, **kwargs):
         super(ScipyRecipe, self).__init__(*args, **kwargs)
+        self.sha256 = '4190d34bf9a09626cd42100bbb12e3d9' \
+                      '6b2daf1a8a3244e991263eb693732122'
+
         self.name = 'scipy'
         self.version = '0.19.0'
         self.pydepends = ['numpy', 'sphinx']

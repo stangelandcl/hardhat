@@ -144,10 +144,14 @@ http://wiki.linuxfromscratch.org/blfs/wiki/firefox
 - jenkins
 - icu
 
-- jinja2
-- cffi
-- babel
-- hg-git
-- sphinx
-- scipy
-- pandas
+- dulwich
+- requests
+- pyyaml
+- alabaster
+- markupsafe
+- pycparser
+- pyparsing
+- pytz
+
+
+
