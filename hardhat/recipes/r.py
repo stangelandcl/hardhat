@@ -11,7 +11,7 @@ class RRecipe(GnuRecipe):
         super(RRecipe, self).__init__(*args, **kwargs)
         self.sha256 = '288e9ed42457c47720780433b3d5c3c2' \
                       '0983048b789291cc6a7baa11f9428b91'
-                
+
         self.name = 'r'
         self.version = '3.4.0'
         self.version_prefix = 'R'
@@ -23,7 +23,8 @@ class RRecipe(GnuRecipe):
         self.depends = ['bash', 'bzip2', 'curl', 'libpng', 'libtiff',
                         'libssh2',
                         'ncurses5', 'openblas',
-                        'pcre', 'posix', 'readline', 'texlive', 'xz', 'zlib']
+                        'pcre', 'posix', 'readline',
+                        'texlive', 'tre', 'xz', 'zlib']
         self.environment['LD_RUN_PATH'] = Template('$prefix/lib:$prefix/lib64:'
                                                    '$prefix/$target/lib:'
                                                    '$prefix/$target/lib64:'
@@ -37,11 +38,12 @@ class RRecipe(GnuRecipe):
         self.configure_args += ['--enable-R-shlib',
                                 '--enable-R-static-lib',
                                 '--enable-BLAS-shlib',
-                                '--enable-lto',
+                                '--disable-lto',
                                 '--with-blas',
                                 '--with-lapack',
                                 '--with-x=%s' % self.with_x,
                                 '--with-system-pcre',
+                                '--with-system-tre',
                                 '--without-recommended-packages',
                                 ]
         super(RRecipe, self).configure()
