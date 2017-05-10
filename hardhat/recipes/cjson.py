@@ -11,8 +11,11 @@ class CJsonRecipe(GnuRecipe):
         self.version = '1.2.0'
         self.url = 'https://github.com/DaveGamble/cJSON/archive/' \
                    'v$version.tar.gz'
-        self.compile_args += ['PREFIX=%s' % self.prefix_dir]
-        self.install_args += ['install', 'PREFIX=%s' % self.prefix_dir]
+        self.compile_args += ['all']
+        self.install_args += ['PREFIX=""',
+                              'DESTDIR=%s' % self.prefix_dir,
+                              'LIBRARY_PATH=lib',
+                              'INCLUDE_PATH=include/cjson']
 
     def configure(self):
         pass
