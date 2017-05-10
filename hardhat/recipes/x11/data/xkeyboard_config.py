@@ -11,3 +11,5 @@ class XKeyboardConfigRecipe(X11BaseRecipe):
         self.version = '2.19'
         self.depends = ['xorg-libs']
         self.configure_args += ['--with-xkb-rules-symlink=xorg']
+        self.url = 'http://www.x.org/releases/individual/data/' \
+                   'xkeyboard-config/xkeyboard-config-$version.tar.bz2'

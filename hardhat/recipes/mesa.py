@@ -4,17 +4,16 @@ from .base import GnuRecipe
 class MesaRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(MesaRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = 'a6ed622645f4ed61da418bf65adde5bc' \
-                      'c4bb79023c36ba7d6b45b389da4416d5'
+        self.sha256 = '7510eee0d0077860b250d30d73305048' \
+                      'c2df4ba09ea8fc04e4f3eec7beece301'
 
         self.name = 'mesa'
-        self.version = '13.0.2'
+        self.version = '17.0.5'
         self.version_regex = '(?P<version>\d+\.\d+\.\d+)/'
         self.version_url = 'https://mesa.freedesktop.org/archive/'
         self.depends = ['elfutils', 'eudev', 'libdrm', 'llvm', 'nettle',
                         'wayland-protocols', 'xorg-libs']
-        self.url = 'ftp://ftp.freedesktop.org/pub/mesa/$version/' \
-                   'mesa-$version.tar.xz'
+        self.url = 'https://mesa.freedesktop.org/archive/mesa-$version.tar.gz'
         self.configure_args += [
             '--enable-egl',
             '--with-egl-platforms=x11,drm,wayland,surfaceless',

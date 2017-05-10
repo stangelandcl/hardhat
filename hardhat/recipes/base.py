@@ -384,7 +384,7 @@ class Recipe(RecipeSettings, Logger, ExeRunner, ShortVersionMixin):
         args = ['%s/bin/update-mime-database' % self.prefix_dir,
                 '%s/share/mime/' % self.prefix_dir]
         if os.path.exists(args[0]):
-            self.log_dir('post-install', dir, 'update-mime-database')
+            self.log_dir('post-install', self.prefix_dir, 'update-mime-database')
             self.run_exe(args, self.prefix_dir, self.environment)
 
     def texhash(self):
@@ -392,12 +392,12 @@ class Recipe(RecipeSettings, Logger, ExeRunner, ShortVersionMixin):
         exe = os.path.join(self.prefix_dir, 'bin', 'texhash')
         if os.path.exists(exe):
             args = [exe]
-            self.log_dir('post-install', dir, 'ldconfig')
+            self.log_dir('post-install', self.prefix_dir, 'ldconfig')
             self.run_exe(args, self.prefix_dir, self.environment)
 
     def post_install(self):
         self.ldconfig()
-        self.update_mime_database()
+#        self.update_mime_database()  # maybe not by default
 #        self.texhash()
 
     def cleanup(self):
