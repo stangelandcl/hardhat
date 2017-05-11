@@ -4,11 +4,11 @@ from .base import GnuRecipe
 class CJsonRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(CJsonRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = 'df549298ea6515058648eaacc62bcc4f' \
-                      '82fa34f8b93af7753e30eb35c3841c7d'
+        self.sha256 = '6d1482c1b492893b25ab7e77ee6098fe' \
+                      '3ef10585df660e5ffe67e632a8c5b9e4'
 
         self.name = 'cJSON'
-        self.version = '1.2.0'
+        self.version = '1.5.2'
         self.url = 'https://github.com/DaveGamble/cJSON/archive/' \
                    'v$version.tar.gz'
         self.compile_args += ['all']
