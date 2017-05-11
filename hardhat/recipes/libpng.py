@@ -8,11 +8,11 @@ class Extra:
 class LibPngRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(LibPngRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '266743a326986c3dbcee9d89b640595f' \
-                      '6b16a293fd02b37d8c91348d317b73f9'
+        self.sha256 = '4245b684e8fe829ebb76186327bb37ce' \
+                      '5a639938b219882b53d64bd3cfc5f239'
 
         self.name = 'libpng'
-        self.version = '1.6.26'
+        self.version = '1.6.29'
         self.depends = ['zlib']
         self.url = 'http://download.sourceforge.net/$name/' \
                    '$name-$version.tar.xz'
@@ -22,8 +22,8 @@ class LibPngRecipe(GnuRecipe):
         self.apng.version = self.version
         self.apng.url = 'http://downloads.sourceforge.net/libpng-apng/' \
                         'libpng-$version-apng.patch.gz'
-        self.apng.sha256 = '01dec904d91ee8c90a9a78f253d01d8f' \
-                           'ac0e37a3f4beacb60e136ea7c814d72c'
+        self.apng.sha256 = '06f3c9b23f61a5a16310170d10a29d0b' \
+                           'a1a9350e23b8ce90ae870333b513285b'
         self.extra_downloads = [self.apng]
 
     def patch(self):
