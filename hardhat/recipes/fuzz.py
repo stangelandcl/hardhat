@@ -19,7 +19,7 @@ class FuzzRecipe(GnuRecipe):
         self.version_regex = r'(?P<version>\d+\.\d+\.\d+)'
         self.url = 'http://spivey.oriel.ox.ac.uk/mike/fuzz/fuzz-$version.tgz'
 
-        self.depends = ['make', 'texlive']
+        self.depends = ['flex', 'make', 'texlive']
 
         self.manual = Extra()
         self.manual.url = 'http://spivey.oriel.ox.ac.uk/mike/fuzz/fuzzman.pdf'
