@@ -22,7 +22,8 @@ class FirefoxRecipe(GnuRecipe):
                         'dbus-glib',
                         'gconf',
                         'graphite2',
-                        'gtk3',
+                        'gtk2',
+#                        'gtk3',
                         'harfbuzz',
                         'hunspell',
                         'icu',
@@ -85,7 +86,7 @@ ac_add_options --disable-gold
 #ac_add_options --disable-necko-wifi
 
 # Uncomment this option if you wish to build with gtk+-2
-#ac_add_options --enable-default-toolkit=cairo-gtk2
+ac_add_options --enable-default-toolkit=cairo-gtk2
 
 # Uncomment these lines if you have installed optional dependencies:
 ac_add_options --enable-system-hunspell

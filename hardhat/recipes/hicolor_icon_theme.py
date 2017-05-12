@@ -16,7 +16,7 @@ class HiColorIconThemeRecipe(GnuRecipe):
                    'hicolor-icon-theme-$version.tar.xz'
 
     def post_install(self):
-        self.run_exe(['gtk-icon-theme-cache',
+        self.run_exe(['gtk-update-icon-cache',
                       '%s/share/icons/hicolor' % self.prefix_dir],
                      self.directory,
                      self.environment)

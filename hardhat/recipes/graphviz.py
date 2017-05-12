@@ -4,17 +4,19 @@ from .base import GnuRecipe
 class GraphVizRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(GraphVizRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '81aa238d9d4a010afa73a9d2a704fc32' \
-                      '21c731e1e06577c2ab3496bdef67859e'
+        self.sha256 = 'ca5218fade0204d59947126c38439f43' \
+                      '2853543b0818d9d728c589dfe7f3a421'
 
         self.name = 'graphviz'
-        self.version = '2.38.0'
+        self.version = '2.40.1'
         self.depends = ['freeglut', 'fontconfig', 'freetype',
                         'gdk-pixbuf', 'guile',
-                        'java', 'libjpeg-turbo', 'libpng', 'librsvg',
+                        'java',
+                        'libgd',
+                        'libjpeg-turbo', 'libpng', 'librsvg',
                         'lua',
                         'ocaml', 'pango', 'python2', 'python3-tk', 'r',
-                        'swig', 'tk', 'xorg-libs']
-        self.url = 'http://pkgs.fedoraproject.org/repo/pkgs/graphviz/' \
-                   'graphviz-$version.tar.gz/' \
-                   '5b6a829b2ac94efcd5fa3c223ed6d3ae/graphviz-$version.tar.gz'
+                        'qt5', 'swig', 'tk', 'xorg-libs']
+        self.url = 'http://graphviz.org/pub/graphviz/stable/SOURCES/' \
+                   'graphviz-$version.tar.gz'
+        self.configure_args += ['--with-libgd=no']
