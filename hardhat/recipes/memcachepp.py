@@ -13,7 +13,7 @@ class MemcacheppRecipe(GnuRecipe):
         self.version = 'e948be5189c1b8863bb4bfc6cf3830482933b54a'
         self.url = 'https://github.com/deanberris/memcachepp/archive/' \
                    '$version.tar.gz'
-        self.depends = ['boost']
+        self.depends = ['boost', 'cmake']
         self.configure_args = [
             'cmake',
             '-DCMAKE_INSTALL_PREFIX=%s' % self.prefix_dir,
