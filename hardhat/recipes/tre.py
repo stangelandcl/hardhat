@@ -9,6 +9,7 @@ class TreRecipe(GnuRecipe):
 
         self.description = 'Regex library'
         self.name = 'tre'
+        self.depends = ['autotools']
         self.version = '6fb7206b935b35814c5078c20046dbe065435363'
         self.url = self.github_commit('laurikari')
 

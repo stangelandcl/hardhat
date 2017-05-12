@@ -14,7 +14,7 @@ class TexLiveRecipe(GnuRecipe):
         self.version = '3.14159265-2016'
         self.url = 'http://mirror.ctan.org/systems/texlive/tlnet/' \
                    'install-tl-unx.tar.gz'
-        self.depends = ['perl']
+        self.depends = ['perl5']
         self.profile_file = os.path.join(self.directory, 'texlive.profile')
         self.install_args = [
             'perl',

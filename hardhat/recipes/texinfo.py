@@ -10,4 +10,5 @@ class TexInfoRecipe(GnuRecipe):
 
         self.name = 'texinfo'
         self.version = '6.3'
+        self.depends = ['perl5']
         self.url = Urls.gnu_template(self.name, self.version, 'tar.xz')
