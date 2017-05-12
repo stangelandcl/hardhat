@@ -156,13 +156,13 @@ mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/firefox-build-dir
         with open(file, 'wt') as f:
             f.write(mozconfig)
 
-        src = r"cpp = list(buildconfig.substs['CPP'])"
-        dst = r"cpp = buildconfig.substs['CPP'].split()"
-        file = os.path.join(self.directory, 'dom/bindings/GenerateCSS2PropertiesWebIDL.py')
-        patch(file, src, dst)
+#        src = r"cpp = list(buildconfig.substs['CPP'])"
+#        dst = r"cpp = buildconfig.substs['CPP'].split()"
+#        file = os.path.join(self.directory, 'dom/bindings/GenerateCSS2PropertiesWebIDL.py')
+#        patch(file, src, dst)
 
-        file = os.path.join(self.directory, 'layout/style/GenerateCSSPropsGenerated.py')
-        patch(file, src, dst)
+#        file = os.path.join(self.directory, 'layout/style/GenerateCSSPropsGenerated.py')
+#        patch(file, src, dst)
 
         # Fix install failure when --enable-debug is specified
         # Only enable this if --enable debug is specified
