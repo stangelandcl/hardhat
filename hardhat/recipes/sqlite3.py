@@ -4,9 +4,8 @@ from .base import GnuRecipe
 class Sqlite3Recipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(Sqlite3Recipe, self).__init__(*args, **kwargs)
-        self.sha256 = '07b35063b9386865b78226cdaca9a299' \
-                      'd938a87aaa8fdc4d73edb0cef30f3149'
-
+        self.sha256 = '3757612463976e7d08c5e9f0af302161' \
+                      '3fc24bbcfe1c51197d6776b9ece9ac5c'
         self.name = 'sqlite3'
         self.version = '3.18.0'
         # Doesn't work because version is not in href
