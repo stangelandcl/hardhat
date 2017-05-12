@@ -21,7 +21,7 @@ class MuPdfRecipe(GnuRecipe):
              'build=release',
              'docdir=%s/share/doc/mupdf' % self.prefix_dir,
              'install'],
-            ['ln', '-sfv', 'mupdf-x11-curl', '%s/mupdf' % self.prefix_dir]]
+            ['ln', '-sfv', 'mupdf-x11-curl', '%s/bin/mupdf' % self.prefix_dir]]
 
 
 
