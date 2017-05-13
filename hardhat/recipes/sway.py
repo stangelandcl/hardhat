@@ -1,3 +1,4 @@
+import os
 from .base import GnuRecipe
 from ..version import extension_regex
 
@@ -39,7 +40,9 @@ class SwayRecipe(GnuRecipe):
 # to run sway with logging 'sway -d 2> sway.log'
 
     def install(self):
-        super(SwayRecipe, self).install()
+        #super(SwayRecipe, self).install()
+        self.log_dir('install', self.directory, 'sudo install')
+        self.run_sudo(self.install_args)
 
         exe = '%s/bin/sway' % self.prefix_dir
         self.log_dir('install', self.directory, 'setcap cap_sys_ptrace=eip')
@@ -50,4 +53,14 @@ class SwayRecipe(GnuRecipe):
         self.run_sudo(args)
         self.log_dir('install', self.directory, 'setuid sway')
         args = ['chmod', '+s', exe]
+        self.run_sudo(args)
+        self.log_dir('install', self.directory, 'chown root etc/sway/security.d')
+        security = os.path.join(self.prefix_dir, 'etc', 'sway', 'security.d')
+        args = ['chown', '-R', 'root', security]
+        self.run_sudo(args)
+
+        self.log_dir('install', self.directory, 'chmod etc/sway/security.d')
+        args = ['chmod', '755', security]
+        self.run_sudo(args)
+        args = ['chmod', '644', security + '/*']
         self.run_sudo(args)

@@ -10,12 +10,14 @@ from ..urls import Urls
 class EmacsRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(EmacsRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '33d26b095160084b536a64ea76ae76b5' \
-                      '3924b5699973032389ce85269d3e5886'
+        self.sha256 = '59b55194c9979987c5e9f1a1a4ab5406' \
+                      '714e80ffcfd415cc6b9222413bc073fa'
+                
         self.name = 'emacs'
-        self.version = '3c4c8ca06e3306ccbcd07e354eb51abe53b52d22'
-        self.url = 'http://git.savannah.gnu.org/cgit/emacs.git/snapshot/' \
-                   'emacs-$version.tar.gz'
+        self.version = '25.2'
+        self.url = 'http://mirrors.kernel.org/gnu/emacs/emacs-$version.tar.xz'
+#        self.url = 'http://git.savannah.gnu.org/cgit/emacs.git/snapshot/' \
+#                   'emacs-$version.tar.gz'
 
         self.depends = ['dejavu-fonts',
                         'fontconfig',
