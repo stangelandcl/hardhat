@@ -17,7 +17,8 @@ class DotRecipe(GnuRecipe):
                              ' building documentation'
         self.configure_args += ['--without-x',
                                 '--disable-swig',
-                                '--without-glut']
+                                '--without-glut',
+                                '--with-libgd=no']
     def post_install(self):
         super(DotRecipe, self).post_install()
         self.run_exe(['dot', '-c'], self.directory, self.environment)
