@@ -4,9 +4,9 @@ from .base import PipBaseRecipe
 class BleachRecipe(PipBaseRecipe):
     def __init__(self, *args, **kwargs):
         super(BleachRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '978e758599b54cd3caa2e160d7410287' \
-                      '9b230ea8dc93871d0783721eef58bc65'
+        self.sha256 = 'b9522130003e4caedf4f00a39c120a90' \
+                      '6dcd4242329c1c8f621f5370203cbc30'
 
         self.name = 'bleach'
-        self.version = '1.5.0'
+        self.version = '2.0.0'
         self.pydepends = ['html5lib']

@@ -10,7 +10,7 @@
 9. cpplint
 10. lint
 11. frama C
-12. uno - http://spinroot.com/uno/
+
 
 * Code
 1. Default version checking url for github to releases
@@ -37,6 +37,7 @@
 20. move x11 apps to x11/apps sub directory
 21. rename x11 to xorg
 22. turn off debug mode for Emacs
+23. generate all python packages from pypi with dependencies
 
 * Packages
 1. xgboost
