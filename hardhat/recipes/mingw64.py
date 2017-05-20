@@ -77,7 +77,9 @@ class Mingw64Recipe(GnuRecipe):
         os.makedirs(self.gcc_build_dir)
 
     def configure(self):
-        self.log_dir('configure', self.binutils_build_dir, 'configure binutils')
+        self.log_dir('configure',
+                     self.binutils_build_dir,
+                     'configure binutils')
         self.run_exe(self.binutils_configure_args,
                      self.binutils_build_dir,
                      self.environment)
