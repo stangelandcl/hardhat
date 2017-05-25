@@ -4,11 +4,11 @@ from .base import GnuRecipe
 class GLibRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(GLibRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = 'f113b7330f4b4a43e3e401fe7849e751' \
-                      '831060d574bd936a63e979887137a74a'
-
+        self.sha256 = 'f00e5d9e2a2948b1da25fcba734a6b7a' \
+                      '40f556de8bc9f528a53f6569969ac5d0'
+                
         self.name = 'glib'
-        self.version = '2.51.0'
+        self.version = '2.52.2'
         self.version_regex = '(?P<version>\d+\.\d+)'
         self.version_url = 'http://ftp.gnome.org/pub/gnome/sources/glib/'
         self.depends = ['gtk-doc', 'libffi', 'pcre', 'python3', 'util-linux']

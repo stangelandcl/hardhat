@@ -1,10 +1,10 @@
 import os
-from hardhat.util import load_recipes
 
 directory = os.path.dirname(__file__)
 
 
 def load(settings):
+    from hardhat.util import load_recipes
     recipes = load_recipes(directory, 'hardhat.recipes.python')
 
     dependencies = [

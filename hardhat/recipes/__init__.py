@@ -1,5 +1,4 @@
 import os
-from hardhat.util import load_recipes, add_dependencies
 
 directory = os.path.dirname(__file__)
 
@@ -14,6 +13,7 @@ import hardhat.recipes.x11
 
 
 def load(settings):
+    from hardhat.util import load_recipes, add_dependencies
     #  Fedora query to find dependencies: dnf repoquery --requires libtool
     dependencies = [
         ['asciidoc', 'python2'],

@@ -8,7 +8,7 @@ class HardhatRecipe(SetupPyRecipe):
         super(HardhatRecipe, self).__init__(*args, **kwargs)
         self.sha256 = '8c7e40921866f042293b8f4669873031' \
                       'b1cfa87f1f13303df536a560f43fce26'
-                
+
         self.description = 'Install hardhat (ourself) the current version'
         self.name = 'hardhat'
         self.version = '747d6caf98516ffce4347c3a8688f1356fed90bb'
