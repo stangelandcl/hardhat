@@ -5,6 +5,8 @@ from .base import GnuRecipe
 class Python3Recipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(Python3Recipe, self).__init__(*args, **kwargs)
+        self.sha256 = 'aa50b0143df7c89ce91be020fe413826' \
+                      '13a817354b33acdc6641b44f8ced3828'
         self.name = 'python3'
         self.depends = ['bdb', 'bzip2', 'cacert', 'expat', 'gdbm', 'ncurses',
                         'openssl', 'readline', 'sqlite3', 'xz', 'zlib']
