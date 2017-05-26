@@ -37,11 +37,11 @@ def version_compare(x, y):
 # (version, sha256, url) in order
 VERSIONS = [
 # glibc 2.24 requires linux kernel headers 3.2 or better but will still
-# work on x64 when the actual kernel is 2.6.32 or better
-#    ('2.6.32.71',
-#     '640af1c1a9aad730b1e733f3be3671d503842be42d40adffd2af72dd21ca41be',
-#     'http://cdn.kernel.org/pub/linux/kernel/v2.6/longterm/v2.6.32/'
-#     'linux-2.6.32.71.tar.gz'),
+# work on x64 when the actual kernel is 2.6.32 or better, except on Intel
+    ('2.6.32.71',
+     '640af1c1a9aad730b1e733f3be3671d503842be42d40adffd2af72dd21ca41be',
+     'http://cdn.kernel.org/pub/linux/kernel/v2.6/longterm/v2.6.32/'
+     'linux-2.6.32.71.tar.gz'),
     ('3.2.83',
      '999423977616ca6ba2463229f00aee2334ef778f059fdaa84499eeddbcecad01',
      'https://cdn.kernel.org/pub/linux/kernel/v3.x/linux-3.2.83.tar.gz'),
