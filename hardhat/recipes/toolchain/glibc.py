@@ -91,7 +91,7 @@ files.  To use kernel headers not from /usr/include/linux, use the
 configure option --with-headers." "$LINENO" 5
 fi
 '''
-        filename = os.path.join(self.extract_dir, 'sysdeps/unix/sysv/linux')
+        filename = os.path.join(self.extract_dir, 'sysdeps/unix/sysv/linux/configure')
         patch(filename, src, '')
 
 

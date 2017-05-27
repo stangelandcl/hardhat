@@ -4,16 +4,13 @@ from .base import GnuRecipe
 class Python2Recipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(Python2Recipe, self).__init__(*args, **kwargs)
-        self.sha256 = 'a4f05a0720ce0fd92626f0278b6b433e' \
-                      'ee9a6173ddf2bced7957dfb599a5ece1'
-
+        self.sha256 = 'ccd67509dfe45ec92432b7131df69468' \
+                      '586c51ba7940aa70705f69bb068ba6cb'
         self.name = 'python2'
-        self.version = '2.7.13'
+        self.version = '96f502059717a692ca3abd968b26c5ea2918ad3a'
         self.depends = ['bdb', 'bzip2', 'cacert', 'expat', 'gdbm', 'ncurses',
                         'openssl', 'readline', 'sqlite3', 'zlib']
-        self.url = \
-            'https://www.python.org/ftp/python/%s/Python-%s.tgz' \
-            % (self.version, self.version)
+        self.url = self.github_commit('python', 'cpython')
         self.configure_args += [
             '--enable-shared',
 #           '--enable-profiling',
