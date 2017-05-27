@@ -6,6 +6,12 @@ from hardhat.util import patch
 from .base import GnuRecipe
 
 
+class Extra:
+    def __init__(self, name):
+        self.name = name
+        self.sha256 = None
+
+
 class RRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(RRecipe, self).__init__(*args, **kwargs)
@@ -33,6 +39,12 @@ class RRecipe(GnuRecipe):
         self.configure_strip_cross_compile()
         self.with_x = 'no'
 #        self.environment_strip_lto()
+        #docs: http://www.sfu.ca/~sblay/R-C-interface.txt
+        self.ext = Extra('R-exts')
+        self.ext.version = self.version
+        self.ext.url = 'https://cran.r-project.org/doc/manuals/' \
+                       'r-release/R-exts.pdf'
+        self.extra_downloads.append(ext)
 
     def configure(self):
         self.configure_args += ['--enable-R-shlib',
@@ -74,6 +86,17 @@ class RRecipe(GnuRecipe):
         # Compile again. R will use the installed libR.so not the
         # just compiled version
         super(RRecipe, self).compile()
+
+
+    def install(self):
+        super(RRecipe, self).install()
+
+        self.log_dir('install', self.directory, 'R-exts.pdf')
+        dst = os.path.join(self.prefix_dir, 'share', 'doc', 'R')
+        if not os.path.exists(dst):
+            os.makedirs(dst)
+        dst = os.path.join(dst, 'R-exts.pdf')
+        shutil.copy2(self.ext.filename, dst)
 
 
     def patch(self):
