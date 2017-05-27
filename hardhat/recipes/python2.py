@@ -40,3 +40,8 @@ class Python2Recipe(GnuRecipe):
 #                              '_PYTHON_HOST_PLATFORM=%s' % (self.HOST),
 #                              'HOST_GNU_TYPE=%s' % (self.HOST)
 #                              ]
+
+    @property
+    def short_version(self):
+        # for boost
+        return '2.7'
