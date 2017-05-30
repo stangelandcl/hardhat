@@ -44,7 +44,7 @@ class RRecipe(GnuRecipe):
         self.ext.version = self.version
         self.ext.url = 'https://cran.r-project.org/doc/manuals/' \
                        'r-release/R-exts.pdf'
-        self.extra_downloads.append(ext)
+        self.extra_downloads.append(self.ext)
 
     def configure(self):
         self.configure_args += ['--enable-R-shlib',

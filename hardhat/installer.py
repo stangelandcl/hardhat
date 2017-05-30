@@ -138,11 +138,12 @@ class InstallFile(object):
 
 class Installer(object):
     def __init__(self, directory, recipes, dependencies,
-                 target, install_file, download_dir):
+                 target, install_file, download_dir, settings):
         self.directory = directory
         self.recipes = recipes
         self.dependencies = dependencies
         self.install_file = install_file
+        self.settings = settings
         init_file = os.path.join(self.directory, 'init.sh')
         export_init_script(init_file, self.directory, target, download_dir)
 
@@ -235,7 +236,7 @@ class Installer(object):
 
     def _check_sudo(self, recipes):
         recipes = list(filter(lambda x: x.sudo, recipes))
-        if recipes:
+        if recipes and not self.settings.no_sudo:
             names = [x.name for x in recipes]
             names.sort()
             names = ', '.join(names)
@@ -251,7 +252,7 @@ class Installer(object):
                     print('Authenticated')
                 else:
                     print('Authentication FAILED')
-                    sys.exit(1)  # Could continue until get to sudo
+                    sys.exit(1)  # Could not continue until get to sudo
             except: pass
             for recipe in recipes:
                 recipe.password = password

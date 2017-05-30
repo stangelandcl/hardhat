@@ -115,7 +115,8 @@ def main():
                           dependencies,
                           settings.target_triplet,
                           settings.install_file,
-                          settings.tarball_dir)
+                          settings.tarball_dir,
+                          settings)
 
     settings.installer = installer
     for recipe in recipes:
