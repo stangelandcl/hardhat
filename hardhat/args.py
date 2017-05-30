@@ -41,6 +41,9 @@ def parse_args():
     parser.add_argument('--just',
                         help="don't install dependencies",
                         action='store_true')
+    parser.add_argument('--no-sudo',
+                        help="skip installations requiring sudo",
+                        action='store_true')
     parser.add_argument('--version',
                         help='print version',
                         version='0.1',
@@ -157,6 +160,7 @@ def parse_args():
     settings.cpu_count = _cpu_count(args.cpus)
     settings.post_clean = not args.no_clean
     settings.enable_version_check = args.cmd == 'version'
+    settings.no_sudo = args.no_sudo
     if args.march:
         settings.march = args.march
         os.environ['HARDHAT_MARCH'] = args.march

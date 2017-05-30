@@ -44,6 +44,7 @@ class RecipeSettings(Object):
         self.tarball_dir = os.path.expanduser('~/Downloads/hardhat')
         self.march = get_march()
         self.post_clean = True
+        self.no_sudo = False
 
         self.prefix_dir = os.path.expanduser('~/hardhat')
         self.quiet = RecipeSettings.quiet
@@ -71,6 +72,7 @@ class RecipeSettings(Object):
         self.march = src.march
         self.post_clean = src.post_clean
         self.enable_version_check = src.enable_version_check
+        self.no_sudo = src.no_sudo
 #        self.settings_filename = src.settings_filename
 
     ## @property

@@ -112,7 +112,11 @@ session     required      pam_unix.so
 '''
         write('password-auth', password_auth)
 
-        self.log_dir('install', self.directory, 'setuid unix_chkpwd')
-        exe = os.path.join(self.prefix_dir, 'sbin', 'unix_chkpwd')
-        self.run_sudo(['chown', 'root', exe])
-        self.run_sudo(['chmod', '+s', exe])
+        if self.no_sudo:
+            self.log_dir('install', self.directory,
+                         'skipping sudo due to --no-sudo command line flag')
+        else:
+            self.log_dir('install', self.directory, 'setuid unix_chkpwd')
+            exe = os.path.join(self.prefix_dir, 'sbin', 'unix_chkpwd')
+            self.run_sudo(['chown', 'root', exe])
+            self.run_sudo(['chmod', '+s', exe])
