@@ -46,12 +46,7 @@ class VlcRecipe(GnuRecipe):
 
     def configure(self):
         super(VlcRecipe, self).configure()
-#        self.environment['LDFLAGS'] += ' -L%s/src/.libs' % self.directory
         self.log_dir('configure', self.directory, 'add vlccore linking')
-        ## src = 'vlc_LDADD ='
-        ## dst = 'vlc_LDADD = -Wl,-rpath=../src/.libs ../src/libvlccore.la'
-
-        ## patch(filename, src, dst)
 
         src = 'vlc_LDADD = ../lib/libvlc.la'
         dst = 'vlc_LDADD = ../lib/libvlc.la ../src/libvlccore.la'
