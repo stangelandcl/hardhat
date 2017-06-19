@@ -11,3 +11,5 @@ class LibmtpRecipe(GnuRecipe):
         self.depends = ['autotools']
         self.url = 'https://downloads.sourceforge.net/project/$name/' \
                    '$name/$version/$name-$version.tar.gz'
+
+        # TODO: requires sudo to install mtp-probe in udev
