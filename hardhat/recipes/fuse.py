@@ -1,3 +1,5 @@
+import os
+import shutil
 from .base import GnuRecipe
 
 
@@ -13,4 +15,21 @@ class FuseRecipe(GnuRecipe):
         self.url = 'https://github.com/libfuse/libfuse/releases/download/' \
                    'fuse-$version/fuse-$version.tar.gz'
 
-        # TODO: install documentation
+        # TODO: install documentation and examples
+
+    def install(self):
+        super(FuseRecipe, self).install()
+
+        self.log_dir('install', self.directory, 'install docs and examples')
+
+        dst = os.path.join(self.prefix_dir, 'share', 'doc', 'fuse')
+        if os.path.exists(dst):
+            shutil.rmtree(dst)
+
+        os.makedirs(dst)
+
+        src = os.path.join(self.directory, 'example')
+        shutil.copytree(src, os.path.join(dst, 'example'))
+
+        src = os.path.join(self.directory, 'doc', 'html')
+        shutil.copytree(src, os.path.join(dst, 'html'))
