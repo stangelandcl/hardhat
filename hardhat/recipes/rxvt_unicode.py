@@ -1,4 +1,6 @@
+import os
 from .base import GnuRecipe
+from ..util import patch
 
 
 class RxvtUnicodeRecipe(GnuRecipe):
@@ -24,6 +26,15 @@ class RxvtUnicodeRecipe(GnuRecipe):
                                 '--enable-xft',
                                 '--enable-unicode',
                                 '--with-term=rxvt-256color']
+
+    def patch(self):
+        self.log_dir('patch', self.directory,
+                     'disable close all tabs on window close')
+
+        filename = os.path.join(self.directory, 'src', 'perl', 'tabbed')
+        src = '$_->destroy for @{ $self->{tabs} };'
+        dst = '#$_->destroy for @{ $self->{tabs} };'
+        patch(filename, src, dst)
 
 
 #https://www.reddit.com/r/urxvt/comments/3ep4u6/can_i_make_urxvt_pop_up_a_warning_or_something/
