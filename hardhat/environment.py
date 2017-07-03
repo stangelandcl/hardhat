@@ -50,7 +50,7 @@ export LDFLAGS="$$LDFLAGS_NO_OPT $$LD_OPT"
 export TMPDIR=$TMPDIR
 export JAVA_HOME=$JAVA_HOME
 export LIBS="$LIBS"
-export CCACHE_DIR=$CCACHE_DIR
+export CCACHE_DIR=$HARDHAT_PREFIX/$USER/.ccache
 export PREFIX=$PREFIX
 
 
@@ -160,7 +160,7 @@ def runtime_env(prefix, target, download_dir):
         'TMPDIR': '%s/tmp' % (prefix),
         'LIBRARY_PATH': lib_path,
         'JAVA_HOME': '%s/java' % (prefix),
-        'CCACHE_DIR': '%s/.ccache' % (prefix),
+        'CCACHE_DIR': '%s/%s/.ccache' % (prefix, os.environ['USER']),
         'R_SHELL': '%s/bin/bash' % (prefix),
         'LDFLAGS_NO_OPT': ldflags,
         'LDFLAGS': ld_opt_flags,

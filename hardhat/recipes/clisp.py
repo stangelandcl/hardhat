@@ -10,13 +10,13 @@ class ClispRecipe(GnuRecipe):
         self.name = 'clisp'
         self.version = '2.49'
         self.depends = ['libsigsegv']
-        self.url = 'http://heanet.dl.sourceforge.net/project/clisp/' \
+        self.url = 'http://downloads.sourceforge.net/project/clisp/' \
                    'clisp/$version/clisp-$version.tar.bz2'
         self.configure_args += ['--cbc']
         self.configure_strip_cross_compile()
         # If not set CLISP src/makemake generates a makefile with
         # LIBS=... -R... and gcc cannot evaluate a -R parameter
-#        self.environment['LTLIBSIGSEGV'] = '-lsigsegv'
-#        self.environment['LIBSIGSEGV'] = '-lsigsegv'
-#        self.environment['LD'] = 'ld'
-#        self.environment['CC'] = 'gcc'
+        self.environment['LTLIBSIGSEGV'] = '-lsigsegv'
+        self.environment['LIBSIGSEGV'] = '-lsigsegv'
+        self.environment['LD'] = 'ld'
+        self.environment['CC'] = 'gcc'
