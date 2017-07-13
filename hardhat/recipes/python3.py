@@ -27,8 +27,7 @@ class Python3Recipe(GnuRecipe):
             'ac_cv_file__dev_ptc=no',
 
             # force cross-compile
-            '_PYTHON_HOST_PLATFORM=%s'
-            % (self.host_triplet),
+            '_PYTHON_HOST_PLATFORM=%s' % (self.host_triplet),
 
 # Cross-compiling python requires a python >= 3.3. However it uses code from
 # python 3.5. Since we are only fake cross compiling we can tell configure
@@ -62,4 +61,4 @@ class Python3TkRecipe(Python3Recipe):
     def __init__(self, *args, **kwargs):
         super(Python3TkRecipe, self).__init__(*args, **kwargs)
         self.name = 'python3-tk'
-        self.depends+= ['tk']
+        self.depends += ['tk']

@@ -32,7 +32,6 @@ class Python2Recipe(GnuRecipe):
             "PYTHON_FOR_BUILD='env LD_LIBRARY_PATH=. ./$(BUILDPYTHON) -E'"
             ]
 
-
         self.compile_args += ['profile-opt']
 #                              '_PYTHON_HOST_PLATFORM=%s' % (self.HOST),
 #                              'HOST_GNU_TYPE=%s' % (self.HOST)
@@ -42,3 +41,10 @@ class Python2Recipe(GnuRecipe):
     def short_version(self):
         # for boost
         return '2.7'
+
+
+class Python2TkRecipe(Python2Recipe):
+    def __init__(self, *args, **kwargs):
+        super(Python2TkRecipe, self).__init__(*args, **kwargs)
+        self.name = 'python2-tk'
+        self.depends += ['tk']
