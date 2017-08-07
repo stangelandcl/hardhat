@@ -16,6 +16,7 @@ export HARDHAT_MARCH=$HARDHAT_MARCH
 export PREFIX=$PREFIX
 export XORG_PREFIX=$XORG_PREFIX
 export XML_CATALOG_FILES=$XML_CATALOG_FILES
+export PYTHON_EGG_CACHE=$PYTHON_EGG_CACHE
 
 export GOROOT=$HARDHAT_PREFIX/go
 export LC_ALL=C
@@ -147,6 +148,8 @@ def runtime_env(prefix, target, download_dir):
         'ROOT_PATH': ROOT_PATH,
         'PATH': '%s:%s' % (path, ROOT_PATH),
         'XML_CATALOG_FILES': os.path.join(prefix, 'etc', 'xml', 'catalog'),
+        'PYTHON_EGG_CACHE': '%s/home/%s/.cache/Python-Eggs'
+                            % (prefix, os.environ['USER']),
         'CPP': target_exe('cpp'),
         'CC': target_exe('gcc'),
         'CXX': target_exe('g++'),

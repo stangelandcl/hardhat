@@ -1,5 +1,11 @@
 import os
+import shutil
 from .base import GnuRecipe
+
+
+class Extra:
+    def __init__(self, name):
+        self.name = name
 
 
 class PostgresRecipe(GnuRecipe):
@@ -26,7 +32,27 @@ class PostgresRecipe(GnuRecipe):
                                                   'bin', 'python3')
         self.compile_args += ['world']
         self.install_args = ['make', 'install-world']
+        self.doc = Extra('postgres-doc')
+        self.doc.url = 'https://www.postgresql.org/files/documentation/pdf/' \
+                       '%s/postgresql-%s-US.pdf' % (self.short_version,
+                                                    self.short_version)
+        self.doc.sha256 = '09d5110f81e7a55399fe49d2c7d5ff88' \
+                          '94836597c039d209026182e216510d9e'
+        self.doc.version = self.version
+        self.extra_downloads.append(self.doc)
 #        self.environment['LIBS'] = '-lrt -lncursesw'  # for libreadline
 
     def need_configure(self):
         return True
+
+    def install(self):
+        super(PostgresRecipe, self).install()
+
+        dir = os.path.join(self.prefix_dir, 'share', 'doc')
+        name = os.path.basename(self.doc.filename)
+        filename = os.path.join(dir, name)
+        self.log_dir('install', self.directory, 'copy doc to %s' % filename)
+        if not os.path.exists(dir):
+            os.makedirs(dir)
+
+        shutil.copy(self.doc.filename, filename)
