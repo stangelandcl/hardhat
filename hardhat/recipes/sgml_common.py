@@ -1,5 +1,6 @@
 import os
 from .base import GnuRecipe
+from ..util import patch
 
 
 class SgmlCommonRecipe(GnuRecipe):
@@ -14,10 +15,24 @@ class SgmlCommonRecipe(GnuRecipe):
                    'SOURCES/sgml-common-$version.tgz'
 
     def patch(self):
+        self.log_dir('patch', self.directory, 'patching paths')
         file = os.path.join(self.directory, 'doc', 'man', 'Makefile.am')
         text = 'man_MANS = install-catalog.8'
         with open(file, 'wt') as f:
             f.write(text)
+
+        src = '/etc/sgml'
+        dst = '%s/etc/sgml' % self.prefix_dir
+
+        files = ['bin/install-catalog.in',
+                 'bin/sgmlwhich',
+                 'doc/refentry/install-catalog.sgml',
+                 'doc/HTML/install-catalog.html',
+                 'config/sgml.conf']
+
+        for file in files:
+            filename = os.path.join(self.directory, file)
+            patch(filename, src, dst)
 
     def configure(self):
         args = self.configure_args
