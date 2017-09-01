@@ -1,5 +1,11 @@
 import os
+import shutil
 from .base import GnuRecipe
+
+
+class Extra:
+    def __init__(self):
+        self.sha256 = None
 
 
 class FreeTdsRecipe(GnuRecipe):
@@ -21,6 +27,14 @@ class FreeTdsRecipe(GnuRecipe):
              '--disable-odbc', '--disable-server', '--disable-pool',
              '--with-openssl', '--with-tdsver=7.3']]
         self.compile_args = ['make', '-j1']
+        self.doc = Extra()
+        self.doc.version = '12.5.1'
+        self.doc.url = 'http://infocenter.sybase.com/help/topic/' \
+                       'com.sybase.help.ocs_$version.dblib/pdf/dblib.pdf'
+        self.doc.name = 'dblib.pdf'
+        self.doc.sha256 = '55216b1e8f2292d3a843b51ac31b9bbe' \
+                          '8c3defd3e1f917546dfca8c692e9082a'
+        self.extra_downloads.append(self.doc)
 
     def install(self):
         super(FreeTdsRecipe, self).install()
@@ -28,6 +42,10 @@ class FreeTdsRecipe(GnuRecipe):
         self.log_dir('install', self.directory, 'install docs')
 
         docdir = os.path.join(self.prefix_dir, 'share', 'doc', self.name)
+        dst = os.path.join(docdir, 'dblib.pdf')
+        shutil.copy2(self.doc.filename, dst)
+
+
         docdir = os.path.join(docdir, 'userguide')
         args = [
             ['wget', '--recursive', '--page-requisites',
