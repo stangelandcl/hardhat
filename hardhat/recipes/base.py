@@ -424,6 +424,15 @@ class Patcher(Object):
     def __init__(self, *args, **kwargs):
         super(Patcher, self).__init__(*args, **kwargs)
 
+    def run_patch_script(self, text):
+        self.log_dir('patch', self.directory, 'running patch script')
+        name = 'patch.sh'
+        filename = os.path.join(self.directory, name)
+        with open(filename, 'wt') as f:
+            f.write(text)
+        args = self.shell_args + [name]
+        self.run_exe(args, self.directory, self.environment)
+
     def apply_patch(self, directory, patch_text):
         patch_file = os.path.join(directory, 'patch1.patch')
         self.log_dir('patch', self.directory, 'writing patch1.patch')
