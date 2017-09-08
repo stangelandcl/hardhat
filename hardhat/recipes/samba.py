@@ -16,11 +16,11 @@ class SambaRecipe(GnuRecipe):
                    'samba-$version.tar.gz'
 
         self.configure_args += [
-            '--sysconfdir=%s/etc' % self.prefix_dir,
-            '--localstatedir=%s/var' % self.prefix_dir,
-            '--with-piddir=%s/run/samba' % self.prefix_dir,
+#            '--sysconfdir=%s/etc' % self.prefix_dir,
+#            '--localstatedir=%s/var' % self.prefix_dir,
+#            '--with-piddir=%s/run/samba' % self.prefix_dir,
             '--with-pammodulesdir=%s/lib/security' % self.prefix_dir,
-            '--enable-fhs',
+#            '--enable-fhs', # adds /sambda subdirectories
             '--without-ad-dc',
             '--without-systemd',
 # otherwise figure out how to make waf use -lpanelw
