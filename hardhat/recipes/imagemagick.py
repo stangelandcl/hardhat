@@ -11,16 +11,22 @@ class ImageMagickRecipe(GnuRecipe):
         self.version_regex = r'ImageMagick\-(?P<version>\d+\.\d+\.\d+\-\d+)' \
             + extension_regex
         self.version_url = 'https://www.imagemagick.org/download/'
+
+    def clean(self):
+        # Version check here so we only query server on trying to install
+        # not on every hardhat run
+        #
         # imagemagick only maintains one copy of their releases and
         # they change frequently. so just use whatever is there
         # TODO: set a mininmum version just in case
-        self.version = self.get_version()[0]
+        self.version = self.get_version_always()[0]
         if not self.version:
-            self.version = '7.0.5-5'
-        if self.version and self.version_compare('7.0.5-5') > 0:
+            self.version = '7.0.7-0'
+        if self.version and self.version_compare('7.0.7-0') > 0:
             raise Exception("imagemagick version is lower than its old version")
         self.url = 'ftp://ftp.imagemagick.org/pub/ImageMagick/releases/' \
                    'ImageMagick-$version.tar.xz'
+        super(ImageMagickRecipe, self).clean()
 
     def version_compare(self, new_version):
         regex = r'\d+'
