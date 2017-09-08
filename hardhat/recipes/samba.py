@@ -23,6 +23,8 @@ class SambaRecipe(GnuRecipe):
             '--enable-fhs',
             '--without-ad-dc',
             '--without-systemd',
+# otherwise figure out how to make waf use -lpanelw
+            '--without-regedit',
             '--enable-selftest']
         self.configure_strip_cross_compile()
 
