@@ -52,7 +52,6 @@ collection-genericextra 1
 collection-genericrecommended 1
 collection-htmlxml 1
 collection-humanities 1
-collection-langafrican 1
 collection-langarabic 1
 collection-langchinese 1
 collection-langcjk 1
@@ -85,7 +84,6 @@ collection-pstricks 1
 collection-publishers 1
 collection-texworks 1
 collection-xetex 1
-in_place 0
 option_adjustrepo 1
 option_autobackup 1
 option_backupdir tlpkg/backups
@@ -94,7 +92,6 @@ option_doc 0
 option_file_assocs 1
 option_fmt 1
 option_letter 1
-option_menu_integration 1
 option_path 1
 option_post_code 1
 option_src 0
