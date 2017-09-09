@@ -10,7 +10,8 @@ class MeldRecipe(SetupPyRecipe):
         self.pythons = ['python3']
         self.python = 'python3'
         self.name = 'meld'
-        self.depends = ['dconf', 'glib', 'gtk3', 'gtksourceview']
+        self.depends = ['dconf', 'glib', 'gtk3', 'gtksourceview',
+                        'itstool']
         self.pydepends = ['pycairo', 'pygobject']
         self.version = '3.17.1'
         short_version = '.'.join(self.version.split('.')[:2])
