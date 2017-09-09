@@ -15,11 +15,14 @@ class GlobalRecipe(GnuRecipe):
         self.depends = ['ncurses', 'texinfo']
         self.url = Urls.gnu_template(self.name, self.version)
 #        self.environment['LIBS'] = ' -ltinfow -lncursesw'
-        self.configure_args += ['--with-curses=yes']
+        self.configure_args += ['--with-curses=%s' % self.prefix_dir]
 
     def patch(self):
         self.log_dir('patch', self.directory, 'fix curses')
         filename = os.path.join(self.directory, 'configure')
+        src = '-lncurses'
+        dst = '-ltinfow -lncursesw'
+        patch(filename, src, dst)
         src = '-lcurses'
         dst = '-ltinfow -lncursesw'
         patch(filename, src, dst)
