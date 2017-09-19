@@ -7,11 +7,10 @@ from .base import GnuRecipe
 class GoProVRRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(GoProVRRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '5971ea8b00df56979d30a19aaacf4b7e' \
-                      '805c75ca0b59a637fe58efd9940a6f72'
-
+        self.sha256 = '8d5aa41ccfb4a6368f5816c958d0a59b' \
+                      '2421394de440ffda620fafedb38886ff'
         self.name = 'goprovr'
-        self.version = '220_2017-02-13'
+        self.version = '231_2017-05-19'
         self.url = 'http://download.kolor.com/ked/stable/linux64tarxz'
 
     def configure(self):
