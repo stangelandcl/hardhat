@@ -11,7 +11,7 @@ class SambaRecipe(GnuRecipe):
         self.name = 'samba'
         self.version = '4.6.7'
         self.depends = ['acl', 'autotools', 'libtirpc', 'libxslt', 'openssl',
-                        'python2']
+                        'python2', 'talloc']
         self.url = 'https://www.samba.org/ftp/samba/stable/' \
                    'samba-$version.tar.gz'
 
