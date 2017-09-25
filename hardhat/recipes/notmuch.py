@@ -11,6 +11,6 @@ class NotMuchRecipe(GnuRecipe):
         self.version = '0.25'
         self.version_regex = r'(?P<version>\d+\.\d+\.\d+)'
         self.version_url = 'https://notmuchmail.org/releases'
-        self.depends = ['autotools', 'gmime', 'xapian']
+        self.depends = ['autotools', 'gmime', 'talloc', 'xapian']
         self.url = 'https://notmuchmail.org/releases/notmuch-$version.tar.gz'
         self.configure_args += ['--without-ruby']
