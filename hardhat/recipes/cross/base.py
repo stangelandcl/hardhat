@@ -7,16 +7,16 @@ from hardhat.environment import toolchain_env
 def make_cross_prefix_dir(prefix_dir):
     return os.path.join(prefix_dir, 'cross')
 
-mpfr_version = '3.1.5'
-mpfr_sha256 = 'ca498c1c7a74dd37a576f353312d1e68' \
-              'd490978de4395fa28f1cbd46a364e658'
+
+mpfr_version = '3.1.6'
+mpfr_sha256 = 'cf4f4b2d80abb79e820e78c8077b6725' \
+              'bbbb4e8f41896783c899087be0e94068'
 gmp_version = '6.1.2'
 gmp_sha256 = '5275bb04f4863a13516b2f39392ac5e2' \
             '72f5e1bb8057b18aec1c9b79d73d8fb2'
 mpc_version = '1.0.3'
 mpc_sha256 = '617decc6ea09889fb08ede330917a00b' \
              '16809b8db88c29c31bfbb49cbf88ecc3'
-
 isl_version = '0.16.1'
 isl_sha256 = '412538bb65c799ac98e17e8cfcdacbb2' \
              '57a57362acfaaff254b0fcae970126d2'
