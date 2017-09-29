@@ -12,7 +12,7 @@ class EmacsRecipe(GnuRecipe):
         super(EmacsRecipe, self).__init__(*args, **kwargs)
         self.sha256 = '59b55194c9979987c5e9f1a1a4ab5406' \
                       '714e80ffcfd415cc6b9222413bc073fa'
-                
+
         self.name = 'emacs'
         self.version = '25.2'
         self.url = 'http://mirrors.kernel.org/gnu/emacs/emacs-$version.tar.xz'
@@ -27,7 +27,9 @@ class EmacsRecipe(GnuRecipe):
 #                        'gtk3',
                         'imagemagick',
                         'libjpeg-turbo', 'libpng',
-                        'libtiff', 'libxml2', 'ncurses', 'zlib']
+                        'libtiff', 'libxml2',
+                        'motif', # for X11
+                        'ncurses', 'zlib']
 
         env = self.environment
         env['OPT'] = \

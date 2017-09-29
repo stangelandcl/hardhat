@@ -16,7 +16,8 @@ class FreeTdsRecipe(GnuRecipe):
 
         self.name = 'freetds'
         self.version = 'a0a3b99a7f3fb748f9ec5924d2913e6e856f659b'
-        self.depends = ['autotools', 'docbook-dsssl', 'git', 'openssl']
+        self.depends = ['autotools', 'docbook-dsssl', 'gettext',
+                        'git', 'openssl']
         self.url = self.github_commit('FreeTDS')
         self.configure_args = [
             ['git', 'init'],

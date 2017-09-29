@@ -20,8 +20,9 @@ class GitRecipe(GnuRecipe):
                         'openssl',
                         'pcre',
                         'perl',
-                        'python2',
-                        'tk']
+                        #'python2',
+                        #'tk'
+                        ]
         gitconfig = os.path.join(self.prefix_dir, 'etc', 'gitconfig')
         self.configure_args += [
             '--with-gitconfig=%s' % gitconfig,
