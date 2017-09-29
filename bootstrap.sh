@@ -110,38 +110,44 @@ if [ ! -e $DIR/importlib ]; then
     mv $IMPORTLIB importlib
 fi
 
-rm -rf $DIR/bootstrap
+if [ ! $DIR/bootstrap/bin/hardhat ]; then
+    rm -rf $DIR/bootstrap
 
-if [ ! -x "$(which $PYTHON)" ]; then   
-    if [ -x "$(which python3)" ]; then
-        PYTHON="$(which python3)"       
-    elif [ -x "$(which python2)" ]; then
-        PYTHON="$(which python2)"
-    elif [ -x "$(which python)" ]; then
-        PYTHON="$(which python)"
-    else
-        echo "$PYTHON, python, python2 or python3 is required"
-        exit 1
+    if [ ! -x "$(which $PYTHON)" ]; then   
+	if [ -x "$(which python3)" ]; then
+            PYTHON="$(which python3)"       
+	elif [ -x "$(which python2)" ]; then
+            PYTHON="$(which python2)"
+	elif [ -x "$(which python)" ]; then
+            PYTHON="$(which python)"
+	else
+            echo "$PYTHON, python, python2 or python3 is required"
+            exit 1
+	fi
+    fi                         
+
+    if [ ! -e $DIR/bootstrap ]; then
+	mkdir -p $DIR/bootstrap/lib/python
+	cd setuptools && "$PYTHON" setup.py install --home=$DIR/bootstrap
+	cd ..
+	cd argparse && "$PYTHON" setup.py install --home=$DIR/bootstrap
+	cd ..
+	cd importlib && "$PYTHON" setup.py install --home=$DIR/bootstrap
+	cd ..
     fi
-fi                         
 
-if [ ! -e $DIR/bootstrap ]; then
-    mkdir -p $DIR/bootstrap/lib/python
-    cd setuptools && "$PYTHON" setup.py install --home=$DIR/bootstrap
-    cd ..
-    cd argparse && "$PYTHON" setup.py install --home=$DIR/bootstrap
-    cd ..
-    cd importlib && "$PYTHON" setup.py install --home=$DIR/bootstrap
-    cd ..
-fi
-
-if [ ! -e $DIR/bootstrap/bin/hardhat ]; then
-    "$PYTHON" setup.py install --home=$DIR/bootstrap
+    if [ ! -e $DIR/bootstrap/bin/hardhat ]; then
+	"$PYTHON" setup.py install --home=$DIR/bootstrap
+    fi
 fi
 
 OLDPATH=$PATH
 export PATH=$DIR/bootstrap/bin:$PATH
 if [ ! -e $PREFIX/bin/python3 ]; then
+    if [ -e $PREFIX/init.sh ]; then
+	# for HARDHAT_TARGET so we use the same compiler
+	. $PREFIX/init.sh
+    fi
     hardhat --march=$MARCH --cpus=$CPUS --prefix=$PREFIX --downloads=$DOWNLOAD_DIR install python3-beautifulsoup
 fi
 export PATH=$PREFIX/bin:$OLDPATH
