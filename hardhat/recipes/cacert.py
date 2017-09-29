@@ -10,8 +10,8 @@ class CACertRecipe(Downloader, Recipe):
         self.name = 'cacert'
         self.version = '1.0'
         self.depends = ['openssl']
-        self.sha256 = 'e62a07e61e5870effa81b430e1900778' \
-                      '943c228bd7da1259dd6a955ee2262b47'
+#        self.sha256 = 'e62a07e61e5870effa81b430e1900778' \
+#                      '943c228bd7da1259dd6a955ee2262b47'
         self.url = 'http://curl.haxx.se/ca/cacert.pem'
         self.directory = os.path.dirname(self.filename)
         self.verify_ssl_certificate = False
