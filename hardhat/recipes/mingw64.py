@@ -52,6 +52,13 @@ class Mingw64Recipe(GnuRecipe):
         self.gcc.sha256 = '8a8136c235f64c6fef69cac0d73a46a1' \
                           'a09bb250776a050aec8f9fc880bebc17'
         self.extra_downloads += [self.binutils, self.gcc]
+        self.headers_build_dir = os.path.join(self.directory, 'build')
+        self.headers_configure_args = self.shell_args + [
+            '../configure',
+            '--prefix=%s' % self.mingw64_dir,
+            '--host=%s' % self.target64,
+            '--build=%s' % self.build_triplet
+            ]
 
     def download(self):
         super(Mingw64Recipe, self).download()
@@ -93,3 +100,19 @@ class Mingw64Recipe(GnuRecipe):
         self.run_exe(['make', 'install'],
                      self.binutils_build_dir,
                      self.environment)
+
+        self.log_dir('configure', self.headers_build_dir, 'configure headers')
+        self.run_exe(self.headers_configure_args,
+                     self.headers_build_dir,
+                     self.environment)
+
+        self.log_dir('configure', self.headers_build_dir, 'install headers')
+        self.run_exe(['make', 'install'],
+                     self.headers_build_dir,
+                     self.environment)
+
+    def compile(self):
+        pass
+
+    def install(self):
+        pass
