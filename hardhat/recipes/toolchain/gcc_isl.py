@@ -1,3 +1,4 @@
+from string import Template
 from .gcc_prereq import GccPrereqRecipe
 from ..cross.base import isl_sha256, isl_version
 
@@ -9,3 +10,9 @@ class GccIslRecipe(GccPrereqRecipe):
         self.gcc_directory = None
         self.name = 'isl'
         self.version = isl_version
+
+    @property
+    def url(self):
+        return Template('ftp://gcc.gnu.org/pub/gcc/infrastructure/'
+                        '$name-$version.%s' % (self.extension)).substitute(
+                            name='isl', version=self.version)

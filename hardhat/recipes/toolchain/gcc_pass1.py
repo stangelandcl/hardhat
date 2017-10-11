@@ -11,12 +11,48 @@ from hardhat.recipes.cross.base import CrossGnuRecipe
 from string import Template
 import hardhat
 import stat
+from ..base import GnuRecipe
 
 
 HEADERS = set(['linux64.h', 'linux.h', 'sysv4.h'])
 
 
-class GccRecipe(CrossGnuRecipe):
+class GccPrereqRecipesMixin:
+    def __init__(self, *args, **kwargs):
+        super(GccPrereqRecipesMixin, self).__init__()
+        prefix = kwargs.get('prefix', '')
+        gcc_directory = kwargs.get('gcc_directory', self.extract_dir)
+        self.gmp = GccGmpRecipe(settings=self)
+        self.mpc = GccMpcRecipe(settings=self)
+        self.mpfr = GccMpfrRecipe(settings=self)
+        self.isl = GccIslRecipe(settings=self)
+        self.prerequisites = [
+            self.gmp, self.mpc, self.mpfr, self.isl
+            ]
+
+        for p in self.prerequisites:
+            p.name = prefix + p.name
+            p.gcc_directory = gcc_directory
+            p.environment = self.environment
+            p.reinstall = True
+
+    def clean(self):
+        for p in self.prerequisites:
+            p.reinstall = True
+            p.clean()
+
+    def patch(self):
+        self.log_dir('patch', self.directory, 'downloading prerequisites')
+        self._download_prequisites()
+
+    def _download_prequisites(self):
+        for prereq in self.prerequisites:
+            self.log_dir('prerequisite', self.directory,
+                         'running %s' % prereq.name)
+            prereq.run()
+
+
+class GccRecipe(CrossGnuRecipe, GccPrereqRecipesMixin):
     def __init__(self, *args, **kwargs):
         super(GccRecipe, self).__init__(*args, **kwargs)
         self.sha256 = self.gcc_sha256
@@ -42,17 +78,7 @@ class GccRecipe(CrossGnuRecipe):
                              'install',
                              'MAKEINFO=true'
                              ]
-
-        self.prerequisites = [
-            GccGmpRecipe(settings=self),
-            GccMpcRecipe(settings=self),
-            GccMpfrRecipe(settings=self),
-            GccIslRecipe(settings=self)
-            ]
-
-        for p in self.prerequisites:
-            p.gcc_directory = self.extract_dir
-            p.environment = self.environment
+        GccPrereqRecipesMixin.__init__(self, *args, **kwargs)
 
     def need_configure(self):
         return True
@@ -62,9 +88,7 @@ class GccRecipe(CrossGnuRecipe):
             shutil.rmtree(self.extract_dir)
         if os.path.exists(self.directory):
             shutil.rmtree(self.directory)
-        for p in self.prerequisites:
-            p.reinstall = True
-            p.clean()
+        super(GccPrereqRecipesMixin, self).clean()
 
     def compile(self):
 #        dir = self.directory
@@ -150,12 +174,6 @@ class GccRecipe(CrossGnuRecipe):
             ]
         check_directory(self.directory)
 
-    def _download_prequisites(self):
-        for prereq in self.prerequisites:
-            self.log_dir('prerequisite', self.directory,
-                         'running %s' % prereq.name)
-            prereq.run()
-
     def _patch_lib64(self):
         self.log_dir('patch', self.directory, 'lib to lib64')
         filename = os.path.join(self.extract_dir,
@@ -185,12 +203,12 @@ class GccRecipe(CrossGnuRecipe):
         lib64 = os.path.join(self.prefix_dir, self.target_triplet, 'lib64')
         if not os.path.exists(lib64):
             os.symlink(lib, lib64)
-        self.log_dir('patch', self.directory, 'downloading prerequisites')
-        self._download_prequisites()
 #        cmd = self.shell_args + [
 #               'contrib/download_prerequisites'
 #               ]
 #        self.run_exe(cmd, self.extract_dir, self.environment)
+
+        super(GccPrereqRecipesMixin, self).patch()
 
         dir = os.path.join(self.extract_dir, 'gcc', 'config')
         headers = set(self._find_headers(dir))

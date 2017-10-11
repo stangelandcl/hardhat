@@ -1,5 +1,6 @@
 import os
 from .base import GnuRecipe
+from .toolchain.gcc_pass1 import GccPrereqRecipesMixin
 
 
 class Extra:
@@ -8,7 +9,7 @@ class Extra:
         self.sha256 = None
 
 
-class Mingw64Recipe(GnuRecipe):
+class Mingw64Recipe(GnuRecipe, GccPrereqRecipesMixin):
     def __init__(self, *args, **kwargs):
         super(Mingw64Recipe, self).__init__(*args, **kwargs)
         self.sha256 = '5f46e80ff1a9102a37a3453743dae9df' \
@@ -51,14 +52,26 @@ class Mingw64Recipe(GnuRecipe):
         self.gcc.version = '7.1.0'
         self.gcc.sha256 = '8a8136c235f64c6fef69cac0d73a46a1' \
                           'a09bb250776a050aec8f9fc880bebc17'
+        self.gcc_configure_args = self.shell_args + [
+            '../configure',
+            '--target=%s' % self.target64,
+            '--prefix=%s' % self.mingw64_dir,
+            '--with-sysroot=%s' % self.mingw64_dir,
+            '--enable-targets=all',
+            ]
+
         self.extra_downloads += [self.binutils, self.gcc]
         self.headers_build_dir = os.path.join(self.directory, 'build-headers')
-        self.headers_configure_args = self.shell_args + [
-            '../mingw-w64-headers/configure',
-            '--prefix=%s' % self.mingw64_dir,
+        GccPrereqRecipesMixin.__init__(self, *args,
+                                       prefix='mingw64-')
+
+        self.crt_build_dir = os.path.join(self.directory, 'crt-build')
+        self.crt_configure_args = self.shell_args + [
+            '../mingw-w64-crt/configure',
             '--host=%s' % self.target64,
-            '--build=%s' % self.build_triplet
-            ]
+            '--enable-lib32',
+            '--with-sysroot=%s' % self.mingw64_dir,
+            '--prefix=%s' % self.mingw64_dir]
 
     def download(self):
         super(Mingw64Recipe, self).download()
@@ -82,8 +95,15 @@ class Mingw64Recipe(GnuRecipe):
         self.log_dir('extract', self.directory, 'gcc')
         self.extract_into(self.gcc.filename, self.directory)
         os.makedirs(self.gcc_build_dir)
-
-        os.makedirs(self.headers_build_dir)
+        gcc_dir = os.path.join(self.directory,
+                               'gcc-%s' % self.gcc.version)
+        for p in self.prerequisites:
+            p.gcc_directory = gcc_dir
+        GccPrereqRecipesMixin.patch(self)
+        os.rename(self.gmp.directory, os.path.join(gcc_dir, 'gmp'))
+        os.rename(self.mpc.directory, os.path.join(gcc_dir, 'mpc'))
+        os.rename(self.mpfr.directory, os.path.join(gcc_dir, 'mpfr'))
+        os.rename(self.isl.directory, os.path.join(gcc_dir, 'isl'))
 
     def configure(self):
         self.log_dir('configure',
@@ -103,6 +123,15 @@ class Mingw64Recipe(GnuRecipe):
                      self.binutils_build_dir,
                      self.environment)
 
+        self.environment['PATH'] += ':%s/bin' % self.mingw64_dir
+
+        os.makedirs(self.headers_build_dir)
+        self.headers_configure_args = self.shell_args + [
+            '../mingw-w64-headers/configure',
+            '--prefix=%s' % self.mingw64_dir,
+            '--host=%s' % self.target64,
+            '--build=%s' % self.build_triplet
+            ]
         self.log_dir('configure', self.headers_build_dir, 'configure headers')
         self.run_exe(self.headers_configure_args,
                      self.headers_build_dir,
@@ -112,6 +141,53 @@ class Mingw64Recipe(GnuRecipe):
         self.run_exe(['make', 'install'],
                      self.headers_build_dir,
                      self.environment)
+
+        self.log_dir('configure', self.mingw64_dir, 'symlink directories')
+        dst = os.path.join(self.mingw64_dir, 'mingw')
+        if os.path.exists(dst):
+            os.remove(dst)
+        os.symlink('%s/%s' % (self.mingw64_dir, self.target64),
+                   dst,
+                   target_is_directory=True)
+        dst = '%s/%s/lib' % (self.mingw64_dir, self.target64)
+        if not os.path.exists(dst):
+            os.makedirs(dst)
+        dst = os.path.join(self.mingw64_dir, self.target64, 'lib64')
+        if os.path.exists(dst):
+            os.remove(dst)
+        os.symlink('%s/%s/lib' % (self.mingw64_dir, self.target64),
+                   dst,
+                   target_is_directory=True)
+
+        self.log_dir('configure',
+                     self.gcc_build_dir,
+                     'configure gcc')
+        self.run_exe(self.gcc_configure_args,
+                     self.gcc_build_dir,
+                     self.environment)
+
+        self.log_dir('configure', self.gcc_build_dir, 'make gcc')
+        self.run_exe(['make', 'all-gcc', '-j%s' % self.cpu_count],
+                     self.gcc_build_dir,
+                     self.environment)
+
+        self.log_dir('configure', self.gcc_build_dir, 'install gcc')
+        self.run_exe(['make', 'install-gcc'],
+                     self.gcc_build_dir,
+                     self.environment)
+
+        os.makedirs(self.crt_build_dir)
+        self.log_dir('configure', self.crt_build_dir, 'configure crt')
+        self.run_exe(self.crt_configure_args,
+                     self.crt_build_dir, self.environment)
+
+        self.log_dir('configure', self.gcc_build_dir, 'make crt')
+        self.run_exe(['make', '-j%s' % self.cpu_count],
+                     self.crt_build_dir, self.environment)
+
+        self.log_dir('configure', self.gcc_build_dir, 'install crt')
+        self.run_exe(['make', 'install'],
+                     self.crt_build_dir, self.environment)
 
     def compile(self):
         pass
