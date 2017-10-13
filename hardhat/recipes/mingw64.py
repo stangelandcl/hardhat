@@ -1,4 +1,5 @@
 import os
+import shutil
 from .base import GnuRecipe
 from .toolchain.gcc_pass1 import GccPrereqRecipesMixin
 
@@ -61,6 +62,13 @@ class Mingw64Recipe(GnuRecipe, GccPrereqRecipesMixin):
             ]
 
         self.extra_downloads += [self.binutils, self.gcc]
+
+        self.headers_configure_args = self.shell_args + [
+            '../mingw-w64-headers/configure',
+            '--prefix=%s/%s' % (self.mingw64_dir, self.target64),
+            '--host=%s' % self.target64,
+            '--build=%s' % self.build_triplet
+            ]
         self.headers_build_dir = os.path.join(self.directory, 'build-headers')
         GccPrereqRecipesMixin.__init__(self, *args,
                                        prefix='mingw64-')
@@ -69,9 +77,19 @@ class Mingw64Recipe(GnuRecipe, GccPrereqRecipesMixin):
         self.crt_configure_args = self.shell_args + [
             '../mingw-w64-crt/configure',
             '--host=%s' % self.target64,
-            '--enable-lib32',
-            '--with-sysroot=%s' % self.mingw64_dir,
-            '--prefix=%s' % self.mingw64_dir]
+            '--build=%s' % self.build_triplet,
+#            '--enable-lib32',
+            '--with-sysroot=%s/%s' % (self.mingw64_dir, self.target64),
+            '--prefix=%s/%s' % (self.mingw64_dir, self.target64)]
+
+    def clean(self):
+        super(Mingw64Recipe, self).clean()
+
+        if os.path.exists(self.mingw64_dir):
+            self.log_dir('clean',
+                         self.directory,
+                         'removing %s' % self.mingw64_dir)
+            shutil.rmtree(self.mingw64_dir)
 
     def download(self):
         super(Mingw64Recipe, self).download()
@@ -126,12 +144,6 @@ class Mingw64Recipe(GnuRecipe, GccPrereqRecipesMixin):
         self.environment['PATH'] += ':%s/bin' % self.mingw64_dir
 
         os.makedirs(self.headers_build_dir)
-        self.headers_configure_args = self.shell_args + [
-            '../mingw-w64-headers/configure',
-            '--prefix=%s' % self.mingw64_dir,
-            '--host=%s' % self.target64,
-            '--build=%s' % self.build_triplet
-            ]
         self.log_dir('configure', self.headers_build_dir, 'configure headers')
         self.run_exe(self.headers_configure_args,
                      self.headers_build_dir,
