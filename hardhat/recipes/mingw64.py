@@ -42,6 +42,8 @@ class Mingw64Recipe(GnuRecipe, GccPrereqRecipesMixin):
                                '3501753142ab9e2daa13c5a3edd32a72'
         self.binutils_configure_args = self.shell_args + [
             '../configure',
+#            '--host=%s' % self.target64,
+            '--target=%s' % self.target64,
             '--prefix=%s' % self.mingw64_dir,
             '--with-sysroot=%s' % self.mingw64_dir,
             '--enable-targets=%s,%s' % (self.target32, self.target64),
@@ -67,7 +69,7 @@ class Mingw64Recipe(GnuRecipe, GccPrereqRecipesMixin):
             '../mingw-w64-headers/configure',
             '--prefix=%s/%s' % (self.mingw64_dir, self.target64),
             '--host=%s' % self.target64,
-            '--build=%s' % self.build_triplet
+            '--build=%s' % self.target64
             ]
         self.headers_build_dir = os.path.join(self.directory, 'build-headers')
         GccPrereqRecipesMixin.__init__(self, *args,
@@ -77,9 +79,10 @@ class Mingw64Recipe(GnuRecipe, GccPrereqRecipesMixin):
         self.crt_configure_args = self.shell_args + [
             '../mingw-w64-crt/configure',
             '--host=%s' % self.target64,
-            '--build=%s' % self.build_triplet,
+            '--build=%s' % self.target64,
+            '--target=%s' % self.target64,
 #            '--enable-lib32',
-            '--with-sysroot=%s/%s' % (self.mingw64_dir, self.target64),
+            '--with-sysroot=%s' % self.mingw64_dir,
             '--prefix=%s/%s' % (self.mingw64_dir, self.target64)]
 
     def clean(self):
@@ -141,7 +144,8 @@ class Mingw64Recipe(GnuRecipe, GccPrereqRecipesMixin):
                      self.binutils_build_dir,
                      self.environment)
 
-        self.environment['PATH'] += ':%s/bin' % self.mingw64_dir
+        self.environment['PATH'] = '%s/bin:%s' % (self.mingw64_dir,
+                                                  self.environment['PATH'])
 
         os.makedirs(self.headers_build_dir)
         self.log_dir('configure', self.headers_build_dir, 'configure headers')
@@ -187,6 +191,19 @@ class Mingw64Recipe(GnuRecipe, GccPrereqRecipesMixin):
         self.run_exe(['make', 'install-gcc'],
                      self.gcc_build_dir,
                      self.environment)
+
+        self.environment['AR'] = self.target64 + '-ar'
+        self.environment['CC'] = self.target64 + '-gcc'
+        self.environment['CPP'] = self.target64 + '-cpp'
+        self.environment['CXX'] = self.target64 + '-g++'
+        self.environment['AS'] = self.target64 + '-as'
+        self.environment['LD'] = self.target64 + '-ld'
+        del self.environment['CCACHE_DIR']
+        del self.environment['LDFLAGS']
+        del self.environment['CFLAGS']
+        del self.environment['CPPFLAGS']
+        del self.environment['CXXFLAGS']
+        del self.environment['LIBS']
 
         os.makedirs(self.crt_build_dir)
         self.log_dir('configure', self.crt_build_dir, 'configure crt')
