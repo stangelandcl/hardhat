@@ -218,6 +218,16 @@ class Mingw64Recipe(GnuRecipe, GccPrereqRecipesMixin):
         self.run_exe(['make', 'install'],
                      self.crt_build_dir, self.environment)
 
+        self.log_dir('configure', self.gcc_build_dir, 'make gcc')
+        self.run_exe(['make', '-j%s' % self.cpu_count],
+                     self.gcc_build_dir,
+                     self.environment)
+
+        self.log_dir('configure', self.gcc_build_dir, 'install gcc')
+        self.run_exe(['make', 'install'],
+                     self.gcc_build_dir,
+                     self.environment)
+
     def compile(self):
         pass
 
