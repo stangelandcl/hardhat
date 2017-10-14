@@ -27,6 +27,7 @@ stat:
 	@echo "python    = $$(($$(find hardhat/recipes/python -name '*.py' | wc -l) - 2))"
 	@echo "toolchain = 3"
 	@echo "x11       = $$(($$(find hardhat/recipes/x11 -name '*.py' | wc -l) - 2))"
+	@echo ""
 	@echo "----------------"
 	@echo "total     = $$(($$(find hardhat/recipes -name '*.py' -o -path toolchain -prune -o -path cross -prune | wc -l) - 12))"
 
