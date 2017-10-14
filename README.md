@@ -48,6 +48,7 @@ other     = 463
 perl      = 4  
 python    = 177  
 toolchain = 3  
-x11       = 54  
+x11       = 54
+
 ----------------  
 total     = 742  
