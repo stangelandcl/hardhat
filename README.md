@@ -41,14 +41,13 @@ Thanks to Linux from Scratch and Beyond Linux from Scratch for most
 of the information and for the patches applied using patch.
 
 Estimated package counts as of 2017-10-14
-doc       = 3
-java      = 5
-ocaml     = 9
-other     = 463
-perl      = 4
-python    = 177
-toolchain = 3
-x11       = 54
-
-----------------
-total     = 742
+doc       = 3  
+java      = 5  
+ocaml     = 9  
+other     = 463  
+perl      = 4  
+python    = 177  
+toolchain = 3  
+x11       = 54  
+----------------  
+total     = 742  
