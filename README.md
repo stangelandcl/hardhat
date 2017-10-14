@@ -40,7 +40,7 @@ to see what is available
 Thanks to Linux from Scratch and Beyond Linux from Scratch for most
 of the information and for the patches applied using patch.
 
-Estimated package counts as of 2017-10-14
+Estimated package counts as of 2017-10-14  
 doc       = 3  
 java      = 5  
 ocaml     = 9  
