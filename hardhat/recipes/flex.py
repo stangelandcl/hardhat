@@ -1,18 +1,18 @@
 import os
 from .base import GnuRecipe
-from ..urls import Urls, GithubUrl
 
 
 class FlexRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(FlexRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '68b2742233e747c462f781462a2a1e29' \
-                      '9dc6207401dac8f0bbb316f48565c2aa'
+        self.sha256 = 'e87aae032bf07c26f85ac0ed3250998c' \
+                      '37621d95f8bd748b31f15b33c45ee995'
 
         self.name = 'flex'
-        self.version = '2.6.3'
+        self.version = '2.6.4'
         self.version_url = 'https://github.com/westes/flex/releases'
-        self.url = 'https://github.com/westes/flex/releases/download/v$version/flex-$version.tar.gz'
+        self.url = 'https://github.com/westes/flex/releases/download/' \
+            'v$version/flex-$version.tar.gz'
         self.depends = ['autotools', 'bison']
 
         # doxygen fails to compile to compile with flex 2.6.0

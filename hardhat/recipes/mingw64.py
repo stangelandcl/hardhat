@@ -79,7 +79,17 @@ class Mingw64Recipe(GnuRecipe, GccPrereqRecipesMixin):
         self.crt_configure_args = self.shell_args + [
             '../mingw-w64-crt/configure',
             '--host=%s' % self.target64,
-            '--build=%s' % self.target64,
+            '--build=%s' % self.target_triplet,
+            '--target=%s' % self.target64,
+#            '--enable-lib32',
+            '--with-sysroot=%s' % self.mingw64_dir,
+            '--prefix=%s/%s' % (self.mingw64_dir, self.target64)]
+
+        self.pthread_build_dir = os.path.join(self.directory, 'pthread-build')
+        self.pthread_configure_args = self.shell_args + [
+            '../mingw-w64-libraries/winpthreads/configure',
+            '--host=%s' % self.target64,
+            '--build=%s' % self.target_triplet,
             '--target=%s' % self.target64,
 #            '--enable-lib32',
             '--with-sysroot=%s' % self.mingw64_dir,
@@ -226,6 +236,21 @@ class Mingw64Recipe(GnuRecipe, GccPrereqRecipesMixin):
         self.log_dir('configure', self.gcc_build_dir, 'install gcc')
         self.run_exe(['make', 'install'],
                      self.gcc_build_dir,
+                     self.environment)
+
+        os.makedirs(self.pthread_build_dir)
+        self.log_dir('configure', self.pthread_build_dir, 'configure pthread')
+        self.run_exe(self.pthread_configure_args,
+                     self.pthread_build_dir, self.environment)
+
+        self.log_dir('configure', self.pthread_build_dir, 'make pthread')
+        self.run_exe(['make', '-j%s' % self.cpu_count],
+                     self.pthread_build_dir,
+                     self.environment)
+
+        self.log_dir('configure', self.pthread_build_dir, 'install pthread')
+        self.run_exe(['make', 'install'],
+                     self.pthread_build_dir,
                      self.environment)
 
     def compile(self):
