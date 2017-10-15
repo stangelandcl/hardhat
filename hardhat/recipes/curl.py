@@ -5,11 +5,11 @@ from .cacert import CACertRecipe
 class CurlRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(CurlRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = 'f50ebaf43c507fa7cc32be4b8108fa8b' \
-                      'bd0f5022e90794388f3c7694a302ff06'
+        self.sha256 = 'de60a4725a3d461c70aa571d7d69c788' \
+                      'f1816d9d1a8a2ef05f864ce8f01279df'
 
         self.name = 'curl'
-        self.version = '7.54.0'
+        self.version = '7.56.0'
         if self.mingw64:
             self.depends = ['zlib']
         else:
@@ -22,7 +22,8 @@ class CurlRecipe(GnuRecipe):
             ]
         if self.mingw64:
             self.configure_args += ['--with-winssl']
-            self.environment['CFLAGS'] += ' -DWIN32_LEAN_AND_MEAN'
+# no longer needed
+#            self.environment['CFLAGS'] += ' -DWIN32_LEAN_AND_MEAN'
         else:
             self.configure_args += [
                 '--with-ca-bundle=%s' % CACertRecipe.bundle_path(
