@@ -280,7 +280,8 @@ class Recipe(RecipeSettings, Logger, ExeRunner, ShortVersionMixin):
             self.sha256 = None
         self.environment = runtime_env(self.prefix_dir,
                                        self.target_triplet,
-                                       self.tarball_dir)
+                                       self.tarball_dir,
+                                       self.mingw64)
         self.environment_strip_lto()
         self.directory_template = '$prefix/build/$name-$version'
         self.sudo = False
@@ -374,11 +375,12 @@ class Recipe(RecipeSettings, Logger, ExeRunner, ShortVersionMixin):
         pass
 
     def ldconfig(self):
-        # run ldconfig to rebuild ld cache
-        args = ['ldconfig']
-        dir = os.path.join(self.prefix_dir, self.target_triplet, 'etc')
-        self.log_dir('post-install', dir, 'ldconfig')
-        self.run_exe(args, dir, self.environment)
+        if not self.mingw64:
+            # run ldconfig to rebuild ld cache
+            args = ['ldconfig']
+            dir = os.path.join(self.prefix_dir, self.target_triplet, 'etc')
+            self.log_dir('post-install', dir, 'ldconfig')
+            self.run_exe(args, dir, self.environment)
 
     def update_mime_database(self):
         args = ['%s/bin/update-mime-database' % self.prefix_dir,

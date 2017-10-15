@@ -10,5 +10,6 @@ class ZlibRecipe(GnuRecipe):
         self.name = 'zlib'
         self.version = '1.2.11'
         self.url = 'http://zlib.net/zlib-$version.tar.gz'
+        self.environment['LDSHAREDLIBC'] = ''
         self.configure_args = ['./configure',
                                '--prefix=%s' % (self.prefix_dir)]

@@ -17,11 +17,17 @@ class ICURecipe(GnuRecipe):
             'icu4c-%s-src.tgz' % (underscore_version)
 
         # ICU requires a working host ICU to cross-compile
-        self.configure_strip_cross_compile()
+        if self.mingw64:
+            self.configure_args += ['--with-cross-build=%s/build/%s/source' %
+                                    (os.environ['HARDHAT_PREFIX'],
+                                     os.path.basename(self.directory))]
+        else:
+            self.configure_strip_cross_compile()
         self.environment_strip_lto()
         self.environment['CXXFLAGS'] += ' -fvisibility=default'
         self.environment['CFLAGS'] += ' -fvisibility=default'
         self.environment['LDFLAGS'] += ' -fvisibility=default'
+        self.post_clean = False
 
     def clean(self):
         super(ICURecipe, self).clean()
@@ -77,3 +83,43 @@ class ICURecipe(GnuRecipe):
 ## '''
 ##         self.apply_patch(self.directory, text)
         self.directory = os.path.join(self.directory, 'source')
+
+        if self.mingw64:
+            filename = os.path.join(self.directory, 'common', 'putil.cpp')
+            self.log_dir('patch', self.directory, 'fix slashes in includes')
+            files = [
+                r'unicode\uloc.h',
+                r'wrl\wrappers\corewrappers.h',
+                r'wrl\client.h',
+                ]
+            for file in files:
+                patch(filename, file, file.replace('\\', '/'))
+
+            self.log_dir('patch', self.directory, 'disable strtod_l')
+            src = '#   define U_USE_STRTOD_L 1'
+            dst = '#   define U_USE_STRTOD_L 0'
+            filename = os.path.join(self.directory, 'i18n/digitlst.cpp')
+            patch(filename, src, dst)
+
+            src = r'''        // TODO: test this code path, including wperm.
+        wchar_t wperm[40] = {};
+        size_t  retVal;
+        mbstowcs_s(&retVal, wperm, perm, _TRUNCATE);
+        FILE *systemFile = _wfopen((const wchar_t *)filename, wperm);
+        if (systemFile) {
+            result = finit_owner(systemFile, locale, codepage, TRUE);
+        }
+        if (!result) {
+            /* Something bad happened.
+               Maybe the converter couldn't be opened. */
+            fclose(systemFile);
+        }'''
+            dst = ''
+            filename = os.path.join(self.directory, 'io/ufile.cpp')
+            self.log_dir('patch', self.directory, 'disable mbstowcs_s')
+            patch(filename, src, dst)
+
+            filename = os.path.join(self.directory, 'tools/toolutil/pkg_genc.cpp')
+            src = '#include "pkg_genc.h"'
+            dst = src + '\n#include "filetools.h"\n'
+            patch(filename, src, dst)

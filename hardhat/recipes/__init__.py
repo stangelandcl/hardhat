@@ -15,13 +15,19 @@ import hardhat.recipes.x11
 def load(settings):
     from hardhat.util import load_recipes, add_dependencies
     #  Fedora query to find dependencies: dnf repoquery --requires libtool
+
+    # alias for autotools
+    if settings.mingw64:
+        autotools = ['autotools', '']
+    else:
+        autotools = ['autotools', 'autoconf', 'automake', 'libtool']
     dependencies = [
         ['asciidoc', 'python2'],
         ['apache', 'apr-util', 'openssl', 'pcre'],
         ['apr-util', 'apr', 'openssl'],
         ['atk', 'glib', 'gobject-introspection'],
         ['awk', 'gawk'],
-        ['autotools', 'autoconf', 'automake', 'libtool'],  # alias for autotools
+        autotools,
         ['fonts', 'cantarell-fonts', 'dejavu-fonts', 'freefont'], # alias for all fonts
         ['fontconfig', 'harfbuzz'],
         ['freetype', 'libpng', 'which'],
@@ -58,7 +64,7 @@ def load(settings):
     ]
 
     recipes = load_recipes(directory, 'hardhat.recipes')
-    add_dependencies(dependencies, recipes)
+    add_dependencies(settings, dependencies, recipes)
 
     cross = hardhat.recipes.cross.load(settings)
     doc = hardhat.recipes.doc.load(settings)
@@ -77,9 +83,11 @@ def load(settings):
             toolchain_depends = set(d)
             break
 
-    for d in dependencies:
-        if d[0] not in toolchain_depends:
-            d += ['toolchain']
+    if not settings.mingw64:
+        # mingw64 assumes mingw64 already installed
+        for d in dependencies:
+            if d[0] not in toolchain_depends:
+                d += ['toolchain']
 
     # Java dependencies do not rely on toolchain
     dependencies += java[1]

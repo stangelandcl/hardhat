@@ -10,14 +10,17 @@ _now = datetime.datetime.now()
 TARGET = _now.date().isoformat().replace('-', '') \
         + str(chr(ord('a') + _now.hour))
 
+
 def make_target_triplet(arch, os_name):
     return '%s-%s-%s-gnu' % (arch, TARGET, os_name)
+
 
 def get_target_triplet(arch, os_name):
     target = os.environ.get('HARDHAT_TARGET')
     target = target if target else make_target_triplet(arch, os_name)
     os.environ['HARDHAT_TARGET'] = target
     return target
+
 
 def get_march():
     target = os.environ.get('HARDHAT_MARCH')
@@ -45,6 +48,7 @@ class RecipeSettings(Object):
         self.march = get_march()
         self.post_clean = True
         self.no_sudo = False
+        self.mingw64 = False
 
         self.prefix_dir = os.path.expanduser('~/hardhat')
         self.quiet = RecipeSettings.quiet
@@ -73,6 +77,7 @@ class RecipeSettings(Object):
         self.post_clean = src.post_clean
         self.enable_version_check = src.enable_version_check
         self.no_sudo = src.no_sudo
+        self.mingw64 = src.mingw64
 #        self.settings_filename = src.settings_filename
 
     ## @property

@@ -32,6 +32,9 @@ def parse_args():
                         default=default_download_dir,
                         help='the directory to download packages to. '
                              'Cached for offline installs')
+    parser.add_argument('--mingw64',
+                        action='store_true',
+                        help='use mingw64 instead of installed gcc')
     parser.add_argument('-v', '--verbose',
                         help='verbose logging',
                         action='store_true')
@@ -67,22 +70,22 @@ def parse_args():
                                    help='package name',
                                    nargs='+')
 
-    download_parser = sub_parsers.add_parser('download',
-                                             help='download package and dependencies only')
-    download_parser.add_argument('package',
-                                 help='package(s) (and dependencies) to download',
-                                 nargs='+')
+    download_parser = sub_parsers.add_parser(
+        'download',
+        help='download package and dependencies only')
+    download_parser.add_argument(
+        'package',
+        help='package(s) (and dependencies) to download',
+        nargs='+')
 
     env_parser = sub_parsers.add_parser(
         'env', help='show environment used when compiling')
-
 
     info_parser = sub_parsers.add_parser('info',
                                          help='package info')
     info_parser.add_argument('package',
                              help='packages to list info about',
                              nargs='+')
-
 
     install_parser = sub_parsers.add_parser(
         'install', help='install a package or packages')
@@ -95,7 +98,6 @@ def parse_args():
     install_parser.add_argument('--no-clean',
                                 help="leave build directory after install",
                                 action='store_true')
-
 
     list_parser = sub_parsers.add_parser('list',
                                          help='list packages')
@@ -161,6 +163,11 @@ def parse_args():
     settings.post_clean = not args.no_clean
     settings.enable_version_check = args.cmd == 'version'
     settings.no_sudo = args.no_sudo
+    settings.mingw64 = args.mingw64
+    if args.mingw64:
+        settings.target_triplet = 'x86_64-w64-mingw32'
+        settings.host_triplet = settings.target_triplet
+
     if args.march:
         settings.march = args.march
         os.environ['HARDHAT_MARCH'] = args.march

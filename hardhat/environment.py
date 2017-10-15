@@ -96,7 +96,7 @@ path_with_root()
 ''')
 
 
-def runtime_env(prefix, target, download_dir):
+def runtime_env(prefix, target, download_dir, mingw64):
     shell = '/bin/bash'
     bin_shell = os.path.join(prefix, 'bin', 'bash')
     if os.path.exists(bin_shell):
@@ -125,6 +125,13 @@ def runtime_env(prefix, target, download_dir):
 # -falign-functions=1 -falign-jumps=1 -falign-loops=1
 
     cflags = '-Wno-error=format-nonliteral -Wno-error=implicit-fallthrough='
+
+    if mingw64:
+        # 600 = Vista, 601 = Windows 7
+        cflags += ' -D_WIN32_WINNT=0x601 -DMINGW_HAS_SECURE_API '
+        LIBS = ''
+    else:
+        LIBS = '-lrt'
 
     c_opt_flags = cflags
     if c_opt_flags:
@@ -176,7 +183,7 @@ def runtime_env(prefix, target, download_dir):
         'CPPFLAGS': '-DNDEBUG',
         'CXXFLAGS': c_opt_flags,
         'FFLAGS': c_opt_flags,
-        'LIBS': '-lrt',
+        'LIBS': LIBS,
         'LFLAGS': '',
 #        'CCACHE_DISABLE': '1',
         'SH': shell,
@@ -193,7 +200,7 @@ def runtime_env(prefix, target, download_dir):
 
 def export_init_script(filename, prefix, target, download_dir):
     with open(filename, 'wt') as f:
-        env = runtime_env(prefix, target, download_dir)
+        env = runtime_env(prefix, target, download_dir, False)
         env['PREFIX'] = prefix
         env['HARDHAT_TARGET'] = target
         text = ENVIRONMENT.substitute(env)
@@ -276,7 +283,7 @@ def target_path_env(*prefixes):
     arch = os.environ['HARDHAT_MARCH']
     cflags = '-O3 -mtune=native -march=%s' \
              ' -fomit-frame-pointer' \
-             ' -momit-leaf-frame-pointer -DNDEBUG' % arch
+             ' -momit-leaf-frame-pointer -DNDEBUG ' % arch
 
     return dotdict({
         'PATH': path,

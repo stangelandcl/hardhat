@@ -196,9 +196,9 @@ def load_recipes(directory, prefix, exclusions=['__init__.py', 'base.py']):
     return recipes
 
 
-def add_dependencies(dependencies, recipes):
+def add_dependencies(settings, dependencies, recipes):
     for recipe in recipes:
-        recipe = recipe()
+        recipe = recipe(settings=settings)
         exists = False
         for d in dependencies:
             if d[0] == recipe.name:

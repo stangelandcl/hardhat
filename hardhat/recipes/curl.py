@@ -10,11 +10,22 @@ class CurlRecipe(GnuRecipe):
 
         self.name = 'curl'
         self.version = '7.54.0'
-        self.depends = ['cacert', 'openldap', 'openssl']
+        if self.mingw64:
+            self.depends = ['zlib']
+        else:
+            self.depends = ['cacert', 'openldap', 'openssl', 'zlib']
         self.url = 'https://curl.haxx.se/download/curl-$version.tar.bz2'
         self.configure_args += [
-            '--with-ca-bundle=%s' % CACertRecipe.bundle_path(self.prefix_dir),
-            '--with-ca-path=%s' % CACertRecipe.certs_path(self.prefix_dir),
             '--enable-ldap',
-            '--enable-ldaps'
+            '--enable-ldaps',
+            '--with-zlib',
             ]
+        if self.mingw64:
+            self.configure_args += ['--with-winssl']
+            self.environment['CFLAGS'] += ' -DWIN32_LEAN_AND_MEAN'
+        else:
+            self.configure_args += [
+                '--with-ca-bundle=%s' % CACertRecipe.bundle_path(
+                    self.prefix_dir),
+                '--with-ca-path=%s' % CACertRecipe.certs_path(self.prefix_dir),
+                ]
