@@ -11,7 +11,3 @@ class LibCsvRecipe(GnuRecipe):
         self.version = '3.0.3'
         self.url = 'http://downloads.sourceforge.net/project/$name/$name/' \
                    '$name-$version/$name-$version.tar.gz'
-
-
-#https://sourceforge.net/projects/libcsv/files/latest/download
-#http://downloads.sourceforge.net/project/libcsv/libcsv/libcsv-3.0.3/libcsv-3.0.3.tar.gz?r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Flibcsv%2F&ts=1471893694&use_mirror=pilotfiber

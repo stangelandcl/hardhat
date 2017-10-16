@@ -1,0 +1,6 @@
+* Known to compile on mingw64 on linux
+** cURL
+** ICU
+** libcsv
+** lmdb
+

@@ -1,4 +1,6 @@
+import os
 from .base import GnuRecipe
+from ..util import patch
 
 
 class CJsonRecipe(GnuRecipe):
@@ -11,7 +13,13 @@ class CJsonRecipe(GnuRecipe):
         self.version = '1.5.2'
         self.url = 'https://github.com/DaveGamble/cJSON/archive/' \
                    'v$version.tar.gz'
-        self.compile_args += ['all']
+        self.compile_args = ['make', 'all']
+        if self.mingw64:
+            self.environment['CFLAGS'] += ' -D__WINDOWS__'
+            extra = ['SHARED=dll']
+            self.compile_args += extra
+            self.install_args += extra
+
         self.install_args = [
             self.install_args + ['PREFIX=""',
                                  'DESTDIR=%s' % self.prefix_dir,
@@ -19,6 +27,12 @@ class CJsonRecipe(GnuRecipe):
                                  'INCLUDE_PATH=include/cjson'],
             ['cp', 'libcjson.a', '%s/lib' % self.prefix_dir],
             ['cp', 'libcjson_utils.a', '%s/lib' % self.prefix_dir]]
+
+    def patch(self):
+        filename = os.path.join(self.directory, 'Makefile')
+        src = 'CFLAGS += -fstack-protector-strong'
+        dst = 'CFLAGS +='
+        patch(filename, src, dst)
 
     def configure(self):
         pass
