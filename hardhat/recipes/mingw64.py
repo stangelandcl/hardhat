@@ -2,6 +2,7 @@ import os
 import shutil
 from .base import GnuRecipe
 from .toolchain.gcc_pass1 import GccPrereqRecipesMixin
+from ..util import patch
 
 
 class Extra:
@@ -135,6 +136,30 @@ class Mingw64Recipe(GnuRecipe, GccPrereqRecipesMixin):
         os.rename(self.mpc.directory, os.path.join(gcc_dir, 'mpc'))
         os.rename(self.mpfr.directory, os.path.join(gcc_dir, 'mpfr'))
         os.rename(self.isl.directory, os.path.join(gcc_dir, 'isl'))
+
+    def patch(self):
+        self.log_dir('patch', self.directory, 'add ConnectEx')
+        filename = os.path.join(self.directory, 'mingw-w64-crt', 'lib64',
+                                'ws2_32.def')
+        src = 'WSAConnect\n'
+        dst = 'WSAConnect\nConnectEx\n'
+        patch(filename, src, dst)
+
+        filename = os.path.join(self.directory, 'mingw-w64-headers', 'include',
+                                'mswsock.h')
+        src = '#endif /* (_WIN32_WINNT >= 0x0600) */'
+        dst = r'''
+        BOOL PASCAL ConnectEx(
+  _In_     SOCKET                s,
+  _In_     const struct sockaddr *name,
+  _In_     int                   namelen,
+  _In_opt_ PVOID                 lpSendBuffer,
+  _In_     DWORD                 dwSendDataLength,
+  _Out_    LPDWORD               lpdwBytesSent,
+  _In_     LPOVERLAPPED          lpOverlapped
+);
+#endif /* (_WIN32_WINNT >= 0x0600) */
+'''
 
     def configure(self):
         self.log_dir('configure',
