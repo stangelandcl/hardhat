@@ -110,7 +110,7 @@ if [ ! -e $DIR/importlib ]; then
     mv $IMPORTLIB importlib
 fi
 
-if [ ! $DIR/bootstrap/bin/hardhat ]; then
+if [ ! -f $DIR/bootstrap/bin/hardhat ]; then
     rm -rf $DIR/bootstrap
 
     if [ ! -x "$(which $PYTHON)" ]; then   
@@ -136,7 +136,7 @@ if [ ! $DIR/bootstrap/bin/hardhat ]; then
 	cd ..
     fi
 
-    if [ ! -e $DIR/bootstrap/bin/hardhat ]; then
+    if [ ! -f $DIR/bootstrap/bin/hardhat ]; then
 	"$PYTHON" setup.py install --home=$DIR/bootstrap
     fi
 fi

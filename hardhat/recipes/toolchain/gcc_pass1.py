@@ -88,7 +88,7 @@ class GccRecipe(CrossGnuRecipe, GccPrereqRecipesMixin):
             shutil.rmtree(self.extract_dir)
         if os.path.exists(self.directory):
             shutil.rmtree(self.directory)
-        super(GccPrereqRecipesMixin, self).clean()
+        GccPrereqRecipesMixin.clean(self)
 
     def compile(self):
 #        dir = self.directory
@@ -208,7 +208,7 @@ class GccRecipe(CrossGnuRecipe, GccPrereqRecipesMixin):
 #               ]
 #        self.run_exe(cmd, self.extract_dir, self.environment)
 
-        super(GccPrereqRecipesMixin, self).patch()
+        GccPrereqRecipesMixin.patch(self)
 
         dir = os.path.join(self.extract_dir, 'gcc', 'config')
         headers = set(self._find_headers(dir))
