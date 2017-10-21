@@ -5,8 +5,8 @@ from ..urls import Urls
 class CyrusSaslRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(CyrusSaslRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '4ec6df83bd80ad0b73cce3f409a98699' \
-                      '24fde4c2ad2da803e4349727386e2f98'
+        self.sha256 = '49b2e49488c837259d6dfcab8ff1cbd9' \
+                      '4ada334f7bef4420384e9534f0684aaf'
 
         self.name = 'cyrus-sasl'
         self.depends = ['autotools', 'openssl']

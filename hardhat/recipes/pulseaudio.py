@@ -9,7 +9,7 @@ class PulseAudioRecipe(GnuRecipe):
 
         self.name = 'pulseaudio'
         self.version = '9.0'
-        self.depends = ['json-c', 'libsndfile']
+        self.depends = ['intltool', 'json-c', 'libsndfile']
         self.url = 'http://freedesktop.org/software/pulseaudio/releases/' \
                    'pulseaudio-$version.tar.xz'
         self.configure_strip_cross_compile()

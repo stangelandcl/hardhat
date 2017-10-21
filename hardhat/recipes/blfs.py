@@ -18,7 +18,7 @@ class BeyondLinuxFromScratchRecipe(GnuRecipe):
         # call get_version() after setting other properties
         self.version = self.get_version()[0]
         if not self.version:
-            self.version = '2017-09-08'
+            self.version = '2017-10-20'
 #            raise Exception('No version for BLFS found')
 
     def configure(self):

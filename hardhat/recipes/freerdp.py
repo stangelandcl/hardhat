@@ -6,9 +6,8 @@ from ..util import patch
 class FreeRdpRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(FreeRdpRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = 'c6c8cf64fda6cd611674d627fec76fb2' \
-                      '336a037119d90b2f7975f8665a36c22f'
-
+        self.sha256 = '99e108cfc2f7bc7339d0693e9c4c25f9' \
+	              '0bad4c6bc38349206758c2cccd7cc4cc'
         self.name = 'freerdp'
         self.version = '71ce3378da9044d21575d0331dc4fb97bc4c995c'
         self.url = 'https://github.com/FreeRDP/FreeRDP/archive/' \

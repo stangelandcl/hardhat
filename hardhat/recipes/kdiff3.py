@@ -13,7 +13,7 @@ class KDiff3Recipe(GnuRecipe):
         self.name = 'kdiff3'
         self.version = '0.9.98'
         self.depends = ['qt5']
-        self.url = 'https://dronedata.dl.sourceforge.net/project/kdiff3/' \
+        self.url = 'http://downloads.sourceforge.net/project/kdiff3/' \
                    'kdiff3/$version/kdiff3-$version.tar.gz'
         self.compile_args = self.shell_args + ['./configure', 'qt4']
 

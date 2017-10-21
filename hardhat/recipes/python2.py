@@ -4,8 +4,8 @@ from .base import GnuRecipe
 class Python2Recipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(Python2Recipe, self).__init__(*args, **kwargs)
-        self.sha256 = 'ccd67509dfe45ec92432b7131df69468' \
-                      '586c51ba7940aa70705f69bb068ba6cb'
+        self.sha256 = 'fa7190be30634e24b3b57f32c8242342' \
+	              'e514241cf8cc0e38233abaad9a7f6130'
         self.name = 'python2'
         self.version = '96f502059717a692ca3abd968b26c5ea2918ad3a'
         self.depends = ['bdb', 'bzip2', 'cacert', 'expat', 'gdbm', 'ncurses',
