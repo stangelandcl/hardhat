@@ -10,7 +10,7 @@ def load(settings):
     dependencies = []
 
     for recipe in recipes:
-        recipe = recipe()
+        recipe = recipe(settings=settings)
         if not hasattr(recipe, 'depends'):
             recipe.depends = []
 

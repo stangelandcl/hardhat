@@ -1,6 +1,7 @@
 import os
 from string import Template
 from .dotdict import dotdict
+from .util import gcc_version
 
 
 LIBRARY_PATH = '/usr/lib64'
@@ -144,7 +145,6 @@ def runtime_env(prefix, target, download_dir, mingw64, use_root):
     # -ffast-math breaks sqlite so needs disabled for sqlite3 and bdb at least
 # -falign-functions=1 -falign-jumps=1 -falign-loops=1
 
-    cflags += ' -Wno-error=format-nonliteral -Wno-error=implicit-fallthrough='
 
     if mingw64:
         # 600 = Vista, 601 = Windows 7
@@ -153,17 +153,29 @@ def runtime_env(prefix, target, download_dir, mingw64, use_root):
     else:
         LIBS = '-lrt'
 
-    c_opt_flags = cflags
-    if c_opt_flags:
-        c_opt_flags += ' '
-    c_opt_flags += opt
-
 #    cflags = '-I$prefix/include -I$prefix/$target/include'
 #    cflags = Template(cflags).substitute(prefix=prefix, target=target)
+
+    if use_root:
+        if os.path.exists('/usr/bin/gcc'):
+            bin_dir = '/usr/bin'
+        elif os.path.exists('/bin/gcc'):
+            bin_dir = '/bin'
+        else:
+            raise Exception("Root gcc not found")
 
     exe_prefix = '' if use_root else prefix
     def target_exe(exe):
         return '%s/bin/%s-%s' % (exe_prefix, target, exe)
+
+    gcc = target_exe('gcc')
+    if gcc_version(gcc)[0] >= 7:
+        cflags += ' -Wno-error=format-nonliteral' \
+                  ' -Wno-error=implicit-fallthrough='
+    c_opt_flags = cflags
+    if c_opt_flags:
+        c_opt_flags += ' '
+    c_opt_flags += opt
 
     env = dotdict({
         'HARDHAT_PREFIX': prefix,
@@ -178,13 +190,14 @@ def runtime_env(prefix, target, download_dir, mingw64, use_root):
         'XML_CATALOG_FILES': os.path.join(prefix, 'etc', 'xml', 'catalog'),
         'PYTHON_EGG_CACHE': '%s/home/%s/.cache/Python-Eggs'
                             % (prefix, os.environ['USER']),
-        'CPP': '/bin/cpp' if use_root else target_exe('cpp'),
-        'CC': target_exe('gcc'),
+        'CPP': ('%s/cpp' % bin_dir) if use_root else target_exe('cpp'),
+        'CC': gcc,
         'CXX': target_exe('g++'),
-        'AR': '/bin/ar' if use_root else target_exe('ar'),
-        'AS': '/bin/as' if use_root else target_exe('as'),
-        'LD': '/bin/ld' if use_root else target_exe('ld'),
-        'READELF': '/bin/readelf' if use_root else target_exe('readelf'),
+        'AR': ('%s/ar' % bin_dir) if use_root else target_exe('ar'),
+        'AS': ('%s/as' % bin_dir) if use_root else target_exe('as'),
+        'LD': ('%s/ld' % bin_dir) if use_root else target_exe('ld'),
+        'READELF': ('%s/readelf' % bin_dir) if use_root
+                                            else target_exe('readelf'),
         'FC': target_exe('gfortran'),
         'F77': target_exe('gfortran'),
         'F90': target_exe('gfortran'),

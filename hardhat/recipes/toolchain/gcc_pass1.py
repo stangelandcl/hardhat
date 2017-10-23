@@ -19,7 +19,6 @@ HEADERS = set(['linux64.h', 'linux.h', 'sysv4.h'])
 
 class GccPrereqRecipesMixin:
     def __init__(self, *args, **kwargs):
-        super(GccPrereqRecipesMixin, self).__init__()
         prefix = kwargs.get('prefix', '')
         gcc_directory = kwargs.get('gcc_directory', self.extract_dir)
         self.gmp = GccGmpRecipe(settings=self)

@@ -12,7 +12,8 @@ class CppReferenceRecipe(TarballRecipe):
 
         self.name = 'cppreference'
         self.version = '20161029'
-        self.url = 'http://upload.cppreference.com/mwiki/images/4/4c/html_book_$version.tar.gz'
+        self.url = 'http://upload.cppreference.com/mwiki/images/4/4c/' \
+                   'html_book_$version.tar.gz'
 
     def configure(self):
         pass
