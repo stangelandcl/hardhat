@@ -39,6 +39,8 @@
 22. turn off debug mode for Emacs
 23. generate all python packages from pypi with dependencies
 24. Move Oracle Java to amazon and add JDK
+25. Add option to download and extract source code without building
+26. Make a list of projects to keep source code for, like emacs, R, python, sqlite, lmdb, and other libs like cJSON, libcsv
 
 * Packages
 1. xgboost
@@ -146,13 +148,15 @@ http://wiki.linuxfromscratch.org/blfs/wiki/firefox
 - run on bsd
 - test on multiple linuxes old and new. Add bootstrapping gcc for getting up to current version
 
+
+
 * Stack
 - chromium
 - nodejs
 - cmake
 - jenkins
 - icu
-
+  
 - dulwich
 - requests
 - pyyaml

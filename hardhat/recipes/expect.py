@@ -9,7 +9,7 @@ class ExpectRecipe(GnuRecipe):
 
         self.name = 'expect'
         self.version = '5.45'
-        self.depends = ['tcl', 'tk']
+        self.depends = ['tcl']  # tk is optional (for GUI)
         self.url = 'http://prdownloads.sourceforge.net/expect/' \
                    'expect$version.tar.gz'
 

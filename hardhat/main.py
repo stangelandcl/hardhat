@@ -100,12 +100,14 @@ $dependencies
 def main():
     args, settings = parse_args()
 
-    log_file = os.path.join(settings.prefix_dir, 'install.log')
+    dir = settings.prefix_dir.replace('/mingw64', '')
+    log_file = os.path.join(dir, 'install.log')
     if args.cmd != 'log' and os.path.exists(log_file):
         open(log_file, 'w').close()  # truncate
 
     log_file_is_open = is_file_open(log_file)
-    settings.install_file = InstallFile(settings.prefix_dir)
+
+    settings.install_file = InstallFile(dir)
 
     RECIPES, dependencies = hardhat.recipes.load(settings)
     recipes = [x(settings=settings) for x in RECIPES]

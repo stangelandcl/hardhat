@@ -14,12 +14,6 @@ class CJsonRecipe(GnuRecipe):
         self.url = 'https://github.com/DaveGamble/cJSON/archive/' \
                    'v$version.tar.gz'
         self.compile_args = ['make', 'all']
-        if self.mingw64:
-            self.environment['CFLAGS'] += ' -D__WINDOWS__'
-            extra = ['SHARED=dll']
-            self.compile_args += extra
-            self.install_args += extra
-
         self.install_args = [
             self.install_args + ['PREFIX=""',
                                  'DESTDIR=%s' % self.prefix_dir,
@@ -36,3 +30,13 @@ class CJsonRecipe(GnuRecipe):
 
     def configure(self):
         pass
+
+
+class Mingw64CJsonRecipe(CJsonRecipe):
+    def __init__(self, *args, **kwargs):
+        super(Mingw64CJsonRecipe, self).__init__(*args, **kwargs)
+        self.name = 'mingw64-cjson'
+        self.environment['CFLAGS'] += ' -D__WINDOWS__'
+        extra = ['SHARED=dll']
+        self.compile_args += extra
+        self.install_args += extra

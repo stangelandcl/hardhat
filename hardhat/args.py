@@ -164,6 +164,21 @@ def parse_args():
     settings.enable_version_check = args.cmd == 'version'
     settings.no_sudo = args.no_sudo
     settings.mingw64 = args.mingw64
+    hasMingw64 = False
+    hasOther = False
+
+    if hasattr(args, 'package'):
+        for package in args.package:
+            if package.startswith('mingw64-'):
+                args.mingw64 = settings.mingw64 = True
+                hasMingw64 = True
+                args.prefix = settings.prefix_dir = \
+                    os.path.join(settings.prefix_dir, 'mingw64')
+            else:
+                hasOther = False
+        if hasMingw64 and hasOther:
+            raise Exception('Cannot mix mingw64-* and non-mingw64 packages')
+
     if args.mingw64:
         settings.target_triplet = 'x86_64-w64-mingw32'
         settings.host_triplet = settings.target_triplet

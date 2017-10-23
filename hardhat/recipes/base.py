@@ -91,7 +91,9 @@ class Logger(Object):
     def log_filename(self):
         if hasattr(self, '_log_filename'):
             return self._log_filename
-        return os.path.join(self.prefix_dir, 'install.log')
+        dir = self.prefix_dir
+        dir = dir.replace('/mingw64', '')
+        return os.path.join(dir, 'install.log')
 
     @log_filename.setter
     def log_filename(self, value):
@@ -285,6 +287,7 @@ class Recipe(RecipeSettings, Logger, ExeRunner, ShortVersionMixin):
         self.environment_strip_lto()
         self.directory_template = '$prefix/build/$name-$version'
         self.sudo = False
+        self.mingw64_dir = os.path.join(self.prefix_dir, 'mingw64')
 
     @property
     def CFLAGS(self):

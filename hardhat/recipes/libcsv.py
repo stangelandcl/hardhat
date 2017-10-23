@@ -9,5 +9,11 @@ class LibCsvRecipe(GnuRecipe):
 
         self.name = 'libcsv'
         self.version = '3.0.3'
-        self.url = 'http://downloads.sourceforge.net/project/$name/$name/' \
-                   '$name-$version/$name-$version.tar.gz'
+        self.url = 'http://downloads.sourceforge.net/project/libcsv/libcsv/' \
+                   'libcsv-$version/libcsv-$version.tar.gz'
+
+
+class Mingw64LibCsvRecipe(LibCsvRecipe):
+    def __init__(self, *args, **kwargs):
+        super(Mingw64LibCsvRecipe, self).__init__(*args, **kwargs)
+        self.name = 'mingw64-libcsv'

@@ -53,6 +53,8 @@ export JAVA_HOME=$JAVA_HOME
 export LIBS="$LIBS"
 export CCACHE_DIR=$CCACHE_DIR
 export PREFIX=$PREFIX
+export R_SHELL=$R_SHELL
+export R_HOME=$R_HOME
 
 
 #export TERM=xterm-256color
@@ -114,13 +116,17 @@ def runtime_env(prefix, target, download_dir, mingw64):
               ' -L$prefix/$target/lib64'
     ldflags = Template(ldflags).substitute(prefix=prefix, target=target)
 
-    ld_opt = '-O3 -flto -fuse-linker-plugin'
-    ld_opt_flags = ldflags + ' ' + ld_opt
-
     arch = os.environ['HARDHAT_MARCH']
-    opt = '-O3 -mtune=native -march=%s' \
-          ' -flto -ffat-lto-objects -fomit-frame-pointer' \
-          ' -momit-leaf-frame-pointer ' % arch
+    if mingw64:
+        ld_opt = '-O3 '
+        opt = '-O3 -mtune=native -march=%s' \
+              ' -fomit-frame-pointer -momit-leaf-frame-pointer ' % arch
+    else:
+        ld_opt = '-O3 -flto -fuse-linker-plugin'
+        opt = '-O3 -mtune=native -march=%s' \
+              ' -flto -ffat-lto-objects -fomit-frame-pointer' \
+              ' -momit-leaf-frame-pointer ' % arch
+    ld_opt_flags = ldflags + ' ' + ld_opt
     # -ffast-math breaks sqlite so needs disabled for sqlite3 and bdb at least
 # -falign-functions=1 -falign-jumps=1 -falign-loops=1
 
@@ -172,6 +178,7 @@ def runtime_env(prefix, target, download_dir, mingw64):
         'JAVA_HOME': '%s/java' % (prefix),
         'CCACHE_DIR': '%s/home/%s/.ccache' % (prefix, os.environ['USER']),
         'R_SHELL': '%s/bin/bash' % (prefix),
+        'R_HOME': '%s/lib64/R' % (prefix),
         'LDFLAGS_NO_OPT': ldflags,
         'LDFLAGS': ld_opt_flags,
         'LD_OPT': ld_opt,

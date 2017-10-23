@@ -10,23 +10,33 @@ class CurlRecipe(GnuRecipe):
 
         self.name = 'curl'
         self.version = '7.56.0'
-        if self.mingw64:
-            self.depends = ['zlib']
-        else:
-            self.depends = ['cacert', 'openldap', 'openssl', 'zlib']
+        self.depends = ['cacert', 'openldap', 'openssl', 'zlib']
         self.url = 'https://curl.haxx.se/download/curl-$version.tar.bz2'
         self.configure_args += [
             '--enable-ldap',
             '--enable-ldaps',
             '--with-zlib',
             ]
-        if self.mingw64:
-            self.configure_args += ['--with-winssl']
+
+    def configure(self):
+        self.configure_args += [
+            '--with-ca-bundle=%s' % CACertRecipe.bundle_path(
+                self.prefix_dir),
+            '--with-ca-path=%s' % CACertRecipe.certs_path(self.prefix_dir),
+            ]
+
+        super(CurlRecipe, self).configure()
+
+
+class Mingw64CurlRecipe(CurlRecipe):
+    def __init__(self, *args, **kwargs):
+        super(Mingw64CurlRecipe, self).__init__(*args, **kwargs)
+        self.name = 'mingw64-curl'
+        self.depends = ['zlib']
+
+    def configure(self):
+        self.configure_args += ['--with-winssl']
 # no longer needed
 #            self.environment['CFLAGS'] += ' -DWIN32_LEAN_AND_MEAN'
-        else:
-            self.configure_args += [
-                '--with-ca-bundle=%s' % CACertRecipe.bundle_path(
-                    self.prefix_dir),
-                '--with-ca-path=%s' % CACertRecipe.certs_path(self.prefix_dir),
-                ]
+
+        super(CurlRecipe, self).configure()
