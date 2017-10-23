@@ -141,7 +141,8 @@ def main():
         env = runtime_env(settings.prefix_dir,
                           settings.target_triplet,
                           settings.tarball_dir,
-                          settings.mingw64)
+                          settings.mingw64,
+                          settings.use_root)
         print('\n')
         print_settings('Environment', list(env.items()))
     elif args.cmd == 'info':

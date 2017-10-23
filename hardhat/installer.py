@@ -147,7 +147,8 @@ class Installer(object):
         if not settings.mingw64:
             # mingw64 assumes we are running from external hardhat
             init_file = os.path.join(self.directory, 'init.sh')
-            export_init_script(init_file, self.directory, target, download_dir)
+            export_init_script(init_file, self.directory, target,
+                               download_dir, settings.use_root)
 
     def _log_required(self, required, installed):
         text = '\nRequired packages:'

@@ -7,6 +7,7 @@ PREFIX=""
 DOWNLOAD_DIR="~/Downloads/hardhat"
 CPUS=.9
 MARCH="core2"
+USE_ROOT=
 unset HARDHAT_TARGET
 
 for i in "$@"; do
@@ -27,6 +28,9 @@ for i in "$@"; do
 	--march=*)
 	    MARCH="${i#*=}"
 	    ;;
+    --use-root*)
+        USE_ROOT="--use-root"
+        ;;
 	*)
 	    # skip unknown
 	    ;;
@@ -148,7 +152,7 @@ if [ ! -e $PREFIX/bin/python3 ]; then
 	# for HARDHAT_TARGET so we use the same compiler
 	. $PREFIX/init.sh
     fi
-    hardhat --march=$MARCH --cpus=$CPUS --prefix=$PREFIX --downloads=$DOWNLOAD_DIR install python3-beautifulsoup
+    hardhat $USE_ROOT --march=$MARCH --cpus=$CPUS --prefix=$PREFIX --downloads=$DOWNLOAD_DIR install python3-beautifulsoup
 fi
 export PATH=$PREFIX/bin:$OLDPATH
 export PYTHONPATH=""
@@ -165,7 +169,7 @@ if [ ! -e $PREFIX/bin/hardhat ]; then
 fi
 
 if [ "$PKG_FILE" != "" ]; then       
-    hardhat --march=$MARCH --cpus=$CPUS --prefix=$PREFIX --downloads=$DOWNLOAD_DIR install --file=$PKG_FILE
+    hardhat $USE_ROOT --march=$MARCH --cpus=$CPUS --prefix=$PREFIX --downloads=$DOWNLOAD_DIR install --file=$PKG_FILE
 fi
 
 echo "Run '. $PREFIX/init.sh' or 'source $PREFIX/init.sh' (without quotes) to step into your new sysroot environment at $PREFIX."

@@ -2,7 +2,7 @@ import datetime
 import multiprocessing
 import os
 import platform
-from .util import Object
+from .util import Object, run_or_error
 from .config import ConfigParser, read_config
 
 DEFAULT = 'hardhat'
@@ -29,6 +29,11 @@ def get_march():
     return target
 
 
+def root_target_triplet():
+    return run_or_error(['/usr/bin/gcc', '-dumpmachine'],
+                        '/tmp', {}).strip()
+
+
 class RecipeSettings(Object):
     quiet = False
     silent = False
@@ -49,6 +54,7 @@ class RecipeSettings(Object):
         self.post_clean = True
         self.no_sudo = False
         self.mingw64 = False
+        self.use_root = False
 
         self.prefix_dir = os.path.expanduser('~/hardhat')
         self.quiet = RecipeSettings.quiet
@@ -62,6 +68,7 @@ class RecipeSettings(Object):
             self._copy_settings(kwargs['settings'])
 
     def _copy_settings(self, src):
+        self.use_root = src.use_root
         self.host_triplet = src.host_triplet
         self.target_triplet = src.target_triplet
         self.tarball_dir = src.tarball_dir

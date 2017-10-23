@@ -9,7 +9,7 @@ class OpenLdapRecipe(GnuRecipe):
 
         self.name = 'openldap'
         self.version = '2.4.44'
-        self.depends = ['cyrus-sasl', 'icu', 'openssl']
+        self.depends = ['cyrus-sasl', 'icu', 'libtool', 'openssl']
         self.url = 'ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/' \
                    'openldap-$version.tgz'
         self.configure_args += ['--enable-dynamic',

@@ -37,11 +37,14 @@ class Perl5Recipe(GnuRecipe):
 #            '-Dtargethost=linux-x64',
             # cross-compiling to eliminate root directories
             ]
+        self.environment['CFLAGS'] += ' -pthread'
+        self.environment['LDFLAGS'] += ' -pthread'
 
     def patch(self):
         self.log_dir('patch', self.directory, 'patching many perl issues')
 
-        text = """: change the next line if compiling for Xenix/286 on Xenix/386
+        if not self.use_root:
+            text = """: change the next line if compiling for Xenix/286 on Xenix/386
 xlibpth='/usr/lib/386 /lib/386'
 : Possible local library directories to search.
 loclibpth="/usr/local/lib /opt/local/lib /usr/gnu/lib"
@@ -55,19 +58,19 @@ test -f /shlib/libc.so     && glibpth="/shlib $glibpth"
 test -d /usr/lib64         && glibpth="$glibpth /lib64 /usr/lib64 /usr/local/lib64"
 """
 
-        filename = os.path.join(self.directory, 'Configure')
-        os.chmod(filename, stat.S_IRWXU)
-        with open_file(filename, 'rt', encoding='utf-8') as f:
-            text1 = f.read()
-        text1 = text1.replace(text, '')
+            filename = os.path.join(self.directory, 'Configure')
+            os.chmod(filename, stat.S_IRWXU)
+            with open_file(filename, 'rt', encoding='utf-8') as f:
+                text1 = f.read()
+            text1 = text1.replace(text, '')
 
-        text = '''locincpth="/usr/local/include /opt/local/include /usr/gnu/include"
-locincpth="$locincpth /opt/gnu/include /usr/GNU/include /opt/GNU/include"
-'''
-        text1 = text1.replace(text, '')
+            text = '''locincpth="/usr/local/include /opt/local/include /usr/gnu/include"
+    locincpth="$locincpth /opt/gnu/include /usr/GNU/include /opt/GNU/include"
+    '''
+            text1 = text1.replace(text, '')
 
-        with open(filename, 'wt', encoding='utf-8') as f:
-            f.write(text1)
+            with open(filename, 'wt', encoding='utf-8') as f:
+                f.write(text1)
 
 #        src = """rp="Directories to use for library searches?"
 #. ./myread
@@ -79,12 +82,12 @@ locincpth="$locincpth /opt/gnu/include /usr/GNU/include /opt/GNU/include"
 #        dst = 'echo libpth=$libpth'
 #        patch(filename, src, dst)
 
-        src = '''glibpth=`echo " $glibpth " | sed -e 's! /usr/shlib ! !'`
-glibpth="/usr/shlib $glibpth"'''
-        dst = ': skipping setting glibpth'
-        patch(filename, src, dst)
+            src = '''glibpth=`echo " $glibpth " | sed -e 's! /usr/shlib ! !'`
+        glibpth="/usr/shlib $glibpth"'''
+            dst = ': skipping setting glibpth'
+            patch(filename, src, dst)
 
-        src = r'''    for var in xlibpth loclibpth locincpth glibpth; do
+            src = r'''    for var in xlibpth loclibpth locincpth glibpth; do
 	eval xxx=\$$var
 	eval $var=''
 	for path in $xxx; do
@@ -92,15 +95,15 @@ glibpth="/usr/shlib $glibpth"'''
 	done
     done
 '''
-        dst = "# Skipping setting lib paths with sysroot"
-        patch(filename, src, dst)
+            dst = "# Skipping setting lib paths with sysroot"
+            patch(filename, src, dst)
 
-        src = r'''libpth="`$echo $libpth|$sed 's/^ //'`"'''
-        dst = r'''libpth="`$echo $libpth|$sed 's/^ //'`"
+            src = r'''libpth="`$echo $libpth|$sed 's/^ //'`"'''
+            dst = r'''libpth="`$echo $libpth|$sed 's/^ //'`"
             # set plibpth to empty to remove sysroot directories
             plibpth=""
 '''
-        patch(filename, src, dst)
+            patch(filename, src, dst)
 
 
         # Disable LD_PRELOAD on linux. Causes problems the second

@@ -98,7 +98,7 @@ path_with_root()
 ''')
 
 
-def runtime_env(prefix, target, download_dir, mingw64):
+def runtime_env(prefix, target, download_dir, mingw64, use_root):
     shell = '/bin/bash'
     bin_shell = os.path.join(prefix, 'bin', 'bash')
     if os.path.exists(bin_shell):
@@ -108,12 +108,26 @@ def runtime_env(prefix, target, download_dir, mingw64):
            ':$prefix/$target/bin:$prefix/java/bin:$prefix/go/bin'
     path = Template(path).substitute(prefix=prefix, target=target)
 
-    lib_path = '$prefix/lib:$prefix/$target/lib64:$prefix/$target/lib' \
-               ':$prefix/lib64'
-    lib_path = Template(lib_path).substitute(prefix=prefix, target=target)
+    if use_root:
+        path += ':/bin:/usr/bin:/usr/sbin:/usr/local/bin'
+        lib_path = '$prefix/lib:$prefix/lib64'
+        ldflags = '-L$prefix/lib -L$prefix/lib64 ' \
+                  '-Wl,-rpath,$prefix/lib,-rpath,$prefix/lib64'
+    else:
+        lib_path = '$prefix/lib:$prefix/$target/lib64:$prefix/$target/lib' \
+                   ':$prefix/lib64'
+        ldflags = '-L$prefix/lib -L$prefix/lib64 -L$prefix/$target/lib' \
+                  ' -L$prefix/$target/lib64'
+    cppflags = '-DNDEBUG -I $prefix/include'
+    cflags = ''
+    if not os.path.exists('%s/lib' % prefix):
+        os.makedirs('%s/lib' % prefix)
 
-    ldflags = '-L$prefix/lib -L$prefix/lib64 -L$prefix/$target/lib' \
-              ' -L$prefix/$target/lib64'
+    if not os.path.exists('%s/lib64' % prefix):
+        os.makedirs('%s/lib64' % prefix)
+
+    cppflags = Template(cppflags).substitute(prefix=prefix)
+    lib_path = Template(lib_path).substitute(prefix=prefix, target=target)
     ldflags = Template(ldflags).substitute(prefix=prefix, target=target)
 
     arch = os.environ['HARDHAT_MARCH']
@@ -130,7 +144,7 @@ def runtime_env(prefix, target, download_dir, mingw64):
     # -ffast-math breaks sqlite so needs disabled for sqlite3 and bdb at least
 # -falign-functions=1 -falign-jumps=1 -falign-loops=1
 
-    cflags = '-Wno-error=format-nonliteral -Wno-error=implicit-fallthrough='
+    cflags += ' -Wno-error=format-nonliteral -Wno-error=implicit-fallthrough='
 
     if mingw64:
         # 600 = Vista, 601 = Windows 7
@@ -147,8 +161,9 @@ def runtime_env(prefix, target, download_dir, mingw64):
 #    cflags = '-I$prefix/include -I$prefix/$target/include'
 #    cflags = Template(cflags).substitute(prefix=prefix, target=target)
 
+    exe_prefix = '' if use_root else prefix
     def target_exe(exe):
-        return '%s/bin/%s-%s' % (prefix, target, exe)
+        return '%s/bin/%s-%s' % (exe_prefix, target, exe)
 
     env = dotdict({
         'HARDHAT_PREFIX': prefix,
@@ -163,12 +178,13 @@ def runtime_env(prefix, target, download_dir, mingw64):
         'XML_CATALOG_FILES': os.path.join(prefix, 'etc', 'xml', 'catalog'),
         'PYTHON_EGG_CACHE': '%s/home/%s/.cache/Python-Eggs'
                             % (prefix, os.environ['USER']),
-        'CPP': target_exe('cpp'),
+        'CPP': '/bin/cpp' if use_root else target_exe('cpp'),
         'CC': target_exe('gcc'),
         'CXX': target_exe('g++'),
-        'AR': target_exe('ar'),
-        'AS': target_exe('as'),
-        'LD': target_exe('ld'),
+        'AR': '/bin/ar' if use_root else target_exe('ar'),
+        'AS': '/bin/as' if use_root else target_exe('as'),
+        'LD': '/bin/ld' if use_root else target_exe('ld'),
+        'READELF': '/bin/readelf' if use_root else target_exe('readelf'),
         'FC': target_exe('gfortran'),
         'F77': target_exe('gfortran'),
         'F90': target_exe('gfortran'),
@@ -187,7 +203,7 @@ def runtime_env(prefix, target, download_dir, mingw64):
         'CXXFLAGS_NO_OPT': cflags,
         'FFLAGS_NO_OPT': cflags,
         'CFLAGS': c_opt_flags,
-        'CPPFLAGS': '-DNDEBUG',
+        'CPPFLAGS': cppflags,
         'CXXFLAGS': c_opt_flags,
         'FFLAGS': c_opt_flags,
         'LIBS': LIBS,
@@ -195,7 +211,7 @@ def runtime_env(prefix, target, download_dir, mingw64):
 #        'CCACHE_DISABLE': '1',
         'SH': shell,
         'SHELL': shell,
-        'CONFIG_SHELL': shell  # for R
+        'CONFIG_SHELL': shell  # for R,
         })
 
     for k, v in proxy_env().items():
@@ -205,9 +221,9 @@ def runtime_env(prefix, target, download_dir, mingw64):
     return env
 
 
-def export_init_script(filename, prefix, target, download_dir):
+def export_init_script(filename, prefix, target, download_dir, use_root):
     with open(filename, 'wt') as f:
-        env = runtime_env(prefix, target, download_dir, False)
+        env = runtime_env(prefix, target, download_dir, False, use_root)
         env['PREFIX'] = prefix
         env['HARDHAT_TARGET'] = target
         text = ENVIRONMENT.substitute(env)
@@ -288,7 +304,7 @@ def target_path_env(*prefixes):
     path += ROOT_PATH
 
     arch = os.environ['HARDHAT_MARCH']
-    cflags = '-O3 -mtune=native -march=%s' \
+    cflags = ' -O3 -mtune=native -march=%s' \
              ' -fomit-frame-pointer' \
              ' -momit-leaf-frame-pointer -DNDEBUG ' % arch
 

@@ -77,17 +77,18 @@ def load(settings):
 
     dependencies += ocaml[1] + perl[1] + python[1] + toolchain[1] + x11[1]
 
-    toolchain_depends = []
-    for d in toolchain[1]:
-        if d[0] == 'toolchain':
-            toolchain_depends = set(d)
-            break
+    if not settings.use_root:
+        toolchain_depends = []
+        for d in toolchain[1]:
+            if d[0] == 'toolchain':
+                toolchain_depends = set(d)
+                break
 
-    if not settings.mingw64:
-        # mingw64 assumes mingw64 already installed
-        for d in dependencies:
-            if d[0] not in toolchain_depends:
-                d += ['toolchain']
+        if not settings.mingw64:
+            # mingw64 assumes mingw64 already installed
+            for d in dependencies:
+                if d[0] not in toolchain_depends:
+                    d += ['toolchain']
 
     # Java dependencies do not rely on toolchain
     dependencies += java[1]

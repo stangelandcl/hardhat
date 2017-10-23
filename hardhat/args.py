@@ -1,7 +1,7 @@
 import argparse
 import multiprocessing
 import os
-from .settings import RecipeSettings
+from .settings import RecipeSettings, root_target_triplet
 
 
 def parse_args():
@@ -35,6 +35,10 @@ def parse_args():
     parser.add_argument('--mingw64',
                         action='store_true',
                         help='use mingw64 instead of installed gcc')
+    parser.add_argument('--use-root',
+                        action='store_true',
+                        help='use root gcc, glibc and libraries'
+                             ' instead compiling our own')
     parser.add_argument('-v', '--verbose',
                         help='verbose logging',
                         action='store_true')
@@ -154,6 +158,7 @@ def parse_args():
     args.downloads = os.path.expandvars(args.downloads)
 
     settings = RecipeSettings()
+    settings.use_root = args.use_root
     settings.settings_filename = os.path.join(args.prefix, 'config.ini')
     settings.prefix_dir = args.prefix
     settings.tarball_dir = args.downloads
@@ -182,6 +187,12 @@ def parse_args():
     if args.mingw64:
         settings.target_triplet = 'x86_64-w64-mingw32'
         settings.host_triplet = settings.target_triplet
+    elif args.use_root:
+        settings.target_triplet = root_target_triplet()
+        settings.host_triplet = settings.target_triplet
+#        print('target=', settings.target_triplet)
+#    else:
+#        raise Exception("--use-root not specified")
 
     if args.march:
         settings.march = args.march

@@ -75,7 +75,6 @@ class ExeRunner(Object):
             raise Exception('%s in %s failed: %s' % (arg_str, directory, rc))
 
 
-
 class Logger(Object):
     def __init__(self, *args, **kwargs):
         super(Logger, self).__init__(*args, **kwargs)
@@ -283,7 +282,8 @@ class Recipe(RecipeSettings, Logger, ExeRunner, ShortVersionMixin):
         self.environment = runtime_env(self.prefix_dir,
                                        self.target_triplet,
                                        self.tarball_dir,
-                                       self.mingw64)
+                                       self.mingw64,
+                                       self.use_root)
         self.environment_strip_lto()
         self.directory_template = '$prefix/build/$name-$version'
         self.sudo = False
@@ -378,7 +378,7 @@ class Recipe(RecipeSettings, Logger, ExeRunner, ShortVersionMixin):
         pass
 
     def ldconfig(self):
-        if not self.mingw64:
+        if not self.mingw64 and not self.use_root:
             # run ldconfig to rebuild ld cache
             args = ['ldconfig']
             dir = os.path.join(self.prefix_dir, self.target_triplet, 'etc')
@@ -389,7 +389,8 @@ class Recipe(RecipeSettings, Logger, ExeRunner, ShortVersionMixin):
         args = ['%s/bin/update-mime-database' % self.prefix_dir,
                 '%s/share/mime/' % self.prefix_dir]
         if os.path.exists(args[0]):
-            self.log_dir('post-install', self.prefix_dir, 'update-mime-database')
+            self.log_dir('post-install', self.prefix_dir,
+                         'update-mime-database')
             self.run_exe(args, self.prefix_dir, self.environment)
 
     def texhash(self):

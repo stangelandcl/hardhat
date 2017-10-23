@@ -10,3 +10,4 @@ class XZRecipe(GnuRecipe):
         self.name = 'xz'  # includes liblzma
         self.version = '5.2.2'
         self.url = 'http://tukaani.org/xz/xz-$version.tar.bz2'
+        self.compile_args = ['make', '-j1']

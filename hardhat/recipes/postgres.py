@@ -11,16 +11,17 @@ class Extra:
 class PostgresRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(PostgresRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '0187b5184be1c09034e74e44761505e5' \
-                      '2357248451b0c854dddec6c231fe50c9'
+        self.sha256 = '712f5592e27b81c5b454df96b258c14d' \
+                      '94b6b03836831e015c65d6deeae57fd1'
 
         self.name = 'postgres'
-        self.version = '9.6.2'
+        self.version = '10.0'
         self.url = 'https://ftp.postgresql.org/pub/source/' \
                    'v$version/postgresql-$version.tar.bz2'
         self.depends = ['libxml2', 'openldap', 'openssl', 'python3',
                         'readline', 'zlib']
         self.configure_args += [
+            '--with-icu',
             '--with-ldap',
             '--with-openssl',
             '--with-python',
@@ -33,11 +34,12 @@ class PostgresRecipe(GnuRecipe):
         self.compile_args += ['world']
         self.install_args = ['make', 'install-world']
         self.doc = Extra('postgres-doc')
+        self.doc_version = self.version.split('.')[0]
         self.doc.url = 'https://www.postgresql.org/files/documentation/pdf/' \
-                       '%s/postgresql-%s-US.pdf' % (self.short_version,
-                                                    self.short_version)
-        self.doc.sha256 = '619acef648acfead352c97d4a73f678d' \
-                          '676fde977d83087b6241b60328b2c700'
+                       '%s/postgresql-%s-US.pdf' % (self.doc_version,
+                                                    self.doc_version)
+        self.doc.sha256 = '553ebe4fb66c6972cfdb428ea8df320f' \
+                          '00e96ae1f0cfce0e7a1d4ba8e2ba5a01'
         self.doc.version = self.version
         self.extra_downloads.append(self.doc)
 #        self.environment['LIBS'] = '-lrt -lncursesw'  # for libreadline
