@@ -44,10 +44,11 @@ if [ -z "$PREFIX" ]; then
     echo "run hardhat from to build the toolchain, python3, and install hardhat into"
     echo "your chosen prefix/sysroot (PREFIX) directory."
     echo
-    echo "Usage: ./bootstrap.sh --prefix=PREFIX [--downloads=DOWNLOAD_DIR] [--cpus=CPUS] [--pkgfile=PKG_FILE]"
+    echo "Usage: ./bootstrap.sh --prefix=PREFIX [--downloads=DOWNLOAD_DIR] [--cpus=CPUS] [--pkgfile=PKG_FILE] [--use-root]"
     echo "PREFIX = directory to create new sysroot at"
     echo "DOWNLOAD_DIR = default is ~/Downloads/hardhat"
     echo "CPUS = default is .9 (for 90%) use 100 for 100% or an integer like 2 for 2 cores"
+    echo "--use-root for not building gcc and glibc but using root and using root libraries"
     echo "When bootstrap is finished run '. PREFIX/init.sh' (without the quotes) to use"
     echo "the new sysroot."
     exit 1
