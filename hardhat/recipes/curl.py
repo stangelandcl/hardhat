@@ -26,17 +26,3 @@ class CurlRecipe(GnuRecipe):
             ]
 
         super(CurlRecipe, self).configure()
-
-
-class Mingw64CurlRecipe(CurlRecipe):
-    def __init__(self, *args, **kwargs):
-        super(Mingw64CurlRecipe, self).__init__(*args, **kwargs)
-        self.name = 'mingw64-curl'
-        self.depends = ['zlib']
-
-    def configure(self):
-        self.configure_args += ['--with-winssl']
-# no longer needed
-#            self.environment['CFLAGS'] += ' -DWIN32_LEAN_AND_MEAN'
-
-        super(CurlRecipe, self).configure()

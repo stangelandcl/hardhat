@@ -69,13 +69,15 @@ def load(settings):
     cross = hardhat.recipes.cross.load(settings)
     doc = hardhat.recipes.doc.load(settings)
     java = hardhat.recipes.java.load(settings)
+    mingw64 = hardhat.recipes.mingw64.load(settings)
     ocaml = hardhat.recipes.ocaml.load(settings)
     perl = hardhat.recipes.perl.load(settings)
     python = hardhat.recipes.python.load(settings)
     toolchain = hardhat.recipes.toolchain.load(settings)
     x11 = hardhat.recipes.x11.load(settings)
 
-    dependencies += ocaml[1] + perl[1] + python[1] + toolchain[1] + x11[1]
+    dependencies += mingw64[1] + ocaml[1] + perl[1]
+    dependencies += python[1] + toolchain[1] + x11[1]
 
     if not settings.use_root:
         toolchain_depends = []
@@ -90,11 +92,13 @@ def load(settings):
                 if d[0] not in toolchain_depends:
                     d += ['toolchain']
 
+
+
     # Java dependencies do not rely on toolchain
     dependencies += java[1]
     dependencies += doc[1]
     dependencies += cross[1]
 
-    recipes += cross[0] + doc[0] + java[0] + ocaml[0] + \
+    recipes += cross[0] + doc[0] + java[0] + mingw64[0] + ocaml[0] + \
                perl[0] + python[0] + toolchain[0] + x11[0]
     return (recipes, dependencies)

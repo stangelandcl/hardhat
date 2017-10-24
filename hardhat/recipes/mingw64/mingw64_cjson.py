@@ -1,18 +1,24 @@
 import os
 from .base import GnuRecipe
-from ..util import patch
+from hardhat.util import patch
 
 
-class CJsonRecipe(GnuRecipe):
+class Mingw64CJsonRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
-        super(CJsonRecipe, self).__init__(*args, **kwargs)
+        super(Mingw64CJsonRecipe, self).__init__(*args, **kwargs)
         self.sha256 = '6d1482c1b492893b25ab7e77ee6098fe' \
                       '3ef10585df660e5ffe67e632a8c5b9e4'
 
-        self.name = 'cJSON'
+        self.name = 'mingw64-cJSON'
         self.version = '1.5.2'
         self.url = 'https://github.com/DaveGamble/cJSON/archive/' \
                    'v$version.tar.gz'
+        self.environment['CFLAGS'] += ' -D__WINDOWS__'
+
+        extra = ['SHARED=dll']
+        self.compile_args += extra
+        self.install_args += extra
+
         self.compile_args = ['make', 'all']
         self.install_args = [
             self.install_args + ['PREFIX=""',
