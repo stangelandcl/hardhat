@@ -5,6 +5,7 @@ directory = os.path.dirname(__file__)
 import hardhat.recipes.cross
 import hardhat.recipes.doc
 import hardhat.recipes.java
+import hardhat.recipes.mingw64
 import hardhat.recipes.ocaml
 import hardhat.recipes.perl
 import hardhat.recipes.python
