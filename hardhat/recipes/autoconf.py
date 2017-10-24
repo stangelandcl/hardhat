@@ -10,4 +10,5 @@ class AutoConfRecipe(GnuRecipe):
 
         self.name = 'autoconf'
         self.version = '2.69'
+        self.depends = ['perl5']
         self.url = Urls.gnu_template(self.name, self.version)

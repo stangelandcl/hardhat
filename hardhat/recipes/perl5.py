@@ -24,27 +24,41 @@ class Perl5Recipe(GnuRecipe):
             '-Duselargefiles',
             '-Duseshrplib',
             '-Dcc=%s' % self.environment['CC'],
-            '-Dincpth=%s/include' % self.prefix_dir,
-            '-Dlibpth=%s/lib' % self.prefix_dir,
-#            '-Dlibspth=%s/lib' % self.prefix_dir,
-#            '-Dglibpth=%s/lib' % self.prefix_dir,
-#            '-Dxlibpth=%s/lib' % self.prefix_dir,
-#            '-Dlocincpth=%s/include' % self.prefix_dir,
-#            '-Dloclibpth=%s/lib' % self.prefix_dir,
-            '-Dprefix=%s' % self.prefix_dir,
-#            '-Dusecrosscompile=yes',
-#            '-Dtargetarch=linux',
-#            '-Dtargethost=linux-x64',
-            # cross-compiling to eliminate root directories
+            '-Dprefix=%s' % self.prefix_dir]
+
+        if self.use_root:
+            self.configure_args += [
+                '-Dlocincpth=%s/include' % self.prefix_dir,
+                '-Dloclibpth="%s/lib %s/lib64"' % (
+                    self.prefix_dir, self.prefix_dir),
+                '-Aldflags=-Wl,-rpath,%s/lib,-rpath,%s/lib64'
+                % self.prefix_dir,
+            ]
+        else:
+            self.configure_args += [
+                '-Dincpth=%s/include' % self.prefix_dir,
+                '-Dlibpth=%s/lib' % self.prefix_dir,
+                '-Aldflags=-R%s/lib' % self.prefix_dir,
+    #            '-Dlibspth=%s/lib' % self.prefix_dir,
+    #            '-Dglibpth=%s/lib' % self.prefix_dir,
+    #            '-Dxlibpth=%s/lib' % self.prefix_dir,
+    #            '-Dlocincpth=%s/include' % self.prefix_dir,
+    #            '-Dloclibpth=%s/lib' % self.prefix_dir,
+
+    #            '-Dusecrosscompile=yes',
+    #            '-Dtargetarch=linux',
+    #            '-Dtargethost=linux-x64',
+    # cross-compiling to eliminate root directories
             ]
         self.environment['CFLAGS'] += ' -pthread'
         self.environment['LDFLAGS'] += ' -pthread'
 
     def patch(self):
-        self.log_dir('patch', self.directory, 'patching many perl issues')
+        if self.use_root:
+            return
 
-        if not self.use_root:
-            text = """: change the next line if compiling for Xenix/286 on Xenix/386
+        self.log_dir('patch', self.directory, 'patching many perl issues')
+        text = """: change the next line if compiling for Xenix/286 on Xenix/386
 xlibpth='/usr/lib/386 /lib/386'
 : Possible local library directories to search.
 loclibpth="/usr/local/lib /opt/local/lib /usr/gnu/lib"
@@ -58,19 +72,19 @@ test -f /shlib/libc.so     && glibpth="/shlib $glibpth"
 test -d /usr/lib64         && glibpth="$glibpth /lib64 /usr/lib64 /usr/local/lib64"
 """
 
-            filename = os.path.join(self.directory, 'Configure')
-            os.chmod(filename, stat.S_IRWXU)
-            with open_file(filename, 'rt', encoding='utf-8') as f:
-                text1 = f.read()
-            text1 = text1.replace(text, '')
+        filename = os.path.join(self.directory, 'Configure')
+        os.chmod(filename, stat.S_IRWXU)
+        with open_file(filename, 'rt', encoding='utf-8') as f:
+            text1 = f.read()
+        text1 = text1.replace(text, '')
 
-            text = '''locincpth="/usr/local/include /opt/local/include /usr/gnu/include"
+        text = '''locincpth="/usr/local/include /opt/local/include /usr/gnu/include"
     locincpth="$locincpth /opt/gnu/include /usr/GNU/include /opt/GNU/include"
     '''
-            text1 = text1.replace(text, '')
+        text1 = text1.replace(text, '')
 
-            with open(filename, 'wt', encoding='utf-8') as f:
-                f.write(text1)
+        with open(filename, 'wt', encoding='utf-8') as f:
+            f.write(text1)
 
 #        src = """rp="Directories to use for library searches?"
 #. ./myread
@@ -82,12 +96,12 @@ test -d /usr/lib64         && glibpth="$glibpth /lib64 /usr/lib64 /usr/local/lib
 #        dst = 'echo libpth=$libpth'
 #        patch(filename, src, dst)
 
-            src = '''glibpth=`echo " $glibpth " | sed -e 's! /usr/shlib ! !'`
-        glibpth="/usr/shlib $glibpth"'''
-            dst = ': skipping setting glibpth'
-            patch(filename, src, dst)
+        src = '''glibpth=`echo " $glibpth " | sed -e 's! /usr/shlib ! !'`
+glibpth="/usr/shlib $glibpth"'''
+        dst = ': skipping setting glibpth'
+        patch(filename, src, dst)
 
-            src = r'''    for var in xlibpth loclibpth locincpth glibpth; do
+        src = r'''    for var in xlibpth loclibpth locincpth glibpth; do
 	eval xxx=\$$var
 	eval $var=''
 	for path in $xxx; do
@@ -95,15 +109,15 @@ test -d /usr/lib64         && glibpth="$glibpth /lib64 /usr/lib64 /usr/local/lib
 	done
     done
 '''
-            dst = "# Skipping setting lib paths with sysroot"
-            patch(filename, src, dst)
+        dst = "# Skipping setting lib paths with sysroot"
+        patch(filename, src, dst)
 
-            src = r'''libpth="`$echo $libpth|$sed 's/^ //'`"'''
-            dst = r'''libpth="`$echo $libpth|$sed 's/^ //'`"
-            # set plibpth to empty to remove sysroot directories
-            plibpth=""
+        src = r'''libpth="`$echo $libpth|$sed 's/^ //'`"'''
+        dst = r'''libpth="`$echo $libpth|$sed 's/^ //'`"
+        # set plibpth to empty to remove sysroot directories
+        plibpth=""
 '''
-            patch(filename, src, dst)
+        patch(filename, src, dst)
 
 
         # Disable LD_PRELOAD on linux. Causes problems the second
