@@ -137,3 +137,26 @@ class RXRecipe(RRecipe):
         self.with_x = 'yes'
         self.name = 'r-x'
         self.depends += ['xorg-libs']
+
+
+class RSourceRecipe(RRecipe):
+    def __init__(self, *args, **kwargs):
+        super(RSourceRecipe, self).__init__(*args, **kwargs)
+        self.name = 'r-src'
+
+    def configure(self):
+        pass
+
+    def compile(self):
+        pass
+
+    def install(self):
+        dst = os.path.join(self.prefix_dir, 'src',
+                           os.path.basename(self.directory))
+        dir = os.path.dirname(dst)
+        if not os.path.exists(dir):
+            os.makedirs(dir)
+        self.log_dir('install', self.directory, 'move to %s' % dst)
+        if os.path.exists(dst):
+            shutil.rmtree(dst)
+        shutil.move(self.directory, dst)
