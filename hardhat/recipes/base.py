@@ -305,15 +305,17 @@ class Recipe(RecipeSettings, Logger, ExeRunner, ShortVersionMixin):
     def CXXFLAGS(self, value):
         self.environment['CXXFLAGS'] = value
 
-
-    @property
-    def directory(self):
+    def _get_directory(self):
         if hasattr(self, '_directory'):
             return self._directory
         return Template(self.directory_template).substitute(
             name=self.name,
             prefix=self.prefix_dir,
             version=self.short_version)
+
+    @property
+    def directory(self):
+        return self._get_directory()
 
     @directory.setter
     def directory(self, value):
@@ -546,11 +548,14 @@ class Extractor(Object):
         super(Extractor, self).__init__(*args, **kwargs)
         self.extract_dir_template = '$base_extract_dir/$name-$version'
 
-    @property
-    def base_extract_dir(self):
+    def _get_base_extract_dir(self):
         if hasattr(self, '_base_extract_dir'):
             return self._base_extract_dir
         return '%s/build' % (self.prefix_dir)
+
+    @property
+    def base_extract_dir(self):
+        return self._get_base_extract_dir()
 
     @base_extract_dir.setter
     def base_extract_dir(self, value):

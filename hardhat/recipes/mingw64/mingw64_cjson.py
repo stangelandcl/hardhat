@@ -1,9 +1,9 @@
 import os
-from .base import GnuRecipe
+from .base import Mingw64BaseRecipe
 from hardhat.util import patch
 
 
-class Mingw64CJsonRecipe(GnuRecipe):
+class Mingw64CJsonRecipe(Mingw64BaseRecipe):
     def __init__(self, *args, **kwargs):
         super(Mingw64CJsonRecipe, self).__init__(*args, **kwargs)
         self.sha256 = '6d1482c1b492893b25ab7e77ee6098fe' \

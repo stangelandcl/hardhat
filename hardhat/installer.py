@@ -174,6 +174,7 @@ class Installer(object):
         raise Exception('required recipe not found: %s' % (name))
 
     def _install(self, recipe):
+        recipe.init()
         recipe.clean()
         recipe.run()
         self.install_file.installed.add(recipe.running_name)
