@@ -13,13 +13,16 @@ class GitRecipe(GnuRecipe):
         self.url = 'https://www.kernel.org/pub/software/scm/git/' \
                    'git-$version.tar.xz'
 
-        self.depends = ['curl',
+        self.depends = ['asciidoc',
+                        'curl',
                         'docbook-xml',
                         'docbook-xsl',
                         'expat',
                         'openssl',
                         'pcre',
                         'perl',
+                        'xmlto'
+# Optional dependencies for GUI
                         #'python2',
                         #'tk'
                         ]

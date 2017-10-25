@@ -1,6 +1,5 @@
 import os
 import shutil
-import Queue
 from time import sleep
 from string import Template
 import subprocess

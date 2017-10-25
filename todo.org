@@ -41,6 +41,15 @@
 24. Move Oracle Java to amazon and add JDK
 25. Add option to download and extract source code without building
 26. Make a list of projects to keep source code for, like emacs, R, python, sqlite, lmdb, and other libs like cJSON, libcsv
+27. Write --use-root to config file so we don't need to specify it every time
+28. Add a proper config file instead of environment variables
+29. Add option to build new gcc but use old glibc from root directory
+30. Move javascript projects to js subfolder and split out npm from source installs. Use specific versions
+31. Install opam (and optionally ocaml) from binaries.
+32. Add opam installs with specific versions
+33. Add R installs of specific versions: Rcpp and dependencies, GGE etc
+
+    
 
 * Packages
 1. xgboost
