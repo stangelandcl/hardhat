@@ -1,5 +1,4 @@
 from .base import Mingw64BaseRecipe
-from ..cacert import CACertRecipe
 
 
 class Mingw64CurlRecipe(Mingw64BaseRecipe):

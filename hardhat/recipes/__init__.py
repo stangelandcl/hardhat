@@ -5,6 +5,7 @@ directory = os.path.dirname(__file__)
 import hardhat.recipes.cross
 import hardhat.recipes.doc
 import hardhat.recipes.java
+import hardhat.recipes.javascript
 import hardhat.recipes.mingw64
 import hardhat.recipes.ocaml
 import hardhat.recipes.perl
@@ -70,6 +71,7 @@ def load(settings):
     cross = hardhat.recipes.cross.load(settings)
     doc = hardhat.recipes.doc.load(settings)
     java = hardhat.recipes.java.load(settings)
+    javascript = hardhat.recipes.javascript.load(settings)
     mingw64 = hardhat.recipes.mingw64.load(settings)
     ocaml = hardhat.recipes.ocaml.load(settings)
     perl = hardhat.recipes.perl.load(settings)
@@ -79,6 +81,7 @@ def load(settings):
 
     dependencies += mingw64[1] + ocaml[1] + perl[1]
     dependencies += python[1] + toolchain[1] + x11[1]
+    dependencies += javascript[1]
 
     if not settings.use_root:
         toolchain_depends = []
@@ -87,19 +90,18 @@ def load(settings):
                 toolchain_depends = set(d)
                 break
 
-        if not settings.mingw64:
-            # mingw64 assumes mingw64 already installed
-            for d in dependencies:
-                if d[0] not in toolchain_depends:
-                    d += ['toolchain']
-
-
+#        if not settings.mingw64:
+#            # mingw64 assumes mingw64 already installed
+        for d in dependencies:
+            if d[0] not in toolchain_depends:
+                d += ['toolchain']
 
     # Java dependencies do not rely on toolchain
     dependencies += java[1]
     dependencies += doc[1]
     dependencies += cross[1]
 
-    recipes += cross[0] + doc[0] + java[0] + mingw64[0] + ocaml[0] + \
+    recipes += cross[0] + doc[0] + java[0] + javascript[0] + \
+               mingw64[0] + ocaml[0] + \
                perl[0] + python[0] + toolchain[0] + x11[0]
     return (recipes, dependencies)

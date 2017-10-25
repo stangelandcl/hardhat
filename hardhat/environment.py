@@ -132,7 +132,27 @@ def runtime_env(prefix, target, download_dir, mingw64, use_root):
     ldflags = Template(ldflags).substitute(prefix=prefix, target=target)
 
     arch = os.environ['HARDHAT_MARCH']
-    if mingw64:
+    if use_root:
+        if os.path.exists('/usr/bin/gcc'):
+            bin_dir = '/usr/bin'
+        elif os.path.exists('/bin/gcc'):
+            bin_dir = '/bin'
+        else:
+            raise Exception("Root gcc not found")
+
+    exe_prefix = '' if use_root else prefix
+    def target_exe(exe):
+        return '%s/bin/%s-%s' % (exe_prefix, target, exe)
+
+    def bin_or_target_exe(exe):
+        return '%s/%s' % (bin_dir, exe) if use_root else target_exe(exe)
+
+    gcc = ('%s/%s-gcc' % (bin_dir, target)) if use_root else target_exe('gcc')
+    gcc_major = gcc_version(gcc)[0]
+    if gcc_major >= 7:
+        cflags += ' -Wno-error=format-nonliteral' \
+                  ' -Wno-error=implicit-fallthrough='
+    if mingw64 or gcc_major < 7:
         ld_opt = '-O3 '
         opt = '-O3 -mtune=native -march=%s' \
               ' -fomit-frame-pointer -momit-leaf-frame-pointer ' % arch
@@ -155,23 +175,6 @@ def runtime_env(prefix, target, download_dir, mingw64, use_root):
 
 #    cflags = '-I$prefix/include -I$prefix/$target/include'
 #    cflags = Template(cflags).substitute(prefix=prefix, target=target)
-
-    if use_root:
-        if os.path.exists('/usr/bin/gcc'):
-            bin_dir = '/usr/bin'
-        elif os.path.exists('/bin/gcc'):
-            bin_dir = '/bin'
-        else:
-            raise Exception("Root gcc not found")
-
-    exe_prefix = '' if use_root else prefix
-    def target_exe(exe):
-        return '%s/bin/%s-%s' % (exe_prefix, target, exe)
-
-    gcc = target_exe('gcc')
-    if gcc_version(gcc)[0] >= 7:
-        cflags += ' -Wno-error=format-nonliteral' \
-                  ' -Wno-error=implicit-fallthrough='
     c_opt_flags = cflags
     if c_opt_flags:
         c_opt_flags += ' '
@@ -190,18 +193,17 @@ def runtime_env(prefix, target, download_dir, mingw64, use_root):
         'XML_CATALOG_FILES': os.path.join(prefix, 'etc', 'xml', 'catalog'),
         'PYTHON_EGG_CACHE': '%s/home/%s/.cache/Python-Eggs'
                             % (prefix, os.environ['USER']),
-        'CPP': ('%s/cpp' % bin_dir) if use_root else target_exe('cpp'),
+        'CPP': bin_or_target_exe('cpp'),
         'CC': gcc,
-        'CXX': target_exe('g++'),
-        'AR': ('%s/ar' % bin_dir) if use_root else target_exe('ar'),
-        'AS': ('%s/as' % bin_dir) if use_root else target_exe('as'),
-        'LD': ('%s/ld' % bin_dir) if use_root else target_exe('ld'),
-        'READELF': ('%s/readelf' % bin_dir) if use_root
-                                            else target_exe('readelf'),
-        'FC': target_exe('gfortran'),
-        'F77': target_exe('gfortran'),
-        'F90': target_exe('gfortran'),
-        'F95': target_exe('gfortran'),
+        'CXX': bin_or_target_exe('g++'),
+        'AR': bin_or_target_exe('ar'),
+        'AS': bin_or_target_exe('as'),
+        'LD': bin_or_target_exe('ld'),
+        'READELF': bin_or_target_exe('readelf'),
+        'FC': bin_or_target_exe('gfortran'),
+        'F77': bin_or_target_exe('gfortran'),
+        'F90': bin_or_target_exe('gfortran'),
+        'F95': bin_or_target_exe('gfortran'),
         'TMPDIR': '%s/tmp' % (prefix),
         'LIBRARY_PATH': lib_path,
         'JAVA_HOME': '%s/java' % (prefix),

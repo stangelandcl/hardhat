@@ -13,18 +13,14 @@ class MinRecipe(GnuRecipe):
         self.name = 'min'
         self.version = '1.6.3'
         self.version_regex = r'(?P<version>\d+\.\d+\.\d+)'
-        self.depends = ['nodejs']
+        self.depends = ['electron', 'grunt']
         self.url = 'https://github.com/minbrowser/min/archive/v$version.tar.gz'
 
         self.configure_args = [['npm', 'install'],
-                               ['npm', 'run', 'buildTranslations'],
-                               ['npm', 'install', '-g', 'grunt']]
+                               ['npm', 'run', 'buildTranslations']]
         self.compile_args = ['grunt']
-        self.install_args = ['npm', 'install', '-g', 'electron']
 
     def install(self):
-        super(MinRecipe, self).install()
-
         js = os.path.join(self.prefix_dir, 'js')
         if not os.path.exists(js):
             os.makedirs(js)
