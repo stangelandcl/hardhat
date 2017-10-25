@@ -1,5 +1,7 @@
 import os
 import shutil
+import Queue
+from time import sleep
 from string import Template
 import subprocess
 from hardhat.util import hash_file, matches_hash, Object, \
@@ -38,6 +40,7 @@ class ExeRunner(Object):
         read_process_async(p.stderr, output)
 
         while True:
+            sleep(.001)
             p.poll()
             if p.returncode is not None:
                 break
