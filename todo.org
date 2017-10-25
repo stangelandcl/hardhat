@@ -48,8 +48,8 @@
 31. Install opam (and optionally ocaml) from binaries.
 32. Add opam installs with specific versions
 33. Add R installs of specific versions: Rcpp and dependencies, GGE etc
+34. Add flag to say exactly when we should rewrite init.sh
 
-    
 
 * Packages
 1. xgboost
