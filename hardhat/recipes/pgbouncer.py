@@ -13,4 +13,4 @@ class PgBouncerRecipe(GnuRecipe):
         self.depends = ['libevent']
         self.url = 'https://pgbouncer.github.io/downloads/files/$version/' \
                    'pgbouncer-$version.tar.gz'
-        self.configure_strip_cross_compile()
+#        self.configure_strip_cross_compile()
