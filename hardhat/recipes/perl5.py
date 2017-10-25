@@ -32,7 +32,7 @@ class Perl5Recipe(GnuRecipe):
                 '-Dloclibpth="%s/lib %s/lib64"' % (
                     self.prefix_dir, self.prefix_dir),
                 '-Aldflags=-Wl,-rpath,%s/lib,-rpath,%s/lib64'
-                % self.prefix_dir,
+                % (self.prefix_dir, self.prefix_dir),
             ]
         else:
             self.configure_args += [
