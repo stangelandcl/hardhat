@@ -59,11 +59,16 @@ _gcc_exe = None
 def gcc_version(exe):
     global _gcc_version, _gcc_exe
     if not _gcc_exe or exe != _gcc_exe:
-        text = run_or_error([exe, '--version'], '/tmp', {})
-        version = text.strip().split('\n')[0].split(' ')[2]
-        v = version.split('.')
-        _gcc_exe = exe
-        _gcc_version = (int(v[0]), int(v[1]), int(v[2]))
+        # we are using our compiled gcc
+        if not os.path.exists(exe):
+            _gcc_exe = exe
+            _gcc_version = (7, 1, 0)
+        else:
+            text = run_or_error([exe, '--version'], '/tmp', {})
+            version = text.strip().split('\n')[0].split(' ')[2]
+            v = version.split('.')
+            _gcc_exe = exe
+            _gcc_version = (int(v[0]), int(v[1]), int(v[2]))
     return _gcc_version
 
 def open_file(filename, mode, encoding):
