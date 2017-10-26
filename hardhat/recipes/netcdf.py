@@ -12,7 +12,7 @@ class NetcdfRecipe(GnuRecipe):
         self.version_regex = r'(?P<version>\d+\.\d+\.\d+)'
         self.version_url = 'https://www.unidata.ucar.edu/downloads/netcdf/' \
                            'index.jsp'
-        self.depends = ['autotools', 'hdf5', 'zlib']
+        self.depends = ['autotools', 'curl', 'hdf5', 'zlib']
         self.url = 'ftp://ftp.unidata.ucar.edu/pub/netcdf/' \
                    'netcdf-$version.tar.gz'
         self.configure_args += ['--enable-mmap',
