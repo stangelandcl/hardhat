@@ -22,6 +22,11 @@ def get_target_triplet(arch, os_name):
     return target
 
 
+def get_use_root(use_root):
+    return os.environ.get('HARDHAT_USE_ROOT', 'yes' if use_root else 'no') \
+        == 'yes'
+
+
 def get_march():
     target = os.environ.get('HARDHAT_MARCH')
     target = target if target else 'core2'

@@ -14,6 +14,7 @@ export HARDHAT_PATH="$HARDHAT_PATH"
 export HARDHAT_DOWNLOAD_DIR="$HARDHAT_DOWNLOAD_DIR"
 export HARDHAT_TARGET=$HARDHAT_TARGET
 export HARDHAT_MARCH=$HARDHAT_MARCH
+export HARDHAT_USE_ROOT=$HARDHAT_USE_ROOT
 export PREFIX=$PREFIX
 export XORG_PREFIX=$XORG_PREFIX
 export XML_CATALOG_FILES=$XML_CATALOG_FILES
@@ -241,6 +242,7 @@ def export_init_script(filename, prefix, target, download_dir, use_root):
         env = runtime_env(prefix, target, download_dir, False, use_root)
         env['PREFIX'] = prefix
         env['HARDHAT_TARGET'] = target
+        env['HARDHAT_USE_ROOT'] = 'yes' if use_root else 'no'
         text = ENVIRONMENT.substitute(env)
         f.write(text)
 

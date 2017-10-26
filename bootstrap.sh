@@ -9,6 +9,7 @@ CPUS=.9
 MARCH="core2"
 USE_ROOT=
 unset HARDHAT_TARGET
+unset HARDHAT_USE_ROOT
 
 for i in "$@"; do
     case $i in

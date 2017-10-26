@@ -1,7 +1,7 @@
 import argparse
 import multiprocessing
 import os
-from .settings import RecipeSettings, root_target_triplet
+from .settings import RecipeSettings, root_target_triplet, get_use_root
 
 
 def parse_args():
@@ -158,7 +158,7 @@ def parse_args():
     args.downloads = os.path.expandvars(args.downloads)
 
     settings = RecipeSettings()
-    settings.use_root = args.use_root
+    settings.use_root = get_use_root(args.use_root)
     settings.settings_filename = os.path.join(args.prefix, 'config.ini')
     settings.prefix_dir = args.prefix
     settings.tarball_dir = args.downloads
