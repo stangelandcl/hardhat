@@ -1,7 +1,7 @@
 import os
 import shutil
 import stat
-from .base import GnuRecipe
+from ..base import GnuRecipe
 
 
 class MinRecipe(GnuRecipe):
@@ -21,6 +21,7 @@ class MinRecipe(GnuRecipe):
         self.compile_args = ['grunt']
 
     def install(self):
+        self.log_dir('install', self.directory, 'copy min to bin')
         js = os.path.join(self.prefix_dir, 'js')
         if not os.path.exists(js):
             os.makedirs(js)

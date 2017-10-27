@@ -1,19 +1,14 @@
-from ..base import GnuRecipe
+from ..base import Recipe, MakeInstall
 
 
-class NpmBaseRecipe(GnuRecipe):
+class NpmBaseRecipe(MakeInstall, Recipe):
     def __init__(self, *args, **kwargs):
         super(NpmBaseRecipe, self).__init__(*args, **kwargs)
         self.depends = ['nodejs']
+        self.directory = '/tmp'
 
     def init(self):
         super(NpmBaseRecipe, self).init()
 
         self.install_args = ['npm', 'install', '-g',
                              '%s@%s' % (self.name, self.version)]
-
-    def configure_args(self):
-        pass
-
-    def compile_args(self):
-        pass
