@@ -89,4 +89,4 @@ diff -Naur icu.old/source/i18n/ucol_res.cpp icu.new/source/i18n/ucol_res.cpp
      return en;
 '''
             self.apply_patch(self.directory, text)
-            self.directory = os.path.join(self.directory, 'source')
+        self.directory = os.path.join(self.directory, 'source')
