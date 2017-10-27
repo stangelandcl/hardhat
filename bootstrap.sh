@@ -143,7 +143,7 @@ if [ ! -f $DIR/bootstrap/bin/hardhat ]; then
     fi
 
     if [ ! -f $DIR/bootstrap/bin/hardhat ]; then
-	"$PYTHON" setup.py develop --home=$DIR/bootstrap
+	"$PYTHON" setup.py install --home=$DIR/bootstrap
     fi
 fi
 
