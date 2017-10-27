@@ -38,7 +38,6 @@ class Perl5Recipe(GnuRecipe):
             self.configure_args += [
                 '-Dincpth=%s/include' % self.prefix_dir,
                 '-Dlibpth=%s/lib' % self.prefix_dir,
-                '-Aldflags=-R%s/lib' % self.prefix_dir,
     #            '-Dlibspth=%s/lib' % self.prefix_dir,
     #            '-Dglibpth=%s/lib' % self.prefix_dir,
     #            '-Dxlibpth=%s/lib' % self.prefix_dir,
