@@ -143,7 +143,7 @@ if [ ! -f $DIR/bootstrap/bin/hardhat ]; then
     fi
 
     if [ ! -f $DIR/bootstrap/bin/hardhat ]; then
-	"$PYTHON" setup.py install --home=$DIR/bootstrap
+	"$PYTHON" setup.py develop --home=$DIR/bootstrap
     fi
 fi
 
@@ -153,6 +153,8 @@ if [ ! -e $PREFIX/bin/python3 ]; then
     if [ -e $PREFIX/init.sh ]; then
 	# for HARDHAT_TARGET so we use the same compiler
 	. $PREFIX/init.sh
+	# init.sh overwrites path
+	export PATH=$DIR/bootstrap/bin:$PATH
     fi
     hardhat $USE_ROOT --march=$MARCH --cpus=$CPUS --prefix=$PREFIX --downloads=$DOWNLOAD_DIR install python3-beautifulsoup
 fi

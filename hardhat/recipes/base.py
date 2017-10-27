@@ -168,6 +168,15 @@ class EmptyRecipe(Object):
     def provides(self):
         return [self.name]
 
+    def init(self):
+        pass
+
+    def clean(self):
+        pass
+
+    def compile(self):
+        pass
+
     def run(self):
         pass
 
