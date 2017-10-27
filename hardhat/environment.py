@@ -57,7 +57,7 @@ export CCACHE_DIR=$CCACHE_DIR
 export PREFIX=$PREFIX
 export R_SHELL=$R_SHELL
 export R_HOME=$R_HOME
-
+export OPAMROOT=$OPAMROOT
 
 #export TERM=xterm-256color
 
@@ -227,7 +227,8 @@ def runtime_env(prefix, target, download_dir, mingw64, use_root):
 #        'CCACHE_DISABLE': '1',
         'SH': shell,
         'SHELL': shell,
-        'CONFIG_SHELL': shell  # for R,
+        'CONFIG_SHELL': shell,  # for R
+        'OPAMROOT': '%s/opam' % prefix
         })
 
     for k, v in proxy_env().items():
