@@ -196,6 +196,38 @@ class ShortVersionMixin(Object):
         return version
 
 
+class SourceMixin(Object):
+    def __init__(self, *args, **kwargs):
+        super(SourceMixin, self).__init__(*args, **kwargs)
+
+    @property
+    def provides(self):
+        return [self.name + '-src']
+
+    def configure(self):
+        pass
+
+    def compile(self):
+        pass
+
+    def install(self):
+        dst = os.path.join(self.prefix_dir, 'src', self.name)
+        dir = os.path.dirname(dst)
+        if not os.path.exists(dir):
+            os.makedirs(dir)
+        self.log_dir('install', self.directory, 'move to %s' % dst)
+        if os.path.exists(dst):
+            shutil.rmtree(dst)
+        shutil.move(self.directory, dst)
+        version = os.path.join(dst,
+                               'VERSION_%s' % self.version)
+        with open(version, 'wt') as f:
+            f.write(str(self.version))
+
+    def post_install(self):
+        pass
+
+
 class GetVersionMixin(Object):
     def __init__(self, *args, **kwargs):
         super(GetVersionMixin, self).__init__(*args, **kwargs)

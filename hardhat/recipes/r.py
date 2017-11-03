@@ -1,9 +1,8 @@
 import os
 import shutil
-import sys
 from string import Template
 from hardhat.util import patch
-from .base import GnuRecipe
+from .base import GnuRecipe, SourceMixin
 
 
 class Extra:
@@ -87,7 +86,6 @@ class RRecipe(GnuRecipe):
         # just compiled version
         super(RRecipe, self).compile()
 
-
     def install(self):
         super(RRecipe, self).install()
 
@@ -97,7 +95,6 @@ class RRecipe(GnuRecipe):
             os.makedirs(dst)
         dst = os.path.join(dst, 'R-exts.pdf')
         shutil.copy2(self.ext.filename, dst)
-
 
     def patch(self):
 #        src = r'''(eval "$ac_compile") 2>conftest.err'''
@@ -139,24 +136,6 @@ class RXRecipe(RRecipe):
         self.depends += ['xorg-libs']
 
 
-class RSourceRecipe(RRecipe):
+class RSourceRecipe(SourceMixin, RRecipe):
     def __init__(self, *args, **kwargs):
         super(RSourceRecipe, self).__init__(*args, **kwargs)
-        self.name = 'r-src'
-
-    def configure(self):
-        pass
-
-    def compile(self):
-        pass
-
-    def install(self):
-        dst = os.path.join(self.prefix_dir, 'src',
-                           os.path.basename(self.directory))
-        dir = os.path.dirname(dst)
-        if not os.path.exists(dir):
-            os.makedirs(dir)
-        self.log_dir('install', self.directory, 'move to %s' % dst)
-        if os.path.exists(dst):
-            shutil.rmtree(dst)
-        shutil.move(self.directory, dst)
