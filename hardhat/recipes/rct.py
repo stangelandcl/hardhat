@@ -16,5 +16,4 @@ class RctRecipe(GnuRecipe):
             'cmake',
             '-DCMAKE_INSTALL_PREFIX=%s' % self.prefix_dir,
             '-DCMAKE_EXPORT_COMPILE_COMMANDS=1',
-            '-DCMAKE_BUILD_TYPE=Release',
-            '-DFORCE_BASH_COMPLETION_INSTALLATION=ON']
+            '-DCMAKE_BUILD_TYPE=Release']
