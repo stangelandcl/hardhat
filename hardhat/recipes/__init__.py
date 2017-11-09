@@ -10,6 +10,7 @@ import hardhat.recipes.mingw64
 import hardhat.recipes.ocaml
 import hardhat.recipes.perl
 import hardhat.recipes.python
+import hardhat.recipes.rpkg
 import hardhat.recipes.toolchain
 import hardhat.recipes.x11
 
@@ -76,11 +77,12 @@ def load(settings):
     ocaml = hardhat.recipes.ocaml.load(settings)
     perl = hardhat.recipes.perl.load(settings)
     python = hardhat.recipes.python.load(settings)
+    rpkg = hardhat.recipes.rpkg.load(settings)
     toolchain = hardhat.recipes.toolchain.load(settings)
     x11 = hardhat.recipes.x11.load(settings)
 
     dependencies += mingw64[1] + ocaml[1] + perl[1]
-    dependencies += python[1] + toolchain[1] + x11[1]
+    dependencies += python[1] + rpkg[1] + toolchain[1] + x11[1]
     dependencies += javascript[1]
 
     if not settings.use_root:
@@ -103,5 +105,5 @@ def load(settings):
 
     recipes += cross[0] + doc[0] + java[0] + javascript[0] + \
                mingw64[0] + ocaml[0] + \
-               perl[0] + python[0] + toolchain[0] + x11[0]
+               perl[0] + python[0] + rpkg[0] + toolchain[0] + x11[0]
     return (recipes, dependencies)
