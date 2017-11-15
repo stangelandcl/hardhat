@@ -298,6 +298,12 @@ def patch(filename, find, replace):
         f.write(text)
 
 
+def write_script(filename, text):
+    with open(filename, 'wt') as f:
+        f.write(text)
+    os.chmod(filename, stat.S_IRWXU | stat.S_IRWXG | stat.S_IROTH)
+
+
 def exception_str(e):
     if hasattr(e, '__traceback__'):
         e_traceback = traceback.format_exception(e.__class__, e,

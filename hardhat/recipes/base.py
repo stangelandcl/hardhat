@@ -1,5 +1,6 @@
 import os
 import shutil
+import stat
 from time import sleep
 from string import Template
 import subprocess

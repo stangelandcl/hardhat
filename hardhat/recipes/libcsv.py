@@ -1,4 +1,4 @@
-from .base import GnuRecipe
+from .base import GnuRecipe, SourceMixin
 
 
 class LibCsvRecipe(GnuRecipe):
@@ -11,3 +11,8 @@ class LibCsvRecipe(GnuRecipe):
         self.version = '3.0.3'
         self.url = 'http://downloads.sourceforge.net/project/libcsv/libcsv/' \
                    'libcsv-$version/libcsv-$version.tar.gz'
+
+
+class LibCsvSourceRecipe(SourceMixin, LibCsvRecipe):
+    def __init__(self, *args, **kwargs):
+        super(LibCsvSourceRecipe, self).__init__(*args, **kwargs)
