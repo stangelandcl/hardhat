@@ -13,6 +13,7 @@ class AcpilightRecipe(GnuRecipe):
         self.url = self.github_commit('wavexx')
         self.install_args = [
             ['cp', 'xbacklight', '%s/bin/xbacklight' % self.prefix_dir],
+            ['cp', 'xbacklight', '%s/bin/acpilight' % self.prefix_dir],
             ['mkdir', '-p', '%s/man/man1' % self.prefix_dir],
             ['cp', 'xbacklight.1', '%s/man/man1' % self.prefix_dir]
             ]

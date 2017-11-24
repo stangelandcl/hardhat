@@ -48,6 +48,7 @@
 31. Add R installs of specific versions: Rcpp and dependencies, GGE etc
 32. Add flag to say exactly when we should rewrite init.sh
 33. Add config file with options like build git without python2 libxml dependency and without html and man pages. So many more configuration options and parameters. Look at how nix does it.
+34. Update auto4mate, autoreconf, autoheader to have hardhat/bin/perl instead of /usr/bin/perl in shebang and exec line early in script
 
 * Packages
 1. xgboost
