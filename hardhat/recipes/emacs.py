@@ -1,6 +1,6 @@
 import os
 import shutil
-from .base import GnuRecipe
+from .base import GnuRecipe, SourceMixin
 from ..urls import Urls
 
 # Emacs 25
@@ -62,3 +62,8 @@ class EmacsRecipe(GnuRecipe):
         shutil.copy2(src, dst)
 
         super(EmacsRecipe, self).install()
+
+
+class EmacsSourceRecipe(SourceMixin, EmacsRecipe):
+    def __init__(self, *args, **kwargs):
+        super(EmacsSourceRecipe, self).__init__(*args, **kwargs)
