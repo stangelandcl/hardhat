@@ -45,7 +45,7 @@
 28. Add a proper config file instead of environment variables
 29. Add option to build new gcc but use old glibc from root directory
 30. Move javascript projects to js subfolder and split out npm from source installs. Use specific versions
-31. Add R installs of specific versions: Rcpp and dependencies, GGE etc
+31. Add R installs of specific versions: Rcpp and dependencies, GGE etc and install R packages from CRAN
 32. Add flag to say exactly when we should rewrite init.sh
 33. Add config file with options like build git without python2 libxml dependency and without html and man pages. So many more configuration options and parameters. Look at how nix does it.
 34. Update auto4mate, autoreconf, autoheader to have hardhat/bin/perl instead of /usr/bin/perl in shebang and exec line early in script
