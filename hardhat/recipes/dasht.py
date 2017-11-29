@@ -56,3 +56,22 @@ You are now ready to use dasht! Read the manuals below to learn even more.
             src_file = os.path.join(src, name)
             dst_file = os.path.join(dst, name)
             shutil.copy2(src_file, dst_file)
+
+        self.log_dir('install', self.directory, 'installing docsets')
+
+        docsets = [
+            'Bash',
+            'Boost',
+            'C',
+            'C++',
+            'CMake',
+            'Emacs_Lisp',
+            'NET_Framework',
+            'Python_3',
+            'R',
+            'SQLite',
+            'Tcl']
+
+        for docset in docsets:
+            args = ['dasht-docsets-install', '--force', r"""'^%s$'""" % docset]
+            self.run_exe(args, self.directory, self.environment)
