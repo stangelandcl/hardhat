@@ -117,6 +117,8 @@
 64. add acpilight - xbacklight replacement
 65. wmctrl - for focusing windows from the commandline
 66. rifo - dmenu alternative 
+67. DropBoxDownloader
+
 * Bugs
 1. gimp install hangs.
 2. Add better error on circular dependencies.
