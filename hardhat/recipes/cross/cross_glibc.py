@@ -31,7 +31,8 @@ class CrossGLibCRecipe(CrossGnuRecipe):
             '--with-headers=%s/%s/include' % (self.cross_prefix_dir,
                                               self.target_triplet),
             'libc_cv_forced_unwind=yes',
-            'libc_cv_c_cleanup=yes'
+            'libc_cv_c_cleanup=yes',
+            '--disable-werror'
             ]
 
     def version_check(self):

@@ -17,7 +17,7 @@ gmp_sha256 = '5275bb04f4863a13516b2f39392ac5e2' \
 mpc_version = '1.0.3'
 mpc_sha256 = '617decc6ea09889fb08ede330917a00b' \
              '16809b8db88c29c31bfbb49cbf88ecc3'
-isl_version = '0.16.1'
+isl_version = '0.16.1'  # recommended version for gcc
 isl_sha256 = '412538bb65c799ac98e17e8cfcdacbb2' \
              '57a57362acfaaff254b0fcae970126d2'
 
@@ -28,14 +28,14 @@ class CrossGnuRecipe(GnuRecipe):
         self.cross_prefix_dir = make_cross_prefix_dir(self.prefix_dir)
         self.environment = toolchain_env(self.cross_prefix_dir)
 
-        self.gcc_version = '7.1.0'
-        self.gcc_sha256 = '3c187ef42e4cf657eec0ed641aac7f7e' \
-                          '46261bcb1cea31b72dcf2dedddbbdea5'
+        self.gcc_version = '7.2.0'
+        self.gcc_sha256 = '0153a003d3b433459336a91610cca299' \
+                          '5ee0fb3d71131bd72555f2231a6efcfc'
 
-        self.glibc_version = '2.25'
-        self.glibc_sha256 = 'ad984bac07844ecc222039d43bd5f1f1' \
-                            'e1571590ea28045232ae3fa404cefc32'
+        self.glibc_version = '2.26'
+        self.glibc_sha256 = 'dcc2482b00fdb1c316f385f8180e182b' \
+                            'bd37c065dc7d8281a4339d2834ef1be7'
 
-        self.binutils_version = '2.28'
-        self.binutils_sha256 = 'cd717966fc761d840d451dbd58d44e1e' \
-                               '5b92949d2073d75b73fccb476d772fcf'
+        self.binutils_version = '2.29'
+        self.binutils_sha256 = '172e8c89472cf52712fd23a9f14e9bca' \
+                               '6182727fb45b0f8f482652a83d5a11b4'

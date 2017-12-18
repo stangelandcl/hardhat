@@ -95,7 +95,6 @@ fi
         patch(filename, src, '')
 
 
-
     def need_configure(self):
         return True
 
@@ -122,6 +121,13 @@ fi
             '--disable-multilib',
             '--enable-kernel=2.6.32',
             '--enable-obsolete-rpc',
+        # for glibc 2.26:
+        #
+        # malloc.c:3572:25: error: array subscript is above array bounds [-Werror=array-bounds]
+        # mfastbinptr *fb = &fastbin (av, idx);
+        #
+        # and more
+            '--disable-werror'
 #            'libc_cv_ssp=no',
 #            'libc_cv_ssp_strong=no',
             ]
