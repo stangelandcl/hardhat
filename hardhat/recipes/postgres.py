@@ -11,11 +11,10 @@ class Extra:
 class PostgresRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(PostgresRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '712f5592e27b81c5b454df96b258c14d' \
-                      '94b6b03836831e015c65d6deeae57fd1'
-
+        self.sha256 = '3ccb4e25fe7a7ea6308dea103cac2029' \
+                      '63e6b746697366d72ec2900449a5e713'
         self.name = 'postgres'
-        self.version = '10.0'
+        self.version = '10.1'
         self.url = 'https://ftp.postgresql.org/pub/source/' \
                    'v$version/postgresql-$version.tar.bz2'
         self.depends = ['libxml2', 'openldap', 'openssl', 'python3',
