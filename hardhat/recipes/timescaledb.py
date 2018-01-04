@@ -27,4 +27,4 @@ class TimescaleDBRecipe(GnuRecipe):
         super(TimescaleDBRecipe, self).patch()
         dir = os.path.join(self.directory, 'build')
         os.makedirs(dir)
-        self.directory = dir;
+        self.directory = dir
