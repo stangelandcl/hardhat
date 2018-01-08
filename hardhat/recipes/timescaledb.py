@@ -11,7 +11,7 @@ class TimescaleDBRecipe(GnuRecipe):
         self.name = 'timescaledb'
         self.version = '0.7.1'
         self.version_regex = r'(?P<version>\d+\.\d+\.\d+)'
-        self.depends = ['autotools', 'postgres']
+        self.depends = ['autotools', 'cmake', 'postgres']
         self.url = 'https://github.com/timescale/timescaledb/releases/' \
                    'download/$version/timescaledb-$version.tar.gz'
         self.configure_args = [
