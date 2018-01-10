@@ -44,8 +44,8 @@ class GitRecipe(GnuRecipe):
     def compile(self):
         super(GitRecipe, self).compile()
 
-        self.compile_args = ['make', 'html']
-        super(GitRecipe, self).compile()
+#        self.compile_args = ['make', 'html']
+#        super(GitRecipe, self).compile()
 
         self.compile_args = ['make', 'man']
         super(GitRecipe, self).compile()
@@ -56,5 +56,5 @@ class GitRecipe(GnuRecipe):
         self.install_args = ['make', 'install-man']
         super(GitRecipe, self).install()
 
-        self.install_args = ['make', 'install-html']
-        super(GitRecipe, self).install()
+#        self.install_args = ['make', 'install-html']
+#        super(GitRecipe, self).install()
