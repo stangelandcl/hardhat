@@ -119,7 +119,8 @@ fi
             '--with-headers=%s' % (headers),
             '--without-selinux',
             '--disable-multilib',
-            '--enable-kernel=2.6.32',
+            '--enable-kernel=3.10',
+#            '--enable-kernel=2.6.32',
             '--enable-obsolete-rpc',
         # for glibc 2.26:
         #
