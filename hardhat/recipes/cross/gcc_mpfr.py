@@ -12,5 +12,5 @@ class CrossGccMpfrRecipe(GccPrereqRecipe):
 
     @property
     def url(self):
-        return 'http://www.mpfr.org/mpfr-current/mpfr-%s.tar.bz2' \
-            % self.version
+        return 'http://www.mpfr.org/mpfr-%s/mpfr-%s.tar.bz2' \
+            % (self.version, self.version)
