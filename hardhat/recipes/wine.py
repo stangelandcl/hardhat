@@ -16,7 +16,8 @@ class WineRecipe(GnuRecipe):
         # optional dependencies: x11
         self.url = 'http://dl.winehq.org/wine/source/2.x/wine-$version.tar.xz'
         self.configure_args += ['--enable-win64',
-                                '--without-x']
+                                '--without-x',
+                                '--without-freetype']
 #        self.compile_args = ['make']
         self.configure_strip_cross_compile()
         self.environment_strip_lto()
