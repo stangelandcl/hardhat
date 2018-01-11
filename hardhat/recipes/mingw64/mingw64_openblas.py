@@ -12,6 +12,7 @@ class Mingw64OpenBlasRecipe(Mingw64BaseRecipe):
         self.sha256 = 'c4f71a60e3f23a7a25693390af3be230' \
                       '8d374749ae3cb0bcfd8aab33a3c9ac09'
 
+        self.depends = ['wine']
         self.name = 'mingw64-openblas'
         self.version = 'fd4e68128e56beb3b97f37178edf07bef7ade5f1'
         self.url = Urls.github_commit('xianyi', 'OpenBLAS',
