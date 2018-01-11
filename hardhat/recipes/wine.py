@@ -15,7 +15,8 @@ class WineRecipe(GnuRecipe):
         self.depends = ['autotools', 'flex']
         # optional dependencies: x11
         self.url = 'http://dl.winehq.org/wine/source/2.x/wine-$version.tar.xz'
-        self.configure_args += ['--enable-win64']
+        self.configure_args += ['--enable-win64',
+                                '--without-x']
 #        self.compile_args = ['make']
         self.configure_strip_cross_compile()
         self.environment_strip_lto()
