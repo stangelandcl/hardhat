@@ -37,8 +37,8 @@ class PostgresRecipe(GnuRecipe):
         self.doc.url = 'https://www.postgresql.org/files/documentation/pdf/' \
                        '%s/postgresql-%s-US.pdf' % (self.doc_version,
                                                     self.doc_version)
-        self.doc.sha256 = '553ebe4fb66c6972cfdb428ea8df320f' \
-                          '00e96ae1f0cfce0e7a1d4ba8e2ba5a01'
+        self.doc.sha256 = '5e0950eec2d89d50d5638c17f557b027' \
+                          '6374550acd397d6c7c57d6ad1d74e9bf'
         self.doc.version = self.version
         self.extra_downloads.append(self.doc)
 #        self.environment['LIBS'] = '-lrt -lncursesw'  # for libreadline
