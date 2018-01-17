@@ -8,7 +8,7 @@ class QmakeRecipe(GnuRecipe):
         self.sha256 = 'e2882295097e47fe089f8ac741a95fef' \
                       '47e0a73a3f3cdf21b56990638f626ea0'
 
-        self.description = 'qmake without all the other assorted qt stuff"
+        self.description = 'qmake without all the other assorted qt stuff'
         self.name = 'qmake'
         self.version = '4.8.7'
         short_version = '.'.join(self.version.split('.')[:2])
