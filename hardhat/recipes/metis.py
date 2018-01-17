@@ -11,7 +11,7 @@ class MetisRecipe(GnuRecipe):
         self.name = 'metis'
         self.version = '5.1.0'
         self.version_regex = r'(?P<version>\d+\.\d+\.\d+)'
-        self.depends = ['autotools']
+        self.depends = ['cmake']
         self.url = 'http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/' \
                    'metis-$version.tar.gz'
         self.configure_args = [
