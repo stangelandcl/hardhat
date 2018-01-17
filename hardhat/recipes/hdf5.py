@@ -7,9 +7,10 @@ class Hdf5Recipe(GnuRecipe):
         self.sha256 = 'a4335849f19fae88c264fd0df046bc32' \
                       '1a78c536b2548fc508627a790564dc38'
         self.name = 'hdf5'
-        self.version = '1.8.19'
-        self.url = 'https://support.hdfgroup.org/ftp/HDF5/current18/src/' \
-                   'hdf5-$version.tar.gz'
+        self.version = '1.8.20'
+        version = '.'.join(self.version.split('.')[:2])
+        self.url = 'https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-%s/' \
+                   'hdf5-$version/src/hdf5-$version.tar.bz2' % version
         self.depends += ['zlib']
         self.configure_strip_cross_compile()
         self.configure_args += ['--enable-cxx',
