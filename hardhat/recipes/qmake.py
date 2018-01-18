@@ -9,6 +9,8 @@ class QmakeRecipe(GnuRecipe):
                       '47e0a73a3f3cdf21b56990638f626ea0'
 
         self.description = 'qmake without all the other assorted qt stuff'
+
+
         self.name = 'qmake'
         self.version = '4.8.7'
         short_version = '.'.join(self.version.split('.')[:2])

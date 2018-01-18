@@ -37,6 +37,7 @@ class PostgresRecipe(GnuRecipe):
         self.doc.url = 'https://www.postgresql.org/files/documentation/pdf/' \
                        '%s/postgresql-%s-US.pdf' % (self.doc_version,
                                                     self.doc_version)
+
         self.doc.sha256 = '5e0950eec2d89d50d5638c17f557b027' \
                           '6374550acd397d6c7c57d6ad1d74e9bf'
         self.doc.version = self.version
