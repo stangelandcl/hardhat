@@ -19,7 +19,7 @@ class NginxRecipe(GnuRecipe):
             '--pid-path=/run/nginx.pid',
             '--error-log-path=/var/log/nginx/error.log',
             '--http-log-path=/var/log/nginx/access.log',
-#            '--conf-path=/etc/nginx/nginx.conf',
+            '--conf-path=%s/etc/nginx/nginx.conf' % self.prefix_dir,
             '--lock-path=/var/log/nginx/nginx.lock',
             '--with-ipv6',
             '--with-pcre',
