@@ -16,13 +16,14 @@ class Mingw64CLapackRecipe(Mingw64BaseRecipe):
         self.version = '3.2.1'
         self.url = 'http://www.netlib.org/clapack/clapack.tgz'
 
-        if self.is_atom():
-            self.compile_args += ['TARGET=ATOM']
-        else:
-            # hardcoded because it failed to compile when detecting for itself
-            self.compile_args += ['TARGET=CORE2']
+#        if self.is_atom():
+#            self.compile_args += ['TARGET=ATOM']
+#        else:
+#            # hardcoded because it failed to compile when detecting for itself
+#            self.compile_args += ['TARGET=CORE2']
 
 #        self.compile_args += ['USE_THREAD=1']
+        self.install_args = ['cp', '*.a', '%s/lib' % self.prefix_dir]
 
     def patch(self):
         filename = os.path.join(self.directory, 'F2CLIBS', 'libf2c', 'Makefile')
@@ -173,6 +174,12 @@ F2CLIB		 = ../../F2CLIBS/libf2c.a
 
         self.compile_args = args + ['blaslib']
         super(Mingw64CLapackRecipe, self).compile()
+
+        dir = self.directory
+        self.directory = os.path.join(self.directory, 'INSTALL')
+        self.compile_args = args + ['slamch.o', 'second.o', 'dlamch.o', 'dsecnd.o', 'ilaver.o', 'lsame.o']
+        super(Mingw64CLapackRecipe, self).compile()
+        self.directory = dir
 
         dir = self.directory
         self.directory = os.path.join(self.directory, 'SRC')

@@ -2,6 +2,13 @@ import os
 import shutil
 from .base import GnuRecipe
 
+class Extra:
+    def __init__(self, name):
+        self.name = name
+        self.sha256 = None
+        self.version = '1.0'
+        self.url = None
+
 
 class DashtRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
@@ -30,6 +37,11 @@ dasht-server
 
 You are now ready to use dasht! Read the manuals below to learn even more.
 '''
+
+        self.msdn = Extra('msdn')
+        self.msdn.url = 'http://rotemy.com/dash/msdn/msdn.tgz'
+        self.msdn.sha256 = '081d9c3961024355497a68a521acc90ecf5ea81b3a689032c02770bbb8d6562e'
+        self.extra_downloads.append(self.msdn)
 
     def configure(self):
         pass
@@ -75,3 +87,6 @@ You are now ready to use dasht! Read the manuals below to learn even more.
         for docset in docsets:
             args = ['dasht-docsets-install', '--force', r"""'^%s$'""" % docset]
             self.run_exe(args, self.directory, self.environment)
+
+        args = ['dasht-docsets-extract', self.msdn.filename]
+        self.run_exe(args, self.directory, self.environment)
