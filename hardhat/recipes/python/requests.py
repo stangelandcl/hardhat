@@ -8,4 +8,4 @@ class RequestsRecipe(PipBaseRecipe):
                       'abedf16ea10206da1132edaa6dda237e'
         self.name = 'requests'
         self.version = '2.18.4'
-        self.pydepends = ['chardet']
+        self.pydepends = ['chardet', 'idna']
