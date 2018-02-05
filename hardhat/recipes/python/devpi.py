@@ -37,7 +37,9 @@ class DevPiWebRecipe(PipBaseRecipe):
 class DevPiClientRecipe(PipBaseRecipe):
     def __init__(self, *args, **kwargs):
         super(DevPiClientRecipe, self).__init__(*args, **kwargs)
+        self.sha256 = '4e65b4086cd6bcf8bcffd95f40650dff' \
+                      '94d24c8fda4b1c5a71c91fdac54e8e56'
         self.pythons = ['python3']
-        self.pydepends = ['check-manifest', 'pkginfo', 'tox']
+        self.pydepends = ['check-manifest', 'pkginfo', 'requests', 'tox']
         self.name = 'devpi-client'
         self.version = '4.0.1'
