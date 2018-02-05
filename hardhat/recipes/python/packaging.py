@@ -8,3 +8,4 @@ class PackagingRecipe(PipBaseRecipe):
                       '6504efea1177abd7e69329a8e5ea619e'
         self.name = 'packaging'
         self.version = '16.8'
+        self.pydepends = ['pyparsing']
