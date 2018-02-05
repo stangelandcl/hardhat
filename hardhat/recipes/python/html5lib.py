@@ -9,4 +9,4 @@ class Html5LibRecipe(PipBaseRecipe):
 
         self.name = 'html5lib'
         self.version = '0.99999999' # bleach requires this version
-        self.pydepends = ['webencodings']
+        self.pydepends = ['setuptools', 'webencodings']
