@@ -9,4 +9,4 @@ class Argon2CffiRecipe(PipBaseRecipe):
                 
         self.name = 'argon2_cffi'
         self.version = '16.3.0'
-        self.depends = ['six']
+        self.pydepends = ['six']
