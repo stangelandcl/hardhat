@@ -30,9 +30,12 @@ class DevCommonRecipe(PipBaseRecipe):
 class DevPiWebRecipe(PipBaseRecipe):
     def __init__(self, *args, **kwargs):
         super(DevPiWebRecipe, self).__init__(*args, **kwargs)
+        self.sha256 = '5ec1d61ccfdc460ff5084188f49308c6' \
+                      '801c3471e5417bfd213623c499138fd7'
         self.pythons = ['python3']
         self.pydepends = ['devpi-server', 'pyramid_chameleon',
                           'readme_renderer',
+                          'setuptools_scm',
                           'Whoosh']
         self.name = 'devpi-web'
         self.version = '3.2.2'
