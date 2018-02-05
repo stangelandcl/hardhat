@@ -4,6 +4,8 @@ from .base import PipBaseRecipe
 class DevPiServerRecipe(PipBaseRecipe):
     def __init__(self, *args, **kwargs):
         super(DevPiServerRecipe, self).__init__(*args, **kwargs)
+        self.sha256 = '74de3ec0396d8f6f3b2eafd7c50d6d3a' \
+                      'f560a6d80770bd518bee1a312d9be778'
         self.pythons = ['python3']
         self.pydepends = ['argon2_cffi',
                           'defusedxml',
@@ -17,6 +19,8 @@ class DevPiServerRecipe(PipBaseRecipe):
 class DevCommonRecipe(PipBaseRecipe):
     def __init__(self, *args, **kwargs):
         super(DevCommonRecipe, self).__init__(*args, **kwargs)
+        self.sha256 = 'e9afa277a9b227d92335c49fab40be2e' \
+                      '9bb112c0f4dda84906c14addb1ded2f7'
         self.pythons = ['python3']
         self.pydepends = ['requests']
         self.name = 'devpi-common'
