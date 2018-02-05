@@ -9,4 +9,4 @@ class PyramidChameleonRecipe(PipBaseRecipe):
 
         self.name = 'pyramid_chameleon'
         self.version = '0.3'
-        self.pydepends = ['Chameleon']
+        self.pydepends = ['Chameleon', 'pyramid']
