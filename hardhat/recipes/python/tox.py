@@ -8,4 +8,4 @@ class ToxRecipe(PipBaseRecipe):
                       '5243a970154496aac13f9283682435f9'
         self.name = 'tox'
         self.version = '2.7.0'
-        self.pydepends = ['pluggy', 'virtualenv']
+        self.pydepends = ['pluggy', 'py', 'virtualenv']
