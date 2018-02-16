@@ -28,6 +28,7 @@ class FreeTdsRecipe(GnuRecipe):
              '--disable-odbc', '--disable-server', '--disable-pool',
              '--with-openssl', '--with-tdsver=7.3']]
         self.compile_args = ['make', '-j1']
+        self.environment['CFLAGS'] += ' -fPIC'  # for shared libs
         self.doc = Extra()
         self.doc.version = '12.5.1'
         self.doc.url = 'http://infocenter.sybase.com/help/topic/' \
