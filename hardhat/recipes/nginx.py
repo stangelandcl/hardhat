@@ -21,6 +21,7 @@ class NginxRecipe(GnuRecipe):
             '--http-log-path=/var/log/nginx/access.log',
             '--conf-path=%s/etc/nginx/nginx.conf' % self.prefix_dir,
             '--lock-path=/var/log/nginx/nginx.lock',
+            '--with-debug',
             '--with-ipv6',
             '--with-pcre',
             '--with-threads',
