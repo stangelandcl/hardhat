@@ -9,8 +9,8 @@ class NginxAuthLdapRecipe(GnuRecipe):
         self.sha256 = '80d6cce9a9877d51dec2f85a11ce7cd2' \
                       '5edbd2d605c28bc28687ecc5695229ee'
         self.name = 'nginx-auth-ldap'
-        self.version = '42d195d7a7575ebab1c369ad3fc5d78dc2c2669c'
-        self.url = self.github_commit('kvspb')
+        self.version = '9f8b59263f6bf36ddfc831554d6b05579794aa9e'
+        self.url = self.github_commit('stangelandcl')
 
     def configure(self):
         pass
