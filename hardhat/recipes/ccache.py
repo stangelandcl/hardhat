@@ -19,6 +19,8 @@ class CCacheRecipe(GnuRecipe):
         conf = r'''
 max_size = 5.0G
 sloppiness=pch_defines,time_macros
+compression = true
+compression_level = 1
 '''
         dir = os.path.join(self.prefix_dir, '.ccache')
         self.log_dir('install', dir, 'adding ccache.conf')
