@@ -6,10 +6,11 @@ from ..util import patch
 class FreeRdpRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(FreeRdpRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '99e108cfc2f7bc7339d0693e9c4c25f9' \
-	              '0bad4c6bc38349206758c2cccd7cc4cc'
+        self.sha256 = 'e8b23bf7d22d933e7d2a64f84cc09c83' \
+                      '29016a0b31eaff02b9f4eff5c53a2789'
         self.name = 'freerdp'
-        self.version = '71ce3378da9044d21575d0331dc4fb97bc4c995c'
+        # 8cba20 04-26-2018
+        self.version = '8cba2019997587ea83e2949eb39f789671fc6bcd'
         self.url = 'https://github.com/FreeRDP/FreeRDP/archive/' \
                    '$version.tar.gz'
         self.depends = ['alsa-lib',
@@ -34,7 +35,7 @@ class FreeRdpRecipe(GnuRecipe):
             '-DWITH_PULSE=OFF',
             '-DWITH_FFMPEG=ON',
             '-DWITH_JPEG=ON',
-            '-DWITH_X264=ON',
+            '-DWITH_X264=OFF',
             '-DWITH_GSTREAMER_1_0=OFF',
             '-DWITH_GSTREAMER_0_10=OFF',
             ]
