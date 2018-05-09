@@ -229,6 +229,8 @@ def get_groups():
     try:
         groups = os.getgroups()
     except:
+        pass
+    if not len(groups):
         groups = [os.environ['USER']]
     return groups
 
