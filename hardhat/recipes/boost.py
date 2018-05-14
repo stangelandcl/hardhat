@@ -8,11 +8,9 @@ from .python3 import Python3Recipe
 class BoostRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(BoostRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = 'beae2529f759f6b3bf3f4969a19c2e9d' \
-                      '6f0c503edcb2de4a61d1428519fcb3b0'
 
         self.name = 'boost'
-        self.version = '1.63.0'
+        self.version = '1.67.0'
         self.version_regex = r'(?P<version>\d+\.\d+\.\d+)/'
         self.version_url = 'http://www.boost.org/users/download/'
         self.depends = ['bzip2', 'icu', 'openmpi',

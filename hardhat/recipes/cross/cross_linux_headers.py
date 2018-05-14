@@ -59,7 +59,10 @@ VERSIONS = [
      'http://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.7.10.tar.gz'),
     ('4.10.14',
      '86b597801ab62c57a8af818cb555009e54b87a16ecb61e665abb974a44e821b6',
-     'http://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.10.14.tar.gz')
+     'http://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.10.14.tar.gz'),
+    ('4.16.5',
+     '72d25ca2fa54919724b5a59b785a0e47ecc66a03d0df176696d393a19b4c5941',
+     'http://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.16.7.tar.gz')
 ]
 
 

@@ -14,9 +14,9 @@ class ICURecipe(GnuRecipe):
                           'a72aef244b53683d0d7521371683da0c'
             self.version = '58.2'
         else:
-            self.sha256 = 'f073ea8f35b926d70bb33e6577508aa6' \
-                          '42a8b316a803f11be20af384811db418'
-            self.version = '60.2'  # 59.1 gcc 4.8+ required
+            self.sha256 = 'd007f89ae8a2543a53525c74359b65b3' \
+                          '6412fa84b3349f1400be6dcf409fafef'    
+            self.version = '61.1'  # 59.1 gcc 4.8+ required
         self.version_regex = '(?P<version>\d+\.\d+)/'
         self.version_url = 'http://download.icu-project.org/files/icu4c/'
         underscore_version = self.version.replace('.', '_')

@@ -1,6 +1,6 @@
 .PHONY: install sdist bootstrap stats nix
 OLD_VERSION=
-VERSION=20171218
+VERSION=20180509
 
 sdist:
 	python3 setup.py sdist --formats=gztar
@@ -14,7 +14,7 @@ install: sdist
 	cd ~/Downloads && tar xvf hardhat-0.1.tar.gz
 	rm -rf ~/hardhat/${VERSION}
 	if [ -z "$OLD_VERSION" ]; then rm -rf ~/hardhat/${OLD_VERSION} ; fi
-	cd ~/Downloads/hardhat-0.1 && ./bootstrap.sh --march=native --prefix=~/hardhat/${VERSION} --cpus=.5 --pkgfile=~/vcs/hardhat/config/dev.config
+	cd ~/Downloads/hardhat-0.1 && ./bootstrap.sh --march=native --prefix=~/hardhat/${VERSION} --cpus=.75 --pkgfile=~/vcs/hardhat/config/example.config
 
 
 install_root: sdist

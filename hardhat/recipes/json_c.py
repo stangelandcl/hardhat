@@ -9,7 +9,7 @@ class JsonCRecipe(GnuRecipe):
 
         self.name = 'json-c'
         self.version = '0.12'
-        self.depends = []
+        self.depends = ['autoconf']
         self.url = 'https://s3.amazonaws.com/json-c_releases/releases/' \
                    'json-c-$version.tar.gz'
 

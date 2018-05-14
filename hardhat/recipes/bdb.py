@@ -1,5 +1,6 @@
 import os
 from .base import GnuRecipe
+from ..util import patch
 
 
 class BerkeleyDBRecipe(GnuRecipe):
@@ -30,3 +31,10 @@ class BerkeleyDBRecipe(GnuRecipe):
         super(BerkeleyDBRecipe, self).extract()
 
         self.directory = os.path.join(self.directory, 'build_unix')
+
+    def patch(self):
+        src = '__atomic_compare_exchange'
+        dst = 'db__atomic_compare_exchange'
+        filename = os.path.join(self.directory, '../src/dbinc/atomic.h')
+        patch(filename, src, dst)
+

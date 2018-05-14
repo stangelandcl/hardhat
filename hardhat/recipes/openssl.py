@@ -5,10 +5,10 @@ from ..version import Versions
 class OpenSSLRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(OpenSSLRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '6b3977c61f2aedf0f96367dcfb5c6e57' \
-                      '8cf37e7b8d913b4ecb6643c3cb88d8c0'
+        self.sha256 = 'ec3f5c9714ba0fd45cb4e087301eb133' \
+                      '6c317e0d20b575a125050470e8089e4d'
 
-        self.version = '1.0.2k'
+        self.version = '1.0.2o'
         self.name = 'openssl'
 
         self.depends = ['zlib']
