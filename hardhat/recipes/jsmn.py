@@ -6,11 +6,10 @@ from ..util import patch
 class JsmnRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(JsmnRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '58c546d8181cb93a842589fa920eb70d' \
-                      '423f2e60475f223e655f971b2919c42c'
-
+        self.sha256 = 'dcc5967bf86a5c47225930c86635f2f8' \
+                      'e45f338e9f23b1c7ae6a68d973dba3b4'
         self.name = 'jsmn'
-        self.version = 'f1c2cb0e9c7eadebfed0463eb18ce2f5ab339ee0'
+        self.version = '0cf5ed961bba54203d15c6b61a008189c457e50e'
         self.version_regex = r'(?P<version>\d+\.\d+\.\d+)'
         self.depends = []
         self.url = self.github_commit('stangelandcl')
