@@ -230,7 +230,7 @@ def get_groups():
         groups = os.getgroups()
     except:
         pass
-    if not len(groups):
+    if not groups:
         groups = [os.environ['USER']]
     return groups
 

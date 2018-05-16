@@ -18,6 +18,7 @@ install: sdist
 
 
 install_root: sdist
+	mkdir -p ~/Downloads
 	cp dist/hardhat-0.1.tar.gz ~/Downloads
 	rm -rf ~/Downloads/hardhat-0.1
 	cd ~/Downloads && tar xvf hardhat-0.1.tar.gz
