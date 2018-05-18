@@ -651,6 +651,12 @@ class Extractor(Object):
 class Configure(Object):
     def __init__(self, *args, **kwargs):
         super(Configure, self).__init__(*args, **kwargs)
+        self.cmake_args = [
+            'cmake',
+            '-G',
+            '"Unix Makefiles"',
+            '-DCMAKE_BUILD_TYPE=Release',
+            '-DCMAKE_INSTALL_PREFIX=%s' % self.prefix_dir]
 
     @property
     def configure_args(self):
