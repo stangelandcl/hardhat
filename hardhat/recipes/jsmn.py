@@ -5,10 +5,10 @@ from .base import GnuRecipe
 class JsmnRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(JsmnRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = 'b54e8a90b5c6f1c2fa665128ce79e87c' \
-                      '2a5770b8e2431957acc0464d6d95a5f3'
+        self.sha256 = 'f40d98aa140ad16e56128476924d7042' \
+                      '733f276383d2e1d26d206e51c8f1d939'
         self.name = 'jsmn'
-        self.version = '697c0fe247238dbdaf285f47071a3069f188d203'
+        self.version = 'a81db82332c7a8c50e41deb491459338f219f221'
         self.version_regex = r'(?P<version>\d+\.\d+\.\d+)'
         self.depends = []
         self.url = self.github_commit('stangelandcl')
