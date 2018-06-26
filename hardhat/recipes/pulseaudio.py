@@ -4,12 +4,12 @@ from .base import GnuRecipe
 class PulseAudioRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(PulseAudioRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = 'c3d3d66b827f18fbe903fe3df647013f' \
-                      '09fc1e2191c035be1ee2d82a9e404686'
+        self.sha256 = '6e422dbdc9fd11c0cb6af869e5eda73d' \
+                      'c24a8be3c14725440edd51ce6b464444'
 
         self.name = 'pulseaudio'
-        self.version = '9.0'
-        self.depends = ['intltool', 'json-c', 'libsndfile']
+        self.version = '12.0'
+        self.depends = ['gdbm', 'intltool', 'json-c', 'libsndfile']
         self.url = 'http://freedesktop.org/software/pulseaudio/releases/' \
                    'pulseaudio-$version.tar.xz'
         self.configure_strip_cross_compile()

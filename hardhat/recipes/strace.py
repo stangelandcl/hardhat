@@ -4,10 +4,9 @@ from .base import GnuRecipe
 class StraceRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(StraceRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = 'e86a5f6cd8f941f67f3e4b28f4e60f3d' \
-                      '9185c951cf266404533210a2e5cd8152'
-
+        self.sha256 = '068cd09264c95e4d591bbcd3ea08f99a' \
+                      '693ed8663cd5169b0fdad72eb5bdb39d'                                        
         self.name = 'strace'
-        self.version = '4.11'
-        self.url = 'https://downloads.sourceforge.net/project/strace/strace/' \
-                   '$version/strace-$version.tar.xz'
+        self.version = '4.22'
+        self.url = 'https://github.com/strace/strace/releases/' \
+                   'download/v$version/strace-$version.tar.xz'

@@ -1,4 +1,5 @@
 import os
+from ..util import patch
 from .base import GnuRecipe
 
 
@@ -12,6 +13,12 @@ class MakeRecipe(GnuRecipe):
         self.version = '4.2.1'
         self.url = 'http://open-source-box.org/make/make-$version.tar.bz2'
         self.configure_args += ['--without-guile']
+
+    def patch(self):
+        src = '#if !defined __alloca && !defined __GNU_LIBRARY__'
+        dst = '#if 1'
+        filename = os.path.join(self.directory, 'glob', 'glob.c')
+        patch(filename, src, dst)
 
     def install(self):
         super(MakeRecipe, self).install()

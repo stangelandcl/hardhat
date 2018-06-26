@@ -6,7 +6,8 @@ from ..base import GnuRecipe
 class DBeaverRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(DBeaverRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = None
+        self.sha256 = 'a3adf0a9090446e4f2bf53d32a217656' \
+                      '2ed18ce460a38fc9bdbe81445417da35'
 
         self.name = 'dbeaver'
         self.depends = ['java']
