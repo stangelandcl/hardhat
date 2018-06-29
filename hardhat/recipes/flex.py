@@ -19,6 +19,11 @@ class FlexRecipe(GnuRecipe):
         # when flex is built with cross-compile flags
         self.configure_strip_cross_compile()
 
+    def patch(self):
+        exe = ['sed', '-i', '"/math.h/a', '#include <malloc.h>"',
+               'src/flexdef.h']
+        self.run_exe(exe, self.directory, self.environment)
+
     def install(self):
         super(FlexRecipe, self).install()
 

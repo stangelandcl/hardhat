@@ -6,10 +6,8 @@ from .base import GnuRecipe
 class LapackRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(LapackRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = 'a9a0082c918fe14e377bbd5700576167' \
-                      '68dca76cbdc713457d8199aaa233ffc3'
         self.name = 'lapack'
-        self.version = '3.6.0'
+        self.version = '3.8.0'
         self.url = 'http://www.netlib.org/lapack/lapack-$version.tgz'
 
         self.libname = 'liblapack.a'

@@ -6,13 +6,15 @@ from ..util import patch
 class CJsonRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(CJsonRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = 'd1ca2665b34fea164a877637b4ad1624' \
-                      'aa23390fe75de91b88e18c5d6ec91978'
-                                        
+        self.sha256 = '6eb9d852a97ffbe149e747f54d63e39a' \
+                      '674fa248bb24902a14c079803067949a'
+
         self.name = 'cJSON'
-        self.version = '1.7.6'
+        self.version = '1.7.7'
         self.url = 'https://github.com/DaveGamble/cJSON/archive/' \
                    'v$version.tar.gz'
+        self.version_regex = 'v(?P<version>\d+\.\d+\.\d+)\.tar\.gz'
+        self.version_url = 'https://github.com/DaveGamble/cJSON/releases'
         self.compile_args = ['make', 'all']
         self.install_args = [
             self.install_args + ['PREFIX=""',

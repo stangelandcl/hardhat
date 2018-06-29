@@ -5,10 +5,11 @@ from .base import GnuRecipe
 class FreetypeRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(FreetypeRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '3a3bb2c4e15ffb433f2032f50a5b5a92' \
-                      '558206822e22bfe8cbe339af4aa82f88'
+        self.sha256 = 'db8d87ea720ea9d5edc5388fc7a0497b' \
+                      'b11ba9fe972245e0f7f4c7e8b1e1e84d'
+
         self.name = 'freetype'
-        self.version = '2.7.1'
+        self.version = '2.9.1'
         self.version_url = 'http://download.savannah.gnu.org/releases/' \
                            'freetype/'
         self.url = 'http://downloads.sourceforge.net/freetype/' \

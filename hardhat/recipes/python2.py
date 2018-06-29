@@ -4,10 +4,11 @@ from .base import GnuRecipe
 class Python2Recipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(Python2Recipe, self).__init__(*args, **kwargs)
-        self.sha256 = 'fa7190be30634e24b3b57f32c8242342' \
-                      'e514241cf8cc0e38233abaad9a7f6130'
+        self.sha256 = '616315d7f5939682ab1983d33afd7551' \
+                      '0c6b6fcfcd779492b0e78debbedcaa95'
+
         self.name = 'python2'
-        self.version = '96f502059717a692ca3abd968b26c5ea2918ad3a'
+        self.version = '468f97b4640e69b237a707a0ef9152d1c023f701'
         self.depends = ['bdb', 'bzip2', 'cacert', 'expat', 'gdbm', 'ncurses',
                         'openssl', 'readline', 'sqlite3', 'zlib']
         self.url = self.github_commit('python', 'cpython')

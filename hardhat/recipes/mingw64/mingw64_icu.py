@@ -6,10 +6,8 @@ from hardhat.util import patch
 class Mingw64IcuRecipe(Mingw64BaseRecipe):
     def __init__(self, *args, **kwargs):
         super(Mingw64IcuRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '7132fdaf9379429d004005217f10e00b' \
-                      '7d2319d0fea22bdfddef8991c45b75fe'
         self.name = 'mingw64-icu'
-        self.version = '59.1'
+        self.version = '62.1'
         self.version_regex = '(?P<version>\d+\.\d+)/'
         self.version_url = 'http://download.icu-project.org/files/icu4c/'
         underscore_version = self.version.replace('.', '_')

@@ -5,12 +5,11 @@ from .base import GnuRecipe
 class UtilLinuxRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(UtilLinuxRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '2c59ea67cc7b564104f60532f6e0a95f' \
-                      'e17a91acb870ba8fd7e986f273abf9e7'
-
+        self.sha256 = '6c7397abc764e32e8159c2e96042874a' \
+                      '190303e77adceb4ac5bd502a272a4734'
         self.description = 'includes uuidgen'
         self.name = 'util-linux'
-        self.version = '2.29'
+        self.version = '2.32'
         self.version_regex = 'v(?P<version>\d+\.\d+)/'
         self.version_url = 'https://www.kernel.org/pub/linux/utils/util-linux/'
         self.url = 'https://www.kernel.org/pub/linux/utils/util-linux/' \

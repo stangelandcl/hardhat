@@ -124,6 +124,14 @@ class Versions:
         return Versions.get_from_directory(url, version_regex,
                                            get_version_from_file)
 
+    @staticmethod
+    def get_non_link_versions(url, regex):
+        html = read_url(url).decode('utf-8', 'ignore')
+        versions = []
+        for match in re.finditer(regex, html):
+            versions.append(match.group('version'))
+        return (Versions.max(versions), len(set(versions)) > 1)
+
 
 def get_file(url):
     p = urlparse(url)

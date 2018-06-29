@@ -7,11 +7,11 @@ from hardhat.util import open_file, patch
 class Perl5Recipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(Perl5Recipe, self).__init__(*args, **kwargs)
-        self.sha256 = '7e430c6e0e0d9017c3f72898850dea65' \
-                      '7fa6b51909220a7bcf305a87f2475202'
+        self.sha256 = '7e929f64d4cb0e9d1159d4a59fc89394' \
+                      'e27fa1f7004d0836ca0d514685406ea8'
 
         self.name = 'perl5'
-        self.version = '5.24.0'
+        self.version = '5.28.0'
         # Even numbered releases only. Odd numbers are development
         self.version_regex = r'perl\-(?P<version>\d+\.\d*[02468]\.\d+)\.tar\.gz'
         self.url = 'http://www.cpan.org/src/5.0/perl-$version.tar.gz'

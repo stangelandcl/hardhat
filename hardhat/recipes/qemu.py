@@ -4,11 +4,8 @@ from .base import GnuRecipe
 class QemuRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(QemuRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = 'dafd5d7f649907b6b617b822692f4c82' \
-                      'e60cf29bc0fc58bc2036219b591e5e62'
-
         self.name = 'qemu'
-        self.version = '2.8.0'
+        self.version = '2.12.0'
         self.depends = ['alsa-lib',
                         'bzip2',
                         'check',

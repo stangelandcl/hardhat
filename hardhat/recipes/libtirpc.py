@@ -4,13 +4,15 @@ from .base import GnuRecipe
 class LibTiRpcRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(LibTiRpcRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '723c5ce92706cbb601a8db09110df1b4' \
-                      'b69391643158f20ff587e20e7c5f90f5'
-
+        self.sha256 = '86c3a78fc1bddefa96111dd233124c70' \
+                      '3b22a78884203c55c3e06b3be6a0fd5e'
         self.name = 'libtirpc'
-        self.version = '1.0.2'
+        self.version = '1.0.3'
         self.url = 'http://downloads.sourceforge.net/project/libtirpc/' \
                    'libtirpc/$version/libtirpc-$version.tar.bz2'
+        self.version_url = 'https://sourceforge.net/projects/libtirpc/files/' \
+                           'libtirpc/'
+        self.version_regex = 'libtirpc/(?P<version>\d+\.\d+\.\d+)/'
         self.depends = ['mit-kerberos']
 
     def patch(self):

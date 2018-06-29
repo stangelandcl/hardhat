@@ -5,11 +5,10 @@ from .graphviz import GraphVizRecipe
 class LibGdRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(LibGdRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '137f13a7eb93ce72e32ccd7cebdab687' \
-                      '4f8cf7ddf31d3a455a68e016ecd9e4e6'
-
+        self.sha256 = '8c302ccbf467faec732f0741a859eef4' \
+                      'ecae22fea2d2ab87467be940842bde51'
         self.name = 'libgd'
-        self.version = '2.2.4'
-        self.url = 'https://github.com/libgd/libgd/releases/download/gd-$version/libgd-$version.tar.xz'
-
-
+        self.version = '2.2.5'
+        self.version_url = 'https://github.com/libgd/libgd/releases'
+        self.url = 'https://github.com/libgd/libgd/releases/download/' \
+                   'gd-$version/libgd-$version.tar.xz'

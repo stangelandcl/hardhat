@@ -7,11 +7,11 @@ from ..util import save_url
 class BashRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(BashRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = 'd86b3392c1202e8ff5a423b302e6284d' \
-                      'b7f8f435ea9f39b5b1b20fd3ac36dfcb'
+        self.sha256 = '604d9eec5e4ed5fd2180ee44dd756ddc' \
+                      'a92e0b6aa4217bbab2b6227380317f23'
 
         self.name = 'bash'
-        self.version = '4.4'
+        self.version = '4.4.18'
         self.url = Urls.gnu_template(self.name, self.version)
         self.doc_url = 'https://www.gnu.org/software/bash/manual/bash.html'
         self.doc_file = os.path.join(self.prefix_dir, 'doc', 'bash.html')

@@ -5,11 +5,8 @@ from .base import GnuRecipe
 class AbcdeRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(AbcdeRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = 'aa39881682ac46eb9fc199d1343b97bc' \
-                      '56a322b41a5c57013acda31948bc53dd'
-
         self.name = 'abcde'
-        self.version = '2.7.2'
+        self.version = '2.9.1'
         self.depends = ['cdparanoia', 'cd-discid', 'lame']
         self.url = 'https://abcde.einval.com/download/abcde-$version.tar.gz'
         self.install_args += ['prefix=""',

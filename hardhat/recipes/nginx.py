@@ -6,12 +6,10 @@ from ..util import patch
 class NginxRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(NginxRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '8410b6c31ff59a763abf7e5a5316e762' \
-                      '9f5a5033c95a3a0ebde727f9ec8464c5'
 
         self.name = 'nginx'
         self.depends = ['nginx-auth-ldap', 'openssl', 'pcre', 'zlib']
-        self.version = '1.13.8'
+        self.version = '1.15.0'
         self.url = 'http://nginx.org/download/nginx-$version.tar.gz'
         self.configure_strip_cross_compile()
         self.configure_args += [

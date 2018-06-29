@@ -12,6 +12,8 @@ class LinuxPamRecipe(GnuRecipe):
         self.version = '1.3.0'
         self.depends = ['bdb', 'cracklib', 'libtirpc']
         self.url = 'http://linux-pam.org/library/Linux-PAM-$version.tar.bz2'
+        self.version_url = 'http://www.linux-pam.org/library/'
+        self.version_regex = 'Linux-PAM-(?P<version>\d+\.\d+\.\d+)\.tar\.bz2'
         self.sudo = True
         self.configure_args += [
             '--sysconfdir=%s/etc' % self.prefix_dir,
@@ -19,7 +21,7 @@ class LinuxPamRecipe(GnuRecipe):
             '--enable-securedir=%s/lib/security' % self.prefix_dir,
             '--includedir=%s/include/security' % self.prefix_dir
             ]
-        
+
     def patch(self):
         self.log_dir('patch', self.directory, 'patching config directories')
         src = '"/etc/pam.d'
@@ -28,7 +30,7 @@ class LinuxPamRecipe(GnuRecipe):
         patch(filename, src, dst)
         src = '"/usr/lib/'
         dst = '"%s/lib/' % self.prefix_dir
-        patch(filename, src, dst)        
+        patch(filename, src, dst)
 
     def install(self):
         super(LinuxPamRecipe, self).install()
@@ -90,7 +92,7 @@ session     [default=1]   pam_lastlog.so nowtmp showfailed
 session     optional      pam_lastlog.so silent noupdate showfailed
 '''
         write('postlogin', postlogin)
-        
+
         password_auth = r'''#%PAM-1.0
 # This file is auto-generated.
 # User changes will be destroyed the next time authconfig is run.

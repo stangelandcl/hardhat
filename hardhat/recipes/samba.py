@@ -5,11 +5,8 @@ from .base import GnuRecipe
 class SambaRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(SambaRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '9ef24393de08390f236cabccd6a420b5' \
-                      'cea304e959cbf1a99ff317325db3ddfa'
-
         self.name = 'samba'
-        self.version = '4.6.7'
+        self.version = '4.8.3'
         self.depends = ['acl', 'autotools', 'libtirpc', 'libxslt', 'openssl',
                         'python2', 'talloc']
         self.url = 'https://www.samba.org/ftp/samba/stable/' \

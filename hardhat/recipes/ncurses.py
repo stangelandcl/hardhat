@@ -6,11 +6,10 @@ from ..urls import Urls
 class NCursesRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(NCursesRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = 'f551c24b30ce8bfb6e96d9f59b42fbea' \
-                      '30fa3a6123384172f9e7284bcf647260'
-
+        self.sha256 = 'aa057eeeb4a14d470101eff4597d5833' \
+                      'dcef5965331be3528c08d99cebaa0d17'
         self.name = 'ncurses'
-        self.version = '6.0'
+        self.version = '6.1'
         self.url = Urls.gnu_template(self.name, self.version)
 
         self.configure_args += ['--without-libtool',
@@ -24,7 +23,8 @@ class NCursesRecipe(GnuRecipe):
                                 '--enable-getcap',
                                 '--enable-tcap-names',
                                 '--with-termlib',
-                                '--enable-ext-colors'
+                                '--enable-ext-colors',
+                                '--without-tests'
                                 ]
 
     def post_install(self):

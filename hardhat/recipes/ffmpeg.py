@@ -4,11 +4,8 @@ from .base import GnuRecipe
 class FfmpegRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(FfmpegRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '3f01bd1fe1a17a277f8c84869e5d9192' \
-                      'b4b978cb660872aa2b54c3cc8a2fedfc'
-
         self.name = 'ffmpeg'
-        self.version = '3.2.2'
+        self.version = '4.0.1'
         self.depends = ['alsa-lib',
                         'fdk-aac',
                         'freetype',

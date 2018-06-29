@@ -10,6 +10,8 @@ class Bzip2Recipe(GnuRecipe):
         self.sha256 = 'a2848f34fcd5d6cf47def00461fcb528' \
                       'a0484d8edef8208d6d2e2909dc61d9cd'
         self.version = '1.0.6'
+        self.version_url = 'http://www.bzip.org/downloads.html'
+        self.version_regex = 'bzip2-(?P<version>\d+\.\d+\.\d+)\.tar\.gz'
         self.install_args += ['PREFIX=%s' % (self.prefix_dir)]
 
 # shared is 20% slower on x86 according to docs

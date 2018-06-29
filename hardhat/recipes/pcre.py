@@ -4,10 +4,8 @@ from .base import GnuRecipe
 class PcreRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(PcreRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '1d75ce90ea3f81ee080cdc04e68c9c25' \
-                      'a9fb984861a0618be7bbf676b18eda3e'
         self.name = 'pcre'
-        self.version = '8.40'
+        self.version = '8.42'
         self.url = 'https://ftp.pcre.org/pub/pcre/pcre-$version.tar.gz'
         self.depends = ['bzip2', 'readline', 'zlib']
 

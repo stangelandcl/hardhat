@@ -7,17 +7,19 @@ from hardhat.util import patch
 class AutoMakeRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(AutoMakeRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '7946e945a96e28152ba5a6beb0625ca7' \
-                      '15c6e32ac55f2e353ef54def0c8ed924'
-
+        self.sha256 = '608a97523f97db32f1f5d5615c98ca69' \
+                      '326ced2054c9f82e65bade7fc4c9dea8'
         self.name = 'automake'
-        self.version = '1.15'
+        self.version = '1.16.1'
         self.depends = ['autoconf', 'help2man', 'perl5']
         self.url = Urls.gnu_template(self.name, self.version)
         self.configure_args += ['HELP2MAN=false']
         self.compile_args += ['HELP2MAN=true']
 
     def patch(self):
+        return
+
+    # This was needed for an old version
         src = r'''update_mans = \
   $(AM_V_GEN): \
     && $(MKDIR_P) doc \
@@ -34,4 +36,3 @@ class AutoMakeRecipe(GnuRecipe):
             if not os.path.exists(dir):
                 with open(dir, 'wt') as f:
                     f.write('')
-

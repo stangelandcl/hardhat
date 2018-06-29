@@ -5,9 +5,9 @@ from ..urls import Urls
 class GrepRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(GrepRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = 'ad4cc44d23074a1c3a8baae8fbafff2a' \
-                      '8c60f38a9a6108f985eef6fbee6dcaeb'
+        self.sha256 = 'db625c7ab3bb3ee757b3926a5cfa8d9e' \
+                      '1c3991ad24707a83dde8a5ef2bf7a07e'
 
         self.name = 'grep'
-        self.version = '2.27'
+        self.version = '3.1'
         self.url = Urls.gnu_template(self.name, self.version, 'tar.xz')

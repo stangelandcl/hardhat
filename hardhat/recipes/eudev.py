@@ -6,11 +6,10 @@ from ..util import patch
 class EudevRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(EudevRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '57e3d9e51cfefbdad431848ea0ad8ae1' \
-                      'cde04928da42474f44bd200b12f5fe19'
-
+        self.sha256 = '49c2d04105cad2526302627e040fa24b' \
+                      '1916a9a3e059539bc8bb919b973890af'
         self.name = 'eudev'
-        self.version = '3.2.1'
+        self.version = '3.2.5'
         self.url = 'http://dev.gentoo.org/~blueness/eudev/' \
                    'eudev-$version.tar.gz'
         self.depends = ['gperf']
@@ -41,11 +40,6 @@ class EudevRecipe(GnuRecipe):
 
         self.log_dir('patch', self.directory,
                      'removing duplicate declaration')
-        src = r'static const struct key *keyboard_lookup_key' \
-              '(const char *str, unsigned len);'
-        filename = os.path.join(self.directory,
-                                'src/udev/udev-builtin-keyboard.c')
-        patch(filename, src, '')
 
     def install(self):
         super(EudevRecipe, self).install()

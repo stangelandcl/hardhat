@@ -6,25 +6,12 @@ from ..urls import Urls
 class DiffUtilsRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(DiffUtilsRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = 'dad398ccd5b9faca6b0ab219a036453f' \
-                      '62a602a56203ac659b43e889bec35533'
-
+        self.sha256 = 'd621e8bdd4b573918c8145f7ae61817d' \
+                      '1be9deb4c8d2328a65cea8e11d783bd6'
         self.description = 'patch and diff'
-
         self.name = 'diffutils'
-        self.version = '3.5'
+        self.version = '3.6'
         self.url = Urls.gnu_template(name=self.name,
                                      version=self.version,
                                      extension='tar.xz')
-
-    def patch(self):
-        self.log_dir('patch', self.directory, 'fix compile')
-        script = r'''#!/bin/bash
-sed -i 's:= @mkdir_p@:= /bin/mkdir -p:' po/Makefile.in.in
-sed -i '233,237 s/max)/max) \\/' lib/intprops.h
-'''
-        filename = os.path.join(self.directory, 'patch.sh')
-        with open(filename, 'wt') as f:
-            f.write(script)
-        args = self.shell_args + [filename]
-        self.run_exe(args, self.directory, self.environment)
+        self.configure_args +=['gl_cv_func_getopt_gnu=yes']

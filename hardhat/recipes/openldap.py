@@ -4,14 +4,16 @@ from .base import GnuRecipe
 class OpenLdapRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(OpenLdapRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = 'd7de6bf3c67009c95525dde3a0212cc1' \
-                      '10d0a70b92af2af8e3ee800e81b88400'
-
+        self.sha256 = '9a90dcb86b99ae790ccab93b7585a31f' \
+                      'bcbeec8c94bf0f7ab0ca0a87ea0c4b2d'
         self.name = 'openldap'
-        self.version = '2.4.44'
+        self.version = '2.4.46'
         self.depends = ['cyrus-sasl', 'icu', 'libtool', 'openssl']
-        self.url = 'ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/' \
-                   'openldap-$version.tgz'
+        self.url = 'http://www.openldap.org/software/download/OpenLDAP/' \
+                   'openldap-release/openldap-$version.tgz'
+        self.version_url = 'http://www.openldap.org/software/download/' \
+                           'OpenLDAP/openldap-release/'
+        self.version_regex = r'openldap-(?P<version>\d+\.\d+\.\d+)\.tgz'
         self.configure_args += ['--enable-dynamic',
                                 '--disable-debug',
                                 '--with-tls=openssl',

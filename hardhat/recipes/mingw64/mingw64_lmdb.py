@@ -8,11 +8,8 @@ from hardhat.version import extension_regex
 class Mingw64LmdbRecipe(Mingw64BaseRecipe):
     def __init__(self, *args, **kwargs):
         super(Mingw64LmdbRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '108532fb94c6f227558d45be3f3347b5' \
-                      '2539f0f58290a7bb31ec06c462d05326'
-
         self.name = 'mingw64-lmdb'
-        self.version = '0.9.19'
+        self.version = '0.9.22'
         self.version_regex = 'LMDB_(?P<version>\d+\.\d+\.\d+)' \
             + extension_regex
         self.version_url = 'https://github.com/LMDB/lmdb/releases'

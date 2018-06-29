@@ -6,12 +6,13 @@ from ..util import patch
 class MitKerberosRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(MitKerberosRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '437c8831ddd5fde2a993fef425dedb48' \
-                      '468109bb3d3261ef838295045a89eb45'
+        self.sha256 = '214ffe394e3ad0c730564074ec44f1da' \
+                      '119159d94281bbec541dc29168d21117'
 
         self.name = 'mit-kerberos'
-        self.version = '1.15.1'
-        self.version_url = 'http://web.mit.edu/kerberos/dist/krb5/'
+        self.version = '1.16.1'
+        self.version_regex = 'krb5-(?P<version>\d+\.\d+\.\d+)\.tar\.gz'
+        self.version_url = 'http://web.mit.edu/kerberos/dist/index.html'
         self.url = 'http://web.mit.edu/kerberos/dist/krb5/$short_version/' \
                    'krb5-$version.tar.gz'
         self.depends = ['e2fsprogs',  # for libcom_err

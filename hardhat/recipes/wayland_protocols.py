@@ -4,11 +4,12 @@ from .base import GnuRecipe
 class WaylandProtocolsRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(WaylandProtocolsRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '635f2a937d318f1fecb97b54074ca211' \
-                      '486e38af943868dd0fa82ea38d091c1f'
+        self.sha256 = '9648896b2462b49b15a69b60f4465659' \
+                      '3c170c0e73121c890eb16d0c1d9376f6'
 
         self.name = 'wayland-protocols'
-        self.version = '1.7'
+        self.version = '1.14'
+        self.version_url = 'https://wayland.freedesktop.org/releases.html'
         self.depends = ['wayland']
         self.url = 'https://wayland.freedesktop.org/releases/' \
                    'wayland-protocols-$version.tar.xz'

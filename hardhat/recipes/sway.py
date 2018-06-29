@@ -8,7 +8,6 @@ class SwayRecipe(GnuRecipe):
         super(SwayRecipe, self).__init__(*args, **kwargs)
         self.sha256 = '6b033a63524dbf1a1770bc0935eb9421' \
                       '775570b7e4b53b81e0f9da5b899025d0'
-                
         self.name = 'sway'
         self.depends = ['cairo', 'dmenu', 'fonts',
                         'gdk-pixbuf',

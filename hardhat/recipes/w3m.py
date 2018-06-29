@@ -9,7 +9,7 @@ class W3mRecipe(GnuRecipe):
         self.sha256 = 'e994d263f2fd2c22febfbe45103526e0' \
                       '0145a7674a0fda79c822b97c2770a9e3'
         self.name = 'w3m'
-        self.depends = ['glib']
+        self.depends = ['gc', 'glib', 'libnsl']
         self.version = '0.5.3'
         self.version_url = 'https://sourceforge.net/projects/w3m/files/w3m/'
         self.url = 'http://downloads.sourceforge.net/project/w3m/w3m/' \

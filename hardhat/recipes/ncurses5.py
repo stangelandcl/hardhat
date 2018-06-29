@@ -2,16 +2,16 @@ import os
 import shutil
 from .base import GnuRecipe
 from ..urls import Urls
+from ..util import patch
 
 
 class NCurses5Recipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(NCurses5Recipe, self).__init__(*args, **kwargs)
-        self.sha256 = 'f551c24b30ce8bfb6e96d9f59b42fbea' \
-                      '30fa3a6123384172f9e7284bcf647260'
-
+        self.sha256 = 'aa057eeeb4a14d470101eff4597d5833' \
+                      'dcef5965331be3528c08d99cebaa0d17'
         self.name = 'ncurses5'
-        self.version = '6.0'
+        self.version = '6.1'
         self.url = Urls.gnu_template('ncurses', self.version)
 
         self.configure_args += ['--without-libtool',
@@ -26,9 +26,16 @@ class NCurses5Recipe(GnuRecipe):
                                 '--enable-tcap-names',
                                 '--with-termlib',
                                 '--enable-ext-colors',
-                                '--with-abi-version=5'
+                                '--with-abi-version=5',
+                                '--without-tests'
                                 ]
         self.compile_args += ['sources', 'libs']
+
+    def patch(self):
+        filename = os.path.join(self.directory, 'ncurses', 'base', 'new_pair.c')
+        src = 'if (_nc_reserve_pairs(sp, pair) == 0) {'
+        dst = 'if (_nc_reserve_pairs(SP_PARM, pair) == 0) {'
+        patch(filename, src, dst)
 
     def install(self):
         src = os.path.join(self.directory, 'lib')

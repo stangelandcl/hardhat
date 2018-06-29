@@ -4,10 +4,8 @@ from .base import GnuRecipe
 class FehRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(FehRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '34be64648f8ada0bb666e226beac601f' \
-                      '972b695c9cfa73339305124dbfcbc525'
         self.name = 'feh'
-        self.version = '2.18.2'
+        self.version = '2.26.4'
         self.depends = ['curl',
                         'imagemagick',
                         'imlib2',

@@ -4,11 +4,11 @@ from .base import X11BaseRecipe
 class LibX11Recipe(X11BaseRecipe):
     def __init__(self, *args, **kwargs):
         super(LibX11Recipe, self).__init__(*args, **kwargs)
-        self.sha256 = 'b7c748be3aa16ec2cbd81edc847e9b6e' \
-                      'e03f88143ab270fb59f58a044d34e441'
+        self.sha256 = '4d3890db2ba225ba8c55ca63c6409c1e' \
+                      'bb078a2806de59fb16342768ae63435d'
 
         self.name = 'libX11'
-        self.version = '1.6.4'
+        self.version = '1.6.5'
         self.depends = ['libxcb', 'xorg-headers', 'xtrans']
 
         self.configure_args += [

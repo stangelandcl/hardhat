@@ -5,11 +5,9 @@ from .base import GnuRecipe
 class CCacheRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(CCacheRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '3b02a745da1cfa9eb438af7147e0fd35' \
-                      '45e2f6163de9e5b07da86f58859f04ec'
 
         self.name = 'ccache'
-        self.version = '3.3.3'
+        self.version = '3.4.2'
         self.url = 'https://www.samba.org/ftp/ccache/ccache-$version.tar.xz'
 
     def install(self):

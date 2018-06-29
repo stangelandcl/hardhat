@@ -5,11 +5,11 @@ from .base import GnuRecipe
 class GitRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(GitRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '7e7e8d69d494892373b87007674be582' \
-                      '0a4bc1ef596a0117d03ea3169119fd0b'
+        self.sha256 = '8b40be383a603147ae29337136c00d1c' \
+                      '634bdfdc169a30924a024596a7e30e92'
 
         self.name = 'git'
-        self.version = '2.11.0'
+        self.version = '2.18.0'
         self.url = 'https://www.kernel.org/pub/software/scm/git/' \
                    'git-$version.tar.xz'
 

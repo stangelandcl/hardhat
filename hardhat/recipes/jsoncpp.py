@@ -6,11 +6,14 @@ from .base import GnuRecipe
 class JsonCppRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(JsonCppRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '2179a7df19c1c6dc87e02c65b847efc9' \
-                      '14625a9b87df3e443d9610fc70c0f557'
+        self.sha256 = 'c49deac9e0933bcb7044f08516861a2d' \
+                      '560988540b23de2ac1ad443b219afdb6'
 
         self.name = 'jsoncpp'
-        self.version = '1.7.2'
+        self.version = '1.8.4'
+        self.version_url = 'https://github.com/open-source-parsers/' \
+                           'jsoncpp/releases/'
+        self.version_regex = r'(?P<version>\d+\.\d+\.\d+)\.tar\.gz'
         self.url = 'https://github.com/open-source-parsers/jsoncpp/archive/' \
                    '$version.tar.gz'
 

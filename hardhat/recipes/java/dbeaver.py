@@ -6,12 +6,11 @@ from ..base import GnuRecipe
 class DBeaverRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(DBeaverRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = 'a3adf0a9090446e4f2bf53d32a217656' \
-                      '2ed18ce460a38fc9bdbe81445417da35'
-
+        self.sha256 = '260d97d753edbff182c412229c180fde' \
+                      'c36ee2e1f1bc976552cc9f5550c181d2'
         self.name = 'dbeaver'
         self.depends = ['java']
-        self.version = '5.0.4'
+        self.version = '5.1.1'
         self.version_regex = r'(?P<version>\d+\.\d+\.\d+)'
         self.version_url = 'http://dbeaver.jkiss.org/files/'
         self.url = 'http://dbeaver.jkiss.org/files/$version/' \

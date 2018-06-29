@@ -10,10 +10,10 @@ from ..urls import Urls
 class EmacsRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(EmacsRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '253ac5e7075e594549b83fd9ec116a9d' \
-                      'c37294d415e2f21f8ee109829307c00b'
+        self.sha256 = '1cf4fc240cd77c25309d15e18593789c' \
+                      '8dbfba5c2b44d8f77c886542300fd32c'
         self.name = 'emacs'
-        self.version = '25.3'
+        self.version = '26.1'
         self.url = 'http://mirrors.kernel.org/gnu/emacs/emacs-$version.tar.xz'
 #        self.url = 'http://git.savannah.gnu.org/cgit/emacs.git/snapshot/' \
 #                   'emacs-$version.tar.gz'

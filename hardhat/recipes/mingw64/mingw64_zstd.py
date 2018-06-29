@@ -5,11 +5,10 @@ from hardhat.version import extension_regex
 class Mingw64ZstdRecipe(Mingw64BaseRecipe):
     def __init__(self, *args, **kwargs):
         super(Mingw64ZstdRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '980b8febb0118e22f6ed70d23b5b3e60' \
-                      '0995dbf7489c1f6d6122c1411cdda8d8'
-
+        self.sha256 = '92e41b6e8dd26bbd46248e8aa1d86f15' \
+                      '51bc221a796277ae9362954f26d605a9'
         self.name = 'mingw64-zstd'
-        self.version = '1.1.2'
+        self.version = '1.3.4'
         self.version_regex = 'v(?P<version>\d+\.\d+\.\d+)' + extension_regex
         self.version_url = 'https://github.com/facebook/zstd/releases'
         self.url = 'https://github.com/facebook/zstd/archive/v$version.tar.gz'

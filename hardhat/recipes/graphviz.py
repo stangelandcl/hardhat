@@ -9,6 +9,8 @@ class GraphVizRecipe(GnuRecipe):
 
         self.name = 'graphviz'
         self.version = '2.40.1'
+        self.version_url = 'https://graphviz.gitlab.io/_pages/Download/' \
+                           'Download_source.html'
         self.depends = ['freeglut', 'fontconfig', 'freetype',
                         'gdk-pixbuf', 'guile',
                         'java',
@@ -17,6 +19,6 @@ class GraphVizRecipe(GnuRecipe):
                         'lua',
                         'ocaml', 'pango', 'python2', 'python3-tk', 'r',
                         'qt5', 'swig', 'tk', 'xorg-libs']
-        self.url = 'http://graphviz.org/pub/graphviz/stable/SOURCES/' \
-                   'graphviz-$version.tar.gz'
+        self.url = 'https://graphviz.gitlab.io/pub/graphviz/stable/SOURCES/' \
+                   'graphviz.tar.gz'
         self.configure_args += ['--with-libgd=no']

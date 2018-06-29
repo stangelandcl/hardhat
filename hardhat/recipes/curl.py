@@ -5,11 +5,11 @@ from .cacert import CACertRecipe
 class CurlRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(CurlRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = 'de60a4725a3d461c70aa571d7d69c788' \
-                      'f1816d9d1a8a2ef05f864ce8f01279df'
+        self.sha256 = '897dfb2204bd99be328279f88f55b7c6' \
+                      '1592216b0542fcbe995c60aa92871e9b'
 
         self.name = 'curl'
-        self.version = '7.56.0'
+        self.version = '7.60.0'
         self.depends = ['cacert', 'openldap', 'openssl', 'zlib']
         self.url = 'https://curl.haxx.se/download/curl-$version.tar.bz2'
         self.configure_args += [

@@ -84,9 +84,12 @@ class Logger(Object):
 
     @property
     def log_name(self):
-        v = self.version
-        if len(v) > 8:
-            v = self.short_version
+        if hasattr(self, 'version'):
+            v = self.version
+            if len(v) > 8:
+                v = self.short_version
+        else:
+            v = 'None'
         return '%s-%s' % (self.name, v)
 
     @property

@@ -4,11 +4,9 @@ from .base import GnuRecipe
 class AclRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(AclRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '179074bb0580c06c4b4137be4c5a92a7' \
-                      '01583277967acdb5546043c7874e0d23'
 
         self.name = 'acl'
-        self.version = '2.2.52'
+        self.version = '2.2.53'
         self.depends = ['attr']
         self.url = 'http://download.savannah.gnu.org/releases/acl/' \
                    'acl-$version.src.tar.gz'
