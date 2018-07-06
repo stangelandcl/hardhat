@@ -11,11 +11,11 @@ class Extra:
 class FreeTdsRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(FreeTdsRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '14df22fc14bc78dfdee274a25467767a' \
-                      '464959c924bd3223192a99f446eaefb3'
+        self.sha256 = '959b2c93c55a553534c7e1baff21a786' \
+                      'fc7fd42c32ef571182732e1ae9f2a58a'
 
         self.name = 'freetds'
-        self.version = 'a0a3b99a7f3fb748f9ec5924d2913e6e856f659b'
+        self.version = '3287002a403940769bc3c6a7483d633aafcb08b8'
         self.depends = ['autotools', 'docbook-dsssl', 'gettext',
                         'git', 'openssl']
         self.url = self.github_commit('FreeTDS')
@@ -26,7 +26,11 @@ class FreeTdsRecipe(GnuRecipe):
             ['git', 'commit', '-am', 'init'],
             ['./configure', '--prefix=%s' % self.prefix_dir,
              '--disable-odbc', '--disable-server', '--disable-pool',
-             '--with-openssl', '--with-tdsver=7.3']]
+             '--with-openssl', '--with-tdsver=7.3',
+             # for dates in 1-12 instead of 0-11
+             # pymssql requires this. see
+             # http://pymssql.org/en/stable/freetds_and_dates.html
+            '--enable-msdblib']]
         self.compile_args = ['make', '-j1']
         self.environment['CFLAGS'] += ' -fPIC'  # for shared libs
         self.doc = Extra()
