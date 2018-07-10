@@ -12,3 +12,4 @@ class ZstdRecipe(SetupPyRecipe):
         self.version = '1bc5b7cacbd77abfa4157005845c730c46bd4b72'
         self.url = 'https://github.com/stangelandcl/python-zstd/archive/' \
                    '$version.tar.gz'
+        self.extra_install_args = ['--external']
