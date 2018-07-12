@@ -9,7 +9,7 @@ class NginxRecipe(GnuRecipe):
 
         self.name = 'nginx'
         self.depends = ['nginx-auth-ldap', 'openssl', 'pcre', 'zlib']
-        self.version = '1.15.0'
+        self.version = '1.15.1'
         self.url = 'http://nginx.org/download/nginx-$version.tar.gz'
         self.configure_strip_cross_compile()
         self.configure_args += [

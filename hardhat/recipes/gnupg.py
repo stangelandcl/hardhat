@@ -5,6 +5,9 @@ from .base import GnuRecipe
 class GnupgRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(GnupgRecipe, self).__init__(*args, **kwargs)
+        self.sha256 = '777b4cb8ced21965a5053d4fa20fe114' \
+                      '84f0a478f3d011cef508a1a49db50dcd'
+
         self.name = 'gnupg'
         self.version = '2.2.8'
         self.depends = ['gcrypt', 'libassuan', 'libksba', 'npth']

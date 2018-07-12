@@ -4,8 +4,10 @@ from .base import PipBaseRecipe
 class DulwichRecipe(PipBaseRecipe):
     def __init__(self, *args, **kwargs):
         super(DulwichRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '0c3eccac93823e172b05d57aaeab3d6f' \
-                      '03c6c0f1867613606d1909a3ab4100ca'
+        self.sha256 = '34f99e575fe1f1e89cca92cec1ddd50b' \
+                      '4991199cb00609203b28df9eb83ce259'
+
         self.name = 'dulwich'
         self.depends = []
-        self.version = '0.17.3'
+        self.pydepends = ['urllib3']
+        self.version = '0.19.5'

@@ -6,11 +6,12 @@ from .base import SetupPyRecipe
 class NumpyRecipe(SetupPyRecipe):
     def __init__(self, *args, **kwargs):
         super(NumpyRecipe, self).__init__(*args, **kwargs)
+        self.sha256 = 'ce171fc7c23e24c9e559febf43db9466' \
+                      '0a0f265bde0f64a77b9c944e5c1e2d4b'
+
         self.depends = ['openblas', 'python3-cython']
         self.name = 'numpy'
-        self.version = '1.11.0'
-        self.sha256 = 'e898e1f2b89092b95352a0a583152a18' \
-                      '4020a492ae77a38be03379d90f575996'
+        self.version = '1.14.5'
         self.url = 'https://github.com/numpy/numpy/archive/v$version.tar.gz'
         self.filename = os.path.join(self.tarball_dir,
                                      'numpy-%s.tar.gz' % (self.version))

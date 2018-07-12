@@ -6,11 +6,9 @@ from ..util import patch
 class FreeRdpRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(FreeRdpRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = 'e8b23bf7d22d933e7d2a64f84cc09c83' \
-                      '29016a0b31eaff02b9f4eff5c53a2789'
         self.name = 'freerdp'
         # 8cba20 04-26-2018
-        self.version = '8cba2019997587ea83e2949eb39f789671fc6bcd'
+        self.version = '4d0876fcc2bc9ec84812d20df20f01eff4de0ba0'
         self.url = 'https://github.com/FreeRDP/FreeRDP/archive/' \
                    '$version.tar.gz'
         self.depends = ['alsa-lib',

@@ -4,10 +4,10 @@ from .base import GnuRecipe
 class LibAssuanRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(LibAssuanRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '22843a3bdb256f59be49842abf24da76' \
-                      '700354293a066d82ade8134bb5aa2b71'
+        self.sha256 = '47f96c37b4f2aac289f0bc1bacfa8bd8' \
+                      'b4b209a488d3d15e2229cb6cc9b26449'
 
         self.name = 'libassuan'
-        self.version = '2.4.3'
+        self.version = '2.5.1'
         self.url = 'ftp://ftp.gnupg.org/gcrypt/libassuan/' \
                    'libassuan-$version.tar.bz2'

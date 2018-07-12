@@ -3,11 +3,14 @@ from string import Template
 from .base import GnuRecipe
 from .python2 import Python2Recipe
 from .python3 import Python3Recipe
+from ..util import patch
 
 
 class BoostRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(BoostRecipe, self).__init__(*args, **kwargs)
+        self.sha256 = '2684c972994ee57fc5632e03bf044746' \
+                      'f6eb45d4920c343937a465fd67a5adba'
 
         self.name = 'boost'
         self.version = '1.67.0'
@@ -24,12 +27,6 @@ class BoostRecipe(GnuRecipe):
             '-c',
             '"./bootstrap.sh --prefix=%s"' % (self.prefix_dir)]
 
-        self.install_args = self.shell_args + [
-            '-c',
-            '"./b2 install threading=multi'
-            ' --without-python --user-config=%s -j%s"'
-            % (self.user_config, self.cpu_count)
-            ]
 
     def patch(self):
         self.log_dir('patch', self.directory, 'export config')
@@ -37,6 +34,13 @@ class BoostRecipe(GnuRecipe):
         python3 = Python3Recipe(settings=self)
         self.python2_version = python2.short_version
         self.python3_version = python3.short_version
+
+        self.install_args = self.shell_args + [
+            '-c',
+            '"./b2 install threading=multi'
+            ' --with-python python=%s --user-config=%s -j%s"'
+            % (self.python3_version, self.user_config, self.cpu_count)
+            ]
 
         extra_flags = '<compileflags>-Wno-unused-variable' \
                       ' <compileflags>-Wno-unused-local-typedefs'
@@ -58,6 +62,10 @@ class BoostRecipe(GnuRecipe):
             f.write(py2)
             f.write(mpi)
             f.write('\n')
+
+#        filename = os.path.join(self.directory, 'libs/mpi/build/Jamfile.v2')
+#        patch(filename, 'boost_python3',
+#              'boost_python%s' % self.python3_version.replace('.', ''))
 
     def compile(self):
         for version in [self.python2_version,
