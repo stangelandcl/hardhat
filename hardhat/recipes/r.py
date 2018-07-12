@@ -13,9 +13,9 @@ class Extra:
 
 class RRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
-        super(RRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = None
-
+        super(RRecipe, self).__init__(*args, **kwargs)        
+        self.sha256 = 'fd1725535e21797d3d9fea8963d99be0' \
+                      'ba4c3aecadcf081b43e261458b416870'
         self.name = 'r'
         self.version = '3.5.0'
         self.version_prefix = 'R'

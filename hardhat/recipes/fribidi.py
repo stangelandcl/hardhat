@@ -4,10 +4,10 @@ from .base import GnuRecipe
 class FriBidiRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(FriBidiRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '08222a6212bbc2276a2d55c3bf370109' \
-                      'ae4a35b689acbc66571ad2a670595a8e'
-
+        self.sha256 = '94bdfe553e004d8bd095b109e1826823' \
+                      '11dd511740d5083326d1582f1df237be'
+                
         self.name = 'fribidi'
-        self.version = '0.19.7'
+        self.version = '1.0.4'
         self.depends = ['glib']
-        self.url = 'http://fribidi.org/download/fribidi-$version.tar.bz2'
+        self.url = 'https://github.com/fribidi/fribidi/releases/download/v$version/fribidi-$version.tar.bz2'

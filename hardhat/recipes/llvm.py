@@ -16,10 +16,11 @@ class Extra:
 class LlvmRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(LlvmRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '8d10511df96e73b8ff9e7abbfb4d4d43' \
-                      '2edbdbe965f1f4f07afaf370b8a533be'
+        self.sha256 = 'b6d6c324f9c71494c0ccaf3dac1f1623' \
+                      '6d970002b42bb24a6c9e1634f7d0f4e2'
+                
         self.name = 'llvm'
-        self.version = '4.0.0'
+        self.version = '6.0.1'
         self.version_regex = self.name + '\-(?P<version>\d+\.\d+\.\d+).*' \
             + extension_regex
         self.version_url = 'http://releases.llvm.org/download.html'
@@ -68,6 +69,8 @@ class LlvmRecipe(GnuRecipe):
                              '-DCMAKE_INSTALL_PREFIX=%s' % self.prefix_dir,
                              '-DLLVM_ENABLE_FFI=ON',
                              '-DCMAKE_BUILD_TYPE=Release',
+#                             '-DUSE_SHARED=ON', # for llvm config
+#                             '-DLLVM_DYLIB_COMPONENTS=all',
 #                             '-DBUILD_SHARED_LIBS=ON',
                              '-DLLVM_BUILD_LLVM_DYLIB=ON',
                              '-DLLVM_TARGETS_TO_BUILD="host;AMDGPU"',
@@ -84,22 +87,24 @@ class LlvmRecipe(GnuRecipe):
         self.clang.url = self.clang_url
         self.clang.filename = self.clang_file
         self.clang.version = self.version
-        self.clang.sha256 = 'cea5f88ebddb30e296ca89130c83b9d4' \
-                            '6c2d833685e2912303c828054c4dc98a'
+        self.clang.sha256 = '7c243f1485bddfdfedada3cd402ff479' \
+                            '2ea82362ff91fbdac2dae67c6026b667'
+                            
 
         self.compiler_rt = Extra('llvm-compiler_rt')
         self.compiler_rt.url = self.compiler_rt_url
         self.compiler_rt.filename = self.compiler_rt_file
         self.compiler_rt.version = self.version
-        self.compiler_rt.sha256 = 'd3f25b23bef24c305137e6b44f7e81c5' \
-                                  '1bbec764c119e01512a9bd2330be3115'
+        self.compiler_rt.sha256 = 'f4cd1e15e7d5cb708f9931d4844524e4' \
+                                  '904867240c306b06a4287b22ac1c99b9'
+                                  
 
         self.openmp = Extra('llvm-openmp')
         self.openmp.url = self.openmp_url
         self.openmp.filename = self.openmp_file
         self.openmp.version = self.version
-        self.openmp.sha256 = 'db55d85a7bb289804dc42fc5c8e35ca2' \
-                             '4dfc3885782261b675a194fd7e206e26'
+        self.openmp.sha256 = '66afca2b308351b180136cf899a3b228' \
+                             '65af1a775efaf74dc8a10c96d4721c5a'        
 
 
         self.extra_downloads = [
