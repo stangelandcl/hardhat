@@ -7,7 +7,6 @@ class CurlRecipe(GnuRecipe):
         super(CurlRecipe, self).__init__(*args, **kwargs)
         self.sha256 = '897dfb2204bd99be328279f88f55b7c6' \
                       '1592216b0542fcbe995c60aa92871e9b'
-
         self.name = 'curl'
         self.version = '7.60.0'
         self.depends = ['cacert', 'openldap', 'openssl', 'zlib']

@@ -13,7 +13,8 @@ class DropboxUploaderRecipe(GnuRecipe):
         self.name = 'dropbox-uploader'
         self.version = 'c719ac0e327de2b5fd60e898aeb5e3f62a65fb88'
         self.version_regex = r'(?P<version>\d+\.\d+\.\d+)'
-        self.url = 'https://raw.githubusercontent.com/andreafabrizi/Dropbox-Uploader/$version/dropbox_uploader.sh'
+        self.url = 'https://raw.githubusercontent.com/andreafabrizi/' \
+                   'Dropbox-Uploader/$version/dropbox_uploader.sh'
 
     def extract(self):
         src = self.filename
@@ -34,4 +35,3 @@ class DropboxUploaderRecipe(GnuRecipe):
                      dst)
         os.chmod(dst,
                  stat.S_IRWXU | stat.S_IRWXG | stat.S_IROTH | stat.S_IXOTH)
-

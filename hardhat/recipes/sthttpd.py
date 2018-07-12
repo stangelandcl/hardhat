@@ -17,8 +17,9 @@ class SthttpdRecipe(GnuRecipe):
         # Fix rpl_malloc undefined when cross-compiling.
         # See http://rickfoosusa.blogspot.com/2011/11/
         # howto-fix-undefined-reference-to.html
-        self.configure_strip_cross_compile()        
-        self.install_args = ['WEBGROUP=%s' % get_groups()[0]]
+        self.configure_strip_cross_compile()
+        groups = get_groups()
+        self.install_args = ['WEBGROUP=%s' % groups[0]]
 
     def patch(self):
         self.log_dir('pre-configure', self.directory, 'autogen configure')
