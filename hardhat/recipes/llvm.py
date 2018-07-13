@@ -18,7 +18,7 @@ class LlvmRecipe(GnuRecipe):
         super(LlvmRecipe, self).__init__(*args, **kwargs)
         self.sha256 = 'b6d6c324f9c71494c0ccaf3dac1f1623' \
                       '6d970002b42bb24a6c9e1634f7d0f4e2'
-                
+
         self.name = 'llvm'
         self.version = '6.0.1'
         self.version_regex = self.name + '\-(?P<version>\d+\.\d+\.\d+).*' \
@@ -73,6 +73,7 @@ class LlvmRecipe(GnuRecipe):
 #                             '-DLLVM_DYLIB_COMPONENTS=all',
 #                             '-DBUILD_SHARED_LIBS=ON',
                              '-DLLVM_BUILD_LLVM_DYLIB=ON',
+                             '-DLLVM_LINK_LLVM_DYLIB=ON',
                              '-DLLVM_TARGETS_TO_BUILD="host;AMDGPU"',
                              '-DGCC_INSTALL_PREFIX=%s' % self.prefix_dir,
                              '-DLLVM_DEFAULT_TARGET_TRIPLE=%s'
@@ -89,7 +90,7 @@ class LlvmRecipe(GnuRecipe):
         self.clang.version = self.version
         self.clang.sha256 = '7c243f1485bddfdfedada3cd402ff479' \
                             '2ea82362ff91fbdac2dae67c6026b667'
-                            
+
 
         self.compiler_rt = Extra('llvm-compiler_rt')
         self.compiler_rt.url = self.compiler_rt_url
@@ -97,14 +98,14 @@ class LlvmRecipe(GnuRecipe):
         self.compiler_rt.version = self.version
         self.compiler_rt.sha256 = 'f4cd1e15e7d5cb708f9931d4844524e4' \
                                   '904867240c306b06a4287b22ac1c99b9'
-                                  
+
 
         self.openmp = Extra('llvm-openmp')
         self.openmp.url = self.openmp_url
         self.openmp.filename = self.openmp_file
         self.openmp.version = self.version
         self.openmp.sha256 = '66afca2b308351b180136cf899a3b228' \
-                             '65af1a775efaf74dc8a10c96d4721c5a'        
+                             '65af1a775efaf74dc8a10c96d4721c5a'
 
 
         self.extra_downloads = [

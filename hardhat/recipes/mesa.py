@@ -15,7 +15,7 @@ class MesaRecipe(GnuRecipe):
         self.url = 'https://mesa.freedesktop.org/archive/mesa-$version.tar.gz'
         self.configure_args += [
             '--enable-egl',
-            '--with-egl-platforms=x11,drm,wayland,surfaceless',
+            '--with-platforms=drm,x11,wayland,surfaceless',
             '--enable-gles1',
             '--enable-gles2',
             '--enable-shared-glapi',
@@ -23,6 +23,8 @@ class MesaRecipe(GnuRecipe):
             '--enable-dri3',
             '--enable-texture-float',
             '--enable-glx-tls',
+            '--enable-osmesa',
+            '--enable-opengl',
             '--with-gallium-drivers=i915,r600,nouveau,radeonsi,svga,swrast,swr',
             '--enable-llvm'
             ]
