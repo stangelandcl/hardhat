@@ -14,7 +14,9 @@ class FreeTdsRecipe(GnuRecipe):
         self.sha256 = '14df22fc14bc78dfdee274a25467767a' \
                       '464959c924bd3223192a99f446eaefb3'
 
-        # as of July 12, 2018 new versions fail to connect to sql server 2008
+        # as of July 11, 2018, commit 63c5b713fdf833c767bdbd601cc34f60baa93139
+        # new versions fail to connect to sql server 2008
+
         self.name = 'freetds'
         self.version = 'a0a3b99a7f3fb748f9ec5924d2913e6e856f659b'
         self.depends = ['autotools', 'docbook-dsssl', 'gettext',
