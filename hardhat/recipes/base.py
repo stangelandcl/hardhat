@@ -299,13 +299,14 @@ class GetVersionMixin(Object):
             elif self.version_compare(v) > 0:
                 self.log_warn('version_check', 'new version available: %s > %s'
                               % (Terminal.bold_red(v), self.version))
-            elif has_multiple:
+            else:
+            #elif has_multiple:
                 self.log_dir('version_check', self.name + ' ' + self.version,
                              'up to date')
-            else:
-                self.log_yellow('version_check',
-                                self.name + ' ' + self.version,
-                                'maybe up to date. only one version found.')
+#            else:
+#                self.log_yellow('version_check',
+#                                self.name + ' ' + self.version,
+#                                'maybe up to date. only one version found.')
         except Exception as e:
             text = str(e)
             if not text.startswith('HTTP Error '):

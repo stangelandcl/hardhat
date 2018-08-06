@@ -5,13 +5,15 @@ import os
 class ApacheArrowRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(ApacheArrowRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '13dab5ecd4cb44057a57a47b01cf0f5d' \
-                      '07d2e7b373ce652355d578d2fe30fb11'
-
+        self.sha256 = '2094cc6492e77ede19937375769de105' \
+                      '603a50440a6257fefd4038f1176a0626'
         self.name = 'apache-arrow'
-        self.version = '8960a2ed4c0d400be32003beb183f150e019c4ec'
+        self.version = '0.10.0'
         self.depends = ['cmake', 'flatbuffers', 'googletest']
-        self.url = self.github_commit('apache', 'arrow')
+        self.url = 'https://github.com/apache/arrow/archive/' \
+                   'apache-arrow-$version.tar.gz'
+        self.version_url = 'https://github.com/apache/arrow/releases'
+        self.version_regex = r'''apache\-arrow\-(?P<version>\d+\.\d+\.\d+)'''
 
         self.environment['GTEST_HOME'] = self.prefix_dir
         self.environment['FLATBUFFERS_HOME'] = self.prefix_dir

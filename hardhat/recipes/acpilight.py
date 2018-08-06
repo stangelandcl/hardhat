@@ -5,13 +5,14 @@ from .base import GnuRecipe
 class AcpilightRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(AcpilightRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '2253722a0abb0bc6beef1eddf0270e57' \
-                      '13e78b766769cd778246f9437c43e546'
+        self.sha256 = '82505a58482e353c0ec4f1e6aed2a21d' \
+                      '3e209041855332eb539b54a6e3458800'
         self.name = 'acpilight'
-        self.version = 'f54865ed9a11eedaeffa71af320a3bf36c89f15d'
-        self.version_regex = r'(?P<version>\d+\.\d+\.\d+)'
-        self.url = 'https://gitlab.com/wavexx/acpilight/-/archive/$version/' \
-                   'acpilight-$version.tar.gz'
+        self.version = '1.1'
+        self.version_regex = r'v(?P<version>\d+\.\d+(\.\d+)?)'
+        self.version_url = 'https://gitlab.com/wavexx/acpilight/tags'
+        self.url = 'https://gitlab.com/wavexx/acpilight/-/archive/' \
+                   'v$version/acpilight-v$version.tar.gz'
         self.install_args = [
             ['cp', 'xbacklight', '%s/bin/xbacklight' % self.prefix_dir],
             ['cp', 'xbacklight', '%s/bin/acpilight' % self.prefix_dir],
