@@ -5,11 +5,10 @@ from .base import GnuRecipe
 class AdwaitaIconThemeRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(AdwaitaIconThemeRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = 'c18bf6e26087d9819a962c77288b291e' \
-                      'fab25d0419b73d909dd771716a45dcb7'
-
+        self.sha256 = '4908104a90b0aaa5ce0b826165052f65' \
+                      'bdec89e9985be523652c75beb000bc43'
         self.name = 'adwaita-icon-theme'
-        self.version = '3.22.0'
+        self.version = '3.29.90'
         self.version_regex = r'(?P<version>\d+\.\d+(\.\d+)?)'
         self.version_url = 'http://ftp.gnome.org/pub/gnome/sources/' \
                            'adwaita-icon-theme/'

@@ -148,6 +148,11 @@ def parse_args():
                                 help='show only missing packages',
                                 action='store_true')
 
+    hash_parser = sub_parsers.add_parser('hash', help='download and hash exact')
+    hash_parser.add_argument('package',
+                             help='package(s) to check hashes',
+                                 nargs='*')
+
 
     args = parser.parse_args()
     if not hasattr(args, 'no_clean'):

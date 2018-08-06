@@ -178,3 +178,9 @@ http://wiki.linuxfromscratch.org/blfs/wiki/firefox
 
 
 
+
+
+* Hashes
+- adwaita-qt
+- adwaita-icon-theme
+- abcde 

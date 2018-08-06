@@ -5,14 +5,15 @@ from .base import GnuRecipe
 class AdwaitaQtRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(AdwaitaQtRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '48ccf17088afb77e98fe409f4dc6fdcc' \
-                      'd035bbdbcb51f0c2f0da00ef204daba0'
-
+        self.sha256 = 'c2c0c71b131d0e3e58ee108570796cf7' \
+                      '0b35dccaa64ce17915d4486de5e91513'
         self.name = 'adwaita-qt'
-        self.version = '0.4'
+        self.version = '1.0'
         self.depends = ['qt5']
-        self.url = 'https://github.com/MartinBriza/adwaita-qt/archive/' \
+        self.url = 'https://github.com/FedoraQt/adwaita-qt/archive/' \
                    '$version.tar.gz'
+        self.version_url = 'https://github.com/FedoraQt/adwaita-qt/releases/'
+        self.version_regex = r'''(?P<version>\d+\.\d+)\.tar\.gz'''
 
         self.configure_args = [
             'cmake',

@@ -213,6 +213,12 @@ class Installer(object):
         for recipe in missing + installed:
             self._download(recipe)
 
+    def download_single(self, names):
+        for recipe in self.recipes:
+            if recipe.name in names:
+                self._download(recipe.name)
+                break
+
     def _check_version(self, name):
         recipe = self._recipe(name)
         recipe.running_name = name

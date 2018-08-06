@@ -203,6 +203,8 @@ def main():
         if len(args.package) == 1 and os.path.exists(args.package[0]):
             args.package = read_packages(args.package[0])
         installer.download(args.package)
+    elif args.cmd == 'hash':
+        installer.download_single(args.package)
     elif args.cmd == 'version':
         if args.installed:
             installer.check_version(installed=True)
