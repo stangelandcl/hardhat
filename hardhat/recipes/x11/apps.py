@@ -1,8 +1,8 @@
 from .base import X11AppBaseRecipe, X11BaseRecipe
 
 
-classes = [('bdftopcf', '1.0.5', '38f447be0c61f94c473f128cf519dd0c'
-                                 'ff63b5d7775240a2e895a183a61e2026'),
+classes = [('bdftopcf', '1.1', '4b4df05fc53f1e98993638d6f7e178d9'
+                               '5b31745c4568cee407e167491fd311a2'),
            ('iceauth', '1.0.7', '1216af2dee99b318fcf8bf9a25991527'
                                 '3bcb37a7f1e7859af4f15d0ebf6f3f0a'),
            ('luit', '1.1.1', '30b0e787cb07a0f504b70f1d61239305'

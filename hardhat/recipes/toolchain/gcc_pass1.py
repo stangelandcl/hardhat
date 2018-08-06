@@ -58,6 +58,9 @@ class GccRecipe(CrossGnuRecipe, GccPrereqRecipesMixin):
         self.name = 'gcc'
         self.version = self.gcc_version
         self.post_clean = False
+        self.version_url = 'http://ftpmirror.gnu.org/gcc'
+        self.version_regex = 'gcc\-(?P<version>\d+\.\d+\.\d+)'
+        #'http://gnu.mirrors.hoobly.com/gcc/'
         self.url = Urls.gnu('gcc', 'gcc-%s/gcc-%s.tar.gz'
                             % (self.version, self.version))
         self.environment = target_path_env(self.prefix_dir,

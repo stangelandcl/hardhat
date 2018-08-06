@@ -4,9 +4,8 @@ from .base import GnuRecipe
 class CAresRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(CAresRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '8692f9403cdcdf936130e045c8402166' \
-                      '5118ee9bfea905d1a76f04d4e6f365fb'
-
+        self.sha256 = '45d3c1fd29263ceec2afc8ff9cd06d5f' \
+                      '8f889636eb4e80ce3cc7f0eaf7aadc6e'
         self.name = 'c-ares'
-        self.version = '1.12.0'
+        self.version = '1.14.0'
         self.url = 'https://c-ares.haxx.se/download/$name-$version.tar.gz'

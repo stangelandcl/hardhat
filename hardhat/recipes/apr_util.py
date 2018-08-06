@@ -7,6 +7,7 @@ class AprUtilRecipe(GnuRecipe):
         self.name = 'apr-util'
         self.version = '1.6.1'
         self.url = 'http://archive.apache.org/dist/apr/$name-$version.tar.bz2'
+        self.version_regex = 'apr\-util\-(?P<version>\d+\.\d+\.\d+)\.tar\.gz'
 
         self.configure_strip_cross_compile()
         self.configure_args += [

@@ -6,10 +6,10 @@ from .base import GnuRecipe
 class BlasRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(BlasRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = 'bd62d5791b90702ddc99b64136951c6d' \
-                      '665dd7dfdb641c0d5fd30a56559a66b8'
+        self.sha256 = '55df2a24966c2928d3d2ab4a20e9856d' \
+                      '9914b856cf4742ebd4f7a4507c8e44e8'
         self.name = 'blas'
-        self.version = '3.6.0'
+        self.version = '3.8.0'
         self.url = 'http://www.netlib.org/blas/blas-$version.tgz'
         self.libname = 'libblas.a'
 

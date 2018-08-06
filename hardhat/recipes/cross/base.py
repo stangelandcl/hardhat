@@ -30,14 +30,14 @@ class CrossGnuRecipe(GnuRecipe):
         self.cross_prefix_dir = make_cross_prefix_dir(self.prefix_dir)
         self.environment = toolchain_env(self.cross_prefix_dir)
 
-        self.gcc_version = '8.1.0'
-        self.gcc_sha256 = 'af300723841062db6ae24e38e61aaf4f' \
-                          'bf3f6e5d9fd3bf60ebbdbf95db4e9f09'
+        self.gcc_version = '8.2.0'
+        self.gcc_sha256 = '1b0f36be1045ff58cbb9c83743835367' \
+                          'b860810f17f0195a4e093458b372020f'
 
-        self.glibc_version = '2.27'
-        self.glibc_sha256 = '881ca905e6b5eec724de7948f14d66a0' \
-                            '7d97bdee8013e1b2a7d021ff5d540522'
+        self.glibc_version = '2.28'
+        self.glibc_sha256 = 'f318d6e3f1f4ed0b74d2832ac4f491d0' \
+                            'fb928e451c9eda594cbf1c3bee7af47c'
 
-        self.binutils_version = '2.30'
-        self.binutils_sha256 = '8c3850195d1c093d290a716e20ebcaa7' \
-                               '2eda32abf5e3d8611154b39cff79e9ea'
+        self.binutils_version = '2.31.1'
+        self.binutils_sha256 = 'e88f8d36bd0a75d3765a4ad088d819e3' \
+                               '5f8d7ac6288049780e2fefcad18dde88'

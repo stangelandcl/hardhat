@@ -15,6 +15,9 @@ class GLibCRecipe(CrossGnuRecipe):
         self.version = self.glibc_version
         self.url = 'http://ftp.wayne.edu/gnu/libc/glibc-%s.tar.gz' \
             % (self.version)
+        self.version_url = 'http://ftpmirror.gnu.org/glibc'
+#        self.version_url = 'http://gnu.mirrors.hoobly.com/glibc/'
+        self.version_regex = 'glibc\-(?P<version>\d+\.\d+)\.tar\.gz'
 
         self.directory = os.path.join(self.base_extract_dir,
                                       'glibc-%s-build' % (self.version))
