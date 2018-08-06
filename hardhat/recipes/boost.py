@@ -15,7 +15,7 @@ class BoostRecipe(GnuRecipe):
         self.name = 'boost'
         self.version = '1.67.0'
         self.version_regex = r'(?P<version>\d+\.\d+\.\d+)/'
-        self.version_url = 'http://www.boost.org/users/download/'
+        self.version_url = 'https://dl.bintray.com/boostorg/release/'
         self.depends = ['bzip2', 'icu', 'openmpi',
                         'python2', 'python3', 'zlib']
         underscore_version = self.version.replace('.', '_')
