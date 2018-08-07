@@ -5,9 +5,8 @@ from ..urls import Urls
 class PatchRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(PatchRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '7436f5a19f93c3ca83153ce9c5cbe484' \
-                      '7e97c5d956e57a220121e741f6e7968f'
-
+        self.sha256 = '8cf86e00ad3aaa6d26aca30640e86b0e' \
+                      '3e1f395ed99f189b06d4c9f74bc58a4e'
         self.name = 'patch'
-        self.version = '2.7.5'
+        self.version = '2.7.6'
         self.url = Urls.gnu_template(self.name, self.version)

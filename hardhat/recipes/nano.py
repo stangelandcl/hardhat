@@ -6,11 +6,10 @@ from hardhat.urls import Urls
 class NanoRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(NanoRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = 'b2b060129b9feff2d4870d803a441178' \
-                      'c96531de9aed144ec0b83bd63ccb12ee'
-
+        self.sha256 = '07192c320b74c1fb78437021e9affa6a' \
+                      '9d55b806ee012de601902392eaa03601'
         self.name = 'nano'
-        self.version = '2.5.3'
+        self.version = '2.9.8'
         self.depends = ['ncurses']
         self.url = Urls.gnu(
             self.name,

@@ -7,11 +7,10 @@ from ..urls import Urls
 class ManDBRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(ManDBRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = 'c68cffa6b93f6362beb1d1259f9ad5b6' \
-                      '5af2aee9a7d9910086082ea4b75f5da2'
-
+        self.sha256 = '103c185f9d8269b9ee3b8a4cb27912b3' \
+                      'aa393e952731ef96fedc880723472bc3'
         self.name = 'man-db'
-        self.version = '2.7.6'
+        self.version = '2.8.4'
         self.depends = ['groff', 'libpipeline']
         self.url = Urls.savannah(self.name, self.version, 'tar.xz')
         self.configure_args += [

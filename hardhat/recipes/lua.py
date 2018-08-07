@@ -6,11 +6,10 @@ from ..util import patch
 class LuaRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(LuaRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '5113c06884f7de453ce57702abaac1d6' \
-                      '18307f33f6789fa870e87a59d772aca2'
-
+        self.sha256 = '0c2eed3f960446e1a3e4b9a1ca2f3ff8' \
+                      '93b6ce41942cf54d5dd59ab4b3b058ac'
         self.name = 'lua'
-        self.version = '5.3.3'
+        self.version = '5.3.5'
         self.url = 'http://www.lua.org/ftp/lua-$version.tar.gz'
         self.compile_args = ['make',
                              'MYCFLAGS="-DLUA_COMPAT_5_2 -DLUA_COMPAT_5_1"',

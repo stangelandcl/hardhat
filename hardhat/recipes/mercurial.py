@@ -5,8 +5,11 @@ from .base import GnuRecipe
 class MercurialRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(MercurialRecipe, self).__init__(*args, **kwargs)
+        self.sha256 = '098cb1437f77fb7f75dc2f008742933c' \
+                      '729ec0b63cfa3e4e2f0a8fbc3d0d349f'
+
         self.name = 'mercurial'
-        self.version = '4.6.1'
+        self.version = '4.7'
         self.depends = ['guess-renames', 'hg-git', 'hg-zipdoc',
                         'python2-docutils']
         self.url = 'https://www.mercurial-scm.org/release/' \

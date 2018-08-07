@@ -5,11 +5,10 @@ from .base import GnuRecipe
 class LinksRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(LinksRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = 'f70d0678ef1c5550953bdc27b12e72d5' \
-                      'de86e53b05dd59b0fc7f07c507f244b8'
-
+        self.sha256 = '82f03038d5e050a65681b9888762af41' \
+                      'c40fd42dec7e59a8d630bfb0ee134a3f'
         self.name = 'links'
-        self.version = '2.14'
+        self.version = '2.16'
         self.depends = [
             'libjpeg-turbo',
             'libpng',

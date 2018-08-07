@@ -6,10 +6,10 @@ from hardhat.version import extension_regex
 class Mingw64Lz4Recipe(Mingw64BaseRecipe):
     def __init__(self, *args, **kwargs):
         super(Mingw64Lz4Recipe, self).__init__(*args, **kwargs)
-        self.sha256 = '0190cacd63022ccb86f44fa5041dc6c3' \
-                      '804407ad61550ca21c382827319e7e7e'
+        self.sha256 = '0963fbe9ee90acd1d15e9f09e826eaaf' \
+                      '8ea0312e854803caf2db0a6dd40f4464'
         self.name = 'mingw64-lz4'
-        self.version = '1.7.5'
+        self.version = '1.8.2'
         self.version_regex = r'v(?P<version>\d+\.\d+\.\d+)' + extension_regex
         self.version_url = 'https://github.com/lz4/lz4/releases'
         self.url = 'https://github.com/Cyan4973/lz4/archive/v$version.tar.gz'

@@ -6,8 +6,10 @@ from .base import GnuRecipe
 class PaleMoonRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(PaleMoonRecipe, self).__init__(*args, **kwargs)
+        self.sha256 = 'b2ad32daf6b83474a77f9c56e18a0e92' \
+                      '82bf2af34a8d9ace581f0583545fd375'
         self.name = 'palemoon'
-        self.version = '27.1.0b2'
+        self.version = '27.9.4'
         self.version_regex = r'(?P<version>\d+\.\d+\.\d+(\w+\d+)?)'
         self.version_url = 'https://github.com/MoonchildProductions/' \
                            'Pale-Moon/releases'
@@ -17,7 +19,7 @@ class PaleMoonRecipe(GnuRecipe):
                         'glib', 'gobject-introspection',
                         'gtk2', 'mesa', 'pango', 'python2', 'xorg-libs']
         self.url = 'https://github.com/MoonchildProductions/Pale-Moon/' \
-                   'archive/$version.tar.gz'
+                   'archive/${version}_Release.tar.gz'
 
     def patch(self):
         self.log_dir('patch', self.directory, 'creating .mozconfig')
