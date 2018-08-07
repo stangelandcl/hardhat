@@ -6,14 +6,15 @@ from ..urls import Urls
 class ArdbRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(ArdbRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '9dfe021e96598ca0179b120536645028' \
-                      '8d540b05d2f43902092c3b57de4dc0bb'
-
+        self.sha256 = '3d8edbebe8c550d29d82278ee96c6260' \
+                      '0ea629bc63349416311bb436a613743b'
         self.name = 'ardb'
         self.description = 'client-server key value database in C++'
-        self.version = '0.9.3'
+        self.version = '0.9.7'
         self.url = Urls.github_commit('yinqiwen', self.name,
                                       'v' + self.version)
+        self.version_url = 'https://github.com/yinqiwen/ardb/releases'
+        self.version_regex = r'''v(?P<version>\d+\.\d+\.\d+)\.tar\.gz'''
         self.depends = ['cJSON', 'cpp-btree',
                         'jemalloc', 'lmdb', 'lua',
                         'snappy', 'sparsehash']

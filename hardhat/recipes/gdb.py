@@ -4,11 +4,10 @@ from .base import GnuRecipe
 class GdbRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(GdbRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = 'af61a0263858e69c5dce51eab26662ff' \
-                      '3d2ad9aa68da9583e8143b5426be4b34'
-
+        self.sha256 = '97dcc3169bd430270fc29adb65145846' \
+                      'a58c1b55cdbb73382a4a89307bdad03c'
         self.name = 'gdb'
-        self.version = '8.1'
+        self.version = '8.1.1'
         self.url = 'http://ftp.gnu.org/gnu/gdb/gdb-$version.tar.xz'
         self.depends = ['readline', 'zlib']
         autoload = '$p/$t/lib:$p/$t/lib64:$p/lib:$p/lib64'.replace(
