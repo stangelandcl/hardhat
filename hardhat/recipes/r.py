@@ -13,11 +13,11 @@ class Extra:
 
 class RRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
-        super(RRecipe, self).__init__(*args, **kwargs)        
-        self.sha256 = 'fd1725535e21797d3d9fea8963d99be0' \
-                      'ba4c3aecadcf081b43e261458b416870'
+        super(RRecipe, self).__init__(*args, **kwargs)
+        self.sha256 = '0463bff5eea0f3d93fa071f79c18d099' \
+                      '3878fd4f2e18ae6cf22c1639d11457ed'
         self.name = 'r'
-        self.version = '3.5.0'
+        self.version = '3.5.1'
         self.version_prefix = 'R'
 
         self.url = 'http://cran.mtu.edu/src/base/R-3/R-$version.tar.gz'

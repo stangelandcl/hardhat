@@ -4,11 +4,10 @@ from .base import GnuRecipe
 class AgRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(AgRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = 'cb416a0da7fe354a009c482ae709692e' \
-                      'd567f8e7d2dad4d242e726dd7ca202f0'
-
+        self.sha256 = '6a0a19ca5e73b2bef9481c29a508d241' \
+                      '3ca1a0a9a5a6b1bd9bbd695a7626cbf9'
         self.name = 'ag'
-        self.version = '2.1.0'
+        self.version = '2.2.0'
         self.version_regex = r'(?P<version>\d+\.\d+\.\d+)'
         self.version_url = 'https://github.com/ggreer/the_silver_searcher/' \
                            'releases'

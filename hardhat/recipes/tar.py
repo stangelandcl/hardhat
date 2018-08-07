@@ -6,11 +6,10 @@ from ..urls import Urls
 class TarRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(TarRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '402dcfd0022fd7a1f2c5611f5c61af1c' \
-                      'd84910a760a44a688e18ddbff4e9f024'
-
+        self.sha256 = 'f1bf92dbb1e1ab27911a861ea8dde820' \
+                      '8ee774866c46c0bb6ead41f4d1f4d2d3'
         self.name = 'tar'
-        self.version = '1.29'
+        self.version = '1.30'
         self.url = Urls.gnu_template(self.name, self.version,
                                      'tar.xz')
 

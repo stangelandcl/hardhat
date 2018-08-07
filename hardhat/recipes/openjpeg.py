@@ -5,11 +5,11 @@ from .base import GnuRecipe
 class OpenJpegRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(OpenJpegRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '4ce77b6ef538ef090d9bde1d5eeff8b3' \
-                      '069ab56c4906f083475517c2c023dfa7'
+        self.sha256 = '6fddbce5a618e910e03ad00d66e7fcd0' \
+                      '9cc6ee307ce69932666d54c73b7c6e7b'
 
         self.name = 'openjpeg'
-        self.version = '2.1.2'
+        self.version = '2.2.0'
         self.version_regex = r'(?P<version>\d+\.\d+\.\d+)'
         self.version_url = 'https://github.com/ggreer/the_silver_searcher/' \
                            'releases'
