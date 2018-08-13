@@ -5,13 +5,13 @@ from .base import GnuRecipe
 class Python3Recipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(Python3Recipe, self).__init__(*args, **kwargs)
-        self.sha256 = '53a3e17d77cd15c5230192b6a8c1e031' \
-                      'c07cd9f34a2f089a731c6f6bd343d5c6'
+        self.sha256 = '85bb9feb6863e04fb1700b018d9d42d1' \
+                      'caac178559ffa453d7e6a436e259fd0d'
         self.name = 'python3'
         self.depends = ['bdb', 'bzip2', 'cacert', 'expat', 'gdbm', 'ncurses',
                         'openssl', 'readline', 'sqlite3', 'xz', 'zlib']
 
-        self.version = '3.6.5'
+        self.version = '3.7.0'
         self.url = \
             'https://www.python.org/ftp/python/$version/Python-$version.tgz'
         self.configure_args += [

@@ -4,10 +4,10 @@ from .base import GnuRecipe
 class CmakeRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(CmakeRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = 'd0781a90f6cdb9049d104ac16a150f93' \
-                      '50b693498b9dea8a0331e799db6b9d69'
+        self.sha256 = 'c53d5c2ce81d7a957ee83e3e635c8cda' \
+                      '5dfe20c9d501a4828ee28e1615e57ab2'
         self.name = 'cmake'
-        self.version = '3.12.0'
+        self.version = '3.12.1'
         self.depends = ['bzip2', 'curl', 'expat', 'jsoncpp',
                         'libarchive', 'librhash', 'libuv',
                         'xz', 'zlib']

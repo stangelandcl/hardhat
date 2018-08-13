@@ -4,10 +4,10 @@ from .base import GnuRecipe
 class HtopRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(HtopRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '179be9dccb80cee0c5e1a1f58c8f72ce' \
-                      '7b2328ede30fb71dcdf336539be2f487'
+        self.sha256 = 'd9d6826f10ce3887950d709b53ee1d8c' \
+                      '1849a70fa38e91d5896ad8cbc6ba3c57'
         self.name = 'htop'
-        self.version = '2.0.2'
+        self.version = '2.2.0'
         self.version_regex = r'(?P<version>\d+\.\d+(\.\d+)?)'
         self.version_url = 'http://hisham.hm/htop/releases/'
         self.url = 'http://hisham.hm/htop/releases/$version/' \

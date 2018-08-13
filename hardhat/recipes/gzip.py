@@ -5,9 +5,9 @@ from ..urls import Urls
 class GzipRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(GzipRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = 'ff1767ec444f71e5daf8972f6f8bf68c' \
-                      'fcca1d2f76c248eb18e8741fc91dbbd3'
+        self.sha256 = 'ae506144fc198bd8f81f1f4ad19ce63d' \
+                      '5a2d65e42333255977cf1dcf1479089a'
 
         self.name = 'gzip'
-        self.version = '1.8'
+        self.version = '1.9'
         self.url = Urls.gnu_template(self.name, self.version, 'tar.xz')

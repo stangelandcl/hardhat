@@ -4,11 +4,11 @@ from .base import GnuRecipe
 class CoreutilsRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(CoreutilsRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '92d0fa1c311cacefa89853bdb53c62f4' \
-                      '110cdfda3820346b59cbd098f40f955e'
+        self.sha256 = 'e831b3a86091496cdba720411f9748de' \
+                      '81507798f6130adeaef872d206e1b057'
 
         self.name = 'coreutils'
-        self.version = '8.29'
+        self.version = '8.30'
         self.depends = ['automake', 'bison']
         self.url = 'http://ftpmirror.gnu.org/coreutils/' \
                    'coreutils-$version.tar.xz'
