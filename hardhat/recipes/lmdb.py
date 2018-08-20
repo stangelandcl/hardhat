@@ -1,19 +1,17 @@
 import os
 from .base import GnuRecipe
 from ..version import extension_regex
+from ..util import patch
 
 
 class LmdbRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(LmdbRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = 'f3927859882eb608868c8c31586bb7eb' \
-                      '84562a40a6bf5cc3e13b6b564641ea28'
         self.name = 'lmdb'
-        self.version = '0.9.22'
+        self.version = '5fced32bbebe95a125b11474f9190e63c47e82b9'
         self.version_regex = 'LMDB_(?P<version>\d+\.\d+\.\d+)' \
             + extension_regex
-        self.version_url = 'https://github.com/LMDB/lmdb/releases'
-        self.url = 'https://github.com/LMDB/lmdb/archive/LMDB_$version.tar.gz'
+        self.url = self.github_commit('stangelandcl')
 
         self.compile_args += [
             'XCFLAGS="-DMDB_MAXKEYSIZE=1800"',
@@ -30,3 +28,8 @@ class LmdbRecipe(GnuRecipe):
 
     def configure(self):
         pass
+
+#    def patch(self):
+#        src = 'env->me_psize = env->me_os_psize;'
+#        dst = 'env->me_psize = 65536;'
+#        patch(os.path.join(self.directory, 'mdb.c'), src, dst)
