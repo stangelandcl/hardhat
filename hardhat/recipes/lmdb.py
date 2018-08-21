@@ -7,6 +7,8 @@ from ..util import patch
 class LmdbRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(LmdbRecipe, self).__init__(*args, **kwargs)
+        self.sha256 = '871d754a707c9968106dd7c7095dcd83' \
+                      '18938bb530f8fb020fd175bbd137584d'
         self.name = 'lmdb'
         self.version = '5fced32bbebe95a125b11474f9190e63c47e82b9'
         self.version_regex = 'LMDB_(?P<version>\d+\.\d+\.\d+)' \

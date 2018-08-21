@@ -13,7 +13,7 @@ class BinoRecipe(GnuRecipe):
         self.version = '1.6.5'
         self.depends = ['ffmpeg',
                         'glew',
-                        'openal',
+                        'openal-soft',
                         'pkgconfig',
                         ]
 #        self.url = 'http://download.savannah.nongnu.org/releases/bino/' \
