@@ -8,7 +8,8 @@ class Python3Recipe(GnuRecipe):
         self.sha256 = '85bb9feb6863e04fb1700b018d9d42d1' \
                       'caac178559ffa453d7e6a436e259fd0d'
         self.name = 'python3'
-        self.depends = ['bdb', 'bzip2', 'cacert', 'expat', 'gdbm', 'ncurses',
+        self.depends = ['bdb', 'bzip2', 'cacert', 'expat', 'gdbm',
+                        'libffi', 'ncurses',
                         'openssl', 'readline', 'sqlite3', 'xz', 'zlib']
 
         self.version = '3.7.0'

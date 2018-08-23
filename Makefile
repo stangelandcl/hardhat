@@ -1,6 +1,6 @@
 .PHONY: install sdist bootstrap stats nix
 OLD_VERSION=
-VERSION=20180626
+VERSION=20180823
 
 sdist:
 	python3 setup.py sdist --formats=gztar

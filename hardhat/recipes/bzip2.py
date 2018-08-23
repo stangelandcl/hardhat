@@ -5,12 +5,14 @@ from .base import GnuRecipe, hash_file
 class Bzip2Recipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(Bzip2Recipe, self).__init__(*args, **kwargs)
-        self.url = 'http://www.bzip.org/1.0.6/bzip2-1.0.6.tar.gz'
         self.name = 'bzip2'
-        self.sha256 = 'a2848f34fcd5d6cf47def00461fcb528' \
-                      'a0484d8edef8208d6d2e2909dc61d9cd'
+        self.sha256 = 'd70a9ccd8bdf47e302d96c69fecd5492' \
+                      '5f45d9c7b966bb4ef5f56b770960afa7'
         self.version = '1.0.6'
-        self.version_url = 'http://www.bzip.org/downloads.html'
+        self.version_url = 'https://web.archive.org/web/20180624184806/' \
+                           'http://www.bzip.org/downloads.html'
+        self.url = 'http://http.debian.net/debian/pool/main/b/bzip2/' \
+                   'bzip2_$version.orig.tar.bz2'
         self.version_regex = 'bzip2-(?P<version>\d+\.\d+\.\d+)\.tar\.gz'
         self.install_args += ['PREFIX=%s' % (self.prefix_dir)]
 
