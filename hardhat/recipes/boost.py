@@ -83,6 +83,6 @@ class BoostRecipe(GnuRecipe):
                 '-c',
                 '"./b2 install threading=multi'
                 ' --user-config=%s -j%s"'
-                % (version, self.user_config, self.cpu_count)
+                % (self.user_config, self.cpu_count)
                 ]
         super(BoostRecipe, self).compile()
