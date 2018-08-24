@@ -55,12 +55,12 @@ class BoostRecipe(GnuRecipe):
                        ' $prefix/include/python${version} ;\n')
         py2 = py2.substitute(prefix=self.prefix_dir,
                              version=self.python2_version)
-        mpi = 'using mpi ;'
+#        mpi = 'using mpi ;'
         with open(self.user_config, 'wt') as f:
             f.write(gcc)
             f.write(py3)  # default version
             f.write(py2)
-            f.write(mpi)
+#            f.write(mpi)
             f.write('\n')
 
 #        filename = os.path.join(self.directory, 'libs/mpi/build/Jamfile.v2')
