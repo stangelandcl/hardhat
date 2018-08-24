@@ -78,3 +78,11 @@ class BoostRecipe(GnuRecipe):
                 % (version, self.user_config, self.cpu_count)
                 ]
             super(BoostRecipe, self).compile()
+
+        self.compile_args = self.shell_args + [
+                '-c',
+                '"./b2 install threading=multi'
+                ' --user-config=%s -j%s"'
+                % (version, self.user_config, self.cpu_count)
+                ]
+        super(BoostRecipe, self).compile()
