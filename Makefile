@@ -28,7 +28,7 @@ install_root: sdist
 	cd ${DOWNLOADS} && tar xvf hardhat-0.1.tar.gz
 	rm -rf ${DIR}/${VERSION}
 #	if [ -z "$OLD_VERSION" ]; then rm -rf ${DIR}/${OLD_VERSION} ; fi
-	cd ${DOWNLOADS}/hardhat-0.1 && ./bootstrap.sh --use-root ${NATIVE} --downloads=${DOWNLOADS} --prefix=${DIR}/${VERSION} --cpus=.5
+	cd ${DOWNLOADS}/hardhat-0.1 && ./bootstrap.sh --use-root ${NATIVE} ${NO_SUDO} --downloads=${DOWNLOADS} --prefix=${DIR}/${VERSION} --cpus=.5
 
 
 stat:
