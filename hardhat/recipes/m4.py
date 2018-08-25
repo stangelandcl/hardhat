@@ -12,3 +12,21 @@ class M4Recipe(GnuRecipe):
         self.version = '1.4.18'
         self.url = Urls.gnu_template(self.name, self.version, 'tar.gz')
         self.environment_strip_lto()
+
+    def patch(self):
+        self.log_dir('patch', self.directory, 'patch for glibc 1.28')
+
+        filename = os.path.join(self.directory, 'lib', 'stdio-impl.h')
+        with open(filename, 'rt') as f:
+            text = f.read()
+        text += '\n#define _IO_IN_BACKUP 0x100\n'
+        with open(filename, 'wt') as f:
+            f.write(text)
+
+        files = ['fpurge.c', 'fflush.c', 'fseeko.c', 'fpending.c', 'freading.c',
+                 'freadahead.c']
+        for file in files:
+            filename = os.path.join(self.directory, 'lib', file)
+            src = 'IO_ftrylockfile'
+            dst = 'IO_EOF_SEEN'
+            patch(filename, src, dst)
