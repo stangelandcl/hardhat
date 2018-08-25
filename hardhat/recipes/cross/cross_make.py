@@ -18,8 +18,8 @@ class CrossMakeRecipe(CrossGnuRecipe):
         self.name = 'cross-make'
         self.configure_args += self.shell_args + [
             './configure', '--without-guile',
-            '--target=%s' % self.target_triplet,
             '--prefix=%s' % self.cross_prefix_dir]
+        self.configure_strip_cross_compile()
 
     def patch(self):
         src = '#if !defined __alloca && !defined __GNU_LIBRARY__'
