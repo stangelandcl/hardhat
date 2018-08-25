@@ -32,3 +32,7 @@ class CrossMakeRecipe(CrossGnuRecipe):
         if os.path.exists(dst):
             os.remove(dst)
         os.symlink(src, dst)
+
+    def post_install(self):
+        pass
+        # disable ldconfig
