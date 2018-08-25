@@ -18,6 +18,7 @@ class CrossMakeRecipe(CrossGnuRecipe):
         self.name = 'cross-make'
         self.configure_args += self.shell_args + [
             './configure', '--without-guile',
+            '--target=%s' % self.target_triplet,
             '--prefix=%s' % self.cross_prefix_dir]
 
     def patch(self):
