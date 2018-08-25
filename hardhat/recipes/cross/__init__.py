@@ -16,7 +16,8 @@ def load(settings):
     recipes = load_recipes(directory, 'hardhat.recipes.cross', exclusions)
 
     dependencies = [
-        ['cross-binutils'],
+        ['cross-make'],
+        ['cross-binutils', 'cross-make'],
         ['cross-gcc',
          'cross-binutils',
          'cross-gcc1',
