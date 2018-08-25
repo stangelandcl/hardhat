@@ -30,8 +30,8 @@ class CrossMakeRecipe(CrossGnuRecipe):
     def install(self):
         super(CrossMakeRecipe, self).install()
 
-        src = os.path.join(self.prefix_dir, 'bin', 'make')
-        dst = os.path.join(self.prefix_dir, 'bin', 'gmake')
+        src = os.path.join(self.cross_prefix_dir, 'bin', 'make')
+        dst = os.path.join(self.cross_prefix_dir, 'bin', 'gmake')
         if os.path.exists(dst):
             os.remove(dst)
         os.symlink(src, dst)
