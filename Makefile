@@ -17,7 +17,7 @@ install: sdist
 	rm -rf ${DOWNLOADS}/hardhat-0.1
 	cd ${DOWNLOADS} && tar xvf hardhat-0.1.tar.gz
 	rm -rf ${DIR}/${VERSION}
-	cp make ~/Downloads/hardhat-0.1
+	cp make ${DOWNLOADS}/hardhat-0.1
 	if [ -z "$OLD_VERSION" ]; then rm -rf ${DIR}/${OLD_VERSION} ; fi
 	cd ${DOWNLOADS}/hardhat-0.1 && ./bootstrap.sh --downloads=${DOWNLOADS} ${NATIVE} ${NO_SUDO} --prefix=${DIR}/${VERSION} --cpus=.25 --pkgfile=${DIR}/hardhat/config/example.config
 
