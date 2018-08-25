@@ -365,7 +365,7 @@ def toolchain_env(*prefixes):
     env = target_path_env(*prefixes)
     merge(env, proxy_env())
     merge(env, OLD_LIB_ENV)
-    env['PATH'] += ':' + os.path.abspath('.')
+    env['PATH'] = os.path.abspath('.') + ':' + env['PATH']
     return env
 
 
