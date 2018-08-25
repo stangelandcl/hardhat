@@ -16,7 +16,7 @@ class CrossMakeRecipe(CrossGnuRecipe):
         self.url = make.url
 
         self.name = 'cross-make'
-        self.configure_args += self.shell_args + [
+        self.configure_args = self.shell_args + [
             './configure', '--without-guile',
             '--prefix=%s' % self.cross_prefix_dir]
         self.configure_strip_cross_compile()
