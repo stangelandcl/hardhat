@@ -10,7 +10,7 @@ from ..make import MakeRecipe
 class CrossMakeRecipe(CrossGnuRecipe):
     def __init__(self, *args, **kwargs):
         super(CrossMakeRecipe, self).__init__(*args, **kwargs)
-        make = BinutilsRecipe(settings=self)
+        make = MakeRecipe(settings=self)
         self.sha256 = make.sha256
         self.version = make.version
         self.url = make.url
@@ -25,7 +25,7 @@ class CrossMakeRecipe(CrossGnuRecipe):
         patch(filename, src, dst)
 
     def install(self):
-        super(MakeRecipe, self).install()
+        super(CrossMakeRecipe, self).install()
 
         src = os.path.join(self.prefix_dir, 'bin', 'make')
         dst = os.path.join(self.prefix_dir, 'bin', 'gmake')
