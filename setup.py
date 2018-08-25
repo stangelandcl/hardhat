@@ -6,7 +6,8 @@ from setuptools import setup
 filenames = [
     'setuptools-20.10.1.tar.gz',
     'argparse-1.4.0.tar.gz',
-    'importlib-1.0.3.tar.gz'
+    'importlib-1.0.3.tar.gz',
+    'make'
 ]
 
 filenames = list(filter(lambda x: os.path.exists(x), filenames))
