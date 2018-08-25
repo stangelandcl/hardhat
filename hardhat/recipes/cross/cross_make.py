@@ -1,5 +1,5 @@
 import os
-from ..util import patch
+from hardhat.util import patch
 import shutil
 from hardhat.environment import toolchain_lib_path
 from hardhat.urls import Urls
