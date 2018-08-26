@@ -655,7 +655,10 @@ class Extractor(Object):
 class Configure(Object):
     def __init__(self, *args, **kwargs):
         super(Configure, self).__init__(*args, **kwargs)
-        self.cmake_args = [
+
+    @property
+    def cmake_args(self):
+        return [
             'cmake',
             '-G',
             '"Unix Makefiles"',
