@@ -11,3 +11,11 @@ class GzipRecipe(GnuRecipe):
         self.name = 'gzip'
         self.version = '1.9'
         self.url = Urls.gnu_template(self.name, self.version, 'tar.xz')
+
+    def patch(self):
+        self.log_dir('patch', self.directory, 'patch for glibc 1.28')
+        args = [['sed', '-i', "'s/IO_ftrylockfile/IO_EOF_SEEN/'", 'lib/*.c'],
+                ['echo', '"#define _IO_IN_BACKUP 0x100"', '>>', 'lib/stdio-impl.h']]
+
+        for arg in args:
+            self.run_exe(arg, self.directory, self.environment)

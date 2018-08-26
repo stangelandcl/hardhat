@@ -17,7 +17,7 @@ class LuaRecipe(GnuRecipe):
         self.install_args = [
             ['make',
              'INSTALL_TOP=%s' % self.prefix_dir,
-             'TO_LIB="liblua.so liblua.so.5.3 liblua.so.5.3.3"',
+             'TO_LIB="liblua.so liblua.so.5.3 liblua.so.5.3.4"',
              'INSTALL_DATA="cp -d"',
              'INSTALL_MAN=%s/share/man/man1' % self.prefix_dir,
              'install'],
@@ -32,7 +32,7 @@ class LuaRecipe(GnuRecipe):
     def install(self):
         text = r'''
 V=5.3
-R=5.3.3
+R=%s
 
 prefix=%s
 INSTALL_BIN=${prefix}/bin
@@ -52,7 +52,7 @@ Requires:
 Libs: -L${libdir} -llua -lm -ldl
 Cflags: -I${includedir}
 EOF
-''' % self.prefix_dir
+''' % (self.version, self.prefix_dir)
 
         filename = os.path.join(self.directory, 'lua.pc')
         with open(filename, 'wt') as f:
