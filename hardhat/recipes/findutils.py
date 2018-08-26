@@ -13,6 +13,7 @@ class FindUtilsRecipe(GnuRecipe):
         self.url = Urls.gnu_template(self.name, self.version)
 
     def patch(self):
+        self.log_dir('patch', self.directory, 'glibc 1.28')
         args = [['sed', '-i', "'s/IO_ftrylockfile/IO_EOF_SEEN/'", 'gl/lib/*.c'],
                 ['sed', '-i', "'/unistd/a #include <sys/sysmacros.h>'", 'gl/lib/mountlist.c'],
                 ['echo', '"#define _IO_IN_BACKUP 0x100"', '>>', 'gl/lib/stdio-impl.h']]
