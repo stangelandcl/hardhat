@@ -39,8 +39,8 @@ class PostgresRecipe(GnuRecipe):
                        '%s/postgresql-%s-US.pdf' % (self.doc_version,
                                                     self.doc_version)
 
-        self.doc.sha256 = '04d247184253f77b1b3f5200c06faaab' \
-                          '2fe08975b7384f0e60f393c7f80b1871'
+        self.doc.sha256 = '97b2709e81b0579491950562da112eaf' \
+                          '6485b86515002360626f84b7514cedaf'
 
         self.doc.version = self.version
         self.extra_downloads.append(self.doc)
