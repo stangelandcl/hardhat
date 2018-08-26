@@ -11,3 +11,10 @@ class FindUtilsRecipe(GnuRecipe):
         self.name = 'findutils'
         self.version = '4.6.0'
         self.url = Urls.gnu_template(self.name, self.version)
+
+    def patch(self):
+        args = [['sed', '-i', "'s/IO_ftrylockfile/IO_EOF_SEEN/'", 'gl/lib/*.c'],
+                ['sed', '-i', "'/unistd/a #include <sys/sysmacros.h>'", 'gl/lib/mountlist.c'],
+                ['echo', '"#define _IO_IN_BACKUP 0x100"', '>>', 'gl/lib/stdio-impl.h']]
+        for arg in args:
+            self.run_exe(arg, self.directory, self.environment)
