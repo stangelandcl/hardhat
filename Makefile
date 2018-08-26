@@ -4,7 +4,8 @@ VERSION=20180823
 DIR=~
 DOWNLOADS=${DIR}/Downloads
 NATIVE=-mtune=native
-NO_SUDO=--no-sudo
+NO_SUDO=
+#--no-sudo
 
 sdist:
 	python3 setup.py sdist --formats=gztar
