@@ -1,7 +1,8 @@
 .PHONY: install sdist bootstrap stats nix
 OLD_VERSION=
 VERSION=20180823
-DIR=/mnt/common/rh7/btcab/hardhat
+DIR=~
+#/mnt/common/rh7/btcab/hardhat
 DOWNLOADS=${DIR}/Downloads
 NATIVE=-mtune=native
 NO_SUDO=--no-sudo
