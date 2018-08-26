@@ -3,7 +3,7 @@ OLD_VERSION=
 VERSION=20180823
 DIR=~/hardhat
 DOWNLOADS=~/Downloads/hardhat
-NATIVE=-mtune=native
+NATIVE=--march=native
 NO_SUDO=
 #--no-sudo
 
