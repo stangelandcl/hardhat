@@ -1,6 +1,7 @@
 import os
 from .base import GnuRecipe
 from hardhat.urls import Urls
+from ..util import patch
 
 
 class M4Recipe(GnuRecipe):
