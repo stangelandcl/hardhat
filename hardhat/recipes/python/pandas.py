@@ -4,11 +4,11 @@ from .base import PipBaseRecipe
 class PandasRecipe(PipBaseRecipe):
     def __init__(self, *args, **kwargs):
         super(PandasRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '9cd3614b4e31a0889388ff1bd19ae857' \
-                      'ad52658b33f776065793c293a29cf612'
+        self.sha256 = '5b24ca47acf69222e82530e89111dd9d' \
+                      '14f9b970ab2cd3a1c2c78f0c4fbba4f4'
 
         self.name = 'pandas'
-        self.version = '0.23.3'
+        self.version = '0.23.4'
         self.pydepends = ['numpy', 'dateutil', 'scipy', 'xlwt']
 
         self.environment['CFLAGS'] += \
