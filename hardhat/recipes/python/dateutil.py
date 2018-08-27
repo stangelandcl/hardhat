@@ -8,6 +8,6 @@ class DateUtilRecipe(PipBaseRecipe):
                       '3504a7bc5da472209b4c70f02829f0b8'
 
         self.name = 'dateutil'
-        self.pydepends = ['six']
+        self.pydepends = ['setuptools', 'six']
         self.version = '2.7.3'
         self.pypi_name = 'python-dateutil'
