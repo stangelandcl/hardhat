@@ -38,5 +38,5 @@ install -vm644 doc/manual.html \
                 version=self.version)
         self.install_args = [script]
 
-    def compile_args(self):
+    def compile(self):
         pass
