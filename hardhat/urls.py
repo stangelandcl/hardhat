@@ -69,7 +69,7 @@ class Urls(object):
 
     @staticmethod
     def pypi(name):
-        return 'https://pypi.python.org/pypi/%s/json' % name
+        return 'https://pypi.org/pypi/%s/json' % name
 
     @staticmethod
     def gnu_template(name, version, extension='tar.gz'):
