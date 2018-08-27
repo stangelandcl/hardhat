@@ -1,3 +1,4 @@
+import os
 from .base import GnuRecipe
 from hardhat.urls import Urls
 
@@ -15,3 +16,12 @@ class GuileRecipe(GnuRecipe):
                         'libtool', 'libunistring', 'ncurses', 'readline']
         # to avoid requiring a bootstrap guile
         self.configure_strip_cross_compile()
+
+    def extract(self):
+        if not os.path.exists(self.extract_dir):
+            os.makedirs(self.extract_dir)
+        args = ['tar', 'xf', self.filename, '--strip-components=1',
+                '-C', self.directory]
+        self.log_dir('extract', self.directory,
+                     'extract %s' % self.filename)
+        self.run_exe(args, self.directory, self.environment)
