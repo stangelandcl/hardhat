@@ -9,13 +9,14 @@ class CoreutilsRecipe(GnuRecipe):
 
         self.name = 'coreutils'
         self.version = '8.30'
-        self.depends = ['automake', 'bison']
+        self.depends = ['autoconf', 'automake', 'bison']
         self.url = 'http://ftpmirror.gnu.org/coreutils/' \
                    'coreutils-$version.tar.xz'
 
-        self.configure_args += ['--disable-silent-rules',
-                                '--enable-no-install-program=kill,uptime']
         self.configure_strip_cross_compile()
+        self.configure_args = [['autoreconf', '-fiv'],
+                               self.configure_args + ['--disable-silent-rules',
+                               '--enable-no-install-program=kill,uptime']]
 
 
     def patch(self):

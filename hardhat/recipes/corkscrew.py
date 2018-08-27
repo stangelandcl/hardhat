@@ -10,6 +10,7 @@ class CorkscrewRecipe(GnuRecipe):
         self.name = 'corkscrew'
         self.version = 'a94f745b40077172b8fe7d77e2d583b9cf900281'
         self.url = self.github_commit('bryanpkc')
+        self.depends = ['autotools']
         self.configure_args = [self.shell_args + ['autoreconf', '--install'],
 	                       self.configure_args]
 
