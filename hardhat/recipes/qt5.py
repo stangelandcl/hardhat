@@ -30,7 +30,6 @@ class Qt5Recipe(GnuRecipe):
         # to fix "warning: libQtCLucene.so.4, needed by ... libQtHelp.so"
         self.environment['LDFLAGS'] += ' -Wl,-rpath-link,%s/lib' \
                                        % (self.directory)
-
         self.configure_args = self.shell_args + [
             './configure',
             '-prefix %s' % (self.prefix_dir),
@@ -53,7 +52,7 @@ class Qt5Recipe(GnuRecipe):
 # missing some xcb libraries. Add them and this can be removed.
             '-qt-xcb'
             ]
-#        self.compile_args = ['make']
+#        self.compile_args = ['make', '-j1']
 
     def patch(self):
         self.log_dir('patch', self.directory, 'use local X11 directories')
