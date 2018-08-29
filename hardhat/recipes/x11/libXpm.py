@@ -9,4 +9,4 @@ class LibXpmRecipe(X11BaseRecipe):
 
         self.name = 'libXpm'
         self.version = '3.5.12'
-        self.depends = ['libX11', 'xorg-headers']
+        self.depends = ['libX11', 'xorgproto']

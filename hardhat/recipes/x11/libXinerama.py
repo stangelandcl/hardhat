@@ -9,4 +9,4 @@ class LibXineramaRecipe(X11BaseRecipe):
 
         self.name = 'libXinerama'
         self.version = '1.1.3'
-        self.depends = ['libXext', 'libX11', 'xorg-headers']
+        self.depends = ['libXext', 'libX11', 'xorgproto']

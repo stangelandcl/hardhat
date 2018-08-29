@@ -8,4 +8,4 @@ class LibXcursorRecipe(X11BaseRecipe):
                       'a2dfe5708851bbc13d032401b7a3df6b'
         self.name = 'libXcursor'
         self.version = '1.1.15'
-        self.depends = ['libX11', 'libXfixes', 'libXrender', 'xorg-headers']
+        self.depends = ['libX11', 'libXfixes', 'libXrender', 'xorgproto']

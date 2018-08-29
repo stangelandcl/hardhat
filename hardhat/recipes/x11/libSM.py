@@ -9,4 +9,4 @@ class LibSMRecipe(X11BaseRecipe):
 
         self.name = 'libSM'
         self.version = '1.2.2'
-        self.depends = ['libICE', 'xorg-headers', 'xtrans']
+        self.depends = ['libICE', 'xorgproto', 'xtrans']

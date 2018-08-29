@@ -31,6 +31,7 @@ class FfmpegRecipe(GnuRecipe):
             '--enable-version3',
             '--enable-nonfree',
             '--enable-shared',
+            '--enable-avresample',
             '--enable-libass',
             '--enable-libfdk-aac',
             '--enable-libfreetype',

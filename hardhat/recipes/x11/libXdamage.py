@@ -9,4 +9,4 @@ class LibXdamageRecipe(X11BaseRecipe):
 
         self.name = 'libXdamage'
         self.version = '1.1.4'
-        self.depends = ['libX11', 'libXfixes', 'xorg-headers']
+        self.depends = ['libX11', 'libXfixes', 'xorgproto']

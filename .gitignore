@@ -98,3 +98,5 @@ gmon.out
 \#*#
 a.out
 scripts/pamtest/pamtest
+*.swp
+

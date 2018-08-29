@@ -9,4 +9,4 @@ class LibXScrnSaverRecipe(X11BaseRecipe):
 
         self.name = 'libXScrnSaver'
         self.version = '1.2.2'
-        self.depends = ['libX11', 'libXext', 'xorg-headers']
+        self.depends = ['libX11', 'libXext', 'xorgproto']

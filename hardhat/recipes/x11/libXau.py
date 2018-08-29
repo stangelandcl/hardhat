@@ -9,4 +9,4 @@ class LibXauRecipe(X11BaseRecipe):
 
         self.name = 'libXau'
         self.version = '1.0.8'
-        self.depends = ['xorg-headers']
+        self.depends = ['xorgproto']

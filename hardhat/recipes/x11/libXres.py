@@ -8,4 +8,4 @@ class LibXresRecipe(X11BaseRecipe):
                       '0f140464cf90c42616ebb263ec5fa0e5'
         self.name = 'libXres'
         self.version = '1.0.7'
-        self.depends = ['libXext', 'libX11', 'xorg-headers']
+        self.depends = ['libXext', 'libX11', 'xorgproto']

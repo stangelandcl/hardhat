@@ -9,4 +9,4 @@ class LibXiRecipe(X11BaseRecipe):
 
         self.name = 'libXi'
         self.version = '1.7.8'
-        self.depends = ['libXext', 'libX11', 'xorg-headers']
+        self.depends = ['libXext', 'libX11', 'xorgproto']

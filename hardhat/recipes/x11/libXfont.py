@@ -9,4 +9,4 @@ class LibXFontRecipe(X11BaseRecipe):
 
         self.name = 'libXfont'
         self.version = '1.5.2'
-        self.depends = ['freetype', 'libfontenc', 'xorg-headers']
+        self.depends = ['freetype', 'libfontenc', 'xorgproto']

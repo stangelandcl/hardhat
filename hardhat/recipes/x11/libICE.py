@@ -9,4 +9,4 @@ class LibICERecipe(X11BaseRecipe):
 
         self.name = 'libICE'
         self.version = '1.0.9'
-        self.depends = ['xorg-headers', 'xtrans']
+        self.depends = ['xorgproto', 'xtrans']

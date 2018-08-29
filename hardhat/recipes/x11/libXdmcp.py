@@ -9,4 +9,4 @@ class LibXdmcpRecipe(X11BaseRecipe):
 
         self.name = 'libXdmcp'
         self.version = '1.1.2'
-        self.depends = ['xorg-headers']
+        self.depends = ['xorgproto']

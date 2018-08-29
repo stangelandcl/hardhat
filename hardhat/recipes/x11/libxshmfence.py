@@ -8,4 +8,4 @@ class LibXshmFenceRecipe(X11BaseRecipe):
                       '31cb75f92bed5ccf9836345b459220c7'
         self.name = 'libxshmfence'
         self.version = '1.3'
-        self.depends = ['xorg-headers']
+        self.depends = ['xorgproto']

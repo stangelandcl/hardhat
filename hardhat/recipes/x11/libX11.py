@@ -9,7 +9,7 @@ class LibX11Recipe(X11BaseRecipe):
 
         self.name = 'libX11'
         self.version = '1.6.5'
-        self.depends = ['libxcb', 'xorg-headers', 'xtrans']
+        self.depends = ['libxcb', 'xorgproto', 'xtrans']
 
         self.configure_args += [
             '--enable-ipv6',

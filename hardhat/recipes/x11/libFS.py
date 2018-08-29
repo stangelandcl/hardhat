@@ -9,4 +9,4 @@ class LibFSRecipe(X11BaseRecipe):
 
         self.name = 'libFS'
         self.version = '1.0.7'
-        self.depends = ['pkgconfig', 'xorg-headers', 'xtrans']
+        self.depends = ['pkgconfig', 'xorgproto', 'xtrans']

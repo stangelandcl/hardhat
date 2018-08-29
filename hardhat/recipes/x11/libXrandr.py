@@ -9,4 +9,4 @@ class LibXrandrRecipe(X11BaseRecipe):
 
         self.name = 'libXrandr'
         self.version = '1.5.1'
-        self.depends = ['libX11', 'libXext', 'libXrender', 'xorg-headers']
+        self.depends = ['libX11', 'libXext', 'libXrender', 'xorgproto']

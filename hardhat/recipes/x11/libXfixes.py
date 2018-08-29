@@ -9,4 +9,4 @@ class LibXfixesRecipe(X11BaseRecipe):
 
         self.name = 'libXfixes'
         self.version = '5.0.3'
-        self.depends = ['libX11', 'xorg-headers']
+        self.depends = ['libX11', 'xorgproto']
