@@ -7,10 +7,11 @@ from ..util import patch
 class LmdbRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(LmdbRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '871d754a707c9968106dd7c7095dcd83' \
-                      '18938bb530f8fb020fd175bbd137584d'
+        self.sha256 = 'db4224fb9eb07ad07fbda97645e66693' \
+                      '0348c06f390da326153f3ada57c059ae'
+
         self.name = 'lmdb'
-        self.version = '5fced32bbebe95a125b11474f9190e63c47e82b9'
+        self.version = '13f345a47ed1c002280a11b924f49f29157f6e5a'
         self.version_regex = 'LMDB_(?P<version>\d+\.\d+\.\d+)' \
             + extension_regex
         self.url = self.github_commit('stangelandcl')
