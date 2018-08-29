@@ -4,8 +4,11 @@ from .base import GnuRecipe
 class FfmpegRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(FfmpegRecipe, self).__init__(*args, **kwargs)
+        self.sha256 = 'a95c0cc9eb990e94031d2183f2e6e444' \
+                      'cc61c99f6f182d1575c433d62afb2f97'
+
         self.name = 'ffmpeg'
-        self.version = '4.0.1'
+        self.version = '4.0.2'
         self.depends = ['alsa-lib',
                         'fdk-aac',
                         'freetype',
@@ -38,9 +41,10 @@ class FfmpegRecipe(GnuRecipe):
             '--enable-libvpx',
             '--enable-libx264',
             '--enable-libx265',
-            '--enable-x11grab',
             '--disable-debug',
             '--enable-openssl',
+            '--disable-doc',
+            '--disable-htmlpages'
             ]
         self.configure_strip_cross_compile()
         self.environment_strip_lto()
