@@ -20,7 +20,7 @@ install: sdist
 	rm -rf ${DIR}/${VERSION}
 	cp make ${DOWNLOADS}/hardhat-0.1
 	if [ -z "$OLD_VERSION" ]; then rm -rf ${DIR}/${OLD_VERSION} ; fi
-	cd ${DOWNLOADS}/hardhat-0.1 && ./bootstrap.sh --downloads=${DOWNLOADS} ${NATIVE} ${NO_SUDO} --prefix=${DIR}/${VERSION} --cpus=.99
+	cd ${DOWNLOADS}/hardhat-0.1 && ./bootstrap.sh --downloads=${DOWNLOADS} ${NATIVE} ${NO_SUDO} --prefix=${DIR}/${VERSION} --cpus=.5
 #--pkgfile=${DIR}/hardhat/config/example.config
 
 install_root: sdist
