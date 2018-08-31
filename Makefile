@@ -1,6 +1,6 @@
 .PHONY: install sdist bootstrap stats nix
 OLD_VERSION=
-VERSION=20180823
+VERSION=20180831
 DIR=~/hardhat
 DOWNLOADS=~/Downloads/hardhat
 NATIVE=--march=native
@@ -20,7 +20,7 @@ install: sdist
 	rm -rf ${DIR}/${VERSION}
 	cp make ${DOWNLOADS}/hardhat-0.1
 	if [ -z "$OLD_VERSION" ]; then rm -rf ${DIR}/${OLD_VERSION} ; fi
-	cd ${DOWNLOADS}/hardhat-0.1 && ./bootstrap.sh --downloads=${DOWNLOADS} ${NATIVE} ${NO_SUDO} --prefix=${DIR}/${VERSION} --cpus=.25
+	cd ${DOWNLOADS}/hardhat-0.1 && ./bootstrap.sh --downloads=${DOWNLOADS} ${NATIVE} ${NO_SUDO} --prefix=${DIR}/${VERSION} --cpus=.99
 #--pkgfile=${DIR}/hardhat/config/example.config
 
 install_root: sdist
