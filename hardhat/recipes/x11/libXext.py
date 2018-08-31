@@ -9,4 +9,4 @@ class LibXextRecipe(X11BaseRecipe):
 
         self.name = 'libXext'
         self.version = '1.3.3'
-        self.depends = ['libxslt', 'xmlto']
+        self.depends = ['libxslt', 'xmlto', 'xorgproto']
