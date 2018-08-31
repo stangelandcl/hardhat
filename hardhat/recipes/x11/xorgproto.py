@@ -25,7 +25,7 @@ class XOrgProtoRecipe(GnuRecipe):
 mkdir build &&
 cd    build &&
 
-meson --prefix=$HARDHAT_PREFIX --datadir=$HARDHAT_PREFIX/lib .. &&
+meson --prefix=$HARDHAT_PREFIX --datadir=$HARDHAT_PREFIX/lib --buildtype=release .. &&
 ninja
 '''
         with open(script, 'wt') as f:

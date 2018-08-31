@@ -6,31 +6,33 @@ from ..version import extension_regex
 class SwayRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(SwayRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '6b033a63524dbf1a1770bc0935eb9421' \
-                      '775570b7e4b53b81e0f9da5b899025d0'
+        self.sha256 = '2af2e6091c14657c651ad26e7c17c547' \
+                      'aaf5aef26e8dd4a1e3f37bb620084fda'
+
         self.name = 'sway'
         self.depends = ['cairo', 'dmenu', 'fonts',
                         'gdk-pixbuf',
-                        'json-c', 'libcap', 'linux-pam', 'pango',
+                        'json-c', 'libcap', 'linux-pam',
+                        'meson', 'pango',
                         'pcre', 'pkgconfig', 'util-linux',
-                        'wayland', 'wlc', 'xf86-video-fbdev',
+                        'wayland', 'wlc', 'wlroots', 'xf86-video-fbdev',
                         'xorg-server']
         # Plus install a specific driver for better performance
         # see recipes/x11/drivers for a list
         # Also install the synaptics driver in that directory
         # for laptop touchpad support
-        self.version = 'ee81b1aecb44611f82dc34836ced495ee1514c51'
+        self.environment['CFLAGS'] += ' -Wno-error=maybe-uninitialized'
+        self.version = 'de9e80459a93598bdaf6a68485215ce597131d88'
         self.version_regex = r'(?P<version>\d+\.\d+(-rc\d+)?)' \
             + extension_regex
         self.version_url = 'https://github.com/SirCmpwn/sway/releases'
         self.url = 'https://github.com/SirCmpwn/sway/archive/$version.tar.gz'
-        self.configure_args = [
-            'cmake',
-            '-G',
-            '"Unix Makefiles"',
-            '-DCMAKE_BUILD_TYPE=Release',
-            '-DCMAKE_INSTALL_PREFIX=%s' % self.prefix_dir,
-            ]
+        self.configure_args = ['meson', 'build',
+                               '--prefix %s' % self.prefix_dir,
+                               '--buildtype', 'release']
+        self.compile_args = ['ninja', '-C', 'build']
+        self.install_args = ['%s/bin/ninja' % self.prefix_dir,
+                             '-C', 'build', 'install']
         self.sudo = True
 # to set keyboard layout. run these commands before starting sway
 #    export XKB_DEFAULT_LAYOUT=us
