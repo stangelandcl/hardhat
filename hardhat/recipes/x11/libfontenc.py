@@ -9,4 +9,4 @@ class LibFontEncRecipe(X11BaseRecipe):
 
         self.name = 'libfontenc'
         self.version = '1.1.3'
-        self.depends = ['zlib']
+        self.depends = ['xorgproto', 'zlib']
