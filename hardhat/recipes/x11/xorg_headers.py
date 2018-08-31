@@ -43,8 +43,8 @@ class XOrgHeadersRecipe(Recipe):
 #                                    '2174dce58d3e207021b8f860be498468'),
 #            ('recordproto', '1.14.2', 'a777548d2e92aa259f1528de3c4a36d1'
 #                                      '5e07a4650d0976573a8e2ff5437e7370'),
-#            ('renderproto', '0.11.1', '06735a5b92b20759204e4751ecd6064a'
-#                                      '2ad8a6246bb65b3078b862a00def2537'),
+            ('renderproto', '0.11.1', '06735a5b92b20759204e4751ecd6064a'
+                                      '2ad8a6246bb65b3078b862a00def2537'),
 ##            ('resourceproto', '1.2.0', '3c66003a6bdeb0f70932a9ed3cf57cc5'
 #                                       '54234154378d301e0c5cfa189d8f6818'),
 #            ('scrnsaverproto', '1.2.2', '8bb70a8da164930cceaeb4c741802916'
