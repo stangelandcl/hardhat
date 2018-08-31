@@ -8,4 +8,4 @@ class LibXpRecipe(X11BaseRecipe):
                       '52c19f61a52b18530d6b005cb9148c57'
         self.name = 'libXp'
         self.version = '1.0.3'
-        self.depends = ['libXext', 'libX11', 'xorgproto']
+        self.depends = ['libXext', 'libX11', 'xorg-headers', 'xorgproto']
