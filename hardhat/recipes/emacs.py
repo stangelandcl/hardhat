@@ -18,7 +18,8 @@ class EmacsRecipe(GnuRecipe):
 #        self.url = 'http://git.savannah.gnu.org/cgit/emacs.git/snapshot/' \
 #                   'emacs-$version.tar.gz'
 
-        self.depends = ['dejavu-fonts',
+        self.depends = ['autotools',
+                        'dejavu-fonts',
                         'fontconfig',
                         'giflib',
 #                        'gnome-icon-theme',

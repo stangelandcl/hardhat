@@ -6,12 +6,12 @@ from ..util import patch
 class NssRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(NssRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '0d4a77ff26bcee79fa8afe0125e0df6a' \
-                      'e9e798b6b36782fa29e28febf7cfce24'
+        self.sha256 = '2c643d3c08d6935f4d325f40743719b6' \
+                      '990aa25a79ec2f8f712c99d086672f62'
 
         self.name = 'nss'
         self.depends = ['nspr', 'p11-kit', 'sqlite3']
-        self.version = '3.30.2'
+        self.version = '3.38'
         self.version_regex = r'(?P<version>\d+\.\d+(\.\d+)*)'
         s = self.version.replace('.', '_')
         self.url = 'https://ftp.mozilla.org/pub/mozilla.org/security/nss/' \
@@ -66,6 +66,7 @@ Upstream Status:         Not applicable
 Origin:                  Self, rediffed for nss-3.28.
 Description:             Adds auto-generated nss.pc and nss-config script, and
                          allows building without nspr in the source tree.
+                         For 3.35, Requires: updated to nspr >= 4.18.
 
 diff -Naurp nss-3.28-orig/nss/Makefile nss-3.28/nss/Makefile
 --- nss-3.28-orig/nss/Makefile	2016-12-21 05:56:27.000000000 -0600
@@ -292,7 +293,7 @@ diff -Naurp nss-3.28-orig/nss/config/nss.pc.in nss-3.28/nss/config/nss.pc.in
 +Name: NSS
 +Description: Network Security Services
 +Version: @NSS_MAJOR_VERSION@.@NSS_MINOR_VERSION@.@NSS_PATCH_VERSION@
-+Requires: nspr >= 4.10
++Requires: nspr >= 4.18
 +Libs: -L@libdir@ -lnss@NSS_MAJOR_VERSION@ -lnssutil@NSS_MAJOR_VERSION@ -lsmime@NSS_MAJOR_VERSION@ -lssl@NSS_MAJOR_VERSION@ -lsoftokn@NSS_MAJOR_VERSION@
 +Cflags: -I${includedir}
 +
@@ -303,20 +304,20 @@ diff -Naurp nss-3.28-orig/nss/manifest.mn nss-3.28/nss/manifest.mn
 
  RELEASE = nss
 
--DIRS = coreconf lib cmd gtests
-+DIRS = coreconf lib cmd gtests config
+-DIRS = coreconf lib cmd cpputil gtests
++DIRS = coreconf lib cmd cpputil gtests config
 '''
 
         self.apply_patch(self.directory, text)
         self.directory = os.path.join(self.directory, 'nss')
 
-        filename = os.path.join(
-            self.directory,
-            'lib/libpkix/pkix_pl_nss/pki/pkix_pl_ocsprequest.c')
-        src = r'''*pHashcode = (((((extensionHash << 8) || certHash) << 8) ||'''
-        dst = r'''*pHashcode = (((((extensionHash << 8) != 0 || certHash) << 8) != 0 ||'''
-        patch(filename, src, dst)
+#        filename = os.path.join(
+#            self.directory,
+#            'lib/libpkix/pkix_pl_nss/pki/pkix_pl_ocsprequest.c')
+#        src = r'''*pHashcode = (((((extensionHash << 8) || certHash) << 8) ||'''
+#        dst = r'''*pHashcode = (((((extensionHash << 8) != 0 || certHash) << 8) != 0 ||'''
+#        patch(filename, src, dst)
 
-        src = r'''dateHash) << 8) || signerHash;'''
-        dst = r'''dateHash) << 8) != 0 || signerHash;'''
-        patch(filename, src, dst)
+#        src = r'''dateHash) << 8) || signerHash;'''
+#        dst = r'''dateHash) << 8) != 0 || signerHash;'''
+#        patch(filename, src, dst)

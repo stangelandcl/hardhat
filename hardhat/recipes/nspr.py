@@ -5,10 +5,11 @@ from .base import GnuRecipe
 class NsprRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(NsprRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '5e4c1751339a76e7c772c0c04747488d' \
-                      '7f8c98980b434dc846977e43117833ab'
+        self.sha256 = '2ed95917fa2277910d1d1cf36030607d' \
+                      'ccc0ba522bba08e2af13c113dcd8f729'
+
         self.name = 'nspr'
-        self.version = '4.13.1'
+        self.version = '4.19'
         self.version_regex = r'v(?P<version>\d+\.\d+(\.\d+)*)'
         self.version_url = 'https://ftp.mozilla.org/pub/mozilla.org/nspr/' \
                            'releases/'

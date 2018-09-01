@@ -4,11 +4,11 @@ from .base import GnuRecipe
 class WebKitGtkRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(WebKitGtkRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = 'eb92383232328ce655b703c64370ed37' \
-                      '95662479719ad1b4a869ed46769d2945'
-                
+        self.sha256 = '8c073494b1060a5e0b713c2705f558df' \
+                      'dc833e69d11ff4f681f04bc4956dd16e'
+
         self.name = 'webkitgtk'
-        self.version = '2.16.1'
+        self.version = '2.21.92'
         self.depends = ['cairo', 'cmake', 'gst-plugins-base', 'gtk2', 'gtk3',
                         'icu', 'libgudev', 'libsecret', 'libsoup', 'libwebp',
                         'mesa', 'ruby', 'sqlite3', 'which']

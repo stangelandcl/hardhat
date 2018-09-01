@@ -4,11 +4,11 @@ from .base import GnuRecipe
 class Pcre2Recipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(Pcre2Recipe, self).__init__(*args, **kwargs)
-        self.sha256 = 'b2b44619f4ac6c50ad74c2865fd56807' \
-                      '571392496fae1c9ad7a70993d018f416'
+        self.sha256 = 'e07d538704aa65e477b6a392b32ff9fc' \
+                      '5edf75ab9a40ddfc876186c4ff4d68ac'
 
         self.name = 'pcre2'
-        self.version = '10.22'
+        self.version = '10.31'
         self.url = 'ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/' \
                    'pcre2-$version.tar.bz2'
         self.depends = ['bzip2', 'readline', 'zlib']
