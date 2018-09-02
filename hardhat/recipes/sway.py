@@ -14,7 +14,7 @@ class SwayRecipe(GnuRecipe):
                         'gdk-pixbuf',
                         'json-c', 'libcap', 'linux-pam',
                         'meson', 'pango',
-                        'pcre', 'pkgconfig', 'util-linux',
+                        'pcre', 'pkgconfig', 'scdoc', 'util-linux',
                         'wayland', 'wlc', 'wlroots', 'xf86-video-fbdev',
                         'xorg-server']
         # Plus install a specific driver for better performance

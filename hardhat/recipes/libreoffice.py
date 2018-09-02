@@ -4,11 +4,8 @@ from .base import GnuRecipe
 class LibreOfficeRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(LibreOfficeRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '04b9215e1c4b8c7ce2d79b8e322bff8d' \
-                      '097426a2d103476cf237cfd42262556e'
-
         self.name = 'libreoffice'
-        self.version = '5.3.0.3'
+        self.version = '6.1.0.3'
         self.version_regex = r'(?P<version>\d+\.\d+\.\d+)'
         self.depends = [
             'apr',
@@ -39,8 +36,8 @@ class LibreOfficeRecipe(GnuRecipe):
             'unzip',
             'zip'
             ]
-        self.url = 'http://download.documentfoundation.org/libreoffice/src/' \
-                   '5.3.0/libreoffice-$version.tar.xz'
+        self.url = 'http://downloadarchive.documentfoundation.org/libreoffice/old/$version/src/' \
+                   'libreoffice-$version.tar.xz'
         self.compile_args = ['make', 'build-nocheck', '-j%s' % self.cpu_count]
         self.install_args = ['make', 'distro-pack-install']
 
