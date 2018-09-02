@@ -9,6 +9,6 @@ class XcbUtilCursorRecipe(GnuRecipe):
         self.name = 'xcb-util-cursor'
         self.version = '0.1.3'
         self.url = 'https://xcb.freedesktop.org/dist/xcb-util-cursor-$version.tar.bz2'
-        self.depends = ['libxcb']
+        self.depends = ['libxcb', 'xcb-util-renderutil']
 
 

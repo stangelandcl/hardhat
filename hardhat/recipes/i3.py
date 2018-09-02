@@ -1,3 +1,4 @@
+import os
 from .base import GnuRecipe
 
 
@@ -12,5 +13,18 @@ class I3Recipe(GnuRecipe):
         self.version_regex = r'(?P<version>\d+\.\d+\.\d+)'
         self.version_url = 'https://i3wm.org/downloads/'
         self.depends = ['autotools', 'libev', 'startup-notification',
-                        'xcb-util-cursor']
+                        'xcb-util-cursor',
+                        'xcb-util-keysyms',
+                        'xcb-util-renderutil',
+                        'xcb-util-xrm',
+                        'yajl']
         self.url = 'https://i3wm.org/downloads/i3-$version.tar.bz2'
+
+    def compile(self):
+        self.directory = os.path.join(self.directory, self.target_triplet)
+        super(I3Recipe, self).compile()
+
+    def install(self):
+        super(I3Recipe, self).install()
+        self.directory = os.path.dirname(self.directory)
+
