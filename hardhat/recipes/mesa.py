@@ -24,7 +24,12 @@ class MesaRecipe(GnuRecipe):
             '--enable-texture-float',
             '--enable-glx-tls',
             '--enable-osmesa',
+            '--enable-gallium-osmesa',
             '--enable-opengl',
-            '--with-gallium-drivers=i915,r600,nouveau,radeonsi,svga,swrast,swr',
-            '--enable-llvm'
+            '--enable-opencl',
+            '--with-gallium-drivers=i915,r600,nouveau,radeonsi,svga,swrast',
+            # swr
+            '--enable-llvm',
+            '--disable-valgrind',
+            '--with-dri-drivers=i915,i965,nouveau,radeon,swrast'
             ]
