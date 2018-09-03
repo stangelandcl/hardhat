@@ -1,5 +1,6 @@
 import os
 from hardhat.recipes.base import GnuRecipe
+from hardhat.util import patch
 
 
 class XOrgServerRecipe(GnuRecipe):
@@ -19,6 +20,8 @@ class XOrgServerRecipe(GnuRecipe):
         self.configure_args += [
             '--sysconfdir=%s/etc' % self.prefix_dir,
             '--enable-glamor',
+            '--enable-xwayland',
+            '--disable-xorg',
             #'--enable-install-setuid',
             '--enable-suid-wrapper',
             #'--with-xkb-output=/var/lib/xkb'
@@ -40,20 +43,32 @@ class XOrgServerRecipe(GnuRecipe):
 
         super(XOrgServerRecipe, self).install()
 
-        exe = '%s/bin/Xorg' % self.prefix_dir
-        self.log_dir('install', self.directory, 'chown root Xorg')
-        self.run_sudo(['chown', 'root', exe])
-        self.log_dir('install', self.directory, 'setuid Xorg')
-        self.run_sudo(['chmod', '+s', exe])
+#        exe = '%s/bin/Xorg' % self.prefix_dir
+#        self.log_dir('install', self.directory, 'chown root Xorg')
+#        self.run_sudo(['chown', 'root', exe])
+#        self.log_dir('install', self.directory, 'setuid Xorg')
+#        self.run_sudo(['chmod', '+s', exe])
 
-        exe = '%s/libexec/Xorg.wrap' % self.prefix_dir
-        self.log_dir('install', self.directory, 'chown root Xorg.wrap')
-        self.run_sudo(['chown', 'root', exe])
-        self.log_dir('install', self.directory, 'setuid Xorg.wrap')
-        self.run_sudo(['chmod', '+s', exe])
+#        exe = '%s/libexec/Xorg.wrap' % self.prefix_dir
+#        self.log_dir('install', self.directory, 'chown root Xorg.wrap')
+#        self.run_sudo(['chown', 'root', exe])
+#        self.log_dir('install', self.directory, 'setuid Xorg.wrap')
+#        self.run_sudo(['chmod', '+s', exe])
 
-        exe = '%s/libexec/Xorg' % self.prefix_dir
-        self.log_dir('install', self.directory, 'chown root libexec/Xorg')
-        self.run_sudo(['chown', 'root', exe])
-        self.log_dir('install', self.directory, 'setuid libexec/Xorg')
-        self.run_sudo(['chmod', '+s', exe])
+#        exe = '%s/libexec/Xorg' % self.prefix_dir
+#        self.log_dir('install', self.directory, 'chown root libexec/Xorg')
+#        self.run_sudo(['chown', 'root', exe])
+#        self.log_dir('install', self.directory, 'setuid libexec/Xorg')
+#        self.run_sudo(['chmod', '+s', exe])
+
+    def patch(self):
+        self.log_dir('patch', self.directory, 'logging')
+        src = 'driver = dlopen(filename, RTLD_LAZY | RTLD_LOCAL);'
+        dst = r'fprintf(stderr, "dlopen(%s)\n", filename);' + '\n' + src
+        filename = os.path.join(self.directory, 'glx', 'glxdricommon.c')
+        patch(filename, src, dst)
+
+        src = 'do {'
+        dst = r'fprintf(stderr, "path=%s\n", path);' + '\n' + src
+        patch(filename, src, dst)
+

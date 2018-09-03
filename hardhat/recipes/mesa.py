@@ -4,10 +4,10 @@ from .base import GnuRecipe
 class MesaRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(MesaRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '2a1e36280d01ad18ba6d5b3fbd653cea' \
-                      'a109eaa031b78eb5dfaa4df452742b66'
+        self.sha256 = '0c3c240bcd1352d179e65993214f9d55' \
+                      'a399beac852c3ab4433e8df9b6c51c83'
         self.name = 'mesa'
-        self.version = '18.1.3'
+        self.version = '18.1.7'
         self.version_regex = '(?P<version>\d+\.\d+\.\d+)/'
         self.version_url = 'https://mesa.freedesktop.org/archive/'
         self.depends = ['elfutils', 'eudev', 'libdrm', 'llvm', 'nettle',
