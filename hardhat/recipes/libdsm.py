@@ -4,13 +4,12 @@ from .base import GnuRecipe
 class LibDsmRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(LibDsmRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = '986696078f240086808191d7d739f2e4' \
-                      'd3cc1af6695493d3845c58299feb7b38'
-
+        self.sha256 = '96caef854a1f7aa61ab6fdfca9c36a18' \
+                      '13b37d23d013db0bc4ec7cd38a570b1c'
         self.description = 'Small portable C SMB client library'
         self.name = 'libdsm'
         self.depends = ['autotools', 'libtasn1']
-        self.version = '0.2.8'
+        self.version = '0.3.0'
         self.version_regex = r'(?P<version>\d+\.\d+\.\d+)'
         self.version_url = 'https://github.com/videolabs/libdsm/releases'
         self.depends = ['autotools', 'pcre', 'pkgconfig', 'xz', 'zlib']
