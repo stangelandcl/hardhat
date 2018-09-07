@@ -12,7 +12,6 @@ class LibDsmRecipe(GnuRecipe):
         self.version = '0.3.0'
         self.version_regex = r'(?P<version>\d+\.\d+\.\d+)'
         self.version_url = 'https://github.com/videolabs/libdsm/releases'
-        self.depends = ['autotools', 'pcre', 'pkgconfig', 'xz', 'zlib']
         self.url = 'https://github.com/videolabs/libdsm/releases/download/' \
                    'v$version/libdsm-$version.tar.gz'
 
