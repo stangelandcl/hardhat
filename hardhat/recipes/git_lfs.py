@@ -7,14 +7,13 @@ from ..util import patch
 class GitLfsRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(GitLfsRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = 'cc21d28433a6eefef8287db6fb09e857' \
-                      'b96a139ddcd3f228ff70a482e5dd226d'
-
+        self.sha256 = '9565fa9c2442c3982567a3498c9352cd' \
+                      'a88e0f6a982648054de0440e273749e7'
         self.name = 'git-lfs'
-        self.version = '1.5.3'
+        self.version = '2.5.1'
         self.depends = ['git']
         self.url = 'https://github.com/git-lfs/git-lfs/releases/' \
-                   'download/v$version/git-lfs-linux-amd64-$version.tar.gz'
+                   'download/v$version/git-lfs-linux-amd64-v$version.tar.gz'
 
     def configure(self):
         pass
@@ -26,7 +25,7 @@ class GitLfsRecipe(GnuRecipe):
         self.log_dir('install', self.directory, 'copying git-lfs to bin')
         shutil.copy2(os.path.join(self.directory, 'git-lfs'),
                      os.path.join(self.prefix_dir, 'bin', 'git-lfs'))
-        
+
         self.log_dir('install', self.directory, 'installing git-lfs')
         self.run_exe(['git', 'lfs', 'install'],
                      self.directory, self.environment)
