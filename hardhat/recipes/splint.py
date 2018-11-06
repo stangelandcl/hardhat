@@ -1,6 +1,6 @@
 import os
 import sys
-from .base import GnuRecipe
+from .base import GnuRecipe, SourceMixin
 from ..util import patch
 
 
@@ -56,3 +56,7 @@ class SplintRecipe(GnuRecipe):
         patch(file, src, dst)
 
 #        sys.exit(1)
+
+class SplintSrcRecipe(SourceMixin, SplintRecipe):
+    def __init__(self, *args, **kwargs):
+        super(SplintSrcRecipe, self).__init__(*args, **kwargs)
