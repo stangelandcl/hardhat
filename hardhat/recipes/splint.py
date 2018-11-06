@@ -13,7 +13,7 @@ class SplintRecipe(GnuRecipe):
         self.version = '3.1.2'
         self.version_regex = r'(?P<version>\d+\.\d+\.\d+)'
         self.version_url = 'https://www.splint.org/download.html'
-        self.depends = ['autotools', 'bison', 'flex']
+        self.depends = ['autotools', 'bison', 'flex', 'wget']
         self.url = 'http://www.splint.org/downloads/splint-$version.src.tgz'
         self.environment_strip_lto()
         self.configure_strip_cross_compile()
@@ -21,6 +21,12 @@ class SplintRecipe(GnuRecipe):
                                 'INSTALL="%s/bin/install -p"' % self.prefix_dir]
         self.environment['AUTOMAKE'] = 'automake'
         self.compile_args = ['make', '-j1']
+
+    def download(self):
+        self.log_dir('download', self.directory, 'downloading')
+        args = ['wget', self.url, '-O', self.filename]
+        self.run_exe(args, self.tmp_dir, self.environment)
+
 
     def patch(self):
         file = os.path.join(self.directory, 'src', 'signature.y')
