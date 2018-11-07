@@ -1,7 +1,14 @@
 import os
+import shutil
 import sys
 from .base import GnuRecipe, SourceMixin
 from ..util import patch
+
+class Extra:
+    def __init__(self):
+        self.name = 'splint-doc'
+        self.sha256 = None
+        self.version = '3.1.2'
 
 
 class SplintRecipe(GnuRecipe):
@@ -21,10 +28,17 @@ class SplintRecipe(GnuRecipe):
                                 'INSTALL="%s/bin/install -p"' % self.prefix_dir]
         self.environment['AUTOMAKE'] = 'automake'
         self.compile_args = ['make', '-j1']
+        self.doc_url = 'http://www.splint.org/manual/manual.html'
 
     def download(self):
         self.log_dir('download', self.directory, 'downloading')
         args = ['wget', self.url, '-O', self.filename]
+        self.run_exe(args, self.tmp_dir, self.environment)
+
+        self.log_dir('download', self.directory, 'downloading docs')
+        self.docfile = os.path.join(os.path.dirname(self.filename),
+                                    'splint-manual.html')
+        args = ['wget', self.doc_url, '-O', self.docfile]
         self.run_exe(args, self.tmp_dir, self.environment)
 
 
@@ -54,6 +68,14 @@ class SplintRecipe(GnuRecipe):
         src = '\t  $(INSTALL_DATA) $$files "$(DESTDIR)$(splintlibdir)" || exit $$?; \\\n'
         dst = '\t  cp -t $(DESTDIR)$(splintlibdir) $$files || exit $$?; \\\n'
         patch(file, src, dst)
+
+    def install(self):
+        super(SplintRecipe, self).install()
+
+        self.log_dir('install', self.directory, 'installing docs')
+        shutil.copy2(self.docfile,
+                     os.path.join(self.prefix_dir, 'share', 'doc',
+                                  os.path.basename(self.docfile)))
 
 #        sys.exit(1)
 
