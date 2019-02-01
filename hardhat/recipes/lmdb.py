@@ -7,17 +7,17 @@ from ..util import patch
 class LmdbRecipe(GnuRecipe):
     def __init__(self, *args, **kwargs):
         super(LmdbRecipe, self).__init__(*args, **kwargs)
-        self.sha256 = 'db4224fb9eb07ad07fbda97645e66693' \
-                      '0348c06f390da326153f3ada57c059ae'
-
+        self.sha256 = '655b4408fa826866df9449c076ba72c8' \
+                      '80a2ce072d3668f069e9086fd729b435'
         self.name = 'lmdb'
-        self.version = '13f345a47ed1c002280a11b924f49f29157f6e5a'
+        self.version = '6169c5e083cc61a8c13f95d274ce9051add07ea7'
         self.version_regex = 'LMDB_(?P<version>\d+\.\d+\.\d+)' \
             + extension_regex
         self.url = self.github_commit('stangelandcl')
 
         self.compile_args += [
             'XCFLAGS="-DMDB_MAXKEYSIZE=1800"',
+#'OPT="-O0 -ggdb3 -DMDB_DEBUG=1"'
             'OPT="%s"' % self.environment['OPT'],
             ]
 
@@ -33,6 +33,6 @@ class LmdbRecipe(GnuRecipe):
         pass
 
 #    def patch(self):
-#        src = 'env->me_psize = env->me_os_psize;'
-#        dst = 'env->me_psize = 65536;'
+#        src = 'static txnid_t mdb_debug_start;'
+#        dst = 'static txnid_t mdb_debug_start=1;'
 #        patch(os.path.join(self.directory, 'mdb.c'), src, dst)
