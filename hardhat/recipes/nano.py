@@ -1,5 +1,5 @@
 import os
-from .base import GnuRecipe
+from .base import GnuRecipe, SourceMixin
 from hardhat.urls import Urls
 
 
@@ -39,3 +39,7 @@ class NanoRecipe(GnuRecipe):
         with open(nanorc, 'wt') as f:
             f.write('include %s/share/nano/*\n' %
                     self.prefix_dir)
+
+class NanoSourceRecipe(SourceMixin, NanoRecipe):
+    def __init__(self, *args, **kwargs):
+        super(NanoSourceRecipe, self).__init__(*args, **kwargs)
